@@ -1,7 +1,7 @@
 import { MapPin, Calendar, Clock } from "lucide-react"
 
 interface TemplatePreviewProps {
-  variant: "garden" | "romantico" | "blacktie" | "minimalista"
+  variant: "garden" | "romantico" | "modern"
 }
 
 export function TemplatePreview({ variant }: TemplatePreviewProps) {
@@ -18,17 +18,11 @@ export function TemplatePreview({ variant }: TemplatePreviewProps) {
       text: "text-[#3E3E3E]",
       border: "border-[#D4A373]",
     },
-    blacktie: {
+    modern: {
       bg: "bg-gradient-to-b from-[#2C2C2C] to-[#1A1A1A]",
       accent: "bg-[#D4AF37]",
       text: "text-white",
       border: "border-[#D4AF37]",
-    },
-    minimalista: {
-      bg: "bg-gradient-to-b from-[#F8F9FA] to-[#E9ECEF]",
-      accent: "bg-[#6C757D]",
-      text: "text-[#212529]",
-      border: "border-[#6C757D]",
     },
   }
 
