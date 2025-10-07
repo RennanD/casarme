@@ -8,7 +8,14 @@ const plans = [
   {
     name: "Plano Simples",
     price: "R$ 29,90",
-    features: ["1 template elegante", "Personalização básica", "Upload de fotos", "Compartilhamento ilimitado"],
+    features: [
+      "1 template elegante",
+      "Personalização básica",
+      "Upload de 1 foto",
+      "Botão de localização no mapa",
+      "Confirmação de presença",
+      "Compartilhamento ilimitado",
+    ],
     highlighted: false,
   },
   {
@@ -17,7 +24,10 @@ const plans = [
     features: [
       "Todos os templates exclusivos",
       "Personalização completa",
-      "Upload de fotos e vídeos",
+      "Upload de múltiplas fotos",
+      "Countdown até o casamento",
+      "Botão de localização no mapa",
+      "Confirmação de presença",
       "Link personalizado",
       "Suporte prioritário",
     ],

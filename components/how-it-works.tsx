@@ -1,20 +1,20 @@
-import { Upload, Palette, Share2 } from "lucide-react"
+import { FileText, Palette, Sparkles } from "lucide-react"
 
 const steps = [
   {
-    icon: Upload,
-    title: "Envie suas fotos e vídeos",
-    description: "Faça upload das suas melhores memórias juntos",
+    icon: FileText,
+    title: "Preencha o formulário",
+    description: "Adicione os dados do casal, data, local e foto do casamento",
   },
   {
     icon: Palette,
     title: "Escolha um template",
-    description: "Selecione entre nossos designs elegantes",
+    description: "Selecione entre nossos designs elegantes e personalizáveis",
   },
   {
-    icon: Share2,
-    title: "Compartilhe com seus convidados",
-    description: "Envie por WhatsApp, Instagram ou TikTok",
+    icon: Sparkles,
+    title: "Página interativa criada",
+    description: "Compartilhe o link único com mapa, countdown e confirmação",
   },
 ]
 

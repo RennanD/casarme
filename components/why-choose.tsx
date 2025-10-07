@@ -1,25 +1,25 @@
-import { Heart, Smartphone, Zap, Video } from "lucide-react"
+import { MapPin, Clock, Heart, Smartphone } from "lucide-react"
 
 const features = [
   {
+    icon: MapPin,
+    title: "Localização interativa",
+    description: "Botão direto para abrir o local do casamento no Google Maps",
+  },
+  {
+    icon: Clock,
+    title: "Countdown ao vivo",
+    description: "Contador regressivo até o grande dia (disponível no Plano Pro)",
+  },
+  {
     icon: Heart,
-    title: "Feito para ser compartilhado",
-    description: "Seus convidados vão amar receber um convite tão especial",
+    title: "Confirmação de presença",
+    description: "Seus convidados confirmam presença direto no convite",
   },
   {
     icon: Smartphone,
-    title: "Perfeito para TikTok e Instagram",
-    description: "Formato otimizado para redes sociais e WhatsApp",
-  },
-  {
-    icon: Zap,
-    title: "Crie em menos de 5 minutos",
-    description: "Interface simples e intuitiva, sem complicação",
-  },
-  {
-    icon: Video,
-    title: "Suporte a vídeos curtos e fotos",
-    description: "Conte sua história com imagens e vídeos emocionantes",
+    title: "100% responsivo",
+    description: "Perfeito em qualquer dispositivo, otimizado para compartilhar",
   },
 ]
 
