@@ -5,6 +5,7 @@ import { Button } from "@/src/components/ui/button"
 import Link from "next/link"
 import { TemplatePreview } from "./template-preview"
 import { Check } from "lucide-react"
+import Image from "next/image"
 
 const templates = [
   {
@@ -81,8 +82,8 @@ export function Templates() {
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <div className="p-4 sm:p-6 bg-gradient-to-b from-[#FAF3E0] to-white">
-                <div className="aspect-[3/4]">
-                  <TemplatePreview variant={template.variant} />
+                <div className="aspect-[3/4] relative">
+                  <Image src={`${template.link}.png`} alt={template.name} fill className="object-cover" />
                 </div>
               </div>
 
@@ -126,8 +127,8 @@ export function Templates() {
                   <Button
                     size="sm"
                     className={`w-full transition-colors ${template.plan === "Pro"
-                        ? "bg-[#D4A373] text-white hover:bg-[#C49363]"
-                        : "bg-[#8B9D7F] text-white hover:bg-[#7A8C70]"
+                      ? "bg-[#D4A373] text-white hover:bg-[#C49363]"
+                      : "bg-[#8B9D7F] text-white hover:bg-[#7A8C70]"
                       }`}
                   >
                     Escolher este modelo
