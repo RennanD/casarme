@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FFF8F0]">
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FFF8F0]">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img

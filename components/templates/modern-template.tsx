@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { MapPin, Calendar, Clock, Heart, Share2, Music, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
+import { InvitationHeader } from "@/components/invitation-header"
 
 interface ModernTemplateProps {
   data: {
@@ -117,31 +118,7 @@ export function ModernTemplate({
 
   return (
     <div className="min-h-screen bg-[#1A1A2E]">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 bg-[#1A1A2E]/95 backdrop-blur-sm border-b border-white/10 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-8 py-4 text-sm">
-            <a href="#home" className="text-white/80 hover:text-white transition-colors uppercase tracking-wider">
-              Home
-            </a>
-            <a
-              href="#boas-vindas"
-              className="text-white/80 hover:text-white transition-colors uppercase tracking-wider"
-            >
-              Boas-vindas
-            </a>
-            <a href="#casal" className="text-white/80 hover:text-white transition-colors uppercase tracking-wider">
-              O Casal
-            </a>
-            <a href="#cerimonia" className="text-white/80 hover:text-white transition-colors uppercase tracking-wider">
-              Cerimônia
-            </a>
-            <a href="#confirmar" className="text-white/80 hover:text-white transition-colors uppercase tracking-wider">
-              Confirmar
-            </a>
-          </div>
-        </div>
-      </nav>
+      <InvitationHeader accentColor="#FFFFFF" textColor="#FFFFFF" />
 
       {/* Music Player */}
       {data.musicUrl && (
@@ -244,21 +221,66 @@ export function ModernTemplate({
         </div>
       </section>
 
-      {/* Countdown Section */}
-      <section className="py-24 bg-[#1A1A2E]">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-4 gap-6 max-w-4xl mx-auto">
-            {[
-              { value: timeLeft.days, label: "DIAS" },
-              { value: timeLeft.hours, label: "HORAS" },
-              { value: timeLeft.minutes, label: "MINUTOS" },
-              { value: timeLeft.seconds, label: "SEGUNDOS" },
-            ].map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="text-5xl md:text-7xl font-bold text-white mb-2">{item.value}</div>
-                <div className="text-sm text-white/60 tracking-widest">{item.label}</div>
+      {/* Ceremony Section */}
+      <section id="cerimonia" className="py-32 px-4 bg-[#0F0F1E] relative">
+        {/* Geometric background pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div
+            className="absolute top-0 left-0 w-full h-full"
+            style={{
+              backgroundImage:
+                "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)",
+              backgroundSize: "100px 100px",
+            }}
+          />
+        </div>
+
+        <div className="container mx-auto max-w-5xl relative z-10">
+          <div className="text-center mb-16">
+            <div className="h-px w-32 bg-white mx-auto mb-8" />
+            <h2 className="text-6xl font-bold text-white mb-4 uppercase tracking-widest">Cerimônia</h2>
+            <div className="h-px w-32 bg-white mx-auto mt-8" />
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            <div className="border-2 border-white/20 p-12 md:p-16">
+              <div className="text-center mb-12">
+                <div className="inline-flex items-center justify-center w-20 h-20 border-2 border-white mb-6">
+                  <MapPin className="w-10 h-10 text-white" />
+                </div>
+                <h3 className="text-3xl font-bold text-white mb-4 uppercase tracking-widest">
+                  {data.venueName || "Local da Cerimônia"}
+                </h3>
+                <p className="text-white/70 text-xl">{data.venueAddress || "Endereço completo"}</p>
               </div>
-            ))}
+
+              <div className="grid md:grid-cols-2 gap-8 mb-12">
+                <div className="text-center p-8 border border-white/20">
+                  <Calendar className="w-10 h-10 text-white mx-auto mb-4" />
+                  <p className="text-white/60 text-sm mb-2 uppercase tracking-widest">Data</p>
+                  <p className="text-white font-bold text-xl">{formatDate(data.weddingDate) || "Data do casamento"}</p>
+                </div>
+
+                <div className="text-center p-8 border border-white/20">
+                  <Clock className="w-10 h-10 text-white mx-auto mb-4" />
+                  <p className="text-white/60 text-sm mb-2 uppercase tracking-widest">Horário</p>
+                  <p className="text-white font-bold text-xl">{data.weddingTime || "Horário"}</p>
+                </div>
+              </div>
+
+              <Button
+                onClick={() =>
+                  window.open(
+                    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.venueAddress)}`,
+                    "_blank",
+                  )
+                }
+                className="w-full bg-white hover:bg-white/90 text-[#0F0F1E] py-8 text-xl font-bold uppercase tracking-widest border-0"
+              >
+                <MapPin className="w-6 h-6 mr-3" />
+                Abrir no Maps
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -297,7 +319,7 @@ export function ModernTemplate({
                 <img
                   src={bridePhoto || "/placeholder.svg?height=400&width=400"}
                   alt={data.brideName}
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"
                 />
               </div>
               <h3 className="text-3xl font-bold text-[#1A1A2E] mb-4 uppercase tracking-wider">
@@ -321,63 +343,6 @@ export function ModernTemplate({
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Ceremony Section */}
-      <section id="cerimonia" className="py-24 px-4 bg-[#1A1A2E]">
-        <div className="container mx-auto max-w-4xl">
-          <div className="h-px w-24 bg-white mx-auto mb-8" />
-          <h2 className="text-5xl font-bold text-white text-center mb-16 uppercase tracking-wider">Cerimônia</h2>
-
-          <div className="bg-white/5 backdrop-blur-sm rounded-none p-12 max-w-2xl mx-auto border border-white/10">
-            <div className="space-y-8">
-              <div className="flex items-start gap-6">
-                <div className="w-16 h-16 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-white mb-2 text-xl uppercase tracking-wider">
-                    {data.venueName || "Local da Cerimônia"}
-                  </h3>
-                  <p className="text-white/70 text-lg">{data.venueAddress || "Endereço completo"}</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6">
-                <div className="w-16 h-16 flex items-center justify-center flex-shrink-0">
-                  <Calendar className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-white mb-2 text-xl uppercase tracking-wider">Data</h3>
-                  <p className="text-white/70 text-lg">{formatDate(data.weddingDate) || "Data do casamento"}</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6">
-                <div className="w-16 h-16 flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-8 h-8 text-white" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-white mb-2 text-xl uppercase tracking-wider">Horário</h3>
-                  <p className="text-white/70 text-lg">{data.weddingTime || "Horário"}</p>
-                </div>
-              </div>
-            </div>
-
-            <Button
-              onClick={() =>
-                window.open(
-                  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.venueAddress)}`,
-                  "_blank",
-                )
-              }
-              className="w-full mt-12 bg-white hover:bg-white/90 text-[#1A1A2E] py-6 text-lg uppercase tracking-wider"
-            >
-              <MapPin className="w-5 h-5 mr-2" />
-              Ver no Mapa
-            </Button>
-          </div>
         </div>
       </section>
 
@@ -482,7 +447,7 @@ export function ModernTemplate({
           {data.brideName || "Noiva"}
         </p>
         <Link href="/criar" className="text-white/60 hover:text-white text-sm uppercase tracking-wider">
-          Crie seu convite com Amore
+          Crie seu convite com CasarMe
         </Link>
       </footer>
     </div>

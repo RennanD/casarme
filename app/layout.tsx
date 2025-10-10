@@ -11,7 +11,7 @@ const inter = {
 }
 
 export const metadata: Metadata = {
-  title: "Amore - Convites de Casamento Online",
+  title: "CasarMe - Convites de Casamento Online",
   description:
     "Crie seu convite de casamento online com fotos e vídeos. Rápido, elegante e perfeito para compartilhar com quem você ama.",
   keywords: ["convite de casamento online", "convite de casamento digital", "convite de casamento interativo"],

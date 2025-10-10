@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { MapPin, Calendar, Clock, Heart, Share2 } from "lucide-react"
 import Link from "next/link"
+import { InvitationHeader } from "@/components/invitation-header"
 
 interface GardenTemplateProps {
   data: {
@@ -78,27 +79,7 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
   return (
     <div className="min-h-screen bg-[#FAF3E0]">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-6 py-4 text-sm">
-            <a href="#home" className="text-[#8B9D7F] hover:text-[#6B7D5F] transition-colors">
-              Home
-            </a>
-            <a href="#boas-vindas" className="text-[#8B9D7F] hover:text-[#6B7D5F] transition-colors">
-              Boas-vindas
-            </a>
-            <a href="#casal" className="text-[#8B9D7F] hover:text-[#6B7D5F] transition-colors">
-              O Casal
-            </a>
-            <a href="#cerimonia" className="text-[#8B9D7F] hover:text-[#6B7D5F] transition-colors">
-              Cerimônia
-            </a>
-            <a href="#confirmar" className="text-[#8B9D7F] hover:text-[#6B7D5F] transition-colors">
-              Confirmar Presença
-            </a>
-          </div>
-        </div>
-      </nav>
+      <InvitationHeader accentColor="#8B9D7F" />
 
       {/* Hero Section */}
       <section id="home" className="pt-24 pb-16 px-4">
@@ -167,28 +148,6 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
             <Share2 className="w-4 h-4 mr-2" />
             Compartilhar Convite
           </Button>
-        </div>
-      </section>
-
-      {/* Countdown Section */}
-      <section className="py-16 bg-[#8B9D7F]">
-        <div className="container mx-auto px-4">
-          <h2 className="font-serif text-3xl text-white text-center mb-8" style={{ fontFamily: "Playfair Display" }}>
-            Contagem Regressiva
-          </h2>
-          <div className="grid grid-cols-4 gap-4 max-w-2xl mx-auto">
-            {[
-              { value: timeLeft.days, label: "DIAS" },
-              { value: timeLeft.hours, label: "HORAS" },
-              { value: timeLeft.minutes, label: "MINUTOS" },
-              { value: timeLeft.seconds, label: "SEGUNDOS" },
-            ].map((item, index) => (
-              <div key={index} className="bg-white rounded-lg p-4 text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#8B9D7F]">{item.value}</div>
-                <div className="text-xs text-[#6B6B6B] mt-1">{item.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -264,76 +223,68 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
       </section>
 
       {/* Ceremony Section */}
-      <section id="cerimonia" className="py-16 px-4">
+      <section id="cerimonia" className="py-16 px-4 bg-[#8B9D7F]">
         <div className="container mx-auto max-w-4xl">
           {/* Olive branch divider */}
           <div className="flex items-center justify-center mb-8">
-            <div className="h-px bg-[#8B9D7F] w-20" />
+            <div className="h-px bg-white/30 w-20" />
             <svg viewBox="0 0 40 40" className="w-10 h-10 mx-4">
               <path
                 d="M20,10 Q25,15 22,20 Q20,25 18,20 Q15,15 20,10 M22,20 Q27,22 25,27 M18,20 Q13,22 15,27"
                 fill="none"
-                stroke="#8B9D7F"
+                stroke="white"
                 strokeWidth="1.5"
               />
-              <ellipse cx="25" cy="27" rx="2" ry="3" fill="#8B9D7F" />
-              <ellipse cx="15" cy="27" rx="2" ry="3" fill="#8B9D7F" />
+              <ellipse cx="25" cy="45" rx="2" ry="3" fill="white" />
+              <ellipse cx="15" cy="45" rx="2" ry="3" fill="white" />
             </svg>
-            <div className="h-px bg-[#8B9D7F] w-20" />
+            <div className="h-px bg-white/30 w-20" />
           </div>
 
-          <h2
-            className="font-serif text-4xl text-[#3E3E3E] text-center mb-12"
-            style={{ fontFamily: "Playfair Display" }}
-          >
+          <h2 className="font-serif text-4xl text-white text-center mb-12" style={{ fontFamily: "Playfair Display" }}>
             Cerimônia
           </h2>
 
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-w-2xl mx-auto">
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#8B9D7F]/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-[#8B9D7F]" />
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-[#FAF3E0] rounded-2xl p-8 md:p-12 shadow-xl">
+              <div className="space-y-8">
+                <div className="text-center pb-6 border-b border-[#8B9D7F]/20">
+                  <h3 className="font-serif text-3xl text-[#3E3E3E] mb-3" style={{ fontFamily: "Playfair Display" }}>
+                    {data.venueName || "Local da Cerimônia"}
+                  </h3>
+                  <p className="text-[#6B6B6B] text-lg">{data.venueAddress || "Endereço completo"}</p>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-[#3E3E3E] mb-1">{data.venueName || "Local da Cerimônia"}</h3>
-                  <p className="text-[#6B6B6B]">{data.venueAddress || "Endereço completo"}</p>
-                </div>
-              </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#8B9D7F]/10 flex items-center justify-center flex-shrink-0">
-                  <Calendar className="w-6 h-6 text-[#8B9D7F]" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-[#3E3E3E] mb-1">Data</h3>
-                  <p className="text-[#6B6B6B]">{formatDate(data.weddingDate) || "Data do casamento"}</p>
-                </div>
-              </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="text-center p-6 bg-white rounded-lg">
+                    <Calendar className="w-8 h-8 text-[#8B9D7F] mx-auto mb-3" />
+                    <p className="text-sm text-[#6B6B6B] mb-1 uppercase tracking-wider">Data</p>
+                    <p className="text-[#3E3E3E] font-semibold">
+                      {formatDate(data.weddingDate) || "Data do casamento"}
+                    </p>
+                  </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#8B9D7F]/10 flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-6 h-6 text-[#8B9D7F]" />
+                  <div className="text-center p-6 bg-white rounded-lg">
+                    <Clock className="w-8 h-8 text-[#8B9D7F] mx-auto mb-3" />
+                    <p className="text-sm text-[#6B6B6B] mb-1 uppercase tracking-wider">Horário</p>
+                    <p className="text-[#3E3E3E] font-semibold">{data.weddingTime || "Horário"}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-[#3E3E3E] mb-1">Horário</h3>
-                  <p className="text-[#6B6B6B]">{data.weddingTime || "Horário"}</p>
-                </div>
+
+                <Button
+                  onClick={() =>
+                    window.open(
+                      `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.venueAddress)}`,
+                      "_blank",
+                    )
+                  }
+                  className="w-full bg-[#8B9D7F] hover:bg-[#6B7D5F] text-white py-6 text-lg"
+                >
+                  <MapPin className="w-5 h-5 mr-2" />
+                  Ver Localização no Mapa
+                </Button>
               </div>
             </div>
-
-            <Button
-              onClick={() =>
-                window.open(
-                  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.venueAddress)}`,
-                  "_blank",
-                )
-              }
-              className="w-full mt-8 bg-[#8B9D7F] hover:bg-[#6B7D5F] text-white"
-            >
-              <MapPin className="w-4 h-4 mr-2" />
-              Ver no Mapa
-            </Button>
           </div>
         </div>
       </section>
@@ -432,7 +383,7 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
           {data.brideName || "Noiva"}
         </p>
         <Link href="/criar" className="text-white/80 hover:text-white text-sm">
-          Crie seu convite com Amore
+          Crie seu convite com CasarMe
         </Link>
       </footer>
     </div>

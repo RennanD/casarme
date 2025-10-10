@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { MapPin, Calendar, Clock, Heart, Share2, Music } from "lucide-react"
 import Link from "next/link"
+import { InvitationHeader } from "@/components/invitation-header"
 
 interface RomanticTemplateProps {
   data: {
@@ -97,28 +98,7 @@ export function RomanticTemplate({
 
   return (
     <div className="min-h-screen bg-[#FFF8F3]">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-6 py-4 text-sm">
-            <a href="#home" className="text-[#E8B4B8] hover:text-[#D89BA0] transition-colors">
-              Home
-            </a>
-            <a href="#boas-vindas" className="text-[#E8B4B8] hover:text-[#D89BA0] transition-colors">
-              Boas-vindas
-            </a>
-            <a href="#casal" className="text-[#E8B4B8] hover:text-[#D89BA0] transition-colors">
-              O Casal
-            </a>
-            <a href="#cerimonia" className="text-[#E8B4B8] hover:text-[#D89BA0] transition-colors">
-              Cerimônia
-            </a>
-            <a href="#confirmar" className="text-[#E8B4B8] hover:text-[#D89BA0] transition-colors">
-              Confirmar Presença
-            </a>
-          </div>
-        </div>
-      </nav>
+      <InvitationHeader accentColor="#E8B4B8" />
 
       {/* Music Player */}
       {data.musicUrl && (
@@ -233,25 +213,6 @@ export function RomanticTemplate({
         </div>
       </section>
 
-      {/* Countdown Section */}
-      <section className="py-16 bg-gradient-to-b from-[#FFF8F3] to-[#FFE8E8]">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-4 gap-4 max-w-2xl mx-auto">
-            {[
-              { value: timeLeft.days, label: "DIAS" },
-              { value: timeLeft.hours, label: "HORAS" },
-              { value: timeLeft.minutes, label: "MINUTOS" },
-              { value: timeLeft.seconds, label: "SEGUNDOS" },
-            ].map((item, index) => (
-              <div key={index} className="bg-white rounded-lg p-4 text-center shadow-md">
-                <div className="text-3xl md:text-4xl font-bold text-[#E8B4B8]">{item.value}</div>
-                <div className="text-xs text-[#6B6B6B] mt-1">{item.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Couple Section */}
       <section id="casal" className="py-16 px-4">
         <div className="container mx-auto max-w-4xl">
@@ -323,8 +284,16 @@ export function RomanticTemplate({
       </section>
 
       {/* Ceremony Section */}
-      <section id="cerimonia" className="py-16 px-4 bg-gradient-to-b from-[#FFF8F3] to-[#FFE8E8]">
-        <div className="container mx-auto max-w-4xl">
+      <section id="cerimonia" className="py-16 px-4 relative overflow-hidden">
+        {/* Background floral decoration */}
+        <div className="absolute top-0 left-0 w-96 h-96 opacity-10 pointer-events-none">
+          <img src="/watercolor-pink-roses-corner-decoration.jpg" alt="" className="w-full h-full object-contain" />
+        </div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 opacity-10 pointer-events-none rotate-180">
+          <img src="/watercolor-pink-roses-corner-decoration.jpg" alt="" className="w-full h-full object-contain" />
+        </div>
+
+        <div className="container mx-auto max-w-4xl relative z-10">
           {/* Floral divider */}
           <div className="flex items-center justify-center mb-8">
             <svg viewBox="0 0 200 40" className="w-48 h-8">
@@ -338,54 +307,50 @@ export function RomanticTemplate({
             className="font-serif text-4xl text-[#3E3E3E] text-center mb-12"
             style={{ fontFamily: "Playfair Display" }}
           >
-            Cerimônia
+            Cerimônia & Recepção
           </h2>
 
-          <div className="bg-white rounded-2xl shadow-lg p-8 max-w-2xl mx-auto">
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#E8B4B8]/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-[#E8B4B8]" />
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-[#E8B4B8]/20">
+              <div className="text-center mb-10">
+                <div className="inline-block p-4 bg-[#FFF8F3] rounded-full mb-4">
+                  <MapPin className="w-10 h-10 text-[#E8B4B8]" />
                 </div>
-                <div>
-                  <h3 className="font-semibold text-[#3E3E3E] mb-1">{data.venueName || "Local da Cerimônia"}</h3>
-                  <p className="text-[#6B6B6B]">{data.venueAddress || "Endereço completo"}</p>
+                <h3 className="font-serif text-3xl text-[#3E3E3E] mb-3" style={{ fontFamily: "Playfair Display" }}>
+                  {data.venueName || "Local da Cerimônia"}
+                </h3>
+                <p className="text-[#6B6B6B] text-lg leading-relaxed">{data.venueAddress || "Endereço completo"}</p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6 mb-10">
+                <div className="text-center p-6 bg-gradient-to-br from-[#FFF8F3] to-[#FFE8E8] rounded-2xl">
+                  <Calendar className="w-8 h-8 text-[#E8B4B8] mx-auto mb-3" />
+                  <p className="text-sm text-[#6B6B6B] mb-2 font-medium">Data</p>
+                  <p className="text-[#3E3E3E] font-semibold text-lg">
+                    {formatDate(data.weddingDate) || "Data do casamento"}
+                  </p>
+                </div>
+
+                <div className="text-center p-6 bg-gradient-to-br from-[#FFF8F3] to-[#FFE8E8] rounded-2xl">
+                  <Clock className="w-8 h-8 text-[#E8B4B8] mx-auto mb-3" />
+                  <p className="text-sm text-[#6B6B6B] mb-2 font-medium">Horário</p>
+                  <p className="text-[#3E3E3E] font-semibold text-lg">{data.weddingTime || "Horário"}</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#E8B4B8]/10 flex items-center justify-center flex-shrink-0">
-                  <Calendar className="w-6 h-6 text-[#E8B4B8]" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-[#3E3E3E] mb-1">Data</h3>
-                  <p className="text-[#6B6B6B]">{formatDate(data.weddingDate) || "Data do casamento"}</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#E8B4B8]/10 flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-6 h-6 text-[#E8B4B8]" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-[#3E3E3E] mb-1">Horário</h3>
-                  <p className="text-[#6B6B6B]">{data.weddingTime || "Horário"}</p>
-                </div>
-              </div>
+              <Button
+                onClick={() =>
+                  window.open(
+                    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.venueAddress)}`,
+                    "_blank",
+                  )
+                }
+                className="w-full bg-[#E8B4B8] hover:bg-[#D89BA0] text-white py-6 text-lg rounded-full shadow-lg"
+              >
+                <MapPin className="w-5 h-5 mr-2" />
+                Como Chegar
+              </Button>
             </div>
-
-            <Button
-              onClick={() =>
-                window.open(
-                  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data.venueAddress)}`,
-                  "_blank",
-                )
-              }
-              className="w-full mt-8 bg-[#E8B4B8] hover:bg-[#D89BA0] text-white"
-            >
-              <MapPin className="w-4 h-4 mr-2" />
-              Ver no Mapa
-            </Button>
           </div>
         </div>
       </section>
@@ -484,7 +449,7 @@ export function RomanticTemplate({
           {data.brideName || "Noiva"}
         </p>
         <Link href="/criar" className="text-white/80 hover:text-white text-sm">
-          Crie seu convite com Amore
+          Crie seu convite com CasarMe
         </Link>
       </footer>
     </div>

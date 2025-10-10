@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import { Check } from "lucide-react"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -16,22 +17,46 @@ const templates = [
     id: "garden",
     name: "Garden",
     plan: "basic",
+    price: "R$ 29,90",
     color: "#8B9D7F",
     description: "Design botânico com tons de verde oliva",
+    features: [
+      "Design botânico elegante",
+      "1 foto de capa",
+      "Countdown até o casamento",
+      "Localização no mapa",
+      "Confirmação de presença",
+    ],
   },
   {
     id: "romantic",
     name: "Romântico",
     plan: "pro",
+    price: "R$ 49,90",
     color: "#E8B4B8",
     description: "Estilo romântico com flores e tons rosados",
+    features: [
+      "Design romântico com flores",
+      "Fotos individuais + galeria",
+      "Histórias personalizadas",
+      "Música de fundo",
+      "Countdown + localização",
+    ],
   },
   {
     id: "modern",
     name: "Modern",
     plan: "pro",
+    price: "R$ 49,90",
     color: "#1A1A2E",
     description: "Design moderno e minimalista com slideshow",
+    features: [
+      "Design moderno sofisticado",
+      "Slideshow com múltiplas fotos",
+      "Fotos individuais + galeria",
+      "Histórias personalizadas",
+      "Música de fundo",
+    ],
   },
 ]
 
@@ -171,15 +196,28 @@ export default function CreateInvitationPage() {
                       }`}
                     >
                       <div className="w-full h-32 rounded-lg mb-4" style={{ backgroundColor: template.color }} />
-                      <h3 className="font-serif font-semibold text-[#3E3E3E] text-lg mb-2">{template.name}</h3>
-                      <p className="text-sm text-[#6B6B6B] mb-2">{template.description}</p>
-                      <span
-                        className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
-                          template.plan === "pro" ? "bg-[#D4A373] text-white" : "bg-[#EDE0D4] text-[#6B6B6B]"
-                        }`}
-                      >
-                        {template.plan === "pro" ? "Plano Pro" : "Plano Básico"}
-                      </span>
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="font-serif font-semibold text-[#3E3E3E] text-lg">{template.name}</h3>
+                        <span
+                          className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                            template.plan === "pro" ? "bg-[#D4A373] text-white" : "bg-[#8B9D7F] text-white"
+                          }`}
+                        >
+                          {template.plan === "pro" ? "Pro" : "Básico"}
+                        </span>
+                      </div>
+                      <div className="mb-3">
+                        <span className="text-2xl font-bold text-[#D4A373]">{template.price}</span>
+                      </div>
+                      <p className="text-sm text-[#6B6B6B] mb-3">{template.description}</p>
+                      <ul className="space-y-1.5">
+                        {template.features.map((feature, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs text-[#6B6B6B]">
+                            <Check className="w-3 h-3 text-[#D4A373] flex-shrink-0 mt-0.5" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </label>
                 ))}

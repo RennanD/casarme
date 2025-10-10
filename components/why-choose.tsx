@@ -28,7 +28,7 @@ export function WhyChoose() {
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-[#3E3E3E] mb-16">
-          Por que escolher o Amore?
+          Por que escolher o CasarMe?
         </h2>
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {features.map((feature, index) => (
