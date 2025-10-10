@@ -9,19 +9,15 @@ import { useRouter } from "next/navigation"
 
 export default function CreateInvitationPage() {
   const [showEmailModal, setShowEmailModal] = useState(false)
+  const [formData, setFormData] = useState<any>(null)
   const router = useRouter()
 
-  const handleEmailSubmit = (email: string) => {
+  const handleEmailSubmit = (email: string, data: any) => {
+    setFormData(data)
     setShowEmailModal(true)
   }
 
   const handleEmailConfirm = (email: string) => {
-    // Generate a unique ID for the invitation
-    const invitationId = Math.random().toString(36).substring(2, 9)
-
-    // Simulate creating the invitation and sending email
-    console.log(`Creating invitation ${invitationId} for email: ${email}`)
-
     // Redirect to thank you page
     router.push("/criar/obrigado")
   }
@@ -40,6 +36,7 @@ export default function CreateInvitationPage() {
           isOpen={showEmailModal}
           onClose={() => setShowEmailModal(false)}
           onSubmit={handleEmailConfirm}
+          formData={formData}
         />
       </div>
     </div>

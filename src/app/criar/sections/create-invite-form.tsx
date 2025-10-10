@@ -10,6 +10,7 @@ import { Input } from "@/src/components/ui/input"
 import { Label } from "@/src/components/ui/label"
 import { Textarea } from "@/src/components/ui/textarea"
 import { Upload, Sparkles, X } from "lucide-react"
+import { useImageUpload } from "@/src/hooks/use-image-upload"
 
 const templates = [
   {
@@ -60,7 +61,7 @@ const templates = [
 ]
 
 interface CreateInviteFormProps {
-  onEmailSubmit: (email: string) => void
+  onEmailSubmit: (email: string, formData: any) => void
 }
 
 export default function CreateInviteForm({ onEmailSubmit }: CreateInviteFormProps) {
@@ -79,79 +80,77 @@ export default function CreateInviteForm({ onEmailSubmit }: CreateInviteFormProp
     musicUrl: "",
   })
 
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null)
-  const [groomPhotoPreview, setGroomPhotoPreview] = useState<string | null>(null)
-  const [bridePhotoPreview, setBridePhotoPreview] = useState<string | null>(null)
-  const [heroPhotos, setHeroPhotos] = useState<(string | null)[]>([])
-  const [galleryPhotos, setGalleryPhotos] = useState<(string | null)[]>([])
+  // Image states
+  const [heroImage, setHeroImage] = useState<any>(null)
+  const [groomImage, setGroomImage] = useState<any>(null)
+  const [brideImage, setBrideImage] = useState<any>(null)
+  const [heroImages, setHeroImages] = useState<any[]>([])
+  const [galleryImages, setGalleryImages] = useState<any[]>([])
 
-  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { uploadImage, isUploading, error } = useImageUpload()
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
     const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setPhotoPreview(reader.result as string)
+    if (!file) return
+
+    const result = await uploadImage(file, type)
+    if (result) {
+      switch (type) {
+        case 'hero':
+          setHeroImage(result)
+          break
+        case 'groom':
+          setGroomImage(result)
+          break
+        case 'bride':
+          setBrideImage(result)
+          break
+        case 'hero_slideshow':
+          setHeroImages(prev => [...prev, result])
+          break
+        case 'gallery':
+          setGalleryImages(prev => [...prev, result])
+          break
       }
-      reader.readAsDataURL(file)
     }
   }
 
-  const handleGroomPhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setGroomPhotoPreview(reader.result as string)
-      }
-      reader.readAsDataURL(file)
-    }
-  }
-
-  const handleBridePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setBridePhotoPreview(reader.result as string)
-      }
-      reader.readAsDataURL(file)
-    }
-  }
-
-  const handleHeroPhotosUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMultipleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
     const files = Array.from(e.target.files || [])
-    files.forEach((file) => {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setHeroPhotos((prev) => [...prev, reader.result as string])
+
+    for (const file of files) {
+      const result = await uploadImage(file, type)
+      if (result) {
+        if (type === 'hero_slideshow') {
+          setHeroImages(prev => [...prev, result])
+        } else if (type === 'gallery') {
+          setGalleryImages(prev => [...prev, result])
+        }
       }
-      reader.readAsDataURL(file)
-    })
+    }
   }
 
-  const handleGalleryPhotosUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || [])
-    files.forEach((file) => {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setGalleryPhotos((prev) => [...prev, reader.result as string])
-      }
-      reader.readAsDataURL(file)
-    })
-  }
-
-  const removeHeroPhoto = (index: number) => {
-    setHeroPhotos((prev) => prev.filter((_, i) => i !== index))
-  }
-
-  const removeGalleryPhoto = (index: number) => {
-    setGalleryPhotos((prev) => prev.filter((_, i) => i !== index))
+  const removeImage = (index: number, type: 'hero_slideshow' | 'gallery') => {
+    if (type === 'hero_slideshow') {
+      setHeroImages(prev => prev.filter((_, i) => i !== index))
+    } else {
+      setGalleryImages(prev => prev.filter((_, i) => i !== index))
+    }
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Trigger email collection modal
-    onEmailSubmit("")
+    onEmailSubmit("", {
+      selectedTemplate,
+      formData,
+      images: {
+        hero: heroImage,
+        groom: groomImage,
+        bride: brideImage,
+        heroSlideshow: heroImages,
+        gallery: galleryImages
+      }
+    })
   }
 
   const isPro = selectedTemplate.plan === "pro"
@@ -165,6 +164,12 @@ export default function CreateInviteForm({ onEmailSubmit }: CreateInviteFormProp
         </h1>
         <p className="text-[#6B6B6B] text-lg">Preencha os dados abaixo e veja a mágica acontecer</p>
       </div>
+
+      {error && (
+        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-600 text-sm">{error}</p>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
         {/* Template Selection */}
@@ -263,30 +268,33 @@ export default function CreateInviteForm({ onEmailSubmit }: CreateInviteFormProp
               <label htmlFor="heroPhotos" className="cursor-pointer">
                 <div className="flex items-center gap-2 px-4 py-2 border-2 border-[#D4A373] text-[#D4A373] rounded-lg hover:bg-[#D4A373] hover:text-white transition-colors w-fit">
                   <Upload className="w-5 h-5" />
-                  <span>{isModern ? "Adicionar fotos" : "Escolher foto"}</span>
+                  <span>
+                    {isUploading ? "Enviando..." : (isModern ? "Adicionar fotos" : "Escolher foto")}
+                  </span>
                 </div>
                 <input
                   id="heroPhotos"
                   type="file"
                   accept="image/*"
                   multiple={isModern}
-                  onChange={isModern ? handleHeroPhotosUpload : handlePhotoUpload}
+                  onChange={(e) => handleImageUpload(e, isModern ? 'hero_slideshow' : 'hero')}
                   className="hidden"
+                  disabled={isUploading}
                 />
               </label>
 
-              {isModern && heroPhotos.length > 0 && (
+              {isModern && heroImages.length > 0 && (
                 <div className="grid grid-cols-4 gap-4">
-                  {heroPhotos.map((photo, index) => (
+                  {heroImages.map((image, index) => (
                     <div key={index} className="relative group">
                       <img
-                        src={photo || "/placeholder.svg"}
+                        src={`/uploads/${image.filename}`}
                         alt={`Hero ${index + 1}`}
                         className="w-full h-24 object-cover rounded-lg border-2 border-[#EDE0D4]"
                       />
                       <button
                         type="button"
-                        onClick={() => removeHeroPhoto(index)}
+                        onClick={() => removeImage(index, 'hero_slideshow')}
                         className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <X className="w-4 h-4" />
@@ -296,10 +304,10 @@ export default function CreateInviteForm({ onEmailSubmit }: CreateInviteFormProp
                 </div>
               )}
 
-              {!isModern && photoPreview && (
+              {!isModern && heroImage && (
                 <div className="w-32 h-32 rounded-lg overflow-hidden border-2 border-[#EDE0D4]">
                   <img
-                    src={photoPreview || "/placeholder.svg"}
+                    src={`/uploads/${heroImage.filename}`}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />
@@ -425,20 +433,21 @@ export default function CreateInviteForm({ onEmailSubmit }: CreateInviteFormProp
                     <label htmlFor="groomPhoto" className="cursor-pointer">
                       <div className="flex items-center gap-2 px-4 py-2 border-2 border-[#D4A373] text-[#D4A373] rounded-lg hover:bg-[#D4A373] hover:text-white transition-colors text-sm">
                         <Upload className="w-4 h-4" />
-                        <span>Escolher</span>
+                        <span>{isUploading ? "Enviando..." : "Escolher"}</span>
                       </div>
                       <input
                         id="groomPhoto"
                         type="file"
                         accept="image/*"
-                        onChange={handleGroomPhotoUpload}
+                        onChange={(e) => handleImageUpload(e, 'groom')}
                         className="hidden"
+                        disabled={isUploading}
                       />
                     </label>
-                    {groomPhotoPreview && (
+                    {groomImage && (
                       <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#EDE0D4]">
                         <img
-                          src={groomPhotoPreview || "/placeholder.svg"}
+                          src={`/uploads/${groomImage.filename}`}
                           alt="Preview Noivo"
                           className="w-full h-full object-cover"
                         />
@@ -455,20 +464,21 @@ export default function CreateInviteForm({ onEmailSubmit }: CreateInviteFormProp
                     <label htmlFor="bridePhoto" className="cursor-pointer">
                       <div className="flex items-center gap-2 px-4 py-2 border-2 border-[#D4A373] text-[#D4A373] rounded-lg hover:bg-[#D4A373] hover:text-white transition-colors text-sm">
                         <Upload className="w-4 h-4" />
-                        <span>Escolher</span>
+                        <span>{isUploading ? "Enviando..." : "Escolher"}</span>
                       </div>
                       <input
                         id="bridePhoto"
                         type="file"
                         accept="image/*"
-                        onChange={handleBridePhotoUpload}
+                        onChange={(e) => handleImageUpload(e, 'bride')}
                         className="hidden"
+                        disabled={isUploading}
                       />
                     </label>
-                    {bridePhotoPreview && (
+                    {brideImage && (
                       <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#EDE0D4]">
                         <img
-                          src={bridePhotoPreview || "/placeholder.svg"}
+                          src={`/uploads/${brideImage.filename}`}
                           alt="Preview Noiva"
                           className="w-full h-full object-cover"
                         />
@@ -517,30 +527,31 @@ export default function CreateInviteForm({ onEmailSubmit }: CreateInviteFormProp
                 <label htmlFor="galleryPhotos" className="cursor-pointer">
                   <div className="flex items-center gap-2 px-4 py-2 border-2 border-[#D4A373] text-[#D4A373] rounded-lg hover:bg-[#D4A373] hover:text-white transition-colors w-fit">
                     <Upload className="w-5 h-5" />
-                    <span>Adicionar fotos</span>
+                    <span>{isUploading ? "Enviando..." : "Adicionar fotos"}</span>
                   </div>
                   <input
                     id="galleryPhotos"
                     type="file"
                     accept="image/*"
                     multiple
-                    onChange={handleGalleryPhotosUpload}
+                    onChange={(e) => handleImageUpload(e, 'gallery')}
                     className="hidden"
+                    disabled={isUploading}
                   />
                 </label>
 
-                {galleryPhotos.length > 0 && (
+                {galleryImages.length > 0 && (
                   <div className="grid grid-cols-3 gap-4 mt-4">
-                    {galleryPhotos.slice(0, 6).map((photo, index) => (
+                    {galleryImages.slice(0, 6).map((image, index) => (
                       <div key={index} className="relative group">
                         <img
-                          src={photo || "/placeholder.svg"}
+                          src={`/uploads/${image.filename}`}
                           alt={`Galeria ${index + 1}`}
                           className="w-full h-32 object-cover rounded-lg border-2 border-[#EDE0D4]"
                         />
                         <button
                           type="button"
-                          onClick={() => removeGalleryPhoto(index)}
+                          onClick={() => removeImage(index, 'gallery')}
                           className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                         >
                           <X className="w-4 h-4" />

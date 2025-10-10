@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Invitation {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  groomName      String
+  brideName      String
+  weddingDate    DateTime
+  weddingTime    String
+  venueName      String
+  venueAddress   String
+  welcomeMessage String
+  coupleStory    String
+  groomStory     String?
+  brideStory     String?
+  musicUrl       String?
+  template       String
+  email          String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  images Image[]
+
+  @@map("invitations")
+}
+
+model Image {
+  id           String      @id @default(cuid())
+  filename     String      @unique
+  originalName String
+  width        Int
+  height       Int
+  size         Int // Size in bytes
+  type         String // 'hero', 'groom', 'bride', 'gallery', 'hero_slideshow'
+  invitationId String?
+  invitation   Invitation? @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  createdAt    DateTime    @default(now())
+
+  @@map("images")
+}

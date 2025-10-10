@@ -11,9 +11,10 @@ interface EmailModalProps {
   isOpen: boolean
   onClose: () => void
   onSubmit: (email: string) => void
+  formData: any // Pass the form data
 }
 
-export default function EmailModal({ isOpen, onClose, onSubmit }: EmailModalProps) {
+export default function EmailModal({ isOpen, onClose, onSubmit, formData }: EmailModalProps) {
   const [email, setEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
@@ -22,10 +23,32 @@ export default function EmailModal({ isOpen, onClose, onSubmit }: EmailModalProp
     if (!email) return
 
     setIsLoading(true)
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    onSubmit(email)
-    setIsLoading(false)
+
+    try {
+      const response = await fetch('/api/invitations/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData.formData,
+          template: formData.selectedTemplate.id,
+          email,
+          images: formData.images
+        })
+      })
+
+      if (response.ok) {
+        onSubmit(email)
+      } else {
+        throw new Error('Failed to create invitation')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      alert('Erro ao criar convite. Tente novamente.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   if (!isOpen) return null
