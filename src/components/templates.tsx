@@ -9,6 +9,7 @@ import Image from "next/image"
 
 const templates = [
   {
+    id: "garden",
     name: "Garden",
     description: "Elegância natural com tons de verde oliva e detalhes botânicos",
     variant: "garden" as const,
@@ -25,6 +26,7 @@ const templates = [
     ],
   },
   {
+    id: "romantic",
     name: "Romântico",
     description: "Delicadeza e charme com flores, galeria de fotos e música",
     variant: "romantico" as const,
@@ -43,6 +45,7 @@ const templates = [
     ],
   },
   {
+    id: "modern",
     name: "Modern",
     description: "Sofisticação moderna com slideshow e design minimalista",
     variant: "modern" as const,
@@ -123,7 +126,7 @@ export function Templates() {
                   </Button>
                 </Link>
 
-                <Link href="/criar">
+                <Link href={`/criar?template=${template.id}`}>
                   <Button
                     size="sm"
                     className={`w-full transition-colors ${template.plan === "Pro"

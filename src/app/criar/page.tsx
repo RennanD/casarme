@@ -5,12 +5,14 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import CreateInviteForm from "./sections/create-invite-form"
 import EmailModal from "./sections/email-modal"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 export default function CreateInvitationPage() {
   const [showEmailModal, setShowEmailModal] = useState(false)
   const [formData, setFormData] = useState<any>(null)
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const selectedTemplateId = searchParams.get('template')
 
   const handleEmailSubmit = (email: string, data: any) => {
     setFormData(data)
@@ -30,7 +32,7 @@ export default function CreateInvitationPage() {
           Voltar para home
         </Link>
 
-        <CreateInviteForm onEmailSubmit={handleEmailSubmit} />
+        <CreateInviteForm onEmailSubmit={handleEmailSubmit} selectedTemplateId={selectedTemplateId} />
 
         <EmailModal
           isOpen={showEmailModal}

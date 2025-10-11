@@ -62,10 +62,20 @@ const templates = [
 
 interface CreateInviteFormProps {
   onEmailSubmit: (email: string, formData: any) => void
+  selectedTemplateId?: string | null
 }
 
-export default function CreateInviteForm({ onEmailSubmit }: CreateInviteFormProps) {
-  const [selectedTemplate, setSelectedTemplate] = useState(templates[0])
+export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: CreateInviteFormProps) {
+  // Find the selected template or default to first one
+  const getInitialTemplate = () => {
+    if (selectedTemplateId) {
+      const template = templates.find(t => t.id === selectedTemplateId)
+      return template || templates[0]
+    }
+    return templates[0]
+  }
+
+  const [selectedTemplate, setSelectedTemplate] = useState(getInitialTemplate())
   const [formData, setFormData] = useState({
     groomName: "",
     brideName: "",
