@@ -2,7 +2,22 @@
 
 ## ✅ Implementações Concluídas
 
-### 1. **Informações Detalhadas dos Templates na Home**
+### 1. **Correção das Informações dos Templates**
+
+**Problema:** Template básico (Garden) mostrava recursos que não possui (countdown) e templates pro tinham histórias individuais desnecessárias.
+
+**Solução:**
+- ✅ Removido "Countdown até o casamento" do template Garden (básico)
+- ✅ Removidas seções de "História do Noivo" e "História da Noiva" dos templates pro
+- ✅ Mantida apenas "História do Casal" nos templates pro
+- ✅ Informações agora são precisas e consistentes
+
+**Templates Corrigidos:**
+- **Garden (Básico - R$ 25,90):** Design botânico, 1 foto de capa, localização, compartilhamento
+- **Romântico (Pro - R$ 39,90):** Design romântico, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
+- **Modern (Pro - R$ 39,90):** Design moderno, slideshow, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
+
+### 2. **Informações Detalhadas dos Templates na Home**
 
 **Problema:** Os cards dos templates na home não mostravam informações completas sobre os recursos disponíveis.
 
@@ -12,11 +27,26 @@
 - ✅ Informações agora são consistentes entre home e página de criação
 
 **Templates Atualizados:**
-- **Garden (Básico - R$ 29,90):** Design botânico, 1 foto de capa, countdown, localização, confirmação
-- **Romântico (Pro - R$ 49,90):** Design romântico, fotos individuais, galeria, histórias, música, countdown, localização, confirmação
-- **Modern (Pro - R$ 49,90): Design moderno, slideshow, fotos individuais, galeria, histórias, música, countdown, localização, confirmação
+- **Garden (Básico - R$ 25,90):** Design botânico, 1 foto de capa, localização, compartilhamento
+- **Romântico (Pro - R$ 39,90):** Design romântico, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
+- **Modern (Pro - R$ 39,90):** Design moderno, slideshow, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
 
-### 2. **Auto-seleção de Template na Página de Criação**
+### 3. **Ajustes de Preços e Badges de Destaque**
+
+**Problema:** Preços não estavam otimizados e templates pro não tinham destaque visual.
+
+**Solução:**
+- ✅ Ajustado preço do template básico: R$ 29,90 → R$ 25,90
+- ✅ Ajustado preço dos templates pro: R$ 49,90 → R$ 39,90
+- ✅ Adicionada badge "Mais Escolhido" nos templates pro
+- ✅ Removida "Confirmação de presença" do template básico (não disponível)
+
+**Benefícios:**
+- ✅ Preços mais competitivos e acessíveis
+- ✅ Destaque visual para templates pro
+- ✅ Informações precisas sobre recursos disponíveis
+
+### 4. **Auto-seleção de Template na Página de Criação**
 
 **Problema:** Usuário precisava selecionar novamente o template na página de criação, mesmo tendo escolhido na home.
 

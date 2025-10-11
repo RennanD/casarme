@@ -17,28 +17,26 @@ const templates = [
     id: "garden",
     name: "Garden",
     plan: "basic",
-    price: "R$ 29,90",
+    price: "R$ 25,90",
     color: "#8B9D7F",
     description: "Design botânico com tons de verde oliva",
     features: [
       "Design botânico elegante",
       "1 foto de capa",
-      "Countdown até o casamento",
       "Localização no mapa",
-      "Confirmação de presença",
     ],
   },
   {
     id: "romantic",
     name: "Romântico",
     plan: "pro",
-    price: "R$ 49,90",
+    price: "R$ 39,90",
     color: "#E8B4B8",
     description: "Estilo romântico com flores e tons rosados",
     features: [
       "Design romântico com flores",
       "Fotos individuais + galeria",
-      "Histórias personalizadas",
+      "História do casal",
       "Música de fundo",
       "Countdown + localização",
     ],
@@ -47,14 +45,14 @@ const templates = [
     id: "modern",
     name: "Modern",
     plan: "pro",
-    price: "R$ 49,90",
+    price: "R$ 39,90",
     color: "#1A1A2E",
     description: "Design moderno e minimalista com slideshow",
     features: [
       "Design moderno sofisticado",
       "Slideshow com múltiplas fotos",
       "Fotos individuais + galeria",
-      "Histórias personalizadas",
+      "História do casal",
       "Música de fundo",
     ],
   },
@@ -498,35 +496,6 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <Label htmlFor="groomStory" className="text-[#3E3E3E] mb-2 block">
-                    História do Noivo (Opcional)
-                  </Label>
-                  <Textarea
-                    id="groomStory"
-                    value={formData.groomStory}
-                    onChange={(e) => setFormData({ ...formData, groomStory: e.target.value })}
-                    placeholder="Conte um pouco sobre o noivo..."
-                    rows={4}
-                    className="border-[#EDE0D4]"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="brideStory" className="text-[#3E3E3E] mb-2 block">
-                    História da Noiva (Opcional)
-                  </Label>
-                  <Textarea
-                    id="brideStory"
-                    value={formData.brideStory}
-                    onChange={(e) => setFormData({ ...formData, brideStory: e.target.value })}
-                    placeholder="Conte um pouco sobre a noiva..."
-                    rows={4}
-                    className="border-[#EDE0D4]"
-                  />
-                </div>
-              </div>
 
               {/* Gallery Photos */}
               <div className="mb-6">

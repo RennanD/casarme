@@ -14,14 +14,12 @@ const templates = [
     description: "Elegância natural com tons de verde oliva e detalhes botânicos",
     variant: "garden" as const,
     plan: "Básico",
-    price: "R$ 29,90",
+    price: "R$ 25,90",
     link: "/exemplo/garden",
     features: [
       "Design botânico elegante",
       "1 foto de capa",
-      "Countdown até o casamento",
       "Localização no mapa",
-      "Confirmação de presença",
       "Compartilhamento ilimitado",
     ],
   },
@@ -31,13 +29,13 @@ const templates = [
     description: "Delicadeza e charme com flores, galeria de fotos e música",
     variant: "romantico" as const,
     plan: "Pro",
-    price: "R$ 49,90",
+    price: "R$ 39,90",
     link: "/exemplo/romantic",
     features: [
       "Design romântico com flores",
       "Fotos individuais do casal",
       "Galeria com até 6 fotos",
-      "Histórias personalizadas",
+      "História do casal",
       "Música de fundo (YouTube)",
       "Countdown até o casamento",
       "Localização no mapa",
@@ -50,14 +48,14 @@ const templates = [
     description: "Sofisticação moderna com slideshow e design minimalista",
     variant: "modern" as const,
     plan: "Pro",
-    price: "R$ 49,90",
+    price: "R$ 39,90",
     link: "/exemplo/modern",
     features: [
       "Design moderno e sofisticado",
       "Slideshow com múltiplas fotos",
       "Fotos individuais do casal",
       "Galeria com até 6 fotos",
-      "Histórias personalizadas",
+      "História do casal",
       "Música de fundo (YouTube)",
       "Countdown até o casamento",
       "Localização no mapa",
@@ -93,12 +91,19 @@ export function Templates() {
               <div className="p-4 sm:p-6">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-serif text-lg sm:text-xl font-semibold text-[#3E3E3E]">{template.name}</h3>
-                  <span
-                    className={`text-xs px-2 py-1 rounded-full ${template.plan === "Pro" ? "bg-[#D4A373] text-white" : "bg-[#8B9D7F] text-white"
-                      }`}
-                  >
-                    {template.plan}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {template.plan === "Pro" && (
+                      <span className="text-xs px-2 py-1 rounded-full bg-gradient-to-r from-[#D4A373] to-[#C49363] text-white font-semibold">
+                        Mais Escolhido
+                      </span>
+                    )}
+                    <span
+                      className={`text-xs px-2 py-1 rounded-full ${template.plan === "Pro" ? "bg-[#D4A373] text-white" : "bg-[#8B9D7F] text-white"
+                        }`}
+                    >
+                      {template.plan}
+                    </span>
+                  </div>
                 </div>
 
                 <div className="mb-3">
