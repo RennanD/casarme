@@ -96,14 +96,28 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
   const [heroImages, setHeroImages] = useState<any[]>([])
   const [galleryImages, setGalleryImages] = useState<any[]>([])
 
-  const { uploadImage, isUploading, error } = useImageUpload()
+  const { uploadImage, isUploading, error, clearError } = useImageUpload()
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
+    console.log('📸 Image upload triggered:', { type, files: e.target.files?.length })
+
     const file = e.target.files?.[0]
-    if (!file) return
+    if (!file) {
+      console.log('❌ No file selected')
+      return
+    }
+
+    console.log('📁 File selected:', {
+      name: file.name,
+      size: file.size,
+      type: file.type
+    })
 
     const result = await uploadImage(file, type)
+    console.log('📤 Upload result:', result)
+
     if (result) {
+      console.log('✅ Upload successful, updating state for type:', type)
       switch (type) {
         case 'hero':
           setHeroImage(result)
@@ -121,20 +135,31 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
           setGalleryImages(prev => [...prev, result])
           break
       }
+    } else {
+      console.log('❌ Upload failed, no result returned')
     }
   }
 
   const handleMultipleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
+    console.log('📸 Multiple image upload triggered:', { type, files: e.target.files?.length })
+
     const files = Array.from(e.target.files || [])
+    console.log('📁 Files selected:', files.map(f => ({ name: f.name, size: f.size, type: f.type })))
 
     for (const file of files) {
+      console.log('📤 Uploading file:', file.name)
       const result = await uploadImage(file, type)
+      console.log('📤 Upload result for', file.name, ':', result)
+
       if (result) {
+        console.log('✅ Upload successful for', file.name, ', updating state')
         if (type === 'hero_slideshow') {
           setHeroImages(prev => [...prev, result])
         } else if (type === 'gallery') {
           setGalleryImages(prev => [...prev, result])
         }
+      } else {
+        console.log('❌ Upload failed for', file.name)
       }
     }
   }
@@ -273,7 +298,33 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                 ? "Adicione múltiplas fotos para criar um slideshow na capa"
                 : "Esta foto aparecerá na seção principal do convite"}
             </p>
+
+            {/* Error Display */}
+            {error && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <div className="flex items-center gap-2">
+                  <div className="text-red-600">❌</div>
+                  <div className="text-red-800 text-sm">
+                    <strong>Erro no upload:</strong> {error}
+                  </div>
+                  <button
+                    onClick={clearError}
+                    className="ml-auto text-red-600 hover:text-red-800"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+            )}
             <div className="space-y-4">
+              {/* Loading Indicator */}
+              {isUploading && (
+                <div className="flex items-center gap-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                  <span className="text-blue-800 text-sm">Enviando imagem...</span>
+                </div>
+              )}
+
               <label htmlFor="heroPhotos" className="cursor-pointer">
                 <div className="flex items-center gap-2 px-4 py-2 border-2 border-[#D4A373] text-[#D4A373] rounded-lg hover:bg-[#D4A373] hover:text-white transition-colors w-fit">
                   <Upload className="w-5 h-5" />
