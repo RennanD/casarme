@@ -50,15 +50,9 @@ export async function POST(request: NextRequest) {
 
     // Create images one by one to handle unique constraints
     const createImage = async (img: any, type: string) => {
-      // Generate unique filename for database
-      const timestamp = Date.now()
-      const randomString = Math.random().toString(36).substring(2, 15)
-      const extension = img.filename.split('.').pop()
-      const uniqueFilename = `${type}_${timestamp}_${randomString}.${extension}`
-
       return prisma.image.create({
         data: {
-          filename: uniqueFilename,
+          filename: img.filename, // Use the same filename that was saved to disk
           originalName: img.originalName,
           width: img.width,
           height: img.height,
@@ -94,8 +88,8 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Generate invitation URL
-    const invitationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/convite/${slug}`
+    // Generate invitation URL with owner mode
+    const invitationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/convite/${slug}?mode=owner`
 
     // Send email
     await resend.emails.send({

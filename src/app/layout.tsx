@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
+import { Toaster } from "sonner"
 
 const playfair = {
   variable: "--font-playfair",
@@ -33,5 +34,10 @@ export default function RootLayout({
 }
 
 function LayoutClient({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      {children}
+      <Toaster position="top-right" />
+    </>
+  )
 }

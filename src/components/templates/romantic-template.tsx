@@ -4,8 +4,9 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { Button } from "@/src/components/ui/button"
-import { MapPin, Calendar, Clock, Heart, Share2, Music } from "lucide-react"
+import { MapPin, Calendar, Clock, Heart, Music } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { InvitationHeader } from "@/src/components/invitation-header"
 
 interface RomanticTemplateProps {
@@ -69,19 +70,6 @@ export function RomanticTemplate({
     return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })
   }
 
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `Casamento ${data.groomName} & ${data.brideName}`,
-          text: `Você está convidado para o nosso casamento!`,
-          url: window.location.href,
-        })
-      } catch (err) {
-        console.log("Erro ao compartilhar:", err)
-      }
-    }
-  }
 
   const handleRSVPSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -120,7 +108,7 @@ export function RomanticTemplate({
       <section id="home" className="pt-24 pb-16 px-4 relative">
         {/* Top right floral decoration */}
         <div className="absolute top-0 right-0 w-64 h-64 opacity-30 pointer-events-none">
-          <img src="/watercolor-pink-roses-corner-decoration.jpg" alt="" className="w-full h-full object-contain" />
+          <Image src="/watercolor-pink-roses-corner-decoration.jpg" alt="" width={400} height={400} className="w-full h-full object-contain" />
         </div>
 
         <div className="container mx-auto max-w-2xl text-center relative z-10">
@@ -144,9 +132,11 @@ export function RomanticTemplate({
             </div>
 
             <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-white shadow-2xl relative z-10">
-              <img
+              <Image
                 src={heroPhoto || "/placeholder.svg?height=400&width=400"}
                 alt={`${data.groomName} e ${data.brideName}`}
+                width={400}
+                height={400}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -169,23 +159,16 @@ export function RomanticTemplate({
           </div>
 
           <p className="text-xl text-[#6B6B6B] mb-8">{formatDate(data.weddingDate) || "Data do casamento"}</p>
-
-          <Button
-            onClick={handleShare}
-            variant="outline"
-            className="border-[#E8B4B8] text-[#E8B4B8] hover:bg-[#E8B4B8] hover:text-white bg-transparent"
-          >
-            <Share2 className="w-4 h-4 mr-2" />
-            Compartilhar Convite
-          </Button>
         </div>
       </section>
 
       {/* Full Width Romantic Photo */}
       <section className="relative h-[60vh] overflow-hidden">
-        <img
+        <Image
           src={heroPhoto || "/placeholder.svg?height=800&width=1600&query=romantic couple wedding photo"}
           alt="Casal"
+          width={1600}
+          height={800}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#FFF8F3] via-transparent to-transparent" />
@@ -287,10 +270,10 @@ export function RomanticTemplate({
       <section id="cerimonia" className="py-16 px-4 relative overflow-hidden">
         {/* Background floral decoration */}
         <div className="absolute top-0 left-0 w-96 h-96 opacity-10 pointer-events-none">
-          <img src="/watercolor-pink-roses-corner-decoration.jpg" alt="" className="w-full h-full object-contain" />
+          <Image src="/watercolor-pink-roses-corner-decoration.jpg" alt="" width={400} height={400} className="w-full h-full object-contain" />
         </div>
         <div className="absolute bottom-0 right-0 w-96 h-96 opacity-10 pointer-events-none rotate-180">
-          <img src="/watercolor-pink-roses-corner-decoration.jpg" alt="" className="w-full h-full object-contain" />
+          <Image src="/watercolor-pink-roses-corner-decoration.jpg" alt="" width={400} height={400} className="w-full h-full object-contain" />
         </div>
 
         <div className="container mx-auto max-w-4xl relative z-10">

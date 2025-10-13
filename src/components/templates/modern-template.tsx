@@ -4,8 +4,9 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { Button } from "@/src/components/ui/button"
-import { MapPin, Calendar, Clock, Heart, Share2, Music, ChevronLeft, ChevronRight } from "lucide-react"
+import { MapPin, Calendar, Clock, Heart, Music, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { InvitationHeader } from "@/src/components/invitation-header"
 
 interface ModernTemplateProps {
@@ -81,19 +82,6 @@ export function ModernTemplate({
     return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })
   }
 
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `Casamento ${data.groomName} & ${data.brideName}`,
-          text: `Você está convidado para o nosso casamento!`,
-          url: window.location.href,
-        })
-      } catch (err) {
-        console.log("Erro ao compartilhar:", err)
-      }
-    }
-  }
 
   const handleRSVPSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -146,9 +134,11 @@ export function ModernTemplate({
               className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"
                 }`}
             >
-              <img
+              <Image
                 src={photo || "/placeholder.svg?height=1080&width=1920"}
                 alt={`Slide ${index + 1}`}
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -195,15 +185,6 @@ export function ModernTemplate({
           <p className="text-2xl md:text-3xl text-white/90 tracking-widest uppercase">
             {formatDate(data.weddingDate) || "Data do casamento"}
           </p>
-
-          <Button
-            onClick={handleShare}
-            variant="outline"
-            className="mt-12 border-2 border-white text-white hover:bg-white hover:text-[#1A1A2E] px-8 py-6 text-lg uppercase tracking-wider bg-transparent"
-          >
-            <Share2 className="w-5 h-5 mr-2" />
-            Compartilhar
-          </Button>
         </div>
       </section>
 
@@ -300,9 +281,11 @@ export function ModernTemplate({
           <div className="grid md:grid-cols-2 gap-16">
             <div className="text-center">
               <div className="w-64 h-64 mx-auto mb-6 overflow-hidden">
-                <img
+                <Image
                   src={groomPhoto || "/placeholder.svg?height=400&width=400"}
                   alt={data.groomName}
+                  width={400}
+                  height={400}
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                 />
               </div>
@@ -314,9 +297,11 @@ export function ModernTemplate({
 
             <div className="text-center">
               <div className="w-64 h-64 mx-auto mb-6 overflow-hidden">
-                <img
+                <Image
                   src={bridePhoto || "/placeholder.svg?height=400&width=400"}
                   alt={data.brideName}
+                  width={400}
+                  height={400}
                   className="w-full h-full object-cover grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"
                 />
               </div>
@@ -332,9 +317,11 @@ export function ModernTemplate({
             <div className="grid grid-cols-3 gap-4 mt-16">
               {galleryPhotos.map((photo, index) => (
                 <div key={index} className="aspect-square overflow-hidden">
-                  <img
+                  <Image
                     src={photo || "/placeholder.svg?height=400&width=400"}
                     alt={`Galeria ${index + 1}`}
+                    width={400}
+                    height={400}
                     className="w-full h-full object-cover grayscale hover:grayscale-0 hover:scale-110 transition-all duration-500"
                   />
                 </div>

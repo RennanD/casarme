@@ -4,8 +4,9 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { Button } from "@/src/components/ui/button"
-import { MapPin, Calendar, Clock, Heart, Share2 } from "lucide-react"
+import { MapPin, Calendar, Clock, Heart } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { InvitationHeader } from "@/src/components/invitation-header"
 
 interface GardenTemplateProps {
@@ -24,8 +25,6 @@ interface GardenTemplateProps {
 
 export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
-  const [showRSVP, setShowRSVP] = useState(false)
-  const [rsvpData, setRsvpData] = useState({ name: "", guests: "1", attending: "yes" })
 
   useEffect(() => {
     if (!data.weddingDate) return
@@ -56,25 +55,7 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
     return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })
   }
 
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `Casamento ${data.groomName} & ${data.brideName}`,
-          text: `Você está convidado para o nosso casamento!`,
-          url: window.location.href,
-        })
-      } catch (err) {
-        console.log("Erro ao compartilhar:", err)
-      }
-    }
-  }
 
-  const handleRSVPSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    alert(`Obrigado por confirmar, ${rsvpData.name}!`)
-    setShowRSVP(false)
-  }
 
   return (
     <div className="min-h-screen bg-[#FAF3E0]">
@@ -124,9 +105,11 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
             </div>
 
             <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-white shadow-2xl relative z-10">
-              <img
+              <Image
                 src={heroPhoto || "/placeholder.svg?height=400&width=400"}
                 alt={`${data.groomName} e ${data.brideName}`}
+                width={256}
+                height={256}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -139,15 +122,6 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
             {data.groomName || "Noivo"} <span className="text-[#8B9D7F]">&</span> {data.brideName || "Noiva"}
           </h1>
           <p className="text-xl text-[#6B6B6B] mb-8">{formatDate(data.weddingDate) || "Data do casamento"}</p>
-
-          <Button
-            onClick={handleShare}
-            variant="outline"
-            className="border-[#8B9D7F] text-[#8B9D7F] hover:bg-[#8B9D7F] hover:text-white bg-transparent"
-          >
-            <Share2 className="w-4 h-4 mr-2" />
-            Compartilhar Convite
-          </Button>
         </div>
       </section>
 
@@ -289,92 +263,6 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
         </div>
       </section>
 
-      {/* RSVP Section */}
-      <section id="confirmar" className="py-16 px-4 bg-white">
-        <div className="container mx-auto max-w-2xl">
-          <h2
-            className="font-serif text-4xl text-[#3E3E3E] text-center mb-8"
-            style={{ fontFamily: "Playfair Display" }}
-          >
-            Confirme sua Presença
-          </h2>
-          <p className="text-center text-[#6B6B6B] mb-8">
-            Sua presença é muito importante para nós! Por favor, confirme até {formatDate(data.weddingDate)}
-          </p>
-
-          {!showRSVP ? (
-            <div className="text-center">
-              <Button
-                onClick={() => setShowRSVP(true)}
-                size="lg"
-                className="bg-[#8B9D7F] hover:bg-[#6B7D5F] text-white px-12"
-              >
-                Confirmar Presença
-              </Button>
-            </div>
-          ) : (
-            <form onSubmit={handleRSVPSubmit} className="bg-[#FAF3E0] rounded-2xl p-8">
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-[#3E3E3E] mb-2 font-medium">Seu Nome</label>
-                  <input
-                    type="text"
-                    value={rsvpData.name}
-                    onChange={(e) => setRsvpData({ ...rsvpData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-[#D4A373] focus:outline-none focus:ring-2 focus:ring-[#8B9D7F]"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#3E3E3E] mb-2 font-medium">Número de Convidados</label>
-                  <select
-                    value={rsvpData.guests}
-                    onChange={(e) => setRsvpData({ ...rsvpData, guests: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-[#D4A373] focus:outline-none focus:ring-2 focus:ring-[#8B9D7F]"
-                  >
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <option key={num} value={num}>
-                        {num} {num === 1 ? "pessoa" : "pessoas"}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[#3E3E3E] mb-2 font-medium">Confirmação</label>
-                  <div className="space-y-2">
-                    <label className="flex items-center gap-3 cursor-pointer">
-                      <input
-                        type="radio"
-                        value="yes"
-                        checked={rsvpData.attending === "yes"}
-                        onChange={(e) => setRsvpData({ ...rsvpData, attending: e.target.value })}
-                        className="w-4 h-4 text-[#8B9D7F]"
-                      />
-                      <span className="text-[#3E3E3E]">Sim, estarei presente!</span>
-                    </label>
-                    <label className="flex items-center gap-3 cursor-pointer">
-                      <input
-                        type="radio"
-                        value="no"
-                        checked={rsvpData.attending === "no"}
-                        onChange={(e) => setRsvpData({ ...rsvpData, attending: e.target.value })}
-                        className="w-4 h-4 text-[#8B9D7F]"
-                      />
-                      <span className="text-[#3E3E3E]">Infelizmente não poderei comparecer</span>
-                    </label>
-                  </div>
-                </div>
-
-                <Button type="submit" className="w-full bg-[#8B9D7F] hover:bg-[#6B7D5F] text-white">
-                  Enviar Confirmação
-                </Button>
-              </div>
-            </form>
-          )}
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="py-8 bg-[#8B9D7F] text-white text-center">
