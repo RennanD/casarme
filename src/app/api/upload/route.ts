@@ -6,6 +6,13 @@ export async function POST(request: NextRequest) {
   console.log('=== UPLOAD API CALLED ===')
 
   try {
+    // Check Cloudinary configuration
+    console.log('🔧 Cloudinary config check:', {
+      cloudName: process.env.CLOUDINARY_CLOUD_NAME ? '✅ Set' : '❌ Missing',
+      apiKey: process.env.CLOUDINARY_API_KEY ? '✅ Set' : '❌ Missing',
+      apiSecret: process.env.CLOUDINARY_API_SECRET ? '✅ Set' : '❌ Missing'
+    })
+
     const formData = await request.formData()
     console.log('FormData received')
 
@@ -42,13 +49,20 @@ export async function POST(request: NextRequest) {
 
     // Upload to Cloudinary
     console.log('☁️ Uploading to Cloudinary...')
-    const cloudinaryResult = await uploadToCloudinary(file, `casarme/${type}`)
-    console.log('✅ Cloudinary upload successful:', {
-      public_id: cloudinaryResult.public_id,
-      secure_url: cloudinaryResult.secure_url,
-      width: cloudinaryResult.width,
-      height: cloudinaryResult.height
-    })
+    let cloudinaryResult
+
+    try {
+      cloudinaryResult = await uploadToCloudinary(file, `casarme/${type}`)
+      console.log('✅ Cloudinary upload successful:', {
+        public_id: cloudinaryResult.public_id,
+        secure_url: cloudinaryResult.secure_url,
+        width: cloudinaryResult.width,
+        height: cloudinaryResult.height
+      })
+    } catch (cloudinaryError) {
+      console.error('❌ Cloudinary upload failed:', cloudinaryError)
+      throw new Error(`Cloudinary upload failed: ${cloudinaryError instanceof Error ? cloudinaryError.message : 'Unknown error'}`)
+    }
 
     // Return metadata in the same format as before
     const imageMetadata = {

@@ -41,6 +41,16 @@ export function useImageUpload() {
         ok: response.ok
       })
 
+      // Check if response is JSON
+      const contentType = response.headers.get('content-type')
+      console.log('📋 Content-Type:', contentType)
+
+      if (!contentType || !contentType.includes('application/json')) {
+        const textResponse = await response.text()
+        console.error('❌ Non-JSON response received:', textResponse.substring(0, 200))
+        throw new Error(`Server returned non-JSON response: ${textResponse.substring(0, 100)}...`)
+      }
+
       if (!response.ok) {
         const errorData = await response.json()
         console.error('❌ Upload failed:', errorData)
