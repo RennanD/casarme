@@ -2,7 +2,17 @@ import sharp from 'sharp'
 import { promises as fs } from 'fs'
 import path from 'path'
 
-const UPLOAD_DIR = path.join(process.cwd(), 'public', 'uploads')
+// Use a more robust path that works in both development and production
+function getUploadDir(): string {
+  // In production (Vercel), use /tmp for temporary storage
+  if (process.env.VERCEL) {
+    return path.resolve('/tmp', 'uploads')
+  }
+  // In development, use the public directory
+  return path.resolve(process.cwd(), 'public', 'uploads')
+}
+
+const UPLOAD_DIR = getUploadDir()
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 
@@ -93,5 +103,11 @@ export async function deleteImage(filename: string): Promise<void> {
 }
 
 export function getImageUrl(filename: string): string {
+  // In production (Vercel), we need to serve files differently
+  if (process.env.VERCEL) {
+    // For Vercel, we'll need to implement a different serving strategy
+    // For now, return a placeholder or implement a different approach
+    return `/api/image/${filename}`
+  }
   return `/uploads/${filename}`
 }

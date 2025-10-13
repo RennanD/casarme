@@ -1,0 +1,16 @@
+{
+  "functions": {
+    "src/app/api/upload/route.ts": {
+      "maxDuration": 30
+    },
+    "src/app/api/image/[filename]/route.ts": {
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/uploads/(.*)",
+      "destination": "/api/image/$1"
+    }
+  ]
+}
