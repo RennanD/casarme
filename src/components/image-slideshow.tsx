@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { getImageUrl } from "@/src/lib/image-utils"
 import { Button } from "@/src/components/ui/button"
 
 interface ImageSlideshowProps {
@@ -50,7 +51,7 @@ export function ImageSlideshow({ images, className = "" }: ImageSlideshowProps) 
       {/* Main Image */}
       <div className="relative overflow-hidden">
         <img
-          src={`/uploads/${images[currentIndex].filename}`}
+          src={getImageUrl(images[currentIndex].filename)}
           alt={`Slide ${currentIndex + 1}`}
           className="w-full h-full object-cover transition-opacity duration-500"
         />

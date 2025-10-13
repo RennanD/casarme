@@ -9,15 +9,8 @@ export async function GET(
   try {
     const filename = params.filename
 
-    // Determine the correct path based on environment
-    let filePath: string
-    if (process.env.VERCEL) {
-      // In production (Vercel), use /tmp
-      filePath = path.resolve('/tmp', 'uploads', filename)
-    } else {
-      // In development, use public directory
-      filePath = path.resolve(process.cwd(), 'public', 'uploads', filename)
-    }
+    // Use public directory for now
+    const filePath = path.resolve(process.cwd(), 'public', 'uploads', filename)
 
     // Check if file exists
     try {

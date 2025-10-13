@@ -1,4 +1,3 @@
-import sharp from 'sharp'
 import { promises as fs } from 'fs'
 import path from 'path'
 
@@ -44,6 +43,28 @@ export async function processAndSaveImage(
   type: string,
   invitationId?: string
 ): Promise<ImageMetadata> {
+  // This function should only be called on the server side
+  // For client-side usage, we'll return basic metadata
+  if (typeof window !== 'undefined') {
+    // Client-side fallback - return basic metadata
+    const extension = file.name.split('.').pop()
+    const timestamp = Date.now()
+    const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    const filename = `${type}_${timestamp}_${randomString}.${extension}`
+
+    return {
+      filename,
+      originalName: file.name,
+      width: 0,
+      height: 0,
+      size: file.size,
+      type
+    }
+  }
+
+  // Server-side processing with Sharp
+  const sharp = (await import('sharp')).default
+
   // Ensure upload directory exists
   await fs.mkdir(UPLOAD_DIR, { recursive: true })
 
@@ -103,11 +124,6 @@ export async function deleteImage(filename: string): Promise<void> {
 }
 
 export function getImageUrl(filename: string): string {
-  // In production (Vercel), we need to serve files differently
-  if (process.env.VERCEL) {
-    // For Vercel, we'll need to implement a different serving strategy
-    // For now, return a placeholder or implement a different approach
-    return `/api/image/${filename}`
-  }
-  return `/uploads/${filename}`
+  // Always use the API route for consistency
+  return `/api/image/${filename}`
 }

@@ -11,6 +11,7 @@ import { Label } from "@/src/components/ui/label"
 import { Textarea } from "@/src/components/ui/textarea"
 import { Upload, Sparkles, X } from "lucide-react"
 import { useImageUpload } from "@/src/hooks/use-image-upload"
+import { getImageUrl } from "@/src/lib/image-utils"
 
 const templates = [
   {
@@ -296,7 +297,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                   {heroImages.map((image, index) => (
                     <div key={index} className="relative group">
                       <img
-                        src={`/uploads/${image.filename}`}
+                        src={getImageUrl(image.filename)}
                         alt={`Hero ${index + 1}`}
                         className="w-full h-24 object-cover rounded-lg border-2 border-[#EDE0D4]"
                       />
@@ -315,7 +316,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
               {!isModern && heroImage && (
                 <div className="w-32 h-32 rounded-lg overflow-hidden border-2 border-[#EDE0D4]">
                   <img
-                    src={`/uploads/${heroImage.filename}`}
+                    src={getImageUrl(heroImage.filename)}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />
@@ -455,7 +456,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                     {groomImage && (
                       <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#EDE0D4]">
                         <img
-                          src={`/uploads/${groomImage.filename}`}
+                          src={getImageUrl(groomImage.filename)}
                           alt="Preview Noivo"
                           className="w-full h-full object-cover"
                         />
@@ -486,7 +487,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                     {brideImage && (
                       <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[#EDE0D4]">
                         <img
-                          src={`/uploads/${brideImage.filename}`}
+                          src={getImageUrl(brideImage.filename)}
                           alt="Preview Noiva"
                           className="w-full h-full object-cover"
                         />
@@ -524,7 +525,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                     {galleryImages.slice(0, 6).map((image, index) => (
                       <div key={index} className="relative group">
                         <img
-                          src={`/uploads/${image.filename}`}
+                          src={getImageUrl(image.filename)}
                           alt={`Galeria ${index + 1}`}
                           className="w-full h-32 object-cover rounded-lg border-2 border-[#EDE0D4]"
                         />

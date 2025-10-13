@@ -3,6 +3,7 @@
 import { GardenTemplate } from "@/src/components/templates/garden-template"
 import { RomanticTemplate } from "@/src/components/templates/romantic-template"
 import { ModernTemplate } from "@/src/components/templates/modern-template"
+import { getImageUrl } from "@/src/lib/image-utils"
 import Image from "next/image"
 
 interface Invitation {
@@ -40,30 +41,30 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
   // Helper functions to get images
   const getHeroImage = () => {
     const image = invitation.images.find(img => img.type === 'hero' || img.type === 'hero_slideshow')
-    return image ? `/uploads/${image.filename}` : '/placeholder.svg?height=400&width=400'
+    return image ? getImageUrl(image.filename) : '/placeholder.svg?height=400&width=400'
   }
 
   const getHeroImages = () => {
     const images = invitation.images
       .filter(img => img.type === 'hero_slideshow')
-      .map(img => `/uploads/${img.filename}`)
+      .map(img => getImageUrl(img.filename))
     return images.length > 0 ? images : ['/placeholder.svg?height=400&width=400']
   }
 
   const getGroomImage = () => {
     const image = invitation.images.find(img => img.type === 'groom')
-    return image ? `/uploads/${image.filename}` : '/placeholder.svg?height=400&width=400'
+    return image ? getImageUrl(image.filename) : '/placeholder.svg?height=400&width=400'
   }
 
   const getBrideImage = () => {
     const image = invitation.images.find(img => img.type === 'bride')
-    return image ? `/uploads/${image.filename}` : '/placeholder.svg?height=400&width=400'
+    return image ? getImageUrl(image.filename) : '/placeholder.svg?height=400&width=400'
   }
 
   const getGalleryImages = () => {
     const images = invitation.images
       .filter(img => img.type === 'gallery')
-      .map(img => `/uploads/${img.filename}`)
+      .map(img => getImageUrl(img.filename))
     return images.length > 0 ? images : ['/placeholder.svg?height=400&width=400']
   }
 
