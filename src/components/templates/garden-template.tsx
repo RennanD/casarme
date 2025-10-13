@@ -7,7 +7,6 @@ import { Button } from "@/src/components/ui/button"
 import { MapPin, Calendar, Clock, Heart } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { InvitationHeader } from "@/src/components/invitation-header"
 
 interface GardenTemplateProps {
   data: {
@@ -59,8 +58,6 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
 
   return (
     <div className="min-h-screen bg-[#FAF3E0]">
-      {/* Navigation */}
-      <InvitationHeader accentColor="#8B9D7F" />
 
       {/* Hero Section */}
       <section id="home" className="pt-24 pb-16 px-4">

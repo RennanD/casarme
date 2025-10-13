@@ -2,12 +2,19 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/src/components/ui/button"
 import { MapPin, Calendar, Clock, Heart, Music } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { InvitationHeader } from "@/src/components/invitation-header"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay"
 
 interface RomanticTemplateProps {
   data: {
@@ -39,7 +46,12 @@ export function RomanticTemplate({
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [showRSVP, setShowRSVP] = useState(false)
   const [rsvpData, setRsvpData] = useState({ name: "", guests: "1", attending: "yes" })
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(true)
+
+  // Plugin de autoplay para o carousel
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  )
 
   useEffect(() => {
     if (!data.weddingDate) return
@@ -86,7 +98,6 @@ export function RomanticTemplate({
 
   return (
     <div className="min-h-screen bg-[#FFF8F3]">
-      <InvitationHeader accentColor="#E8B4B8" />
 
       {/* Music Player */}
       {data.musicUrl && (
@@ -162,17 +173,39 @@ export function RomanticTemplate({
         </div>
       </section>
 
-      {/* Full Width Romantic Photo */}
-      <section className="relative h-[60vh] overflow-hidden">
-        <Image
-          src={heroPhoto || "/placeholder.svg?height=800&width=1600&query=romantic couple wedding photo"}
-          alt="Casal"
-          width={1600}
-          height={800}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FFF8F3] via-transparent to-transparent" />
-      </section>
+      {/* Photo Gallery Carousel */}
+      {galleryPhotos.length > 0 && (
+        <section className="relative h-[60vh] overflow-hidden">
+          <Carousel
+            className="w-full h-full"
+            plugins={[autoplayPlugin.current]}
+            opts={{
+              loop: true,
+            }}
+            onMouseEnter={autoplayPlugin.current.stop}
+            onMouseLeave={autoplayPlugin.current.reset}
+          >
+            <CarouselContent className="h-full">
+              {galleryPhotos.map((photo, index) => (
+                <CarouselItem key={index} className="h-full">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={photo || "/placeholder.svg?height=800&width=1600&query=romantic couple wedding photo"}
+                      alt={`Galeria ${index + 1}`}
+                      width={1600}
+                      height={800}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#FFF8F3] via-transparent to-transparent" />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4 bg-white/80 hover:bg-white text-[#E8B4B8] border-[#E8B4B8]" />
+            <CarouselNext className="right-4 bg-white/80 hover:bg-white text-[#E8B4B8] border-[#E8B4B8]" />
+          </Carousel>
+        </section>
+      )}
 
       {/* Welcome Section */}
       <section id="boas-vindas" className="py-16 px-4">
@@ -249,20 +282,6 @@ export function RomanticTemplate({
             </div>
           </div>
 
-          {/* Photo Gallery */}
-          {galleryPhotos.length > 0 && (
-            <div className="grid grid-cols-3 gap-4">
-              {galleryPhotos.map((photo, index) => (
-                <div key={index} className="aspect-square rounded-lg overflow-hidden shadow-md">
-                  <img
-                    src={photo || "/placeholder.svg?height=400&width=400"}
-                    alt={`Galeria ${index + 1}`}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 

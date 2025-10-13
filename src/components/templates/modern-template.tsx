@@ -7,7 +7,6 @@ import { Button } from "@/src/components/ui/button"
 import { MapPin, Calendar, Clock, Heart, Music, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { InvitationHeader } from "@/src/components/invitation-header"
 
 interface ModernTemplateProps {
   data: {
@@ -39,7 +38,7 @@ export function ModernTemplate({
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [showRSVP, setShowRSVP] = useState(false)
   const [rsvpData, setRsvpData] = useState({ name: "", guests: "1", attending: "yes" })
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(true)
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const slides = heroPhotos.length > 0 ? heroPhotos : ["/modern-wedding-couple-photo.jpg"]
@@ -106,7 +105,6 @@ export function ModernTemplate({
 
   return (
     <div className="min-h-screen bg-[#1A1A2E]">
-      <InvitationHeader accentColor="#FFFFFF" textColor="#FFFFFF" />
 
       {/* Music Player */}
       {data.musicUrl && (

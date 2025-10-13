@@ -285,7 +285,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                   type="file"
                   accept="image/*"
                   multiple={isModern}
-                  onChange={(e) => handleImageUpload(e, isModern ? 'hero_slideshow' : 'hero')}
+                  onChange={(e) => isModern ? handleMultipleImageUpload(e, 'hero_slideshow') : handleImageUpload(e, 'hero')}
                   className="hidden"
                   disabled={isUploading}
                 />
@@ -513,7 +513,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                     type="file"
                     accept="image/*"
                     multiple
-                    onChange={(e) => handleImageUpload(e, 'gallery')}
+                    onChange={(e) => handleMultipleImageUpload(e, 'gallery')}
                     className="hidden"
                     disabled={isUploading}
                   />
