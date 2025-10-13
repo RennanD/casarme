@@ -3,7 +3,7 @@
 import { GardenTemplate } from "@/src/components/templates/garden-template"
 import { RomanticTemplate } from "@/src/components/templates/romantic-template"
 import { ModernTemplate } from "@/src/components/templates/modern-template"
-import { getImageUrl } from "@/src/lib/image-utils"
+import { getImageUrl } from "@/src/lib/image-url"
 import Image from "next/image"
 
 interface Invitation {

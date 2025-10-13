@@ -11,7 +11,7 @@ import { Label } from "@/src/components/ui/label"
 import { Textarea } from "@/src/components/ui/textarea"
 import { Upload, Sparkles, X } from "lucide-react"
 import { useImageUpload } from "@/src/hooks/use-image-upload"
-import { getImageUrl } from "@/src/lib/image-utils"
+import { getImageUrl } from "@/src/lib/image-url"
 
 const templates = [
   {

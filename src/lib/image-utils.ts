@@ -62,9 +62,7 @@ export async function processAndSaveImage(
     }
   }
 
-  // Server-side processing with Sharp
-  const sharp = (await import('sharp')).default
-
+  // Server-side processing - simplified without Sharp for now
   // Ensure upload directory exists
   await fs.mkdir(UPLOAD_DIR, { recursive: true })
 
@@ -82,34 +80,17 @@ export async function processAndSaveImage(
     counter++
   } while (await fs.access(path.join(UPLOAD_DIR, filename)).then(() => true).catch(() => false))
 
-  // Convert file to buffer
+  // Convert file to buffer and save directly
   const buffer = Buffer.from(await file.arrayBuffer())
-
-  // Process image with Sharp
-  const processedBuffer = await sharp(buffer)
-    .resize(1920, 1080, {
-      fit: 'inside',
-      withoutEnlargement: true
-    })
-    .jpeg({
-      quality: 85,
-      progressive: true
-    })
-    .toBuffer()
-
-  // Save processed image
   const filePath = path.join(UPLOAD_DIR, filename)
-  await fs.writeFile(filePath, new Uint8Array(processedBuffer))
-
-  // Get image metadata
-  const metadata = await sharp(processedBuffer).metadata()
+  await fs.writeFile(filePath, new Uint8Array(buffer))
 
   return {
     filename,
     originalName: file.name,
-    width: metadata.width || 0,
-    height: metadata.height || 0,
-    size: processedBuffer.length,
+    width: 0,
+    height: 0,
+    size: buffer.length,
     type
   }
 }

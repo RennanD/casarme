@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { getImageUrl } from "@/src/lib/image-utils"
+import { getImageUrl } from "@/src/lib/image-url"
 import { Button } from "@/src/components/ui/button"
 
 interface ImageSlideshowProps {
