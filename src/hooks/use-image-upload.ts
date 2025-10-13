@@ -44,7 +44,13 @@ export function useImageUpload() {
       if (!response.ok) {
         const errorData = await response.json()
         console.error('❌ Upload failed:', errorData)
-        throw new Error(errorData.error || 'Upload failed')
+
+        // Create detailed error message
+        const errorMessage = errorData.error || 'Upload failed'
+        const errorDetails = errorData.details ? `\n\nDetalhes:\n${errorData.details}` : ''
+        const fullError = `${errorMessage}${errorDetails}`
+
+        throw new Error(fullError)
       }
 
       const data = await response.json()
@@ -53,6 +59,13 @@ export function useImageUpload() {
 
     } catch (err) {
       console.error('❌ Upload error in hook:', err)
+      console.error('❌ Error details:', {
+        name: err instanceof Error ? err.name : 'Unknown',
+        message: err instanceof Error ? err.message : 'Unknown error',
+        stack: err instanceof Error ? err.stack : 'No stack trace',
+        cause: err instanceof Error ? err.cause : 'No cause'
+      })
+
       const errorMessage = err instanceof Error ? err.message : 'Upload failed'
       setError(errorMessage)
       return null

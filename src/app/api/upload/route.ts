@@ -69,9 +69,19 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('❌ Upload error:', error)
-    console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace')
+    console.error('❌ Error details:', {
+      name: error instanceof Error ? error.name : 'Unknown',
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : 'No stack trace',
+      cause: error instanceof Error ? error.cause : 'No cause'
+    })
+
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
-      { error: `Failed to upload image: ${error instanceof Error ? error.message : 'Unknown error'}` },
+      {
+        error: `Failed to upload image: ${errorMessage}`,
+        details: error instanceof Error ? error.stack : 'No additional details'
+      },
       { status: 500 }
     )
   }

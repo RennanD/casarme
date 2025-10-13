@@ -301,18 +301,34 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
 
             {/* Error Display */}
             {error && (
-              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <div className="flex items-center gap-2">
-                  <div className="text-red-600">❌</div>
-                  <div className="text-red-800 text-sm">
-                    <strong>Erro no upload:</strong> {error}
+              <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <div className="flex items-start gap-3">
+                  <div className="text-red-600 text-lg">❌</div>
+                  <div className="flex-1">
+                    <div className="text-red-800 font-semibold mb-2">
+                      Erro no upload de imagem:
+                    </div>
+                    <div className="bg-red-100 p-3 rounded border text-red-900 text-sm font-mono whitespace-pre-wrap break-words max-h-40 overflow-y-auto">
+                      {error}
+                    </div>
+                    <div className="mt-2 flex gap-2">
+                      <button
+                        onClick={clearError}
+                        className="px-3 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700"
+                      >
+                        Fechar
+                      </button>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(error)
+                          alert('Erro copiado para a área de transferência!')
+                        }}
+                        className="px-3 py-1 bg-gray-600 text-white text-xs rounded hover:bg-gray-700"
+                      >
+                        Copiar Erro
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    onClick={clearError}
-                    className="ml-auto text-red-600 hover:text-red-800"
-                  >
-                    ✕
-                  </button>
                 </div>
               </div>
             )}
