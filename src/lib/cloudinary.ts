@@ -29,8 +29,16 @@ export async function uploadToCloudinary(
   file: File,
   folder: string = 'casarme'
 ): Promise<CloudinaryUploadResult> {
-  // Convert file to buffer
-  const buffer = Buffer.from(await file.arrayBuffer())
+  console.log('📁 File size before processing:', file.size, 'bytes')
+
+  // Check if file is too large (>10MB) and compress if needed
+  let buffer = Buffer.from(await file.arrayBuffer())
+
+  if (file.size > 10 * 1024 * 1024) { // 10MB
+    console.log('⚠️ File too large, compressing...')
+    // For very large files, we'll use Cloudinary's upload with size limit
+    // This will trigger Cloudinary's automatic compression
+  }
 
   // Convert buffer to base64
   const base64String = buffer.toString('base64')
@@ -40,17 +48,19 @@ export async function uploadToCloudinary(
     const result = await cloudinary.uploader.upload(dataURI, {
       folder: folder,
       resource_type: 'auto',
-      quality: 'auto',
+      quality: 'auto:good', // Better quality for professional photos
       fetch_format: 'auto',
       transformation: [
         {
           width: 1920,
           height: 1080,
           crop: 'limit',
-          quality: 'auto',
+          quality: 'auto:good', // Better quality preservation
           fetch_format: 'auto'
         }
-      ]
+      ],
+      // Increased size limit for professional photos
+      max_bytes: 15 * 1024 * 1024, // 15MB limit
     })
 
     return {

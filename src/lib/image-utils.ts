@@ -12,7 +12,7 @@ function getUploadDir(): string {
 }
 
 const UPLOAD_DIR = getUploadDir()
-const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
+const MAX_FILE_SIZE = 15 * 1024 * 1024 // 15MB (increased for professional photos)
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 
 export interface ImageMetadata {
@@ -27,7 +27,11 @@ export interface ImageMetadata {
 export async function validateImage(file: File): Promise<{ valid: boolean; error?: string }> {
   // Check file size
   if (file.size > MAX_FILE_SIZE) {
-    return { valid: false, error: 'Imagem muito grande. Máximo 5MB.' }
+    const fileSizeMB = (file.size / 1024 / 1024).toFixed(1)
+    return {
+      valid: false,
+      error: `A imagem é muito grande (${fileSizeMB}MB). O tamanho máximo é 15MB. Por favor, redimensione a imagem antes de enviar.`
+    }
   }
 
   // Check file type
@@ -37,6 +41,7 @@ export async function validateImage(file: File): Promise<{ valid: boolean; error
 
   return { valid: true }
 }
+
 
 export async function processAndSaveImage(
   file: File,

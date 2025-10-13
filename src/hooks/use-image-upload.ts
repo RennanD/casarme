@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { compressImage } from '@/src/lib/image-compression'
 
 interface ImageMetadata {
   filename: string
@@ -25,8 +26,16 @@ export function useImageUpload() {
     setError(null)
 
     try {
+      // Compress image if it's larger than 3MB (more permissive for professional photos)
+      let processedFile = file
+      if (file.size > 3 * 1024 * 1024) { // 3MB threshold
+        console.log('📦 Compressing large image...')
+        // Let the compression function decide optimal settings
+        processedFile = await compressImage(file)
+      }
+
       const formData = new FormData()
-      formData.append('image', file)
+      formData.append('image', processedFile)
       formData.append('type', type)
 
       console.log('📤 Sending request to /api/upload')
