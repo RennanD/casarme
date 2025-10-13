@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { processAndSaveImage, validateImage } from '@/src/lib/image-utils'
+import { uploadToCloudinary } from '@/src/lib/cloudinary'
+import { validateImage } from '@/src/lib/image-utils'
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,8 +24,19 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Process and save image
-    const imageMetadata = await processAndSaveImage(file, type)
+    // Upload to Cloudinary
+    const cloudinaryResult = await uploadToCloudinary(file, `casarme/${type}`)
+
+    // Return metadata in the same format as before
+    const imageMetadata = {
+      filename: cloudinaryResult.public_id,
+      originalName: file.name,
+      width: cloudinaryResult.width,
+      height: cloudinaryResult.height,
+      size: cloudinaryResult.bytes,
+      type: type,
+      url: cloudinaryResult.secure_url
+    }
 
     return NextResponse.json({
       success: true,
