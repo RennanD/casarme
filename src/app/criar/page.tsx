@@ -1,13 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import CreateInviteForm from "./sections/create-invite-form"
 import EmailModal from "./sections/email-modal"
 import { useRouter, useSearchParams } from "next/navigation"
 
-export default function CreateInvitationPage() {
+function CreateInvitationContent() {
   const [showEmailModal, setShowEmailModal] = useState(false)
   const [formData, setFormData] = useState<any>(null)
   const router = useRouter()
@@ -42,5 +42,20 @@ export default function CreateInvitationPage() {
         />
       </div>
     </div>
+  )
+}
+
+export default function CreateInvitationPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#FAF3E0] flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-[#D4A373] border-r-transparent mb-4"></div>
+          <p className="text-[#3E3E3E] font-serif">Carregando...</p>
+        </div>
+      </div>
+    }>
+      <CreateInvitationContent />
+    </Suspense>
   )
 }
