@@ -9,6 +9,7 @@ export async function POST(request: NextRequest) {
     const type = formData.get('type') as string
 
     if (!file || !type) {
+      console.log('File and type are required')
       return NextResponse.json(
         { error: 'File and type are required' },
         { status: 400 }
@@ -18,6 +19,7 @@ export async function POST(request: NextRequest) {
     // Validate image
     const validation = await validateImage(file)
     if (!validation.valid) {
+      console.log(validation.error)
       return NextResponse.json(
         { error: validation.error },
         { status: 400 }
