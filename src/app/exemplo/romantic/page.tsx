@@ -16,7 +16,7 @@ export default function RomanticExamplePage() {
       "Ana é fotógrafa, ama capturar momentos especiais. Conheceu Pedro em uma exposição de arte e desde então são inseparáveis.",
     coupleStory:
       "Nos conhecemos em 2019 e desde o primeiro encontro soubemos que éramos almas gêmeas. Construímos juntos uma história de amor, cumplicidade e muitas aventuras.",
-    musicUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    musicUrl: "https://www.youtube.com/watch?v=OPugs48z2GU&list=RDOPugs48z2GU&start_radio=1",
   }
 
   // Fotos de demonstração para o carousel

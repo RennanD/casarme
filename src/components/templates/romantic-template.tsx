@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/src/components/ui/button"
-import { MapPin, Calendar, Clock, Heart, Music } from "lucide-react"
+import { MapPin, Calendar, Clock, Heart, Play, Pause } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -48,6 +48,14 @@ export function RomanticTemplate({
   const [rsvpData, setRsvpData] = useState({ name: "", guests: "1", attending: "yes" })
   const [isPlaying, setIsPlaying] = useState(false)
   const [hasUserInteracted, setHasUserInteracted] = useState(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  const getYouTubeId = (url: string) => {
+    const videoId = url.match(
+      /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/,
+    )?.[1]
+    return videoId
+  }
 
   // Plugin de autoplay para o carousel
   const autoplayPlugin = useRef(
@@ -90,27 +98,6 @@ export function RomanticTemplate({
     setShowRSVP(false)
   }
 
-  const getYouTubeEmbedUrl = (url: string, autoplay: boolean = false) => {
-    const videoId = url.match(
-      /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/,
-    )?.[1]
-    if (!videoId) return null
-
-    const params = new URLSearchParams({
-      autoplay: autoplay ? '1' : '0',
-      loop: '1',
-      playlist: videoId,
-      controls: '0',
-      disablekb: '1',
-      fs: '0',
-      iv_load_policy: '3',
-      modestbranding: '1',
-      rel: '0',
-      showinfo: '0'
-    })
-
-    return `https://www.youtube.com/embed/${videoId}?${params.toString()}`
-  }
 
   return (
     <div className="min-h-screen bg-[#FFF8F3]">
@@ -140,17 +127,23 @@ export function RomanticTemplate({
                 : "bg-[#E8B4B8] hover:bg-[#D89BA0]"
                 }`}
             >
-              <Music className={`w-6 h-6 ${isPlaying ? "animate-pulse" : ""}`} />
+              {isPlaying ? (
+                <Pause className="w-6 h-6" />
+              ) : (
+                <Play className="w-6 h-6 ml-0.5" />
+              )}
             </Button>
           </div>
-          {isPlaying && hasUserInteracted && getYouTubeEmbedUrl(data.musicUrl, true) && (
-            <iframe
-              src={getYouTubeEmbedUrl(data.musicUrl, true) || ""}
-              allow="autoplay; encrypted-media; fullscreen"
-              className="absolute -top-1 -left-1 w-1 h-1 opacity-0 pointer-events-none"
-              title="Background Music"
-              sandbox="allow-scripts allow-same-origin"
-            />
+          {/* YouTube Player - Hidden but functional */}
+          {hasUserInteracted && getYouTubeId(data.musicUrl) && (
+            <div className="absolute -top-1 -left-1 w-1 h-1 opacity-0 pointer-events-none">
+              <iframe
+                src={`https://www.youtube.com/embed/${getYouTubeId(data.musicUrl)}?autoplay=${isPlaying ? 1 : 0}&loop=1&playlist=${getYouTubeId(data.musicUrl)}&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&enablejsapi=1`}
+                allow="autoplay; encrypted-media"
+                className="w-full h-full"
+                title="Background Music"
+              />
+            </div>
           )}
         </div>
       )}
