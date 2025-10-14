@@ -46,7 +46,8 @@ export function RomanticTemplate({
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
   const [showRSVP, setShowRSVP] = useState(false)
   const [rsvpData, setRsvpData] = useState({ name: "", guests: "1", attending: "yes" })
-  const [isPlaying, setIsPlaying] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [hasUserInteracted, setHasUserInteracted] = useState(false)
 
   // Plugin de autoplay para o carousel
   const autoplayPlugin = useRef(
@@ -89,11 +90,26 @@ export function RomanticTemplate({
     setShowRSVP(false)
   }
 
-  const getYouTubeEmbedUrl = (url: string) => {
+  const getYouTubeEmbedUrl = (url: string, autoplay: boolean = false) => {
     const videoId = url.match(
       /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/,
     )?.[1]
-    return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1` : null
+    if (!videoId) return null
+
+    const params = new URLSearchParams({
+      autoplay: autoplay ? '1' : '0',
+      loop: '1',
+      playlist: videoId,
+      controls: '0',
+      disablekb: '1',
+      fs: '0',
+      iv_load_policy: '3',
+      modestbranding: '1',
+      rel: '0',
+      showinfo: '0'
+    })
+
+    return `https://www.youtube.com/embed/${videoId}?${params.toString()}`
   }
 
   return (
@@ -102,15 +118,39 @@ export function RomanticTemplate({
       {/* Music Player */}
       {data.musicUrl && (
         <div className="fixed bottom-8 right-8 z-50">
-          <Button
-            onClick={() => setIsPlaying(!isPlaying)}
-            size="lg"
-            className="rounded-full w-16 h-16 bg-[#E8B4B8] hover:bg-[#D89BA0] text-white shadow-2xl"
-          >
-            <Music className={`w-6 h-6 ${isPlaying ? "animate-pulse" : ""}`} />
-          </Button>
-          {isPlaying && getYouTubeEmbedUrl(data.musicUrl) && (
-            <iframe src={getYouTubeEmbedUrl(data.musicUrl) || ""} allow="autoplay" className="hidden" />
+          <div className="flex flex-col items-end gap-2">
+            {isPlaying && (
+              <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-[#3E3E3E] font-medium shadow-lg">
+                🎵 Tocando
+              </div>
+            )}
+            {!hasUserInteracted && (
+              <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-[#3E3E3E] font-medium shadow-lg max-w-32 text-center">
+                Toque para tocar música
+              </div>
+            )}
+            <Button
+              onClick={() => {
+                setHasUserInteracted(true)
+                setIsPlaying(!isPlaying)
+              }}
+              size="lg"
+              className={`rounded-full w-16 h-16 text-white shadow-2xl transition-all duration-300 ${isPlaying
+                ? "bg-[#D89BA0] hover:bg-[#C88A8F] scale-105"
+                : "bg-[#E8B4B8] hover:bg-[#D89BA0]"
+                }`}
+            >
+              <Music className={`w-6 h-6 ${isPlaying ? "animate-pulse" : ""}`} />
+            </Button>
+          </div>
+          {isPlaying && hasUserInteracted && getYouTubeEmbedUrl(data.musicUrl, true) && (
+            <iframe
+              src={getYouTubeEmbedUrl(data.musicUrl, true) || ""}
+              allow="autoplay; encrypted-media; fullscreen"
+              className="absolute -top-1 -left-1 w-1 h-1 opacity-0 pointer-events-none"
+              title="Background Music"
+              sandbox="allow-scripts allow-same-origin"
+            />
           )}
         </div>
       )}

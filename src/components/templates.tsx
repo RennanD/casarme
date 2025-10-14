@@ -42,26 +42,27 @@ const templates = [
       "Confirmação de presença",
     ],
   },
-  {
-    id: "modern",
-    name: "Modern",
-    description: "Sofisticação moderna com slideshow e design minimalista",
-    variant: "modern" as const,
-    plan: "Pro",
-    price: "R$ 39,90",
-    link: "/exemplo/modern",
-    features: [
-      "Design moderno e sofisticado",
-      "Slideshow com múltiplas fotos",
-      "Fotos individuais do casal",
-      "Galeria com até 6 fotos",
-      "História do casal",
-      "Música de fundo (YouTube)",
-      "Countdown até o casamento",
-      "Localização no mapa",
-      "Confirmação de presença",
-    ],
-  },
+  // Template moderno temporariamente oculto para MVP
+  // {
+  //   id: "modern",
+  //   name: "Modern",
+  //   description: "Sofisticação moderna com slideshow e design minimalista",
+  //   variant: "modern" as const,
+  //   plan: "Pro",
+  //   price: "R$ 39,90",
+  //   link: "/exemplo/modern",
+  //   features: [
+  //     "Design moderno e sofisticado",
+  //     "Slideshow com múltiplas fotos",
+  //     "Fotos individuais do casal",
+  //     "Galeria com até 6 fotos",
+  //     "História do casal",
+  //     "Música de fundo (YouTube)",
+  //     "Countdown até o casamento",
+  //     "Localização no mapa",
+  //     "Confirmação de presença",
+  //   ],
+  // },
 ]
 
 export function Templates() {
@@ -74,7 +75,7 @@ export function Templates() {
         <p className="text-center text-[#6B6B6B] text-base sm:text-lg mb-12 sm:mb-16 max-w-2xl mx-auto leading-relaxed px-4">
           Escolha o template perfeito para o seu casamento. Cada modelo inclui recursos exclusivos!
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
           {templates.map((template, index) => (
             <Card
               key={index}

@@ -42,21 +42,22 @@ const templates = [
       "Countdown + localização",
     ],
   },
-  {
-    id: "modern",
-    name: "Modern",
-    plan: "pro",
-    price: "R$ 39,90",
-    color: "#1A1A2E",
-    description: "Design moderno e minimalista com slideshow",
-    features: [
-      "Design moderno sofisticado",
-      "Slideshow com múltiplas fotos",
-      "Fotos individuais + galeria",
-      "História do casal",
-      "Música de fundo",
-    ],
-  },
+  // Template moderno temporariamente oculto para MVP
+  // {
+  //   id: "modern",
+  //   name: "Modern",
+  //   plan: "pro",
+  //   price: "R$ 39,90",
+  //   color: "#1A1A2E",
+  //   description: "Design moderno e minimalista com slideshow",
+  //   features: [
+  //     "Design moderno sofisticado",
+  //     "Slideshow com múltiplas fotos",
+  //     "Fotos individuais + galeria",
+  //     "História do casal",
+  //     "Música de fundo",
+  //   ],
+  // },
 ]
 
 interface CreateInviteFormProps {
@@ -210,7 +211,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
         <Card className="p-8 bg-white border-none shadow-lg mb-8">
           <h2 className="font-serif text-2xl font-semibold text-[#3E3E3E] mb-6">Escolha seu Template</h2>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             {templates.map((template) => (
               <label key={template.id} className="cursor-pointer">
                 <input
