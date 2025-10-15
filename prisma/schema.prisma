@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,36 +8,31 @@ datasource db {
 }
 
 model Invitation {
-  id             String   @id @default(cuid())
-  slug           String   @unique
-  groomName      String
-  brideName      String
-  weddingDate    DateTime
-  weddingTime    String
-  venueName      String
-  venueAddress   String
-  welcomeMessage String
-  coupleStory    String
-  groomStory     String?
-  brideStory     String?
-  musicUrl       String?
-  whatsapp       String?
-  template       String
-  email          String
-
-  // Stripe fields
+  id                    String    @id @default(cuid())
+  slug                  String    @unique
+  groomName             String
+  brideName             String
+  weddingDate           DateTime
+  weddingTime           String
+  venueName             String
+  venueAddress          String
+  welcomeMessage        String
+  coupleStory           String
+  groomStory            String?
+  brideStory            String?
+  musicUrl              String?
+  template              String
+  email                 String
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  whatsapp              String?
+  paymentStatus         String?
+  purchasedAt           DateTime?
   stripeCustomerId      String?
   stripePaymentIntentId String?
   stripeSessionId       String?
-  paymentStatus         String? // 'pending', 'completed', 'failed', 'refunded'
-  purchasedAt           DateTime?
-  isActive              Boolean   @default(false) // Convite ativo/inativo
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  images Image[]
+  isActive              Boolean   @default(false)
+  images                Image[]
 
   @@map("invitations")
 }
@@ -51,11 +43,11 @@ model Image {
   originalName String
   width        Int
   height       Int
-  size         Int // Size in bytes
-  type         String // 'hero', 'groom', 'bride', 'gallery', 'hero_slideshow'
+  size         Int
+  type         String
   invitationId String?
-  invitation   Invitation? @relation(fields: [invitationId], references: [id], onDelete: Cascade)
   createdAt    DateTime    @default(now())
+  invitation   Invitation? @relation(fields: [invitationId], references: [id], onDelete: Cascade)
 
   @@map("images")
 }
