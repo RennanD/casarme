@@ -1,5 +1,4 @@
 import { ImageResponse } from 'next/og'
-import { prisma } from '@/src/lib/prisma'
 
 export const runtime = 'edge'
 
@@ -15,7 +14,7 @@ export default async function Image() {
     (
       <div
         style={{
-          background: 'linear-gradient(135deg, #FAF3E0 0%, #D4A373 100%)',
+          background: '#FAF3E0',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -36,7 +35,7 @@ export default async function Image() {
         >
           <h1
             style={{
-              fontSize: '72px',
+              fontSize: '64px',
               fontWeight: 'bold',
               color: '#3E3E3E',
               margin: '0',
@@ -48,7 +47,7 @@ export default async function Image() {
           </h1>
           <p
             style={{
-              fontSize: '28px',
+              fontSize: '24px',
               color: '#6B6B6B',
               margin: '10px 0 0 0',
               textAlign: 'center',
@@ -58,113 +57,14 @@ export default async function Image() {
           </p>
         </div>
 
-        {/* Features */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '40px',
-            alignItems: 'center',
-            marginTop: '20px',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              color: '#3E3E3E',
-            }}
-          >
-            <div
-              style={{
-                fontSize: '48px',
-                marginBottom: '10px',
-              }}
-            >
-              💍
-            </div>
-            <p
-              style={{
-                fontSize: '18px',
-                margin: '0',
-                textAlign: 'center',
-              }}
-            >
-              Templates
-              <br />
-              Elegantes
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              color: '#3E3E3E',
-            }}
-          >
-            <div
-              style={{
-                fontSize: '48px',
-                marginBottom: '10px',
-              }}
-            >
-              📱
-            </div>
-            <p
-              style={{
-                fontSize: '18px',
-                margin: '0',
-                textAlign: 'center',
-              }}
-            >
-              Fácil
-              <br />
-              Compartilhamento
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              color: '#3E3E3E',
-            }}
-          >
-            <div
-              style={{
-                fontSize: '48px',
-                marginBottom: '10px',
-              }}
-            >
-              ✨
-            </div>
-            <p
-              style={{
-                fontSize: '18px',
-                margin: '0',
-                textAlign: 'center',
-              }}
-            >
-              Personalização
-              <br />
-              Completa
-            </p>
-          </div>
-        </div>
-
         {/* CTA */}
         <div
           style={{
-            marginTop: '40px',
             padding: '20px 40px',
             backgroundColor: '#D4A373',
             borderRadius: '12px',
             color: 'white',
-            fontSize: '24px',
+            fontSize: '20px',
             fontWeight: 'bold',
           }}
         >
