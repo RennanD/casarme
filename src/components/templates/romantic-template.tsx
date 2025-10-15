@@ -216,6 +216,33 @@ export function RomanticTemplate({
         </div>
       </section>
 
+      {/* Countdown Section */}
+      <section className="py-16 px-4 bg-gradient-to-b from-[#FFF8F3] to-[#FFE8E8]">
+        <div className="container mx-auto max-w-4xl text-center">
+          <h2 className="font-serif text-3xl text-[#3E3E3E] mb-8" style={{ fontFamily: "Playfair Display" }}>
+            Contagem Regressiva
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-[#E8B4B8]/20">
+              <div className="text-4xl font-bold text-[#E8B4B8] mb-2">{timeLeft.days}</div>
+              <div className="text-sm text-[#6B6B6B] uppercase tracking-wider">Dias</div>
+            </div>
+            <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-[#E8B4B8]/20">
+              <div className="text-4xl font-bold text-[#E8B4B8] mb-2">{timeLeft.hours}</div>
+              <div className="text-sm text-[#6B6B6B] uppercase tracking-wider">Horas</div>
+            </div>
+            <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-[#E8B4B8]/20">
+              <div className="text-4xl font-bold text-[#E8B4B8] mb-2">{timeLeft.minutes}</div>
+              <div className="text-sm text-[#6B6B6B] uppercase tracking-wider">Minutos</div>
+            </div>
+            <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-[#E8B4B8]/20">
+              <div className="text-4xl font-bold text-[#E8B4B8] mb-2">{timeLeft.seconds}</div>
+              <div className="text-sm text-[#6B6B6B] uppercase tracking-wider">Segundos</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Photo Gallery Carousel */}
       {galleryPhotos.length > 0 && (
         <section className="relative h-[60vh] overflow-hidden">

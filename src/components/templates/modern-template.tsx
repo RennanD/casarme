@@ -196,6 +196,32 @@ export function ModernTemplate({
         </div>
       </section>
 
+      {/* Countdown Section */}
+      <section className="py-24 px-4 bg-[#1A1A2E] text-white">
+        <div className="container mx-auto max-w-4xl text-center">
+          <div className="h-px w-24 bg-white mx-auto mb-8" />
+          <h2 className="text-5xl font-bold text-white mb-12 uppercase tracking-wider">Contagem Regressiva</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="bg-white/10 backdrop-blur-sm rounded-none p-8 border border-white/20">
+              <div className="text-5xl font-bold text-white mb-3">{timeLeft.days}</div>
+              <div className="text-sm text-white/80 uppercase tracking-wider">Dias</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-none p-8 border border-white/20">
+              <div className="text-5xl font-bold text-white mb-3">{timeLeft.hours}</div>
+              <div className="text-sm text-white/80 uppercase tracking-wider">Horas</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-none p-8 border border-white/20">
+              <div className="text-5xl font-bold text-white mb-3">{timeLeft.minutes}</div>
+              <div className="text-sm text-white/80 uppercase tracking-wider">Minutos</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-none p-8 border border-white/20">
+              <div className="text-5xl font-bold text-white mb-3">{timeLeft.seconds}</div>
+              <div className="text-sm text-white/80 uppercase tracking-wider">Segundos</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Welcome Section */}
       <section id="boas-vindas" className="py-24 px-4 bg-white">
         <div className="container mx-auto max-w-3xl text-center">
