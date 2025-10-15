@@ -11,35 +11,35 @@ const templates = [
   {
     id: "garden",
     name: "Garden",
-    description: "Elegância natural com tons de verde oliva e detalhes botânicos",
+    description: "Template de convite de casamento botânico com elegância natural e tons de verde oliva",
     variant: "garden" as const,
     plan: "Básico",
     price: "R$ 25,90",
     link: "/exemplo/garden",
     features: [
-      "Design botânico elegante",
-      "1 foto de capa",
-      "Localização no mapa",
-      "Compartilhamento ilimitado",
+      "Design botânico elegante para convite digital",
+      "1 foto de capa personalizada",
+      "Localização interativa no mapa",
+      "Compartilhamento ilimitado do convite",
     ],
   },
   {
     id: "romantic",
     name: "Romântico",
-    description: "Delicadeza e charme com flores, galeria de fotos e música",
+    description: "Modelo de convite romântico com flores, galeria de fotos e música de fundo",
     variant: "romantico" as const,
     plan: "Pro",
     price: "R$ 39,90",
     link: "/exemplo/romantic",
     features: [
-      "Design romântico com flores",
+      "Design romântico com flores para convite digital",
       "Fotos individuais do casal",
-      "Galeria com até 6 fotos",
-      "História do casal",
+      "Galeria com até 6 fotos do casal",
+      "História do casal personalizada",
       "Música de fundo (YouTube)",
-      "Countdown até o casamento",
-      "Localização no mapa",
-      "Confirmação de presença",
+      "Contagem regressiva até o casamento",
+      "Localização interativa no mapa",
+      "Confirmação de presença via WhatsApp",
     ],
   },
   // Template moderno temporariamente oculto para MVP
@@ -70,10 +70,10 @@ export function Templates() {
     <section id="templates" className="py-16 sm:py-24 bg-[#FAF3E0]">
       <div className="container mx-auto px-4">
         <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#3E3E3E] mb-3 sm:mb-4">
-          Modelos de Convite
+          Templates de Convite de Casamento Digital
         </h2>
         <p className="text-center text-[#6B6B6B] text-base sm:text-lg mb-12 sm:mb-16 max-w-2xl mx-auto leading-relaxed px-4">
-          Escolha o template perfeito para o seu casamento. Cada modelo inclui recursos exclusivos!
+          Escolha o modelo de convite digital perfeito para seu casamento. Templates personalizáveis com recursos exclusivos para seu grande dia.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
           {templates.map((template, index) => (

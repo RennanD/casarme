@@ -3,23 +3,23 @@ import { MapPin, Clock, Heart, Smartphone } from "lucide-react"
 const features = [
   {
     icon: MapPin,
-    title: "Localização interativa",
-    description: "Botão direto para abrir o local do casamento no Google Maps",
+    title: "Localização interativa do casamento",
+    description: "Botão direto para abrir o local do casamento no Google Maps. Facilite para seus convidados encontrarem o local da cerimônia",
   },
   {
     icon: Clock,
-    title: "Countdown ao vivo",
-    description: "Contador regressivo até o grande dia (disponível no Plano Pro)",
+    title: "Contagem regressiva personalizada",
+    description: "Contador regressivo até o grande dia com design personalizado (disponível no Plano Pro)",
   },
   {
     icon: Heart,
-    title: "Confirmação de presença",
-    description: "Seus convidados confirmam presença direto no convite",
+    title: "Confirmação de presença via WhatsApp",
+    description: "Seus convidados confirmam presença diretamente no convite digital, integrado com WhatsApp",
   },
   {
     icon: Smartphone,
-    title: "100% responsivo",
-    description: "Perfeito em qualquer dispositivo, otimizado para compartilhar",
+    title: "Convite 100% responsivo",
+    description: "Perfeito em qualquer dispositivo móvel ou desktop, otimizado para compartilhar nas redes sociais",
   },
 ]
 
@@ -28,7 +28,7 @@ export function WhyChoose() {
     <section id="por-que-escolher" className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-[#3E3E3E] mb-16">
-          Por que escolher o CasarMe?
+          Por que escolher o CasarMe para seu Convite de Casamento Digital?
         </h2>
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {features.map((feature, index) => (

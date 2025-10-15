@@ -4,17 +4,17 @@ import { Star } from "lucide-react"
 const testimonials = [
   {
     name: "Ana & Lucas",
-    text: "Nossos convidados amaram o convite! Parecia um mini site do nosso amor.",
+    text: "Nossos convidados amaram o convite digital! Parecia um mini site do nosso amor com mapa e contagem regressiva.",
     image: "/happy-couple-wedding-portrait.jpg",
   },
   {
     name: "Mariana & Pedro",
-    text: "Ficou lindo e foi super fácil de fazer. Recomendo demais!",
+    text: "O convite de casamento digital ficou lindo e foi super fácil de criar. Recomendo demais para outros casais!",
     image: "/smiling-couple-wedding-photo.jpg",
   },
   {
     name: "Julia & Rafael",
-    text: "O vídeo no convite deixou tudo ainda mais especial e emocionante.",
+    text: "A música de fundo e galeria de fotos no convite deixaram tudo ainda mais especial e emocionante para nossos convidados.",
     image: "/romantic-couple-wedding-celebration.jpg",
   },
 ]
@@ -24,7 +24,7 @@ export function Testimonials() {
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-[#3E3E3E] mb-16">
-          O que nossos casais dizem
+          Depoimentos de Casais que Criaram seus Convites Digitais
         </h2>
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (

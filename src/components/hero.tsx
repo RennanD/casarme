@@ -19,11 +19,11 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center animate-fade-in">
-        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-[#3E3E3E] mb-6 animate-slide-up text-balance">
-          Crie seu convite de casamento em minutos
+        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-[#3E3E3E] mb-6 animate-slide-up text-balance">
+          Convite de Casamento Digital Personalizado - Crie em Minutos
         </h1>
         <p className="text-xl md:text-2xl text-[#6B6B6B] mb-12 max-w-3xl mx-auto animate-slide-up [animation-delay:200ms] text-pretty">
-          Transforme suas fotos em um convite interativo e inesquecível com mapa, countdown e confirmação de presença
+          Crie convites de casamento online únicos com mapa interativo, contagem regressiva e confirmação de presença. Templates elegantes para seu grande dia.
         </p>
         <Link href="/criar">
           <Button

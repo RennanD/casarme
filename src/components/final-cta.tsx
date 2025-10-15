@@ -10,10 +10,10 @@ export function FinalCTA() {
       <div className="container mx-auto px-4 text-center">
         <Heart className="w-16 h-16 mx-auto mb-6 animate-pulse" />
         <h2 className="font-serif text-4xl md:text-6xl font-bold mb-6 text-balance">
-          Seu convite merece ser inesquecível
+          Crie seu Convite de Casamento Digital Inesquecível
         </h2>
         <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-pretty opacity-95">
-          Crie agora seu convite digital interativo e encante seus convidados
+          Transforme seu grande dia em uma experiência única. Crie agora seu convite digital personalizado com mapa, contagem regressiva e confirmação de presença.
         </p>
         <Link href="/criar">
           <Button
