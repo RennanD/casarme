@@ -90,12 +90,12 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Generate invitation URL with owner mode
-    const invitationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/convite/${slug}?mode=owner`
+    // Generate shareable invitation URL
+    const invitationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/convite/${slug}`
 
     // Send email
     await resend.emails.send({
-      from: 'no-reply@resend.dev',
+      from: process.env.RESEND_FROM_EMAIL!,
       to: [email],
       subject: `🎉 Seu convite interativo está pronto! - ${groomName} & ${brideName}`,
       react: EmailTemplate({
