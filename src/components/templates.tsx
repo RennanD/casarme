@@ -67,7 +67,7 @@ const templates = [
 
 export function Templates() {
   return (
-    <section className="py-16 sm:py-24 bg-[#FAF3E0]">
+    <section id="templates" className="py-16 sm:py-24 bg-[#FAF3E0]">
       <div className="container mx-auto px-4">
         <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#3E3E3E] mb-3 sm:mb-4">
           Modelos de Convite

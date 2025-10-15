@@ -25,7 +25,7 @@ const features = [
 
 export function WhyChoose() {
   return (
-    <section className="py-24 bg-white">
+    <section id="por-que-escolher" className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-[#3E3E3E] mb-16">
           Por que escolher o CasarMe?
