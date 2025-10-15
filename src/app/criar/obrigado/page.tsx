@@ -45,6 +45,9 @@ export default function ThankYouPage() {
                   <p className="text-[#6B6B6B] text-sm">
                     Enviamos o link do seu convite interativo para o e-mail informado
                   </p>
+                  <p className="text-[#D4A373] text-sm font-medium mt-1">
+                    ⚠️ Importante: Verifique também sua caixa de spam/lixo eletrônico
+                  </p>
                 </div>
               </div>
 
@@ -71,6 +74,21 @@ export default function ThankYouPage() {
                   </p>
                 </div>
               </div>
+            </div>
+          </Card>
+
+          <Card className="p-6 bg-yellow-50 border-yellow-200 border-2 mb-6">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Mail className="w-5 h-5 text-yellow-600" />
+              <h3 className="font-serif text-xl font-semibold text-yellow-800">
+                Não recebeu o e-mail?
+              </h3>
+            </div>
+            <div className="text-yellow-700 text-sm space-y-2">
+              <p>• Verifique sua <strong>caixa de spam</strong> ou lixo eletrônico</p>
+              <p>• Procure por e-mails de <strong>noreply@casarme.com.br</strong></p>
+              <p>• Adicione nosso e-mail aos seus contatos para evitar filtros</p>
+              <p>• O e-mail pode demorar alguns minutos para chegar</p>
             </div>
           </Card>
 

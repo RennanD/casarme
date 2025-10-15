@@ -1,4 +1,15 @@
 import { RomanticTemplate } from "@/src/components/templates/romantic-template"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Exemplo de Convite Romântico - CasarMe",
+  description: "Veja como fica um convite de casamento romântico criado com o CasarMe. Design elegante e personalizado para o seu grande dia.",
+  openGraph: {
+    title: "Exemplo de Convite Romântico - CasarMe",
+    description: "Veja como fica um convite de casamento romântico criado com o CasarMe. Design elegante e personalizado para o seu grande dia.",
+    type: "website",
+  },
+}
 
 export default function RomanticExamplePage() {
   const sampleData = {

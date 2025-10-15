@@ -6,6 +6,25 @@ import { WhyChoose } from "@/src/components/why-choose"
 import { Testimonials } from "@/src/components/testimonials"
 import { FinalCTA } from "@/src/components/final-cta"
 import { Footer } from "@/src/components/footer"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "CasarMe - Convites de Casamento Digitais Personalizados",
+  description: "Crie convites de casamento digitais únicos em minutos. Templates elegantes, personalização completa e compartilhamento fácil. Comece seu grande dia com estilo!",
+  keywords: "convite de casamento digital, convite online, casamento, wedding, convite personalizado, templates de casamento",
+  openGraph: {
+    title: "CasarMe - Convites de Casamento Digitais Personalizados",
+    description: "Crie convites de casamento digitais únicos em minutos. Templates elegantes, personalização completa e compartilhamento fácil. Comece seu grande dia com estilo!",
+    type: "website",
+    url: "https://casarme.com.br",
+    siteName: "CasarMe",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CasarMe - Convites de Casamento Digitais Personalizados",
+    description: "Crie convites de casamento digitais únicos em minutos. Templates elegantes, personalização completa e compartilhamento fácil.",
+  },
+}
 
 export default function Home() {
   return (

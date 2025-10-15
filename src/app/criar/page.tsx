@@ -1,28 +1,24 @@
-"use client"
-
-import { useState, Suspense } from "react"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
-import CreateInviteForm from "./sections/create-invite-form"
-import EmailModal from "./sections/email-modal"
-import { useRouter, useSearchParams } from "next/navigation"
+import { Metadata } from "next"
+import CreateInvitationClient from "./create-invitation-client"
 
-function CreateInvitationContent() {
-  const [showEmailModal, setShowEmailModal] = useState(false)
-  const [formData, setFormData] = useState<any>(null)
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const selectedTemplateId = searchParams.get('template')
+export const metadata: Metadata = {
+  title: "Criar Convite de Casamento Digital - CasarMe",
+  description: "Crie seu convite de casamento digital personalizado em poucos minutos. Escolha entre nossos templates elegantes e personalize cada detalhe.",
+  openGraph: {
+    title: "Criar Convite de Casamento Digital - CasarMe",
+    description: "Crie seu convite de casamento digital personalizado em poucos minutos. Escolha entre nossos templates elegantes e personalize cada detalhe.",
+    type: "website",
+  },
+}
 
-  const handleEmailSubmit = (email: string, data: any) => {
-    setFormData(data)
-    setShowEmailModal(true)
-  }
+interface PageProps {
+  searchParams: { template?: string }
+}
 
-  const handleEmailConfirm = (email: string) => {
-    // Redirect to thank you page
-    router.push("/criar/obrigado")
-  }
+export default function CreateInvitationPage({ searchParams }: PageProps) {
+  const selectedTemplateId = searchParams.template
 
   return (
     <div className="min-h-screen bg-[#FAF3E0]">
@@ -32,30 +28,8 @@ function CreateInvitationContent() {
           Voltar para home
         </Link>
 
-        <CreateInviteForm onEmailSubmit={handleEmailSubmit} selectedTemplateId={selectedTemplateId} />
-
-        <EmailModal
-          isOpen={showEmailModal}
-          onClose={() => setShowEmailModal(false)}
-          onSubmit={handleEmailConfirm}
-          formData={formData}
-        />
+        <CreateInvitationClient selectedTemplateId={selectedTemplateId} />
       </div>
     </div>
-  )
-}
-
-export default function CreateInvitationPage() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-[#FAF3E0] flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-[#D4A373] border-r-transparent mb-4"></div>
-          <p className="text-[#3E3E3E] font-serif">Carregando...</p>
-        </div>
-      </div>
-    }>
-      <CreateInvitationContent />
-    </Suspense>
   )
 }

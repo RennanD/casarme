@@ -1,4 +1,15 @@
 import { ModernTemplate } from "@/src/components/templates/modern-template"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Exemplo de Convite Moderno - CasarMe",
+  description: "Veja como fica um convite de casamento moderno criado com o CasarMe. Design contemporâneo e sofisticado para o seu grande dia.",
+  openGraph: {
+    title: "Exemplo de Convite Moderno - CasarMe",
+    description: "Veja como fica um convite de casamento moderno criado com o CasarMe. Design contemporâneo e sofisticado para o seu grande dia.",
+    type: "website",
+  },
+}
 
 export default function ModernExamplePage() {
   const sampleData = {

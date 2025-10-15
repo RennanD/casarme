@@ -1,4 +1,15 @@
 import { GardenTemplate } from "@/src/components/templates/garden-template"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Exemplo de Convite Garden - CasarMe",
+  description: "Veja como fica um convite de casamento garden criado com o CasarMe. Design clássico e elegante para o seu grande dia.",
+  openGraph: {
+    title: "Exemplo de Convite Garden - CasarMe",
+    description: "Veja como fica um convite de casamento garden criado com o CasarMe. Design clássico e elegante para o seu grande dia.",
+    type: "website",
+  },
+}
 
 export default function GardenExamplePage() {
   const sampleData = {
