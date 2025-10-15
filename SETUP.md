@@ -4,7 +4,7 @@
 
 Crie um arquivo `.env.local` na raiz do projeto com as seguintes variáveis:
 
-```env
+\`\`\`env
 # Database
 DATABASE_URL="postgresql://username:password@localhost:5432/casarme"
 
@@ -13,15 +13,15 @@ RESEND_API_KEY="your_resend_api_key"
 
 # App URL
 NEXT_PUBLIC_BASE_URL="http://localhost:3000"
-```
+\`\`\`
 
 ## Configuração do Banco de Dados
 
 1. Configure seu PostgreSQL
 2. Execute as migrações:
-```bash
+\`\`\`bash
 npx prisma db push
-```
+\`\`\`
 
 ## Funcionalidades Implementadas
 
@@ -51,7 +51,7 @@ npx prisma db push
 
 ## Estrutura de Arquivos
 
-```
+\`\`\`
 src/
 ├── app/
 │   ├── api/
@@ -70,7 +70,7 @@ src/
 │   └── email-template.tsx           # Template de e-mail
 └── hooks/
     └── use-image-upload.ts          # Hook para uploads
-```
+\`\`\`
 
 ## Fluxo Completo
 
