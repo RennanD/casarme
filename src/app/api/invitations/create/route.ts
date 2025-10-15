@@ -23,7 +23,8 @@ export async function POST(request: NextRequest) {
       whatsapp,
       template,
       email,
-      images
+      images,
+      isActive = false // Convite inativo por padrão
     } = body
 
     // Generate unique slug
@@ -46,7 +47,8 @@ export async function POST(request: NextRequest) {
         musicUrl,
         whatsapp,
         template,
-        email
+        email,
+        isActive
       }
     })
 

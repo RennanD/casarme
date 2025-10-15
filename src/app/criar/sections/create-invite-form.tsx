@@ -67,6 +67,7 @@ interface CreateInviteFormProps {
 }
 
 export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: CreateInviteFormProps) {
+
   // Find the selected template or default to first one
   const getInitialTemplate = () => {
     if (selectedTemplateId) {
@@ -190,6 +191,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
     })
   }
 
+
   const isPro = selectedTemplate.plan === "pro"
   const isModern = selectedTemplate.id === "modern"
 
@@ -207,6 +209,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
           <p className="text-red-600 text-sm">{error}</p>
         </div>
       )}
+
 
       <form onSubmit={handleSubmit}>
         {/* Template Selection */}
@@ -395,6 +398,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
               )}
             </div>
           </div>
+
         </Card>
 
         {/* Date and Venue */}

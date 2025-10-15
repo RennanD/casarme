@@ -25,6 +25,7 @@ interface Invitation {
   whatsapp?: string
   template: string
   email: string
+  isActive: boolean
   images: Array<{
     id: string
     filename: string
@@ -114,6 +115,23 @@ export default function InvitationPage() {
         <Card className="p-8 text-center">
           <h1 className="text-2xl font-bold text-[#3E3E3E] mb-4">Convite não encontrado</h1>
           <p className="text-[#6B6B6B] mb-6">O convite que você está procurando não existe ou foi removido.</p>
+          <Button asChild className="bg-[#D4A373] text-white hover:bg-[#C49363]">
+            <a href="/">Voltar para home</a>
+          </Button>
+        </Card>
+      </div>
+    )
+  }
+
+  // Verificar se o convite está ativo
+  if (!invitation.isActive) {
+    return (
+      <div className="min-h-screen bg-[#FAF3E0] flex items-center justify-center">
+        <Card className="p-8 text-center">
+          <h1 className="text-2xl font-bold text-[#3E3E3E] mb-4">Convite em processamento</h1>
+          <p className="text-[#6B6B6B] mb-6">
+            Seu convite está sendo processado. Você receberá um email assim que estiver pronto!
+          </p>
           <Button asChild className="bg-[#D4A373] text-white hover:bg-[#C49363]">
             <a href="/">Voltar para home</a>
           </Button>

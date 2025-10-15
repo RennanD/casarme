@@ -25,7 +25,8 @@ export default function EmailModal({ isOpen, onClose, onSubmit, formData }: Emai
     setIsLoading(true)
 
     try {
-      const response = await fetch('/api/invitations/create', {
+      // Primeiro, criar o convite inativo
+      const createResponse = await fetch('/api/invitations/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,18 +35,41 @@ export default function EmailModal({ isOpen, onClose, onSubmit, formData }: Emai
           ...formData.formData,
           template: formData.selectedTemplate.id,
           email,
-          images: formData.images
+          images: formData.images,
+          isActive: false // Convite inativo
         })
       })
 
-      if (response.ok) {
-        onSubmit(email)
-      } else {
-        throw new Error('Failed to create invitation')
+      if (!createResponse.ok) {
+        throw new Error('Erro ao criar convite')
       }
+
+      const { invitationId } = await createResponse.json()
+
+      // Depois, criar sessão de checkout
+      const checkoutResponse = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          templateId: formData.selectedTemplate.id,
+          customerEmail: email,
+          invitationId // ID do convite criado
+        })
+      })
+
+      const data = await checkoutResponse.json()
+
+      if (!checkoutResponse.ok) {
+        throw new Error(data.error || 'Erro ao processar pagamento')
+      }
+
+      // Redirecionar para o Stripe Checkout
+      window.location.href = data.url
     } catch (error) {
-      console.error('Error:', error)
-      alert('Erro ao criar convite. Tente novamente.')
+      console.error('Erro no processo:', error)
+      alert(error instanceof Error ? error.message : 'Erro ao processar solicitação')
     } finally {
       setIsLoading(false)
     }
@@ -76,7 +100,7 @@ export default function EmailModal({ isOpen, onClose, onSubmit, formData }: Emai
 
           <p className="text-[#6B6B6B] mb-6">
             Para finalizar a criação do seu convite, precisamos do seu e-mail.
-            Enviaremos o link do seu convite interativo para você.
+            Você será redirecionado para o pagamento e receberá o link do seu convite por email após a confirmação.
           </p>
 
           <form onSubmit={handleSubmit}>
@@ -109,7 +133,7 @@ export default function EmailModal({ isOpen, onClose, onSubmit, formData }: Emai
                 disabled={isLoading || !email}
                 className="flex-1 bg-[#D4A373] text-white hover:bg-[#C49363] disabled:opacity-50"
               >
-                {isLoading ? "Criando..." : "Criar Convite"}
+                {isLoading ? "Processando..." : "Pagar e Criar Convite"}
               </Button>
             </div>
           </form>

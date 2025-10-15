@@ -27,8 +27,17 @@ model Invitation {
   whatsapp       String?
   template       String
   email          String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+
+  // Stripe fields
+  stripeCustomerId      String?
+  stripePaymentIntentId String?
+  stripeSessionId       String?
+  paymentStatus         String? // 'pending', 'completed', 'failed', 'refunded'
+  purchasedAt           DateTime?
+  isActive              Boolean   @default(false) // Convite ativo/inativo
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations
   images Image[]
