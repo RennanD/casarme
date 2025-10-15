@@ -23,53 +23,27 @@ export default async function Image() {
           fontFamily: 'system-ui, sans-serif',
         }}
       >
-        {/* Main title */}
-        <div
+        <h1
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            marginBottom: '50px',
-          }}
-        >
-          <h1
-            style={{
-              fontSize: '64px',
-              fontWeight: 'bold',
-              color: '#3E3E3E',
-              margin: '0 0 20px 0',
-              textAlign: 'center',
-              lineHeight: '1.1',
-            }}
-          >
-            Crie seu Convite
-          </h1>
-          <p
-            style={{
-              fontSize: '28px',
-              color: '#6B6B6B',
-              margin: '0',
-              textAlign: 'center',
-            }}
-          >
-            de Casamento Digital
-          </p>
-        </div>
-
-        {/* CTA */}
-        <div
-          style={{
-            padding: '25px 50px',
-            backgroundColor: '#D4A373',
-            borderRadius: '15px',
-            color: 'white',
-            fontSize: '24px',
+            fontSize: '48px',
             fontWeight: 'bold',
+            color: '#3E3E3E',
+            margin: '0 0 20px 0',
             textAlign: 'center',
           }}
         >
-          Comece Agora - É Grátis!
-        </div>
+          Crie seu Convite
+        </h1>
+        <p
+          style={{
+            fontSize: '20px',
+            color: '#6B6B6B',
+            margin: '0',
+            textAlign: 'center',
+          }}
+        >
+          de Casamento Digital
+        </p>
       </div>
     ),
     {

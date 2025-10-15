@@ -17,7 +17,6 @@ export default async function Image({ params }: { params: { slug: string } }) {
       groomName: true,
       brideName: true,
       weddingDate: true,
-      venueName: true,
     }
   })
 
@@ -45,64 +44,35 @@ export default async function Image({ params }: { params: { slug: string } }) {
           fontFamily: 'system-ui, sans-serif',
         }}
       >
-        {/* Main content */}
-        <div
+        <h1
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            fontSize: '48px',
+            fontWeight: 'bold',
+            color: '#3E3E3E',
+            margin: '0 0 20px 0',
             textAlign: 'center',
-            maxWidth: '800px',
-            padding: '40px',
           }}
         >
-          {/* Couple names */}
-          <h1
-            style={{
-              fontSize: '56px',
-              fontWeight: 'bold',
-              color: '#3E3E3E',
-              margin: '0 0 20px 0',
-              lineHeight: '1.1',
-            }}
-          >
-            {invitation.groomName} & {invitation.brideName}
-          </h1>
+          {invitation.groomName} & {invitation.brideName}
+        </h1>
 
-          {/* Wedding date */}
-          <div
-            style={{
-              fontSize: '28px',
-              color: '#6B6B6B',
-              marginBottom: '20px',
-              fontWeight: '500',
-            }}
-          >
-            {weddingDate}
-          </div>
+        <div
+          style={{
+            fontSize: '24px',
+            color: '#6B6B6B',
+            marginBottom: '20px',
+          }}
+        >
+          {weddingDate}
+        </div>
 
-          {/* Venue */}
-          <div
-            style={{
-              fontSize: '20px',
-              color: '#3E3E3E',
-              marginBottom: '40px',
-              fontWeight: '400',
-            }}
-          >
-            {invitation.venueName}
-          </div>
-
-          {/* Footer */}
-          <div
-            style={{
-              fontSize: '16px',
-              color: '#6B6B6B',
-              fontWeight: '500',
-            }}
-          >
-            Criado com CasarMe
-          </div>
+        <div
+          style={{
+            fontSize: '16px',
+            color: '#6B6B6B',
+          }}
+        >
+          Criado com CasarMe
         </div>
       </div>
     ),
