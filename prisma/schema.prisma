@@ -24,6 +24,7 @@ model Invitation {
   groomStory     String?
   brideStory     String?
   musicUrl       String?
+  whatsapp       String?
   template       String
   email          String
   createdAt      DateTime @default(now())

@@ -17,6 +17,7 @@ export default function RomanticExamplePage() {
     coupleStory:
       "Nos conhecemos em 2019 e desde o primeiro encontro soubemos que éramos almas gêmeas. Construímos juntos uma história de amor, cumplicidade e muitas aventuras.",
     musicUrl: "https://www.youtube.com/watch?v=OPugs48z2GU&list=RDOPugs48z2GU&start_radio=1",
+    whatsapp: "+5511999999999",
   }
 
   // Fotos de demonstração para o carousel

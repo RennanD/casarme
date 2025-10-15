@@ -6,10 +6,8 @@ export default function ModernExamplePage() {
     brideName: "Beatriz Almeida",
     weddingDate: "2026-01-30",
     weddingTime: "19:30",
-    ceremonyVenue: "Espaço Contemporâneo",
-    ceremonyAddress: "Rua Moderna, 789 - Vila Nova, Belo Horizonte - MG",
-    ceremonyCity: "Belo Horizonte",
-    ceremonyState: "MG",
+    venueName: "Espaço Contemporâneo",
+    venueAddress: "Rua Moderna, 789 - Vila Nova, Belo Horizonte - MG",
     welcomeMessage:
       "Celebre conosco o início de uma nova jornada. Sua presença é fundamental para tornar este momento inesquecível.",
     groomStory:
@@ -18,16 +16,22 @@ export default function ModernExamplePage() {
       "Beatriz é designer de produtos, ama criar experiências únicas. Se apaixonou por Lucas à primeira vista.",
     coupleStory:
       "Nossa história é moderna, intensa e cheia de cumplicidade. Decidimos unir nossas vidas e construir juntos um futuro brilhante.",
-    mapLink: "https://maps.google.com/?q=Espaço+Contemporâneo+Belo+Horizonte",
-    heroPhotos: [
-      "/modern-wedding-couple-photo.jpg",
-      "/romantic-couple-wedding-photo-in-garden.jpg",
-      "/groom-portrait-smiling.jpg",
-    ],
-    groomPhoto: "/groom-portrait-smiling.jpg",
-    bridePhoto: "/bride-portrait-smiling.jpg",
     musicUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    whatsapp: "+5511999999999",
   }
 
-  return <ModernTemplate data={sampleData} />
+  const heroPhotos = [
+    "/modern-wedding-couple-photo.jpg",
+    "/romantic-couple-wedding-photo-in-garden.jpg",
+    "/groom-portrait-smiling.jpg",
+  ]
+
+  return (
+    <ModernTemplate
+      data={sampleData}
+      heroPhotos={heroPhotos}
+      groomPhoto="/groom-portrait-smiling.jpg"
+      bridePhoto="/bride-portrait-smiling.jpg"
+    />
+  )
 }

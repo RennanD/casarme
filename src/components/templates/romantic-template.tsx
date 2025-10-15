@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/src/components/ui/button"
-import { MapPin, Calendar, Clock, Heart, Play, Pause } from "lucide-react"
+import { MapPin, Calendar, Clock, Heart, Play, Pause, MessageCircle } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -29,6 +29,7 @@ interface RomanticTemplateProps {
     groomStory?: string
     brideStory?: string
     musicUrl?: string
+    whatsapp?: string
   }
   heroPhoto?: string | null
   groomPhoto?: string | null
@@ -44,8 +45,6 @@ export function RomanticTemplate({
   galleryPhotos = [],
 }: RomanticTemplateProps) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
-  const [showRSVP, setShowRSVP] = useState(false)
-  const [rsvpData, setRsvpData] = useState({ name: "", guests: "1", attending: "yes" })
   const [isPlaying, setIsPlaying] = useState(false)
   const [hasUserInteracted, setHasUserInteracted] = useState(false)
   const audioRef = useRef<HTMLAudioElement | null>(null)
@@ -92,10 +91,21 @@ export function RomanticTemplate({
   }
 
 
-  const handleRSVPSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    alert(`Obrigado por confirmar, ${rsvpData.name}!`)
-    setShowRSVP(false)
+  const handleConfirmPresence = () => {
+    if (!data.whatsapp) {
+      alert('WhatsApp não configurado para este convite.')
+      return
+    }
+
+    // Mensagem simples para confirmação
+    const message = `Olá! Será uma honra estar presente nessa data tão especial! 💕`
+
+    // Limpar o número do WhatsApp (remover caracteres não numéricos)
+    const cleanWhatsapp = data.whatsapp.replace(/\D/g, '')
+
+    // Abrir WhatsApp com a mensagem
+    const whatsappUrl = `https://wa.me/${cleanWhatsapp}?text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, '_blank')
   }
 
 
@@ -400,80 +410,19 @@ export function RomanticTemplate({
             Confirme sua Presença
           </h2>
           <p className="text-center text-[#6B6B6B] mb-8">
-            Sua presença é muito importante para nós! Por favor, confirme até {formatDate(data.weddingDate)}
+            Sua presença é muito importante para nós! Clique no botão abaixo para confirmar via WhatsApp.
           </p>
 
-          {!showRSVP ? (
-            <div className="text-center">
-              <Button
-                onClick={() => setShowRSVP(true)}
-                size="lg"
-                className="bg-[#E8B4B8] hover:bg-[#D89BA0] text-white px-12"
-              >
-                Confirmar Presença
-              </Button>
-            </div>
-          ) : (
-            <form onSubmit={handleRSVPSubmit} className="bg-[#FFF8F3] rounded-2xl p-8 border-2 border-[#E8B4B8]">
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-[#3E3E3E] mb-2 font-medium">Seu Nome</label>
-                  <input
-                    type="text"
-                    value={rsvpData.name}
-                    onChange={(e) => setRsvpData({ ...rsvpData, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-[#E8B4B8] focus:outline-none focus:ring-2 focus:ring-[#E8B4B8]"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[#3E3E3E] mb-2 font-medium">Número de Convidados</label>
-                  <select
-                    value={rsvpData.guests}
-                    onChange={(e) => setRsvpData({ ...rsvpData, guests: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border border-[#E8B4B8] focus:outline-none focus:ring-2 focus:ring-[#E8B4B8]"
-                  >
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <option key={num} value={num}>
-                        {num} {num === 1 ? "pessoa" : "pessoas"}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[#3E3E3E] mb-2 font-medium">Confirmação</label>
-                  <div className="space-y-2">
-                    <label className="flex items-center gap-3 cursor-pointer">
-                      <input
-                        type="radio"
-                        value="yes"
-                        checked={rsvpData.attending === "yes"}
-                        onChange={(e) => setRsvpData({ ...rsvpData, attending: e.target.value })}
-                        className="w-4 h-4 text-[#E8B4B8]"
-                      />
-                      <span className="text-[#3E3E3E]">Sim, estarei presente!</span>
-                    </label>
-                    <label className="flex items-center gap-3 cursor-pointer">
-                      <input
-                        type="radio"
-                        value="no"
-                        checked={rsvpData.attending === "no"}
-                        onChange={(e) => setRsvpData({ ...rsvpData, attending: e.target.value })}
-                        className="w-4 h-4 text-[#E8B4B8]"
-                      />
-                      <span className="text-[#3E3E3E]">Infelizmente não poderei comparecer</span>
-                    </label>
-                  </div>
-                </div>
-
-                <Button type="submit" className="w-full bg-[#E8B4B8] hover:bg-[#D89BA0] text-white">
-                  Enviar Confirmação
-                </Button>
-              </div>
-            </form>
-          )}
+          <div className="flex justify-center">
+            <Button
+              onClick={handleConfirmPresence}
+              size="lg"
+              className="bg-[#E8B4B8] hover:bg-[#D89BA0] text-white px-12 flex items-center gap-2"
+            >
+              <MessageCircle className="w-5 h-5" />
+              Confirmar Presença via WhatsApp
+            </Button>
+          </div>
         </div>
       </section>
 

@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
       groomStory,
       brideStory,
       musicUrl,
+      whatsapp,
       template,
       email,
       images
@@ -43,6 +44,7 @@ export async function POST(request: NextRequest) {
         groomStory,
         brideStory,
         musicUrl,
+        whatsapp,
         template,
         email
       }

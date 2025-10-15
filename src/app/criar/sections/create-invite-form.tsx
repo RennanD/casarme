@@ -9,9 +9,10 @@ import { Card } from "@/src/components/ui/card"
 import { Input } from "@/src/components/ui/input"
 import { Label } from "@/src/components/ui/label"
 import { Textarea } from "@/src/components/ui/textarea"
-import { Upload, Sparkles, X } from "lucide-react"
+import { Upload, Sparkles, X, MessageCircle } from "lucide-react"
 import { useImageUpload } from "@/src/hooks/use-image-upload"
 import { getImageUrl } from "@/src/lib/image-url"
+import { PhoneInputComponent } from "@/src/components/ui/phone-input"
 
 const templates = [
   {
@@ -88,6 +89,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
     groomStory: "",
     brideStory: "",
     musicUrl: "",
+    whatsapp: "",
   })
 
   // Image states
@@ -288,6 +290,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
               />
             </div>
           </div>
+
 
           {/* Hero Photos */}
           <div className="mb-6">
@@ -608,6 +611,23 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                     ))}
                   </div>
                 )}
+              </div>
+
+              {/* WhatsApp Confirmation */}
+              <div className="mb-6">
+                <Label className="flex items-center gap-2 text-[#3E3E3E] mb-2 font-medium">
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp para Confirmações
+                </Label>
+                <PhoneInputComponent
+                  value={formData.whatsapp}
+                  onChange={(value) => setFormData({ ...formData, whatsapp: value })}
+                  placeholder="Digite seu WhatsApp"
+                  className="w-full"
+                />
+                <p className="text-sm text-[#6B6B6B] mt-1">
+                  Os convidados poderão confirmar presença via WhatsApp neste número
+                </p>
               </div>
 
               {/* Music */}

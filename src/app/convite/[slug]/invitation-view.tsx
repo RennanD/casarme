@@ -20,6 +20,7 @@ interface Invitation {
   groomStory?: string
   brideStory?: string
   musicUrl?: string
+  whatsapp?: string
   template: string
   email: string
   images: Array<{
@@ -80,7 +81,8 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
     coupleStory: invitation.coupleStory,
     groomStory: invitation.groomStory,
     brideStory: invitation.brideStory,
-    musicUrl: invitation.musicUrl
+    musicUrl: invitation.musicUrl,
+    whatsapp: invitation.whatsapp
   }
 
 

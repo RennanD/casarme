@@ -22,6 +22,7 @@ interface Invitation {
   groomStory?: string
   brideStory?: string
   musicUrl?: string
+  whatsapp?: string
   template: string
   email: string
   images: Array<{
