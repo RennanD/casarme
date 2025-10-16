@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/src/lib/prisma'
 import { generateUniqueSlug } from '@/src/lib/slug'
-import { resend } from '@/src/lib/resend'
-import { EmailTemplate } from '@/src/lib/email-template'
 
 export async function POST(request: NextRequest) {
   try {
@@ -95,17 +93,8 @@ export async function POST(request: NextRequest) {
     // Generate shareable invitation URL
     const invitationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/convite/${slug}`
 
-    // Send email
-    await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL!,
-      to: [email],
-      subject: `🎉 Seu convite interativo está pronto! - ${groomName} & ${brideName}`,
-      react: EmailTemplate({
-        groomName,
-        brideName,
-        invitationUrl
-      })
-    })
+    // Email será enviado apenas após confirmação de pagamento via webhook do Stripe
+    // Removido envio de e-mail aqui para garantir que só seja enviado após pagamento bem-sucedido
 
     return NextResponse.json({
       success: true,
