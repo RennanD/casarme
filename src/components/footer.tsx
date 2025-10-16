@@ -7,15 +7,18 @@ export function Footer() {
         <div className="flex flex-col items-center gap-6">
           <h3 className="font-serif text-3xl font-bold text-[#D4A373]">CasarMe</h3>
           <nav className="flex flex-wrap justify-center gap-6">
-            <Link href="#" className="text-[#6B6B6B] hover:text-[#D4A373] transition-colors">
+            <Link href="/termos-de-uso" className="text-[#6B6B6B] hover:text-[#D4A373] transition-colors">
               Termos de Uso
             </Link>
-            <Link href="#" className="text-[#6B6B6B] hover:text-[#D4A373] transition-colors">
+            <Link href="/politica-de-privacidade" className="text-[#6B6B6B] hover:text-[#D4A373] transition-colors">
               Política de Privacidade
             </Link>
-            <Link href="#" className="text-[#6B6B6B] hover:text-[#D4A373] transition-colors">
+            <a
+              href="mailto:casarme.site@gmail.com"
+              className="text-[#6B6B6B] hover:text-[#D4A373] transition-colors"
+            >
               Contato
-            </Link>
+            </a>
           </nav>
           {/* Updated copyright text to reflect new brand name */}
           <p className="text-[#6B6B6B] text-sm text-center">© 2025 CasarMe. Todos os direitos reservados.</p>
