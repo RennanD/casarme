@@ -19,6 +19,14 @@ export const metadata: Metadata = {
   keywords: ["convite de casamento online", "convite de casamento digital", "convite de casamento interativo"],
   generator: "v0.app",
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://casarme.vercel.app'),
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.png', type: 'image/png' }
+    ],
+    apple: '/favicon.png',
+  },
 }
 
 export default function RootLayout({
