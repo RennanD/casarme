@@ -7,7 +7,7 @@ import { Check } from "lucide-react"
 const plans = [
   {
     name: "Plano Simples",
-    price: "R$ 29,90",
+    price: "R$ 16,50",
     features: [
       "1 template elegante",
       "Personalização básica",
@@ -20,7 +20,7 @@ const plans = [
   },
   {
     name: "Plano Pro",
-    price: "R$ 49,90",
+    price: "R$ 26,90",
     features: [
       "Todos os templates exclusivos",
       "Personalização completa",
@@ -48,8 +48,8 @@ export function Pricing() {
             <Card
               key={index}
               className={`p-8 ${plan.highlighted
-                  ? "bg-[#D4A373] text-white border-[#D4A373] shadow-2xl scale-105"
-                  : "bg-white border-[#EDE0D4]"
+                ? "bg-[#D4A373] text-white border-[#D4A373] shadow-2xl scale-105"
+                : "bg-white border-[#EDE0D4]"
                 } transition-all duration-300 animate-fade-in`}
               style={{ animationDelay: `${index * 150}ms` }}
             >
@@ -77,8 +77,8 @@ export function Pricing() {
               </ul>
               <Button
                 className={`w-full ${plan.highlighted
-                    ? "bg-white text-[#D4A373] hover:bg-[#FAF3E0]"
-                    : "bg-[#D4A373] text-white hover:bg-[#C49363]"
+                  ? "bg-white text-[#D4A373] hover:bg-[#FAF3E0]"
+                  : "bg-[#D4A373] text-white hover:bg-[#C49363]"
                   } transition-colors`}
                 size="lg"
               >

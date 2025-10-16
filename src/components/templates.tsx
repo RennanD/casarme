@@ -14,7 +14,7 @@ const templates = [
     description: "Template de convite de casamento botânico com elegância natural e tons de verde oliva",
     variant: "garden" as const,
     plan: "Básico",
-    price: "R$ 25,90",
+    price: "R$ 16,50",
     link: "/exemplo/garden",
     features: [
       "Design botânico elegante para convite digital",
@@ -29,7 +29,7 @@ const templates = [
     description: "Modelo de convite romântico com flores, galeria de fotos e música de fundo",
     variant: "romantico" as const,
     plan: "Pro",
-    price: "R$ 39,90",
+    price: "R$ 26,90",
     link: "/exemplo/romantic",
     features: [
       "Design romântico com flores para convite digital",

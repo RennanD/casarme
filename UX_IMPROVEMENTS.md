@@ -13,9 +13,9 @@
 - ✅ Informações agora são precisas e consistentes
 
 **Templates Corrigidos:**
-- **Garden (Básico - R$ 25,90):** Design botânico, 1 foto de capa, localização, compartilhamento
-- **Romântico (Pro - R$ 39,90):** Design romântico, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
-- **Modern (Pro - R$ 39,90):** Design moderno, slideshow, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
+- **Garden (Básico - R$ 16,50):** Design botânico, 1 foto de capa, localização, compartilhamento
+- **Romântico (Pro - R$ 26,90):** Design romântico, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
+- **Modern (Pro - R$ 26,90):** Design moderno, slideshow, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
 
 ### 2. **Informações Detalhadas dos Templates na Home**
 
@@ -27,17 +27,17 @@
 - ✅ Informações agora são consistentes entre home e página de criação
 
 **Templates Atualizados:**
-- **Garden (Básico - R$ 25,90):** Design botânico, 1 foto de capa, localização, compartilhamento
-- **Romântico (Pro - R$ 39,90):** Design romântico, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
-- **Modern (Pro - R$ 39,90):** Design moderno, slideshow, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
+- **Garden (Básico - R$ 16,50):** Design botânico, 1 foto de capa, localização, compartilhamento
+- **Romântico (Pro - R$ 26,90):** Design romântico, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
+- **Modern (Pro - R$ 26,90):** Design moderno, slideshow, fotos individuais, galeria, história do casal, música, countdown, localização, confirmação
 
 ### 3. **Ajustes de Preços e Badges de Destaque**
 
 **Problema:** Preços não estavam otimizados e templates pro não tinham destaque visual.
 
 **Solução:**
-- ✅ Ajustado preço do template básico: R$ 29,90 → R$ 25,90
-- ✅ Ajustado preço dos templates pro: R$ 49,90 → R$ 39,90
+- ✅ Ajustado preço do template básico: R$ 29,90 → R$ 16,50 (preço de teste)
+- ✅ Ajustado preço dos templates pro: R$ 49,90 → R$ 26,90 (preço de teste)
 - ✅ Adicionada badge "Mais Escolhido" nos templates pro
 - ✅ Removida "Confirmação de presença" do template básico (não disponível)
 

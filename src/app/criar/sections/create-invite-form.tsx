@@ -19,7 +19,7 @@ const templates = [
     id: "garden",
     name: "Garden",
     plan: "basic",
-    price: "R$ 25,90",
+    price: "R$ 16,50",
     color: "#8B9D7F",
     description: "Design botânico com tons de verde oliva",
     features: [
@@ -32,7 +32,7 @@ const templates = [
     id: "romantic",
     name: "Romântico",
     plan: "pro",
-    price: "R$ 39,90",
+    price: "R$ 26,90",
     color: "#E8B4B8",
     description: "Estilo romântico com flores e tons rosados",
     features: [
