@@ -6,7 +6,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  serverExternalPackages: ['sharp'],
+  serverExternalPackages: ['sharp', 'stripe'],
   images: {
     domains: ['localhost'],
     unoptimized: true,

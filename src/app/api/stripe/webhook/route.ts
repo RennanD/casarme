@@ -6,39 +6,52 @@ import { resend } from "@/src/lib/resend";
 import { EmailTemplate } from "@/src/lib/email-template";
 
 export async function POST(request: NextRequest) {
-  const body = await request.text();
-  const signature = request.headers.get('stripe-signature');
-
-  if (!signature) {
-    return NextResponse.json({ error: 'No signature' }, { status: 400 });
-  }
-
-  let event;
-
   try {
-    event = stripe.webhooks.constructEvent(
-      body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET!
-    );
-  } catch (err) {
-    console.error('Webhook signature verification failed:', err);
-    return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
-  }
+    const body = await request.text();
+    const signature = request.headers.get('stripe-signature');
 
-  // Processar pagamento bem-sucedido
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
+    if (!signature) {
+      console.error('No Stripe signature found');
+      return NextResponse.json({ error: 'No signature' }, { status: 400 });
+    }
+
+    if (!process.env.STRIPE_WEBHOOK_SECRET) {
+      console.error('STRIPE_WEBHOOK_SECRET not configured');
+      return NextResponse.json({ error: 'Webhook secret not configured' }, { status: 500 });
+    }
+
+    let event;
 
     try {
-      await handleSuccessfulPayment(session);
-    } catch (error) {
-      console.error('Erro ao processar pagamento:', error);
-      return NextResponse.json({ error: 'Processing failed' }, { status: 500 });
+      event = stripe.webhooks.constructEvent(
+        body,
+        signature,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
+    } catch (err) {
+      console.error('Webhook signature verification failed:', err);
+      console.error('Body received:', body.substring(0, 200) + '...');
+      console.error('Signature received:', signature);
+      return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
     }
-  }
 
-  return NextResponse.json({ received: true });
+    // Processar pagamento bem-sucedido
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object;
+
+      try {
+        await handleSuccessfulPayment(session);
+      } catch (error) {
+        console.error('Erro ao processar pagamento:', error);
+        return NextResponse.json({ error: 'Processing failed' }, { status: 500 });
+      }
+    }
+
+    return NextResponse.json({ received: true });
+  } catch (error) {
+    console.error('Erro geral no webhook:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
 }
 
 async function handleSuccessfulPayment(session: any) {
