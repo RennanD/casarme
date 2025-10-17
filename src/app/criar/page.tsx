@@ -1,15 +1,30 @@
-import { ArrowLeft } from "lucide-react"
-import Link from "next/link"
 import { Metadata } from "next"
 import CreateInvitationClient from "./create-invitation-client"
 
 export const metadata: Metadata = {
-  title: "Criar Convite de Casamento Digital - CasarMe",
-  description: "Crie seu convite de casamento digital personalizado em poucos minutos. Escolha entre nossos templates elegantes e personalize cada detalhe.",
+  title: "Criar Convite de Casamento - CasarMe",
+  description: "Personalize seu convite de casamento único com templates elegantes. Upload de fotos, personalização completa e compartilhamento fácil.",
+  keywords: "criar convite de casamento, personalizar convite, template de casamento, convite digital",
   openGraph: {
-    title: "Criar Convite de Casamento Digital - CasarMe",
-    description: "Crie seu convite de casamento digital personalizado em poucos minutos. Escolha entre nossos templates elegantes e personalize cada detalhe.",
+    title: "Criar Convite de Casamento - CasarMe",
+    description: "Personalize seu convite de casamento único com templates elegantes. Upload de fotos, personalização completa e compartilhamento fácil.",
     type: "website",
+    url: "https://casarme.com.br/criar",
+    siteName: "CasarMe",
+    images: [
+      {
+        url: "/criar/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Criar Convite de Casamento - CasarMe",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Criar Convite de Casamento - CasarMe",
+    description: "Personalize seu convite de casamento único com templates elegantes. Upload de fotos, personalização completa e compartilhamento fácil.",
+    images: ["/criar/opengraph-image"],
   },
 }
 
@@ -17,19 +32,6 @@ interface PageProps {
   searchParams: { template?: string }
 }
 
-export default function CreateInvitationPage({ searchParams }: PageProps) {
-  const selectedTemplateId = searchParams.template
-
-  return (
-    <div className="min-h-screen bg-[#FAF3E0]">
-      <div className="container mx-auto px-4 py-8">
-        <Link href="/" className="inline-flex items-center gap-2 text-[#D4A373] hover:text-[#C49363] mb-8">
-          <ArrowLeft className="w-5 h-5" />
-          Voltar para home
-        </Link>
-
-        <CreateInvitationClient selectedTemplateId={selectedTemplateId} />
-      </div>
-    </div>
-  )
+export default function CreatePage({ searchParams }: PageProps) {
+  return <CreateInvitationClient selectedTemplateId={searchParams.template} />
 }

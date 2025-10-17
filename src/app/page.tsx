@@ -18,11 +18,20 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://casarme.com.br",
     siteName: "CasarMe",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "CasarMe - Convites de Casamento Digitais Personalizados",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "CasarMe - Convites de Casamento Digitais Personalizados",
     description: "Crie convites de casamento digitais únicos em minutos. Templates elegantes, personalização completa e compartilhamento fácil.",
+    images: ["/opengraph-image"],
   },
 }
 
