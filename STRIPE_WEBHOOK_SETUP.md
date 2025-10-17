@@ -6,13 +6,19 @@ Este erro ocorre quando o Stripe não consegue verificar a assinatura do webhook
 
 ## ✅ Soluções Implementadas
 
-### 1. **Melhor Tratamento de Erros**
+### 1. **Correção do Corpo da Requisição**
+- **Problema**: O corpo estava sendo parseado como JSON
+- **Solução**: Usar `request.arrayBuffer()` e converter para string UTF-8
+- **Configuração**: `runtime = 'nodejs'` e `dynamic = 'force-dynamic'`
+
+### 2. **Melhor Tratamento de Erros**
 - Adicionado logs detalhados para debug
 - Verificação da existência da variável `STRIPE_WEBHOOK_SECRET`
 - Logs do corpo da requisição e assinatura recebidos
+- Logs específicos para cada tipo de evento
 
-### 2. **Configuração do Next.js**
-- Adicionado `serverComponentsExternalPackages: ['stripe']` no `next.config.mjs`
+### 3. **Configuração do Next.js**
+- Adicionado `serverExternalPackages: ['stripe']` no `next.config.mjs`
 - Garantia de que o Stripe seja tratado corretamente
 
 ## 🔧 Configuração Necessária
@@ -109,3 +115,26 @@ console.error('Signature received:', signature);
 ### Erro: "Webhook secret not configured"
 - Adicione a variável `STRIPE_WEBHOOK_SECRET` nas configurações
 - Reinicie o servidor após adicionar a variável
+
+### ⚠️ **Problema Específico: Eventos Expirados**
+Se você está recebendo eventos `checkout.session.expired` em vez de `checkout.session.completed`:
+
+1. **Verifique o status da sessão**: O evento mostra `"status": "expired"`
+2. **Causa**: A sessão de checkout expirou antes do pagamento
+3. **Solução**: 
+   - Configure um tempo de expiração maior no checkout
+   - Verifique se o usuário está completando o pagamento a tempo
+   - Teste com pagamentos mais rápidos
+
+### 📊 **Logs de Debug**
+O webhook agora inclui logs detalhados:
+```
+Webhook recebido: { hasSignature: true, bodyLength: 1234, bodyStart: '...' }
+Evento processado: checkout.session.expired
+Evento ignorado: checkout.session.expired
+```
+
+### 🎯 **Eventos Suportados**
+- ✅ `checkout.session.completed` - Pagamento bem-sucedido
+- ❌ `checkout.session.expired` - Sessão expirada (ignorado)
+- ❌ `checkout.session.canceled` - Pagamento cancelado (ignorado)

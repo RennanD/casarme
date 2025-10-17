@@ -5,10 +5,23 @@ import { generateUniqueSlug } from "@/src/lib/slug";
 import { resend } from "@/src/lib/resend";
 import { EmailTemplate } from "@/src/lib/email-template";
 
+// Configuração para garantir que o corpo seja mantido como string bruta
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.text();
+    // Obter o corpo bruto da requisição como Buffer
+    const body = await request.arrayBuffer();
+    const bodyString = Buffer.from(body).toString('utf8');
     const signature = request.headers.get('stripe-signature');
+
+    console.log('Webhook recebido:', {
+      hasSignature: !!signature,
+      bodyLength: bodyString.length,
+      bodyStart: bodyString.substring(0, 100) + '...',
+      contentType: request.headers.get('content-type')
+    });
 
     if (!signature) {
       console.error('No Stripe signature found');
@@ -24,27 +37,34 @@ export async function POST(request: NextRequest) {
 
     try {
       event = stripe.webhooks.constructEvent(
-        body,
+        bodyString,
         signature,
         process.env.STRIPE_WEBHOOK_SECRET
       );
     } catch (err) {
       console.error('Webhook signature verification failed:', err);
-      console.error('Body received:', body.substring(0, 200) + '...');
+      console.error('Body received (first 200 chars):', bodyString.substring(0, 200));
       console.error('Signature received:', signature);
+      console.error('Webhook secret configured:', !!process.env.STRIPE_WEBHOOK_SECRET);
       return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
     }
+
+    console.log('Evento processado:', event.type);
 
     // Processar pagamento bem-sucedido
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object;
+      console.log('Processando pagamento bem-sucedido:', session.id);
 
       try {
         await handleSuccessfulPayment(session);
+        console.log('Pagamento processado com sucesso');
       } catch (error) {
         console.error('Erro ao processar pagamento:', error);
         return NextResponse.json({ error: 'Processing failed' }, { status: 500 });
       }
+    } else {
+      console.log('Evento ignorado:', event.type);
     }
 
     return NextResponse.json({ received: true });
@@ -61,6 +81,8 @@ async function handleSuccessfulPayment(session: any) {
     invitationId
   } = session.metadata;
 
+  console.log('Metadados da sessão:', { templateId, customerEmail, invitationId });
+
   // Buscar o convite existente
   const invitation = await prisma.invitation.findUnique({
     where: { id: invitationId },
@@ -70,6 +92,8 @@ async function handleSuccessfulPayment(session: any) {
   if (!invitation) {
     throw new Error('Convite não encontrado');
   }
+
+  console.log('Convite encontrado:', invitation.slug);
 
   // Ativar o convite e atualizar dados do Stripe
   await prisma.invitation.update({
@@ -86,6 +110,8 @@ async function handleSuccessfulPayment(session: any) {
 
   // Gerar URL do convite
   const invitationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/convite/${invitation.slug}`;
+
+  console.log('Enviando email para:', customerEmail);
 
   // Enviar email de confirmação
   await resend.emails.send({
