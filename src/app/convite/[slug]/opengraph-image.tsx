@@ -61,9 +61,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
       )
     }
 
-    // Buscar fotos dos noivos
-    const groomPhoto = invitation.images.find(img => img.type === 'groom')
-    const bridePhoto = invitation.images.find(img => img.type === 'bride')
+    // Buscar foto do hero
     const heroPhoto = invitation.images.find(img => img.type === 'hero')
 
     return new ImageResponse(
@@ -77,89 +75,50 @@ export default async function Image({ params }: { params: { slug: string } }) {
             fontFamily: 'system-ui, sans-serif',
           }}
         >
-          {/* Lado esquerdo - Fotos dos noivos */}
+          {/* Lado esquerdo - Foto do hero */}
           <div
             style={{
               width: '50%',
               height: '100%',
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
               padding: '40px',
             }}
           >
-            {/* Foto do noivo */}
-            {groomPhoto && (
+            {heroPhoto ? (
               <div
                 style={{
-                  width: '120px',
-                  height: '120px',
-                  borderRadius: '50%',
+                  width: '300px',
+                  height: '300px',
+                  borderRadius: '20px',
                   background: '#8B9D7F',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: '20px',
                   overflow: 'hidden',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                 }}
               >
-                <span style={{ fontSize: '40px' }}>👨</span>
+                <span style={{ fontSize: '80px' }}>💑</span>
               </div>
-            )}
-
-            <div
-              style={{
-                fontSize: '28px',
-                fontWeight: 'bold',
-                color: '#2D3748',
-                textAlign: 'center',
-                marginBottom: '10px',
-              }}
-            >
-              {invitation.groomName}
-            </div>
-
-            <div
-              style={{
-                fontSize: '24px',
-                color: '#4A5568',
-                textAlign: 'center',
-                marginBottom: '40px',
-              }}
-            >
-              &
-            </div>
-
-            {/* Foto da noiva */}
-            {bridePhoto && (
+            ) : (
               <div
                 style={{
-                  width: '120px',
-                  height: '120px',
-                  borderRadius: '50%',
-                  background: '#E8B4B8',
+                  width: '300px',
+                  height: '300px',
+                  borderRadius: '20px',
+                  background: '#8B9D7F',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: '20px',
                   overflow: 'hidden',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                 }}
               >
-                <span style={{ fontSize: '40px' }}>👩</span>
+                <span style={{ fontSize: '80px' }}>💑</span>
               </div>
             )}
-
-            <div
-              style={{
-                fontSize: '28px',
-                fontWeight: 'bold',
-                color: '#2D3748',
-                textAlign: 'center',
-              }}
-            >
-              {invitation.brideName}
-            </div>
           </div>
 
           {/* Lado direito - Informações do casamento */}
@@ -172,34 +131,47 @@ export default async function Image({ params }: { params: { slug: string } }) {
               alignItems: 'center',
               justifyContent: 'center',
               padding: '40px',
-              background: 'rgba(255, 255, 255, 0.8)',
+              background: 'rgba(255, 255, 255, 0.9)',
             }}
           >
+            {/* Nomes do casal */}
+            <div
+              style={{
+                fontSize: '36px',
+                fontWeight: 'bold',
+                color: '#2D3748',
+                textAlign: 'center',
+                marginBottom: '10px',
+              }}
+            >
+              {invitation.groomName} & {invitation.brideName}
+            </div>
+
             {/* Logo CasarMe */}
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                marginBottom: '40px',
+                marginBottom: '30px',
               }}
             >
               <div
                 style={{
-                  width: '60px',
-                  height: '60px',
+                  width: '50px',
+                  height: '50px',
                   borderRadius: '50%',
                   background: '#8B9D7F',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginRight: '15px',
+                  marginRight: '12px',
                 }}
               >
-                <span style={{ fontSize: '30px' }}>💍</span>
+                <span style={{ fontSize: '24px' }}>💍</span>
               </div>
               <span
                 style={{
-                  fontSize: '36px',
+                  fontSize: '28px',
                   fontWeight: 'bold',
                   color: '#2D3748',
                 }}
@@ -211,10 +183,11 @@ export default async function Image({ params }: { params: { slug: string } }) {
             {/* Data do casamento */}
             <div
               style={{
-                fontSize: '24px',
+                fontSize: '28px',
                 color: '#4A5568',
                 textAlign: 'center',
                 marginBottom: '20px',
+                fontWeight: '600',
               }}
             >
               {new Date(invitation.weddingDate).toLocaleDateString('pt-BR', {
@@ -227,11 +200,12 @@ export default async function Image({ params }: { params: { slug: string } }) {
             {/* Local */}
             <div
               style={{
-                fontSize: '20px',
+                fontSize: '22px',
                 color: '#4A5568',
                 textAlign: 'center',
                 marginBottom: '30px',
-                maxWidth: '300px',
+                maxWidth: '400px',
+                fontWeight: '500',
               }}
             >
               {invitation.venueName}
@@ -240,12 +214,13 @@ export default async function Image({ params }: { params: { slug: string } }) {
             {/* Mensagem de convite */}
             <div
               style={{
-                fontSize: '18px',
+                fontSize: '20px',
                 color: '#2D3748',
                 textAlign: 'center',
                 fontStyle: 'italic',
-                maxWidth: '350px',
+                maxWidth: '400px',
                 lineHeight: 1.4,
+                fontWeight: '500',
               }}
             >
               {invitation.welcomeMessage}
