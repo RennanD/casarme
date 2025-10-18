@@ -2,19 +2,19 @@ import { FileText, Palette, Sparkles } from "lucide-react"
 
 const steps = [
   {
-    icon: FileText,
-    title: "Preencha os dados do casamento",
-    description: "Adicione informações do casal, data, local, fotos e detalhes do seu casamento",
+    icon: Palette,
+    title: "Escolha seu template favorito",
+    description: "Selecione entre 3 templates elegantes - Garden, Romântico ou Modern",
   },
   {
-    icon: Palette,
-    title: "Escolha seu template personalizado",
-    description: "Selecione entre nossos modelos de convite digital elegantes e modernos",
+    icon: FileText,
+    title: "Preencha os dados do casamento",
+    description: "Adicione fotos e informações (2 minutos) - Te guiamos passo a passo",
   },
   {
     icon: Sparkles,
-    title: "Convite digital pronto",
-    description: "Receba seu link personalizado com mapa interativo, contagem regressiva e confirmação de presença",
+    title: "Receba seu link personalizado",
+    description: "Convite pronto instantaneamente com mapa interativo e confirmação WhatsApp",
   },
 ]
 
@@ -22,7 +22,7 @@ export function HowItWorks() {
   return (
     <section id="como-funciona" className="py-24 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-[#3E3E3E] mb-16">Como Criar seu Convite de Casamento Digital</h2>
+        <h2 className="font-serif text-3xl md:text-4xl font-bold text-center text-[#3E3E3E] mb-16">Como Criar seu Convite Digital em 3 Passos Simples</h2>
         <div className="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
           {steps.map((step, index) => (
             <div key={index} className="text-center animate-fade-in" style={{ animationDelay: `${index * 150}ms` }}>

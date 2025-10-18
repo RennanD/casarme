@@ -23,7 +23,7 @@ export function Testimonials() {
   return (
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="font-serif text-4xl md:text-5xl font-bold text-center text-[#3E3E3E] mb-16">
+        <h2 className="font-serif text-3xl md:text-4xl font-bold text-center text-[#3E3E3E] mb-16">
           Depoimentos de Casais que Criaram seus Convites Digitais
         </h2>
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">

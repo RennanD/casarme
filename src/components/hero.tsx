@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@/src/components/ui/button"
-import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export function Hero() {
@@ -19,19 +18,18 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-20 text-center animate-fade-in">
-        <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-[#3E3E3E] mb-6 animate-slide-up text-balance">
-          Convite de Casamento Digital Personalizado - Crie em Minutos
+        <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-[#3E3E3E] mb-6 animate-slide-up text-balance">
+          Convite Digital por Menos de R$ 20
         </h1>
         <p className="text-xl md:text-2xl text-[#6B6B6B] mb-12 max-w-3xl mx-auto animate-slide-up [animation-delay:200ms] text-pretty">
-          Crie convites de casamento online únicos com mapa interativo, contagem regressiva e confirmação de presença. Templates elegantes para seu grande dia.
+          Crie seu convite personalizado em 3 cliques. Templates elegantes, mapa interativo e confirmação via WhatsApp incluídos.
         </p>
         <Link href="/criar">
           <Button
             size="lg"
             className="bg-[#D4A373] hover:bg-[#C49363] text-white text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-up [animation-delay:400ms]"
           >
-            Criar meu convite
-            <ArrowRight className="ml-2 h-5 w-5" />
+            Criar Meu Convite
           </Button>
         </Link>
       </div>
