@@ -17,8 +17,6 @@ export const metadata: Metadata = {
   description:
     "Crie seu convite de casamento online com fotos e vídeos. Rápido, elegante e perfeito para compartilhar com quem você ama.",
   keywords: ["convite de casamento online", "convite de casamento digital", "convite de casamento interativo"],
-  generator: "v0.app",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://casarme.vercel.app'),
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
