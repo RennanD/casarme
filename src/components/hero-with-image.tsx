@@ -23,10 +23,10 @@ export function HeroWithImage() {
           {/* Text Content */}
           <div className="text-center lg:text-left animate-fade-in">
             <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-[#3E3E3E] mb-6 animate-slide-up text-balance">
-              Convite Digital por Menos de R$ 20
+              Crei seu convite de casamento de forma simples
             </h1>
             <p className="text-xl md:text-2xl text-[#6B6B6B] mb-12 max-w-3xl mx-auto lg:mx-0 animate-slide-up [animation-delay:200ms] text-pretty">
-              Crie seu convite personalizado em 3 cliques. Templates elegantes, mapa interativo e confirmação via WhatsApp incluídos.
+              Crie seu convite personalizado de casamento em 3 cliques. Templates elegantes, mapa interativo e confirmação via WhatsApp incluídos.
             </p>
             <div className="animate-slide-up [animation-delay:400ms]">
               <Link href="/criar">
