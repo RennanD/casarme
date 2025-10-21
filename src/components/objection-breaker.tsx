@@ -28,17 +28,17 @@ const objections = [
 
 export function ObjectionBreaker() {
   return (
-    <section className="py-24 bg-[#FAF3E0]">
+    <section className="py-24 bg-[#FAF3E0]" aria-labelledby="objection-title">
       <div className="container mx-auto px-4">
-        <h2 className="font-serif text-3xl md:text-4xl font-bold text-center text-[#3E3E3E] mb-16">
+        <h2 id="objection-title" className="font-serif text-3xl md:text-4xl font-bold text-center text-[#3E3E3E] mb-16">
           Você Não Precisa Ser Designer para Ter um Convite Lindo!
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto" role="list" aria-label="Objeções comuns e soluções">
           {objections.map((objection, index) => (
-            <div key={index} className="bg-white p-8 rounded-2xl shadow-lg animate-fade-in" style={{ animationDelay: `${index * 150}ms` }}>
+            <article key={index} className="bg-white p-8 rounded-2xl shadow-lg animate-fade-in" style={{ animationDelay: `${index * 150}ms` }} role="listitem">
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0" aria-hidden="true">
                   <span className="text-2xl">❌</span>
                 </div>
                 <div>
@@ -51,7 +51,7 @@ export function ObjectionBreaker() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0" aria-hidden="true">
                   <span className="text-2xl">✅</span>
                 </div>
                 <div>
@@ -63,7 +63,7 @@ export function ObjectionBreaker() {
                   </p>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
@@ -72,7 +72,7 @@ export function ObjectionBreaker() {
           <h3 className="font-serif text-2xl font-bold text-[#3E3E3E] mb-6">
             Pare de se preocupar com design. Deixe o CasarMe fazer isso por você!
           </h3>
-          <Link href="/criar">
+          <Link href="/criar" aria-label="Criar meu convite de casamento digital">
             <Button
               size="lg"
               className="bg-[#D4A373] hover:bg-[#C49363] text-white text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"

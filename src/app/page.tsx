@@ -23,18 +23,24 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <Navbar />
-      <div className="pt-16">
-        <HeroWithImage />
-        <ObjectionBreaker />
-        <HowItWorks />
-        <Templates />
-        <WhyChoose />
-        <Testimonials />
-        <FinalCTA />
+    <>
+      <header>
+        <Navbar />
+      </header>
+      <main className="min-h-screen">
+        <div className="pt-16">
+          <HeroWithImage />
+          <ObjectionBreaker />
+          <HowItWorks />
+          <Templates />
+          <WhyChoose />
+          <Testimonials />
+          <FinalCTA />
+        </div>
+      </main>
+      <footer>
         <Footer />
-      </div>
-    </main>
+      </footer>
+    </>
   )
 }

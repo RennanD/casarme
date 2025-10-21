@@ -46,24 +46,24 @@ export default function RomanticExamplePage() {
   return (
     <div className="relative">
       {/* Header Fixo */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-[#E8B4B8] hover:text-[#D4A373] font-medium">
+          <Link href="/" className="text-[#E8B4B8] hover:text-[#D4A373] font-medium" aria-label="Voltar para página inicial do CasarMe">
             ← Voltar ao CasarMe
           </Link>
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-600">Modelo Romântico</span>
-            <Link href="/criar?template=romantic">
+            <Link href="/criar?template=romantic" aria-label="Criar convite com modelo Romântico">
               <Button className="bg-[#E8B4B8] hover:bg-[#D4A373] text-white">
                 Criar Meu Convite
               </Button>
             </Link>
           </div>
         </div>
-      </div>
+      </header>
 
       {/* Conteúdo com padding para o header fixo */}
-      <div className="pt-16">
+      <main className="pt-16">
         <RomanticTemplate
           data={sampleData}
           heroPhoto="/romantic-couple-wedding-celebration.jpg"
@@ -71,7 +71,7 @@ export default function RomanticExamplePage() {
           bridePhoto="/bride-portrait-smiling.jpg"
           galleryPhotos={galleryPhotos}
         />
-      </div>
+      </main>
     </div>
   )
 }

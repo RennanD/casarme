@@ -21,33 +21,36 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-white" aria-labelledby="testimonials-title">
       <div className="container mx-auto px-4">
-        <h2 className="font-serif text-3xl md:text-4xl font-bold text-center text-[#3E3E3E] mb-16">
+        <h2 id="testimonials-title" className="font-serif text-3xl md:text-4xl font-bold text-center text-[#3E3E3E] mb-16">
           Depoimentos de Casais que Criaram seus Convites Digitais
         </h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto" role="list" aria-label="Depoimentos de clientes">
           {testimonials.map((testimonial, index) => (
-            <Card
+            <article
               key={index}
-              className="p-6 bg-[#FAF3E0] border-none shadow-md hover:shadow-lg transition-shadow duration-300 animate-fade-in"
+              role="listitem"
+              className="p-6 bg-[#FAF3E0] border-none shadow-md hover:shadow-lg transition-shadow duration-300 animate-fade-in rounded-lg"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="flex gap-1 mb-4">
+              <div className="flex gap-1 mb-4" aria-label="5 estrelas" aria-hidden="true">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-[#D4A373] text-[#D4A373]" />
                 ))}
               </div>
-              <p className="text-[#3E3E3E] mb-6 leading-relaxed italic">"{testimonial.text}"</p>
-              <div className="flex items-center gap-3">
+              <blockquote className="text-[#3E3E3E] mb-6 leading-relaxed italic">
+                <p>"{testimonial.text}"</p>
+              </blockquote>
+              <footer className="flex items-center gap-3">
                 <img
                   src={testimonial.image || "/placeholder.svg"}
-                  alt={testimonial.name}
+                  alt={`Foto de ${testimonial.name}`}
                   className="w-12 h-12 rounded-full object-cover"
                 />
-                <span className="font-serif font-semibold text-[#3E3E3E]">{testimonial.name}</span>
-              </div>
-            </Card>
+                <cite className="font-serif font-semibold text-[#3E3E3E] not-italic">{testimonial.name}</cite>
+              </footer>
+            </article>
           ))}
         </div>
       </div>

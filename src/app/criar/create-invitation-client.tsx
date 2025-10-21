@@ -28,19 +28,19 @@ export default function CreateInvitationClient({ selectedTemplateId }: CreateInv
   return (
     <div className="relative">
       {/* Header Fixo */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-[#D4A373] hover:text-[#B8935F] font-medium">
+          <Link href="/" className="text-[#D4A373] hover:text-[#B8935F] font-medium" aria-label="Voltar para página inicial do CasarMe">
             ← Voltar ao CasarMe
           </Link>
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-600">Criar Convite</span>
           </div>
         </div>
-      </div>
+      </header>
 
       {/* Conteúdo com padding para o header fixo */}
-      <div className="pt-16">
+      <main className="pt-16">
         <CreateInviteForm onEmailSubmit={handleEmailSubmit} selectedTemplateId={selectedTemplateId} />
 
         <EmailModal
@@ -49,7 +49,7 @@ export default function CreateInvitationClient({ selectedTemplateId }: CreateInv
           onSubmit={handleEmailConfirm}
           formData={formData}
         />
-      </div>
+      </main>
     </div>
   )
 }
