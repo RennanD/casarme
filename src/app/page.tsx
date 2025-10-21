@@ -24,10 +24,18 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      {/* Skip Links for Keyboard Navigation */}
+      <a href="#main-content" className="skip-link">
+        Pular para o conteúdo principal
+      </a>
+      <a href="#navigation" className="skip-link">
+        Pular para a navegação
+      </a>
+
       <header>
         <Navbar />
       </header>
-      <main className="min-h-screen">
+      <main id="main-content" className="min-h-screen">
         <div className="pt-16">
           <HeroWithImage />
           <ObjectionBreaker />

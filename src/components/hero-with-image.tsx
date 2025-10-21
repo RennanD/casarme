@@ -29,10 +29,11 @@ export function HeroWithImage() {
               Crie seu convite personalizado de casamento em 3 cliques. Templates elegantes, mapa interativo e confirmação via WhatsApp incluídos.
             </p>
             <div className="animate-slide-up [animation-delay:400ms]">
-              <Link href="/criar" aria-label="Criar meu convite de casamento digital">
+              <Link href="/criar" aria-label="Criar meu convite de casamento digital" className="touch-target">
                 <Button
                   size="lg"
-                  className="bg-[#D4A373] hover:bg-[#C49363] text-white text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="bg-[#D4A373] hover:bg-[#C49363] text-white text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus-visible:focus-visible"
+                  type="button"
                 >
                   Criar Meu Convite
                 </Button>

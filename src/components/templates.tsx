@@ -123,23 +123,25 @@ export function Templates() {
                   </ul>
 
                   <div className="space-y-2">
-                    <Link href={template.link} aria-label={`Ver exemplo do modelo ${template.name}`}>
+                    <Link href={template.link} aria-label={`Ver exemplo do modelo ${template.name}`} className="touch-target">
                       <Button
                         variant="outline"
                         size="sm"
-                        className="w-full border-[#D4A373] text-[#D4A373] hover:bg-[#D4A373] hover:text-white transition-colors bg-transparent"
+                        className="w-full border-[#D4A373] text-[#D4A373] hover:bg-[#D4A373] hover:text-white transition-colors bg-transparent focus-visible:focus-visible"
+                        type="button"
                       >
                         Ver exemplo interativo
                       </Button>
                     </Link>
 
-                    <Link href={`/criar?template=${template.id}`} aria-label={`Escolher modelo ${template.name}`}>
+                    <Link href={`/criar?template=${template.id}`} aria-label={`Escolher modelo ${template.name}`} className="touch-target">
                       <Button
                         size="sm"
-                        className={`w-full transition-colors ${template.plan === "Pro"
+                        className={`w-full transition-colors focus-visible:focus-visible ${template.plan === "Pro"
                           ? "bg-[#D4A373] text-white hover:bg-[#C49363]"
                           : "bg-[#8B9D7F] text-white hover:bg-[#7A8C70]"
                           }`}
+                        type="button"
                       >
                         Escolher este modelo
                       </Button>

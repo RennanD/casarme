@@ -15,10 +15,11 @@ export function FinalCTA() {
         <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-pretty opacity-95">
           ✅ Templates profissionais ✅ Mapa interativo ✅ Confirmação WhatsApp ✅ Sem mensalidade. Mais de 500 casais já criaram seus convites conosco!
         </p>
-        <Link href="/criar" aria-label="Criar meu convite de casamento digital agora">
+        <Link href="/criar" aria-label="Criar meu convite de casamento digital agora" className="touch-target">
           <Button
             size="lg"
-            className="bg-white text-[#D4A373] hover:bg-[#FAF3E0] text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            className="bg-white text-[#D4A373] hover:bg-[#FAF3E0] text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus-visible:focus-visible"
+            type="button"
           >
             Criar Meu Convite
           </Button>

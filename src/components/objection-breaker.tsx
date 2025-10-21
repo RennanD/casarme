@@ -72,10 +72,11 @@ export function ObjectionBreaker() {
           <h3 className="font-serif text-2xl font-bold text-[#3E3E3E] mb-6">
             Pare de se preocupar com design. Deixe o CasarMe fazer isso por você!
           </h3>
-          <Link href="/criar" aria-label="Criar meu convite de casamento digital">
+          <Link href="/criar" aria-label="Criar meu convite de casamento digital" className="touch-target">
             <Button
               size="lg"
-              className="bg-[#D4A373] hover:bg-[#C49363] text-white text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-[#D4A373] hover:bg-[#C49363] text-white text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus-visible:focus-visible"
+              type="button"
             >
               Criar Meu Convite
             </Button>

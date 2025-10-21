@@ -32,13 +32,13 @@ export default function GardenExamplePage() {
       {/* Header Fixo */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="text-[#8B9D7F] hover:text-[#6B7A5F] font-medium" aria-label="Voltar para página inicial do CasarMe">
+          <Link href="/" className="text-[#8B9D7F] hover:text-[#6B7A5F] font-medium touch-target focus-visible:focus-visible" aria-label="Voltar para página inicial do CasarMe">
             ← Voltar ao CasarMe
           </Link>
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-600">Modelo Garden</span>
-            <Link href="/criar?template=garden" aria-label="Criar convite com modelo Garden">
-              <Button className="bg-[#8B9D7F] hover:bg-[#6B7A5F] text-white">
+            <Link href="/criar?template=garden" aria-label="Criar convite com modelo Garden" className="touch-target">
+              <Button className="bg-[#8B9D7F] hover:bg-[#6B7A5F] text-white focus-visible:focus-visible" type="button">
                 Criar Meu Convite
               </Button>
             </Link>
