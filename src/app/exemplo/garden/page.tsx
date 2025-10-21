@@ -1,5 +1,7 @@
 import { GardenTemplate } from "@/src/components/templates/garden-template"
 import { Metadata } from "next"
+import Link from "next/link"
+import { Button } from "@/src/components/ui/button"
 
 export const metadata: Metadata = {
   title: "Exemplo de Convite Garden - CasarMe",
@@ -25,5 +27,29 @@ export default function GardenExamplePage() {
       "Nossa história começou em 2018, quando nos conhecemos em uma viagem. Desde então, construímos juntos momentos inesquecíveis e decidimos unir nossas vidas para sempre.",
   }
 
-  return <GardenTemplate data={sampleData} />
+  return (
+    <div className="relative">
+      {/* Header Fixo */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="text-[#8B9D7F] hover:text-[#6B7A5F] font-medium">
+            ← Voltar ao CasarMe
+          </Link>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-600">Modelo Garden</span>
+            <Link href="/criar?template=garden">
+              <Button className="bg-[#8B9D7F] hover:bg-[#6B7A5F] text-white">
+                Criar Meu Convite
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Conteúdo com padding para o header fixo */}
+      <div className="pt-16">
+        <GardenTemplate data={sampleData} />
+      </div>
+    </div>
+  )
 }

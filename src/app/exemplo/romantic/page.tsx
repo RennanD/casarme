@@ -1,5 +1,7 @@
 import { RomanticTemplate } from "@/src/components/templates/romantic-template"
 import { Metadata } from "next"
+import Link from "next/link"
+import { Button } from "@/src/components/ui/button"
 
 export const metadata: Metadata = {
   title: "Exemplo de Convite Romântico - CasarMe",
@@ -42,12 +44,34 @@ export default function RomanticExamplePage() {
   ]
 
   return (
-    <RomanticTemplate
-      data={sampleData}
-      heroPhoto="/romantic-couple-wedding-celebration.jpg"
-      groomPhoto="/groom-portrait-smiling.jpg"
-      bridePhoto="/bride-portrait-smiling.jpg"
-      galleryPhotos={galleryPhotos}
-    />
+    <div className="relative">
+      {/* Header Fixo */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="text-[#E8B4B8] hover:text-[#D4A373] font-medium">
+            ← Voltar ao CasarMe
+          </Link>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-600">Modelo Romântico</span>
+            <Link href="/criar?template=romantic">
+              <Button className="bg-[#E8B4B8] hover:bg-[#D4A373] text-white">
+                Criar Meu Convite
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Conteúdo com padding para o header fixo */}
+      <div className="pt-16">
+        <RomanticTemplate
+          data={sampleData}
+          heroPhoto="/romantic-couple-wedding-celebration.jpg"
+          groomPhoto="/groom-portrait-smiling.jpg"
+          bridePhoto="/bride-portrait-smiling.jpg"
+          galleryPhotos={galleryPhotos}
+        />
+      </div>
+    </div>
   )
 }

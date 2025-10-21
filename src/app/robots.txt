@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /private/
 
+# Sitemaps
 Sitemap: https://casarme.site/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1

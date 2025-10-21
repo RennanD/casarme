@@ -1,5 +1,7 @@
 import { ModernTemplate } from "@/src/components/templates/modern-template"
 import { Metadata } from "next"
+import Link from "next/link"
+import { Button } from "@/src/components/ui/button"
 
 export const metadata: Metadata = {
   title: "Exemplo de Convite Moderno - CasarMe",
@@ -38,11 +40,33 @@ export default function ModernExamplePage() {
   ]
 
   return (
-    <ModernTemplate
-      data={sampleData}
-      heroPhotos={heroPhotos}
-      groomPhoto="/groom-portrait-smiling.jpg"
-      bridePhoto="/bride-portrait-smiling.jpg"
-    />
+    <div className="relative">
+      {/* Header Fixo */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="text-[#D4A373] hover:text-[#B8935F] font-medium">
+            ← Voltar ao CasarMe
+          </Link>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-600">Modelo Moderno</span>
+            <Link href="/criar?template=modern">
+              <Button className="bg-[#D4A373] hover:bg-[#B8935F] text-white">
+                Criar Meu Convite
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Conteúdo com padding para o header fixo */}
+      <div className="pt-16">
+        <ModernTemplate
+          data={sampleData}
+          heroPhotos={heroPhotos}
+          groomPhoto="/groom-portrait-smiling.jpg"
+          bridePhoto="/bride-portrait-smiling.jpg"
+        />
+      </div>
+    </div>
   )
 }
