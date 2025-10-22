@@ -1,7 +1,6 @@
 import React, { Suspense } from "react"
 import type { Metadata } from "next"
 import "./globals.css"
-import "../styles/accessibility.css"
 import { Toaster } from "sonner"
 import GoogleTagManagerScripts from "@/src/lib/analytics"
 import { StructuredData } from "@/src/components/structured-data"

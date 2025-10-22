@@ -122,7 +122,7 @@ export function Templates() {
                     ))}
                   </ul>
 
-                  <div className="space-y-2">
+                  <div className="flex flex-col gap-2">
                     <Link href={template.link} aria-label={`Ver exemplo do modelo ${template.name}`} className="touch-target">
                       <Button
                         variant="outline"
