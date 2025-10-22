@@ -100,13 +100,11 @@ select:focus,
 /* Ensure sufficient color contrast for links */
 a {
   color: #B8935F;
-  text-decoration: underline;
 }
 
 a:hover,
 a:focus {
   color: #D4A373;
-  text-decoration: underline;
 }
 
 /* Button accessibility improvements */
