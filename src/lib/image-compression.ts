@@ -61,8 +61,6 @@ export async function compressImage(file: File, maxWidth: number = 1920, maxHeig
               lastModified: Date.now()
             })
             const compressionRatio = ((file.size - compressedFile.size) / file.size * 100).toFixed(1)
-            console.log(`📦 Image compressed: ${(file.size / 1024 / 1024).toFixed(2)}MB → ${(compressedFile.size / 1024 / 1024).toFixed(2)}MB (${compressionRatio}% reduction)`)
-            console.log(`🎯 Quality: ${(finalQuality * 100).toFixed(0)}%, Dimensions: ${width}x${height}`)
             resolve(compressedFile)
           } else {
             reject(new Error('Failed to compress image'))

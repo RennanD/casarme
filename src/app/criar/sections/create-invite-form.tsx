@@ -103,25 +103,14 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
   const { uploadImage, isUploading, error, clearError } = useImageUpload()
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
-    console.log('📸 Image upload triggered:', { type, files: e.target.files?.length })
-
     const file = e.target.files?.[0]
     if (!file) {
-      console.log('❌ No file selected')
       return
     }
 
-    console.log('📁 File selected:', {
-      name: file.name,
-      size: file.size,
-      type: file.type
-    })
-
     const result = await uploadImage(file, type)
-    console.log('📤 Upload result:', result)
 
     if (result) {
-      console.log('✅ Upload successful, updating state for type:', type)
       switch (type) {
         case 'hero':
           setHeroImage(result)
@@ -139,31 +128,21 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
           setGalleryImages(prev => [...prev, result])
           break
       }
-    } else {
-      console.log('❌ Upload failed, no result returned')
     }
   }
 
   const handleMultipleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: string) => {
-    console.log('📸 Multiple image upload triggered:', { type, files: e.target.files?.length })
-
     const files = Array.from(e.target.files || [])
-    console.log('📁 Files selected:', files.map(f => ({ name: f.name, size: f.size, type: f.type })))
 
     for (const file of files) {
-      console.log('📤 Uploading file:', file.name)
       const result = await uploadImage(file, type)
-      console.log('📤 Upload result for', file.name, ':', result)
 
       if (result) {
-        console.log('✅ Upload successful for', file.name, ', updating state')
         if (type === 'hero_slideshow') {
           setHeroImages(prev => [...prev, result])
         } else if (type === 'gallery') {
           setGalleryImages(prev => [...prev, result])
         }
-      } else {
-        console.log('❌ Upload failed for', file.name)
       }
     }
   }
@@ -358,7 +337,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                 <input
                   id="heroPhotos"
                   type="file"
-                  accept="image/*"
+                  accept="*"
                   multiple={isModern}
                   onChange={(e) => isModern ? handleMultipleImageUpload(e, 'hero_slideshow') : handleImageUpload(e, 'hero')}
                   className="hidden"
@@ -522,7 +501,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                       <input
                         id="groomPhoto"
                         type="file"
-                        accept="image/*"
+                        accept="*"
                         onChange={(e) => handleImageUpload(e, 'groom')}
                         className="hidden"
                         disabled={isUploading}
@@ -553,7 +532,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                       <input
                         id="bridePhoto"
                         type="file"
-                        accept="image/*"
+                        accept="*"
                         onChange={(e) => handleImageUpload(e, 'bride')}
                         className="hidden"
                         disabled={isUploading}
@@ -587,7 +566,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
                   <input
                     id="galleryPhotos"
                     type="file"
-                    accept="image/*"
+                    accept="*"
                     multiple
                     onChange={(e) => handleMultipleImageUpload(e, 'gallery')}
                     className="hidden"

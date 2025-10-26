@@ -36,6 +36,28 @@ export async function GET(
       case '.gif':
         contentType = 'image/gif'
         break
+      case '.bmp':
+        contentType = 'image/bmp'
+        break
+      case '.tiff':
+      case '.tif':
+        contentType = 'image/tiff'
+        break
+      case '.svg':
+        contentType = 'image/svg+xml'
+        break
+      case '.avif':
+        contentType = 'image/avif'
+        break
+      case '.heic':
+        contentType = 'image/heic'
+        break
+      case '.heif':
+        contentType = 'image/heif'
+        break
+      case '.ico':
+        contentType = 'image/x-icon'
+        break
       default:
         contentType = 'image/jpeg'
     }

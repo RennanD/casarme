@@ -3,31 +3,13 @@ import { uploadToCloudinary } from '@/src/lib/cloudinary'
 import { validateImage } from '@/src/lib/image-utils'
 
 export async function POST(request: NextRequest) {
-  console.log('=== UPLOAD API CALLED ===')
-
   try {
-    // Check Cloudinary configuration
-    console.log('🔧 Cloudinary config check:', {
-      cloudName: process.env.CLOUDINARY_CLOUD_NAME ? '✅ Set' : '❌ Missing',
-      apiKey: process.env.CLOUDINARY_API_KEY ? '✅ Set' : '❌ Missing',
-      apiSecret: process.env.CLOUDINARY_API_SECRET ? '✅ Set' : '❌ Missing'
-    })
-
     const formData = await request.formData()
-    console.log('FormData received')
 
     const file = formData.get('image') as File
     const type = formData.get('type') as string
 
-    console.log('File info:', {
-      fileName: file?.name,
-      fileSize: file?.size,
-      fileType: file?.type,
-      type: type
-    })
-
     if (!file || !type) {
-      console.log('❌ File and type are required')
       return NextResponse.json(
         { error: 'File and type are required' },
         { status: 400 }
@@ -35,12 +17,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate image
-    console.log('🔍 Validating image...')
     const validation = await validateImage(file)
-    console.log('Validation result:', validation)
 
     if (!validation.valid) {
-      console.log('❌ Validation failed:', validation.error)
       return NextResponse.json(
         { error: validation.error },
         { status: 400 }
@@ -48,19 +27,11 @@ export async function POST(request: NextRequest) {
     }
 
     // Upload to Cloudinary
-    console.log('☁️ Uploading to Cloudinary...')
     let cloudinaryResult
 
     try {
       cloudinaryResult = await uploadToCloudinary(file, `casarme/${type}`)
-      console.log('✅ Cloudinary upload successful:', {
-        public_id: cloudinaryResult.public_id,
-        secure_url: cloudinaryResult.secure_url,
-        width: cloudinaryResult.width,
-        height: cloudinaryResult.height
-      })
     } catch (cloudinaryError) {
-      console.error('❌ Cloudinary upload failed:', cloudinaryError)
       throw new Error(`Cloudinary upload failed: ${cloudinaryError instanceof Error ? cloudinaryError.message : 'Unknown error'}`)
     }
 

@@ -13,7 +13,11 @@ function getUploadDir(): string {
 
 const UPLOAD_DIR = getUploadDir()
 const MAX_FILE_SIZE = 15 * 1024 * 1024 // 15MB (increased for professional photos)
-const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+const ALLOWED_TYPES = [
+  'image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif',
+  'image/bmp', 'image/tiff', 'image/svg+xml', 'image/avif', 'image/heic',
+  'image/heif', 'image/ico', 'image/icon'
+]
 
 export interface ImageMetadata {
   filename: string
@@ -36,7 +40,7 @@ export async function validateImage(file: File): Promise<{ valid: boolean; error
 
   // Check file type
   if (!ALLOWED_TYPES.includes(file.type)) {
-    return { valid: false, error: 'Tipo de arquivo não suportado. Use JPG, PNG ou WebP.' }
+    return { valid: false, error: 'Tipo de arquivo não suportado. Por favor, use um arquivo de imagem válido.' }
   }
 
   return { valid: true }
