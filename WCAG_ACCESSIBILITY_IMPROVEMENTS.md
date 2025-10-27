@@ -58,7 +58,7 @@ Implementei melhorias abrangentes de acessibilidade seguindo as diretrizes WCAG 
 ## 🚀 **Componentes de Acessibilidade Criados:**
 
 ### 1. **CSS de Acessibilidade (`src/styles/accessibility.css`)**
-```css
+\`\`\`css
 /* Focus Indicators - WCAG 2.2 Focus Appearance (AAA) */
 *:focus {
   outline: 3px solid #D4A373;
@@ -98,7 +98,7 @@ Implementei melhorias abrangentes de acessibilidade seguindo as diretrizes WCAG 
     scroll-behavior: auto !important;
   }
 }
-```
+\`\`\`
 
 ### 2. **Helpers de Acessibilidade (`src/components/accessibility-helpers.tsx`)**
 - ✅ **ScreenReaderOnly** - Texto oculto para leitores de tela

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/src/components/ui/button"
-import { Menu, X, Heart } from "lucide-react"
+import { Menu, X, Heart, Users } from "lucide-react"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -11,7 +11,7 @@ export function Navbar() {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      element.scrollIntoView({ behavior: "smooth" })
     }
     setIsOpen(false)
   }
@@ -54,6 +54,13 @@ export function Navbar() {
             >
               Por que escolher
             </button>
+            <Link
+              href="/convite-padrinhos"
+              className="flex items-center gap-2 text-[#3E3E3E] hover:text-[#D4A373] transition-colors"
+            >
+              <Users className="w-4 h-4" />
+              <span>Convite Padrinhos</span>
+            </Link>
           </div>
 
           {/* CTA Button - Desktop */}
@@ -62,10 +69,7 @@ export function Navbar() {
           </Link>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-[#3E3E3E]"
-          >
+          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-[#3E3E3E]">
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -99,12 +103,15 @@ export function Navbar() {
                 Por que escolher
               </button>
               <Link
-                href="/criar"
+                href="/convite-padrinhos"
                 onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2 text-left text-[#3E3E3E] hover:text-[#D4A373] transition-colors py-2"
               >
-                <Button className="w-full bg-[#D4A373] hover:bg-[#C4936B] text-white">
-                  Criar Meu Convite
-                </Button>
+                <Users className="w-4 h-4" />
+                <span>Convite Padrinhos</span>
+              </Link>
+              <Link href="/criar" onClick={() => setIsOpen(false)}>
+                <Button className="w-full bg-[#D4A373] hover:bg-[#C4936B] text-white">Criar Meu Convite</Button>
               </Link>
             </div>
           </div>
