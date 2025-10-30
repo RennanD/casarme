@@ -51,3 +51,13 @@ model Image {
 
   @@map("images")
 }
+
+model GodparentDownload {
+  id        String   @id @default(cuid())
+  email     String
+  template  String
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@map("godparent_downloads")
+}

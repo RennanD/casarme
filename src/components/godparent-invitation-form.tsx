@@ -2,13 +2,21 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { Button } from "@/src/components/ui/button"
 import { Textarea } from "@/src/components/ui/textarea"
 import { Label } from "@/src/components/ui/label"
 import { Input } from "@/src/components/ui/input"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/src/components/ui/dialog"
-import { Heart, Download, Share2 } from "lucide-react"
+import { Heart, Download, Loader2 } from "lucide-react"
+
+import { toPng } from 'html-to-image'
+import {
+  getDownloadCountClient,
+  incrementDownloadCountClient,
+  canDownloadClient,
+  getRemainingDownloadsClient
+} from '@/src/lib/download-limits'
 
 const templates = [
   {
@@ -42,6 +50,19 @@ export function GodparentInvitationForm() {
   const [message, setMessage] = useState(defaultMessages.garden)
   const [showEmailModal, setShowEmailModal] = useState(false)
   const [email, setEmail] = useState("")
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [remainingDownloads, setRemainingDownloads] = useState<number | null>(null)
+  const [showLimitModal, setShowLimitModal] = useState(false)
+  const previewRef = useRef<HTMLDivElement>(null)
+
+  // Check remaining downloads on component mount
+  useEffect(() => {
+    const checkRemaining = () => {
+      const remaining = getRemainingDownloadsClient()
+      setRemainingDownloads(remaining)
+    }
+    checkRemaining()
+  }, [])
 
   const handleTemplateChange = (template: (typeof templates)[0]) => {
     setSelectedTemplate(template)
@@ -53,14 +74,66 @@ export function GodparentInvitationForm() {
       alert("Por favor, preencha a mensagem")
       return
     }
+
+    // Check if user has remaining downloads
+    if (!canDownloadClient()) {
+      setShowLimitModal(true)
+      return
+    }
+
     setShowEmailModal(true)
   }
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Email submitted:", email)
-    alert("Convite criado com sucesso! Em breve você receberá o link por email.")
-    setShowEmailModal(false)
+    setIsProcessing(true)
+    try {
+      // Check limit before proceeding
+      if (!canDownloadClient()) {
+        setShowEmailModal(false)
+        setShowLimitModal(true)
+        return
+      }
+
+      // Increment download count
+      incrementDownloadCountClient()
+
+      // Update remaining downloads
+      setRemainingDownloads(getRemainingDownloadsClient())
+
+      // captura do lead antes do download
+      const response = await fetch('/api/godparent-download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, template: selectedTemplate.id }),
+      })
+
+      if (!response.ok) {
+        const responseData = await response.json()
+        throw new Error(responseData.error || 'Erro ao processar download')
+      }
+
+      const node = previewRef.current
+      if (!node) {
+        alert("Não foi possível gerar a imagem do convite.")
+        return
+      }
+      const dataUrl = await toPng(node, { pixelRatio: 4 })
+      const link = document.createElement("a")
+      link.download = `convite-padrinhos-${selectedTemplate.id}.png`
+      link.href = dataUrl
+      link.click()
+      setShowEmailModal(false)
+      // Após o download, levar o usuário para a página de obrigado
+      setTimeout(() => {
+        window.location.assign('/convite-padrinhos/obrigado')
+      }, 400)
+    } catch (err) {
+      console.error(err)
+      alert("Ocorreu um erro ao gerar o download. Tente novamente.")
+    } finally {
+      setIsProcessing(false)
+    }
   }
 
   const renderPreview = () => {
@@ -182,10 +255,17 @@ export function GodparentInvitationForm() {
               onClick={handleCreate}
               size="lg"
               className="w-full bg-[#D4A373] hover:bg-[#C4935F] text-white font-semibold text-lg"
+              disabled={!canDownloadClient()}
             >
               <Heart className="w-5 h-5 mr-2" />
-              Criar Convite
+              {!canDownloadClient() ? 'Limite Atingido' : 'Criar Convite'}
             </Button>
+
+            {remainingDownloads !== null && remainingDownloads > 0 && (
+              <p className="text-sm text-[#6B6B6B] text-center mt-2">
+                {remainingDownloads} download{remainingDownloads !== 1 ? 's' : ''} restante{remainingDownloads !== 1 ? 's' : ''} hoje
+              </p>
+            )}
           </div>
 
           {/* Preview Section */}
@@ -194,18 +274,17 @@ export function GodparentInvitationForm() {
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-lg text-[#3E3E3E]">Preview em Tempo Real</h3>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" onClick={handleCreate}>
                     <Download className="w-4 h-4" />
-                  </Button>
-                  <Button variant="outline" size="sm">
-                    <Share2 className="w-4 h-4" />
                   </Button>
                 </div>
               </div>
 
               {/* Invitation Preview */}
               <div className="bg-gradient-to-br font-serif from-gray-50 to-gray-100 rounded-xl min-h-[600px] flex items-center justify-center">
-                {renderPreview()}
+                <div ref={previewRef} className="w-full max-w-[480px]">
+                  {renderPreview()}
+                </div>
               </div>
             </div>
           </div>
@@ -218,11 +297,11 @@ export function GodparentInvitationForm() {
           <DialogHeader>
             <DialogTitle className="font-serif text-2xl">Quase lá!</DialogTitle>
             <DialogDescription>
-              Digite seu email para receber o link do convite e poder compartilhar com seus padrinhos.
+              Digite seu e-mail para receber o seu convite e poder compartilhar com seus padrinhos.
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleEmailSubmit} className="space-y-4">
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
@@ -233,10 +312,52 @@ export function GodparentInvitationForm() {
                 required
               />
             </div>
-            <Button type="submit" className="w-full bg-[#D4A373] hover:bg-[#C4935F]">
-              Receber Convite
+            <Button type="submit" className="w-full bg-[#D4A373] hover:bg-[#C4935F]" disabled={isProcessing}>
+              {isProcessing ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Processando...
+                </>
+              ) : (
+                "Receber Convite"
+              )}
             </Button>
           </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Limit Reached Modal */}
+      <Dialog open={showLimitModal} onOpenChange={setShowLimitModal}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="font-serif text-2xl">Limite de Downloads Atingido</DialogTitle>
+            <DialogDescription>
+              Você já fez 3 downloads hoje. Volte amanhã para baixar mais convites ou crie um convite de casamento completo!
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <p className="text-[#3E3E3E]/80">
+              Que tal criar um convite de casamento digital completo com mapa interativo,
+              confirmação de presença e muito mais?
+            </p>
+            <div className="flex gap-3">
+              <Button
+                asChild
+                className="flex-1 bg-[#D4A373] hover:bg-[#C4935F]"
+              >
+                <a href="/criar?utm_source=godparent&utm_medium=limit_reached">
+                  Criar Convite Completo
+                </a>
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setShowLimitModal(false)}
+                className="flex-1"
+              >
+                Fechar
+              </Button>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </section>
