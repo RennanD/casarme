@@ -1,6 +1,7 @@
 import React, { Suspense } from "react"
 import type { Metadata } from "next"
 import "./globals.css"
+import { Bad_Script } from "next/font/google"
 import { Toaster } from "sonner"
 import GoogleTagManagerScripts from "@/src/lib/analytics"
 import { StructuredData } from "@/src/components/structured-data"
@@ -12,6 +13,12 @@ const playfair = {
 const inter = {
   variable: "--font-inter",
 }
+
+const script = Bad_Script({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-script",
+})
 
 export const metadata: Metadata = {
   title: "Criar Convite de Casamento Digital - CasarMe | Templates Elegantes",
@@ -93,7 +100,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`font-sans ${playfair.variable} ${inter.variable} antialiased`}>
+      <body className={`font-sans ${playfair.variable} ${inter.variable} ${script.variable} antialiased`}>
         <LayoutClient>{children}</LayoutClient>
       </body>
     </html>

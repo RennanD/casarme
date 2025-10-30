@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/src/components/ui/button"
-import { Menu, X, Heart } from "lucide-react"
+import { Menu, X, Heart, Users } from "lucide-react"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -54,6 +54,13 @@ export function Navbar() {
             >
               Por que escolher
             </button>
+            <Link
+              href="/convite-padrinhos"
+              className="flex items-center gap-2 text-[#3E3E3E] hover:text-[#D4A373] transition-colors"
+            >
+              <Users className="w-4 h-4" />
+              <span>Convite Padrinhos</span>
+            </Link>
           </div>
 
           {/* CTA Button - Desktop */}
@@ -95,6 +102,14 @@ export function Navbar() {
               >
                 Por que escolher
               </button>
+              <Link
+                href="/convite-padrinhos"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2 text-left text-[#3E3E3E] hover:text-[#D4A373] transition-colors py-2"
+              >
+                <Users className="w-4 h-4" />
+                <span>Convite Padrinhos</span>
+              </Link>
               <Link href="/criar" onClick={() => setIsOpen(false)}>
                 <Button className="w-full bg-[#D4A373] hover:bg-[#C4936B] text-white">Criar Meu Convite</Button>
               </Link>
