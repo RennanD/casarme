@@ -4,6 +4,7 @@ export async function GET() {
   const urls = [
     '',
     '/criar',
+    '/convite-padrinhos',
     '/exemplo/garden',
     '/exemplo/romantic',
     '/exemplo/modern',
