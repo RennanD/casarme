@@ -7,15 +7,15 @@ import Link from "next/link"
 import { Button } from "@/src/components/ui/button"
 
 export const metadata: Metadata = {
-  title: "Convite de Casamento para Padrinhos Grátis - Crie Online | CasarMe",
+  title: "Convite de Casamento para Padrinhos (Grátis) | Convite Padrinhos Online",
   description:
-    "Crie convites de casamento para padrinhos grátis! Modelos personalizados e emocionantes para convidar seus padrinhos de forma especial. Faça online em minutos.",
+    "Crie agora seu convite de casamento para padrinhos grátis. Convite para padrinhos de casamento online, fácil e 100% personalizável. Compartilhe em minutos!",
   keywords:
-    "convite de casamento padrinhos, convite padrinhos casamento, como convidar padrinhos de casamento, convite para ser padrinho, convite madrinha casamento, convite padrinhos grátis, modelo convite padrinhos",
+    "convite de casamento padrinhos, convite para padrinhos de casamento, convite padrinhos, convite de padrinhos de casamento, convite padrinhos casamento, convite padrinhos de casamento, convite de casamento para padrinhos, convite padrinhos grátis",
   openGraph: {
-    title: "Convite de Casamento para Padrinhos Grátis - Crie Online",
+    title: "Convite de Casamento para Padrinhos (Grátis) - Crie Online",
     description:
-      "Crie convites personalizados para convidar seus padrinhos de casamento de forma especial e emocionante. Grátis e online!",
+      "Convite para padrinhos de casamento grátis, online e personalizável. Crie, edite e compartilhe em minutos.",
     type: "website",
   },
 }
@@ -37,12 +37,12 @@ export default function ConvitePadrinhosPage() {
               </div>
 
               <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl text-[#3E3E3E] mb-6 text-balance">
-                Convite de Casamento para Padrinhos
+                Convite de Casamento para Padrinhos (Grátis)
               </h1>
 
               <p className="text-lg md:text-xl text-[#3E3E3E]/80 mb-8 text-pretty leading-relaxed max-w-3xl mx-auto">
-                Convide seus padrinhos de casamento de forma especial e emocionante! Crie convites personalizados grátis
-                com mensagens afetivas que vão tornar esse momento ainda mais memorável.
+                Convite para padrinhos de casamento gratuito: crie um convite personalizado, elegante e fácil de
+                compartilhar. 100% online e sem custo.
               </p>
 
               <div className="flex flex-wrap gap-6 justify-center text-sm text-[#3E3E3E]/70">
@@ -141,9 +141,67 @@ export default function ConvitePadrinhosPage() {
                     personalizar com suas mensagens e compartilhar sem nenhum custo.
                   </p>
                 </div>
+
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <h3 className="font-semibold text-lg text-[#3E3E3E] mb-2">
+                    Como enviar o convite de padrinhos de casamento?
+                  </h3>
+                  <p className="text-[#3E3E3E]/80 leading-relaxed">
+                    Após criar, baixe a imagem ou compartilhe o link diretamente por WhatsApp, e-mail ou redes sociais.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
+
+          {/* JSON-LD FAQ for rich results */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                mainEntity: [
+                  {
+                    '@type': 'Question',
+                    name: 'O que escrever no convite para padrinhos de casamento?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text:
+                        'Escreva uma mensagem sincera e afetiva, demonstrando carinho e explicando a importância de tê-los ao seu lado.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'Quando convidar os padrinhos de casamento?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text:
+                        'Geralmente de 6 a 12 meses antes da cerimônia, para que possam se organizar e participar dos preparativos.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'É grátis criar o convite para padrinhos?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text:
+                        'Sim. A criação é 100% gratuita e você pode personalizar e compartilhar sem custos.',
+                    },
+                  },
+                  {
+                    '@type': 'Question',
+                    name: 'Como enviar o convite de padrinhos de casamento?',
+                    acceptedAnswer: {
+                      '@type': 'Answer',
+                      text:
+                        'Baixe a imagem ou compartilhe o link pelo WhatsApp, e-mail ou redes sociais.',
+                    },
+                  },
+                ],
+              }),
+            }}
+          />
         </div>
       </main>
       <footer>
