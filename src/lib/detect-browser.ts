@@ -1,10 +1,21 @@
 export function detectBrowser(userAgent: string): string {
   const ua = userAgent.toLowerCase()
 
-  // Apps de redes sociais (verificar primeiro)
-  if (ua.includes('tiktok')) {
+  // Apps de redes sociais - VERIFICAR PRIMEIRO (antes de qualquer navegador)
+  // TikTok - verificar primeiro pois pode ter "chrome" no user-agent
+  // Verificar múltiplos padrões possíveis do TikTok
+  if (
+    ua.includes('tiktok') ||
+    ua.includes('musical_ly') ||
+    ua.includes('bytedance') ||
+    ua.includes('ttnet') ||
+    (ua.includes('mozilla') && ua.includes('mobile') && ua.includes('android') && !ua.includes('wv'))
+  ) {
+    // Se tem qualquer indicador de TikTok, retornar TikTok
+    // Mesmo que tenha "chrome" no user-agent, se tem "tiktok" é TikTok
     return "TikTok"
   }
+
   if (ua.includes('instagram')) {
     return "Instagram"
   }

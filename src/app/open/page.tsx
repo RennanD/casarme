@@ -11,7 +11,10 @@ export default function OpenPage() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const userAgent = navigator.userAgent
+      // Debug: log do user-agent para verificar
+      console.log("User-Agent:", userAgent)
       const browser = detectBrowser(userAgent)
+      console.log("Browser detectado:", browser)
       setBrowserName(browser)
       setShowContent(true)
     }
