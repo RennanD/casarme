@@ -17,7 +17,7 @@ model Invitation {
   venueName             String
   venueAddress          String
   welcomeMessage        String
-  coupleStory           String
+  coupleStory           String?
   groomStory            String?
   brideStory            String?
   musicUrl              String?

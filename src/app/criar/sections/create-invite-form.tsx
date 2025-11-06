@@ -85,8 +85,7 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
     weddingTime: "",
     venueName: "",
     venueAddress: "",
-    welcomeMessage: "",
-    coupleStory: "",
+    welcomeMessage: "É com imensa alegria que convidamos você para celebrar conosco o nosso casamento. Este é um momento muito especial em nossas vidas e não poderíamos imaginar compartilhá-lo sem a presença das pessoas que mais amamos. Sua presença será o maior presente que poderíamos receber! 💍✨",
     groomStory: "",
     brideStory: "",
     musicUrl: "",
@@ -461,20 +460,6 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: 
             />
           </div>
 
-          <div>
-            <Label htmlFor="coupleStory" className="text-[#3E3E3E] mb-2 block">
-              História do Casal
-            </Label>
-            <Textarea
-              id="coupleStory"
-              value={formData.coupleStory}
-              onChange={(e) => setFormData({ ...formData, coupleStory: e.target.value })}
-              placeholder="Nossa história começou em 2017..."
-              rows={6}
-              required
-              className="border-[#EDE0D4]"
-            />
-          </div>
         </Card>
 
         {/* Pro Features */}
