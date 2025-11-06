@@ -1,33 +1,61 @@
 export function detectBrowser(userAgent: string): string {
-  if (/tiktok/i.test(userAgent)) {
+  const ua = userAgent.toLowerCase()
+
+  // Apps de redes sociais (verificar primeiro)
+  if (ua.includes('tiktok')) {
     return "TikTok"
   }
-  if (/instagram/i.test(userAgent)) {
+  if (ua.includes('instagram')) {
     return "Instagram"
   }
-  if (/facebook/i.test(userAgent)) {
+  if (ua.includes('fban') || ua.includes('fbav') || ua.includes('fbsv')) {
     return "Facebook"
   }
-  if (/edg/i.test(userAgent)) {
+
+  // Navegadores específicos que podem ter "chrome" no user-agent
+  // Verificar Edge antes de Chrome (Edge tem "Edg" no user-agent)
+  if (ua.includes('edg') && !ua.includes('edgios') && !ua.includes('edga')) {
     return "Microsoft Edge"
   }
-  if (/chrome/i.test(userAgent) && !/edg/i.test(userAgent)) {
-    return "Google Chrome"
-  }
-  if (/safari/i.test(userAgent) && !/chrome/i.test(userAgent)) {
-    return "Safari"
-  }
-  if (/firefox/i.test(userAgent)) {
-    return "Mozilla Firefox"
-  }
-  if (/opera|opr/i.test(userAgent)) {
+
+  // Opera (verificar antes de Chrome)
+  if (ua.includes('opr') || ua.includes('opera')) {
     return "Opera"
   }
-  if (/samsungbrowser/i.test(userAgent)) {
+
+  // Samsung Internet
+  if (ua.includes('samsungbrowser')) {
     return "Samsung Internet"
   }
-  if (/ucbrowser/i.test(userAgent)) {
+
+  // UC Browser
+  if (ua.includes('ucbrowser') || ua.includes('uc browser')) {
     return "UC Browser"
+  }
+
+  // Firefox (não tem "chrome" no user-agent)
+  if (ua.includes('firefox') && !ua.includes('seamonkey')) {
+    return "Mozilla Firefox"
+  }
+
+  // Safari (tem "safari" mas não "chrome")
+  if (ua.includes('safari') && !ua.includes('chrome') && !ua.includes('chromium')) {
+    return "Safari"
+  }
+
+  // Chrome (tem "chrome" mas não é nenhum dos navegadores acima)
+  if (ua.includes('chrome') && !ua.includes('edg') && !ua.includes('opr')) {
+    return "Google Chrome"
+  }
+
+  // Brave (tem "brave" no user-agent)
+  if (ua.includes('brave')) {
+    return "Brave"
+  }
+
+  // Vivaldi
+  if (ua.includes('vivaldi')) {
+    return "Vivaldi"
   }
 
   return "Navegador Desconhecido"
