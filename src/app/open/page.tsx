@@ -2,40 +2,21 @@
 
 import { useEffect, useState } from "react"
 import { Heart } from "lucide-react"
-import { isTikTokBrowser } from "@/src/lib/is-tiktok"
 
 export default function OpenPage() {
-  const [isTikTok, setIsTikTok] = useState(false)
   const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
-    // Check if running on client side
-    if (typeof window === "undefined") return
+    // Fade in animation
+    setTimeout(() => setShowContent(true), 100)
 
-    const userAgent = navigator.userAgent
-    const isTikTokUser = isTikTokBrowser(userAgent)
+    // Redirect after 3 seconds
+    const redirectTimer = setTimeout(() => {
+      window.open("https://casarme.site", "_blank")
+    }, 1000)
 
-    if (isTikTokUser) {
-      setIsTikTok(true)
-      // Fade in animation
-      setTimeout(() => setShowContent(true), 100)
-
-      // Redirect after 3 seconds
-      const redirectTimer = setTimeout(() => {
-        window.location.href = "https://casarme.site"
-      }, 3000)
-
-      return () => clearTimeout(redirectTimer)
-    } else {
-      // Immediate redirect for non-TikTok browsers
-      window.location.href = "https://casarme.site"
-    }
+    return () => clearTimeout(redirectTimer)
   }, [])
-
-  // If not TikTok, don't render anything (will redirect immediately)
-  if (!isTikTok) {
-    return null
-  }
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center">
