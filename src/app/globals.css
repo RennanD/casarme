@@ -137,6 +137,58 @@
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Otimizações de performance */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Prevenir layout shift */
+  img[loading="lazy"] {
+    content-visibility: auto;
+  }
+  
+  /* Skip links para acessibilidade */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #D4A373;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+  }
+  
+  .skip-link:focus {
+    top: 0;
+  }
+  
+  /* Touch targets maiores para mobile */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Otimizações de performance */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Melhorar scroll em mobile */
+  html {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* Prevenir layout shift */
+  [data-next-image] {
+    content-visibility: auto;
+  }
 }
 
 /* Custom animations for Amore landing page */

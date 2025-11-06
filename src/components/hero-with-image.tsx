@@ -9,10 +9,14 @@ export function HeroWithImage() {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FFF8F0]" role="banner" aria-labelledby="hero-title">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
-        <img
+        <Image
           src="/romantic-couple-wedding-natural-light-soft-focus.jpg"
-          alt="Casal romântico em casamento"
-          className="w-full h-full object-cover opacity-30"
+          alt=""
+          fill
+          className="object-cover opacity-30"
+          priority
+          quality={75}
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#FFF8F0]/80 via-[#FFF8F0]/60 to-[#FFF8F0]" />
       </div>
@@ -50,6 +54,9 @@ export function HeroWithImage() {
                 width={700}
                 height={700}
                 priority
+                quality={85}
+                sizes="(max-width: 768px) 100vw, 700px"
+                loading="eager"
               />
             </figure>
           </aside>

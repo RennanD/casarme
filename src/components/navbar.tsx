@@ -9,11 +9,23 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+    try {
+      const element = document.getElementById(id)
+      if (element) {
+        // Fallback para browsers que não suportam smooth scroll
+        try {
+          element.scrollIntoView({ behavior: "smooth" })
+        } catch {
+          element.scrollIntoView()
+        }
+      }
+    } catch (error) {
+      console.error("Scroll error:", error)
+      // Fallback: usar hash
+      window.location.hash = id
+    } finally {
+      setIsOpen(false)
     }
-    setIsOpen(false)
   }
 
   return (

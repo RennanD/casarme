@@ -85,7 +85,15 @@ export function Templates() {
               >
                 <div className="p-4 sm:p-6 bg-gradient-to-b from-[#FAF3E0] to-white">
                   <figure className="aspect-[3/4] relative">
-                    <Image src={`${template.link}.png`} alt={`Preview do modelo ${template.name}`} fill className="object-cover" />
+                    <Image
+                      src={`${template.link}.png`}
+                      alt={`Preview do modelo ${template.name}`}
+                      fill
+                      className="object-cover"
+                      loading="lazy"
+                      quality={80}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                   </figure>
                 </div>
 
