@@ -26,6 +26,22 @@ export function AdminNavbar() {
             <span className="text-sm text-[#6B6B6B] ml-2">Admin</span>
           </Link>
 
+          {/* Navegação */}
+          <div className="flex items-center gap-4">
+            <Link
+              href="/admin"
+              className="text-[#3E3E3E] hover:text-[#D4A373] transition-colors text-sm font-medium"
+            >
+              Convites
+            </Link>
+            <Link
+              href="/admin/abandoned-cart"
+              className="text-[#3E3E3E] hover:text-[#D4A373] transition-colors text-sm font-medium"
+            >
+              Recuperação
+            </Link>
+          </div>
+
           {/* Botão Sair */}
           <Button
             onClick={handleSignOut}
