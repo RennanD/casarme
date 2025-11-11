@@ -19,6 +19,17 @@ export const createInvitationCheckoutSession = async ({
       throw new Error(`Template ${templateId} não encontrado`);
     }
 
+    // Validar que invitationId foi fornecido
+    if (!invitationId) {
+      throw new Error('invitationId é obrigatório para criar sessão de checkout');
+    }
+
+    console.log('Criando sessão de checkout com:', {
+      templateId,
+      customerEmail,
+      invitationId
+    });
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"], // Cartão e PIX
       mode: "payment", // Pagamento único (não recorrente)
@@ -32,9 +43,9 @@ export const createInvitationCheckoutSession = async ({
         },
       ],
       metadata: {
-        templateId,
-        customerEmail,
-        invitationId
+        templateId: String(templateId),
+        customerEmail: String(customerEmail),
+        invitationId: String(invitationId), // Garantir que é string
       },
       // Configurações específicas para PIX
       payment_method_options: {
@@ -44,8 +55,17 @@ export const createInvitationCheckoutSession = async ({
       },
     });
 
+    // Log para verificar se a sessão foi criada com os metadados corretos
+    console.log('✅ Sessão de checkout criada:', {
+      sessionId: session.id,
+      url: session.url,
+      metadata: session.metadata,
+      invitationId: session.metadata.invitationId
+    });
+
     return {
       url: session.url,
+      sessionId: session.id, // Retornar também o ID da sessão para debug
     };
   } catch (error) {
     console.error("Erro ao criar sessão de checkout:", error);
