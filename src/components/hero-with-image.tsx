@@ -2,6 +2,7 @@ import { Button } from "@/src/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
 
+
 export function HeroWithImage() {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FFF8F0]" role="banner" aria-labelledby="hero-title">
