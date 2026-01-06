@@ -3,8 +3,8 @@ import { FileText, Palette, Sparkles } from "lucide-react"
 const steps = [
   {
     icon: Palette,
-    title: "Escolha seu template favorito",
-    description: "Selecione entre 3 templates elegantes - Garden, Romântico ou Modern",
+    title: "Escolha seu modelo favorito",
+    description: "Selecione entre 3 modelos elegantes - Verde Oliva, Romântico ou Modern",
   },
   {
     icon: FileText,
@@ -20,7 +20,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="como-funciona" className="py-24 bg-white" aria-labelledby="how-it-works-title">
+    <section id="como-funciona" className="py-24 bg-[#FAF3E0]" aria-labelledby="how-it-works-title">
       <div className="container mx-auto px-4">
         <h2 id="how-it-works-title" className="font-serif text-3xl md:text-4xl font-bold text-center text-[#3E3E3E] mb-16">
           Como Criar seu Convite Digital em 3 Passos Simples

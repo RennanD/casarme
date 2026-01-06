@@ -7,7 +7,7 @@ const objections = [
   {
     problem: "Não tenho dinheiro para designer",
     problemDescription: "Designer custa R$ 500+ e demora semanas para entregar",
-    solution: "Por menos de R$ 20 e pronto em minutos. Sem espera, sem complicação!",
+    solution: "Por menos de R$ 30 e pronto em minutos. Sem espera, sem complicação!",
   },
   {
     problem: "Não sei usar Canva/Photoshop",
@@ -17,7 +17,7 @@ const objections = [
   {
     problem: "Não tenho tempo para criar",
     problemDescription: "Criar do zero leva horas e horas de trabalho",
-    solution: "Templates prontos, você só personaliza. Pronto em menos de 5 minutos!",
+                    solution: "Modelos prontos, você só personaliza. Pronto em menos de 5 minutos!",
   },
   {
     problem: "Não sei o que colocar no convite",
@@ -72,7 +72,7 @@ export function ObjectionBreaker() {
           <h3 className="font-serif text-2xl font-bold text-[#3E3E3E] mb-6">
             Pare de se preocupar com design. Deixe o CasarMe fazer isso por você!
           </h3>
-          <Link href="/criar" aria-label="Criar meu convite de casamento digital" className="touch-target">
+          <Link href="/#templates" aria-label="Ver modelos de convite de casamento digital" className="touch-target">
             <Button
               size="lg"
               className="bg-[#D4A373] hover:bg-[#C49363] text-white text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus-visible:focus-visible"

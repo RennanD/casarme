@@ -159,7 +159,7 @@ export function RomanticTemplate({
       )}
 
       {/* Hero Section with Floral Frame */}
-      <section id="home" className="pt-24 pb-16 px-4 relative">
+      <section id="home" className="pt-24 px-4 relative">
         {/* Top right floral decoration */}
         <div className="absolute top-0 right-0 w-64 h-64 opacity-30 pointer-events-none">
           <Image src="/watercolor-pink-roses-corner-decoration.jpg" alt="" width={400} height={400} className="w-full h-full object-contain" />
@@ -217,7 +217,7 @@ export function RomanticTemplate({
       </section>
 
       {/* Countdown Section */}
-      <section className="py-16 px-4 bg-gradient-to-b from-[#FFF8F3] to-[#FFE8E8]">
+      <section className="pb-16 px-4 bg-gradient-to-b from-[#FFF8F3] to-[#FFE8E8]">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="font-serif text-3xl text-[#3E3E3E] mb-8" style={{ fontFamily: "Playfair Display" }}>
             Contagem Regressiva
@@ -278,7 +278,7 @@ export function RomanticTemplate({
       )}
 
       {/* Welcome Section */}
-      <section id="boas-vindas" className="py-16 px-4">
+      <section id="boas-vindas" className="pb-16 px-4">
         <div className="container mx-auto max-w-3xl text-center">
           {/* Floral divider */}
           <div className="flex items-center justify-center mb-8">
@@ -300,7 +300,7 @@ export function RomanticTemplate({
       </section>
 
       {/* Couple Section */}
-      <section id="casal" className="py-16 px-4">
+      <section id="casal" className="pb-16 px-4">
         <div className="container mx-auto max-w-4xl">
           {/* Floral divider */}
           <div className="flex items-center justify-center mb-8">
@@ -310,7 +310,7 @@ export function RomanticTemplate({
               <circle cx="100" cy="20" r="4" fill="#E8B4B8" />
             </svg>
           </div>
-
+          {/* 
           <h2
             className="font-serif text-4xl text-[#3E3E3E] text-center mb-12"
             style={{ fontFamily: "Playfair Display" }}
@@ -323,7 +323,7 @@ export function RomanticTemplate({
               {data.coupleStory ||
                 "Nossa história começou de forma inesperada e se tornou a maior aventura das nossas vidas. Cada momento juntos nos trouxe até aqui, e agora queremos celebrar esse amor com todos vocês!"}
             </p>
-          </div>
+          </div> */}
 
           {/* Individual Photos and Stories */}
           <div className="grid md:grid-cols-2 gap-12 mb-12">
