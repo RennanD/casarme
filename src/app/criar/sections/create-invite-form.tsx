@@ -17,9 +17,9 @@ import { PhoneInputComponent } from "@/src/components/ui/phone-input"
 const templates = [
   {
     id: "garden",
-    name: "Verde Oliva",
+    name: "Garden",
     plan: "basic",
-    price: "R$ 26,90",
+    price: "R$ 16,50",
     color: "#8B9D7F",
     description: "Design botânico com tons de verde oliva",
     features: [
@@ -32,7 +32,7 @@ const templates = [
     id: "romantic",
     name: "Romântico",
     plan: "pro",
-    price: "R$ 37,90",
+    price: "R$ 26,90",
     color: "#E8B4B8",
     description: "Estilo romântico com flores e tons rosados",
     features: [
@@ -64,10 +64,9 @@ const templates = [
 interface CreateInviteFormProps {
   onEmailSubmit: (email: string, formData: any) => void
   selectedTemplateId?: string | null
-  hideTemplateSelection?: boolean
 }
 
-export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId, hideTemplateSelection = false }: CreateInviteFormProps) {
+export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId }: CreateInviteFormProps) {
 
   // Find the selected template or default to first one
   const getInitialTemplate = () => {
@@ -192,7 +191,6 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId, hi
 
       <form onSubmit={handleSubmit}>
         {/* Template Selection */}
-        {!hideTemplateSelection && (
         <Card className="p-8 bg-white border-none shadow-lg mb-8">
           <h2 className="font-serif text-2xl font-semibold text-[#3E3E3E] mb-6">Escolha seu Template</h2>
 
@@ -240,7 +238,6 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId, hi
             ))}
           </div>
         </Card>
-        )}
 
         {/* Basic Info */}
         <Card className="p-8 bg-white border-none shadow-lg mb-8">
@@ -465,26 +462,6 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId, hi
 
         </Card>
 
-        {/* WhatsApp Confirmation - Available for all models */}
-        <Card className="p-8 bg-white border-none shadow-lg mb-8">
-          <h2 className="font-serif text-2xl font-semibold text-[#3E3E3E] mb-6">Confirmação de Presença</h2>
-          <div className="mb-6">
-            <Label className="flex items-center gap-2 text-[#3E3E3E] mb-2 font-medium">
-              <MessageCircle className="w-4 h-4" />
-              WhatsApp para Confirmações
-            </Label>
-            <PhoneInputComponent
-              value={formData.whatsapp}
-              onChange={(value) => setFormData({ ...formData, whatsapp: value })}
-              placeholder="Digite seu WhatsApp"
-              className="w-full"
-            />
-            <p className="text-sm text-[#6B6B6B] mt-1">
-              Os convidados poderão confirmar presença via WhatsApp neste número. Facilite o fechamento do seu buffet!
-            </p>
-          </div>
-        </Card>
-
         {/* Pro Features */}
         {isPro && (
           <>
@@ -602,6 +579,23 @@ export default function CreateInviteForm({ onEmailSubmit, selectedTemplateId, hi
                     ))}
                   </div>
                 )}
+              </div>
+
+              {/* WhatsApp Confirmation */}
+              <div className="mb-6">
+                <Label className="flex items-center gap-2 text-[#3E3E3E] mb-2 font-medium">
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp para Confirmações
+                </Label>
+                <PhoneInputComponent
+                  value={formData.whatsapp}
+                  onChange={(value) => setFormData({ ...formData, whatsapp: value })}
+                  placeholder="Digite seu WhatsApp"
+                  className="w-full"
+                />
+                <p className="text-sm text-[#6B6B6B] mt-1">
+                  Os convidados poderão confirmar presença via WhatsApp neste número
+                </p>
               </div>
 
               {/* Music */}
