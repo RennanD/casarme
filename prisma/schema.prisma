@@ -72,7 +72,6 @@ model User {
   sessions      Session[]
 
   @@map("users")
-  @@ignore
 }
 
 model Account {
@@ -92,7 +91,6 @@ model Account {
 
   @@unique([provider, providerAccountId])
   @@map("accounts")
-  @@ignore
 }
 
 model Session {
@@ -103,7 +101,6 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
-  @@ignore
 }
 
 model VerificationToken {
@@ -113,5 +110,4 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
-  @@ignore
 }
