@@ -4,11 +4,11 @@ import Link from "next/link"
 import { Button } from "@/src/components/ui/button"
 
 export const metadata: Metadata = {
-  title: "Exemplo de Convite Verde Oliva - CasarMe",
-  description: "Veja como fica um convite de casamento Verde Oliva criado com o CasarMe. Design botânico elegante para o seu grande dia.",
+  title: "Exemplo de Convite Garden - CasarMe",
+  description: "Veja como fica um convite de casamento garden criado com o CasarMe. Design clássico e elegante para o seu grande dia.",
   openGraph: {
-    title: "Exemplo de Convite Verde Oliva - CasarMe",
-    description: "Veja como fica um convite de casamento Verde Oliva criado com o CasarMe. Design botânico elegante para o seu grande dia.",
+    title: "Exemplo de Convite Garden - CasarMe",
+    description: "Veja como fica um convite de casamento garden criado com o CasarMe. Design clássico e elegante para o seu grande dia.",
     type: "website",
   },
 }
@@ -36,8 +36,8 @@ export default function GardenExamplePage() {
             ← Voltar ao CasarMe
           </Link>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-600">Modelo Verde Oliva</span>
-            <Link href="/criar?template=garden" aria-label="Criar convite com modelo Verde Oliva" className="touch-target">
+            <span className="text-sm text-gray-600">Modelo Garden</span>
+            <Link href="/criar?template=garden" aria-label="Criar convite com modelo Garden" className="touch-target">
               <Button className="bg-[#8B9D7F] hover:bg-[#6B7A5F] text-white focus-visible:focus-visible" type="button">
                 Criar Meu Convite
               </Button>

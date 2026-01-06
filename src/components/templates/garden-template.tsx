@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { Button } from "@/src/components/ui/button"
-import { MapPin, Calendar, Clock, Heart, MessageCircle } from "lucide-react"
+import { MapPin, Calendar, Clock, Heart } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -18,7 +18,6 @@ interface GardenTemplateProps {
     venueAddress: string
     welcomeMessage: string
     coupleStory: string
-    whatsapp?: string
   }
   heroPhoto?: string | null
 }
@@ -55,30 +54,13 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
     return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })
   }
 
-  const handleConfirmPresence = () => {
-    if (!data.whatsapp) {
-      alert('WhatsApp não configurado para este convite.')
-      return
-    }
-
-    // Mensagem simples para confirmação
-    const message = `Olá! Será uma honra estar presente nessa data tão especial! 💕`
-
-    // Limpar o número do WhatsApp (remover caracteres não numéricos)
-    const cleanWhatsapp = data.whatsapp.replace(/\D/g, '')
-
-    // Abrir WhatsApp com a mensagem
-    const whatsappUrl = `https://wa.me/${cleanWhatsapp}?text=${encodeURIComponent(message)}`
-    window.open(whatsappUrl, '_blank')
-  }
-
 
 
   return (
     <div className="min-h-screen bg-[#FAF3E0]">
 
       {/* Hero Section */}
-      <section id="home" className="pt-24 px-4">
+      <section id="home" className="pt-24 pb-16 px-4">
         <div className="container mx-auto max-w-2xl text-center">
           <div className="relative inline-block mb-8">
             {/* Decorative frame */}
@@ -141,7 +123,7 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
       </section>
 
       {/* Welcome Section */}
-      <section id="boas-vindas" className="pb-16 px-4">
+      <section id="boas-vindas" className="py-16 px-4">
         <div className="container mx-auto max-w-3xl text-center">
           {/* Olive branch divider */}
           <div className="flex items-center justify-center mb-8">
@@ -188,7 +170,7 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
             <div className="h-px bg-[#8B9D7F] w-20" />
           </div>
 
-          {/* <h2
+          <h2
             className="font-serif text-4xl text-[#3E3E3E] text-center mb-12"
             style={{ fontFamily: "Playfair Display" }}
           >
@@ -200,7 +182,7 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
               {data.coupleStory ||
                 "Nossa história começou de forma inesperada e se tornou a maior aventura das nossas vidas. Cada momento juntos nos trouxe até aqui, e agora queremos celebrar esse amor com todos vocês!"}
             </p>
-          </div> */}
+          </div>
 
           <div className="text-center">
             <p className="font-serif text-2xl text-[#8B9D7F] italic">
@@ -278,31 +260,6 @@ export function GardenTemplate({ data, heroPhoto }: GardenTemplateProps) {
         </div>
       </section>
 
-      {/* RSVP Section */}
-      <section id="confirmar" className="py-16 px-4 bg-[#8B9D7F]">
-        <div className="container mx-auto max-w-2xl">
-          <h2
-            className="font-serif text-4xl text-white text-center mb-8"
-            style={{ fontFamily: "Playfair Display" }}
-          >
-            Confirme sua Presença
-          </h2>
-          <p className="text-center text-white/90 mb-8">
-            Sua presença é muito importante para nós! Clique no botão abaixo para confirmar via WhatsApp.
-          </p>
-
-          <div className="flex justify-center">
-            <Button
-              onClick={handleConfirmPresence}
-              size="lg"
-              className="bg-white text-[#8B9D7F] hover:bg-[#FAF3E0] px-12 flex items-center gap-2"
-            >
-              <MessageCircle className="w-5 h-5" />
-              Confirmar Presença via WhatsApp
-            </Button>
-          </div>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="py-8 bg-[#8B9D7F] text-white text-center">

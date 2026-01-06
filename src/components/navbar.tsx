@@ -58,7 +58,7 @@ export function Navbar() {
               onClick={() => scrollToSection("templates")}
               className="text-[#3E3E3E] hover:text-[#D4A373] transition-colors"
             >
-              Modelos
+              Templates
             </button>
             <button
               onClick={() => scrollToSection("por-que-escolher")}
@@ -76,7 +76,7 @@ export function Navbar() {
           </div>
 
           {/* CTA Button - Desktop */}
-          <Link href="/#templates" className="hidden md:block">
+          <Link href="/criar" className="hidden md:block">
             <Button className="bg-[#D4A373] hover:bg-[#C4936B] text-white">Criar Meu Convite</Button>
           </Link>
 
@@ -106,7 +106,7 @@ export function Navbar() {
                 onClick={() => scrollToSection("templates")}
                 className="text-left text-[#3E3E3E] hover:text-[#D4A373] transition-colors py-2"
               >
-                Modelos
+                Templates
               </button>
               <button
                 onClick={() => scrollToSection("por-que-escolher")}
@@ -122,7 +122,7 @@ export function Navbar() {
                 <Users className="w-4 h-4" />
                 <span>Convite Padrinhos</span>
               </Link>
-              <Link href="/#templates" onClick={() => setIsOpen(false)}>
+              <Link href="/criar" onClick={() => setIsOpen(false)}>
                 <Button className="w-full bg-[#D4A373] hover:bg-[#C4936B] text-white">Criar Meu Convite</Button>
               </Link>
             </div>

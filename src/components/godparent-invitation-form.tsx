@@ -21,7 +21,7 @@ import {
 const templates = [
   {
     id: "garden",
-    name: "Verde Oliva",
+    name: "Garden",
     preview: "/godparent/garden.jpg",
   },
   {

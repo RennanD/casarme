@@ -3,7 +3,6 @@ import { HeroWithImage } from "@/src/components/hero-with-image"
 import { ObjectionBreaker } from "@/src/components/objection-breaker"
 import { HowItWorks } from "@/src/components/how-it-works"
 import { Templates } from "@/src/components/templates"
-import { WhatsAppConfirmation } from "@/src/components/whatsapp-confirmation"
 import { WhyChoose } from "@/src/components/why-choose"
 import { Testimonials } from "@/src/components/testimonials"
 import { FinalCTA } from "@/src/components/final-cta"
@@ -12,12 +11,12 @@ import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Convite de Casamento Digital - Crie em 3 Cliques | CasarMe",
-  description: "Crie seu convite de casamento digital personalizado em 3 cliques! Modelos elegantes, mapa interativo, confirmação WhatsApp.",
-  keywords: "convite de casamento digital, convite online casamento, criar convite digital, convite personalizado casamento, convite digital barato, modelos convite casamento, convite casamento 3 cliques, convite digital menos 30 reais",
+  description: "Crie seu convite de casamento digital personalizado em 3 cliques! Templates elegantes, mapa interativo, confirmação WhatsApp.",
+  keywords: "convite de casamento digital, convite online casamento, criar convite digital, convite personalizado casamento, convite digital barato, templates convite casamento, convite casamento 3 cliques, convite digital menos 20 reais",
   twitter: {
     card: "summary_large_image",
-    title: "Convite de Casamento Digital - Crie em 3 Cliques | Por menos de R$ 30",
-    description: "Crie seu convite de casamento digital personalizado em 3 cliques! Modelos elegantes, mapa interativo, confirmação WhatsApp. Por menos de R$ 30 - Sem mensalidade.",
+    title: "Convite de Casamento Digital - Crie em 3 Cliques | Por menos de R$ 20",
+    description: "Crie seu convite de casamento digital personalizado em 3 cliques! Templates elegantes, mapa interativo, confirmação WhatsApp. Por menos de R$ 20 - Sem mensalidade.",
     images: ["/opengraph-image"],
   },
 }
@@ -40,9 +39,8 @@ export default function Home() {
         <div className="pt-16">
           <HeroWithImage />
           <ObjectionBreaker />
-          <Templates />
           <HowItWorks />
-          <WhatsAppConfirmation />
+          <Templates />
           <WhyChoose />
           <Testimonials />
           <FinalCTA />
