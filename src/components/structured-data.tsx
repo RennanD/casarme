@@ -9,9 +9,9 @@ export function StructuredData() {
     "operatingSystem": "Web Browser",
     "offers": {
       "@type": "Offer",
-      "price": "16.50",
+      "price": "26.90",
       "priceCurrency": "BRL",
-      "description": "Convite digital por menos de R$ 20"
+      "description": "Convite digital por menos de R$ 30"
     },
     "aggregateRating": {
       "@type": "AggregateRating",

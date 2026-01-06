@@ -3,25 +3,17 @@
 import { Card } from "@/src/components/ui/card"
 import { Button } from "@/src/components/ui/button"
 import Link from "next/link"
-import { TemplatePreview } from "./template-preview"
-import { Check } from "lucide-react"
 import Image from "next/image"
 
 const templates = [
   {
     id: "garden",
-    name: "Garden",
+    name: "Verde Oliva",
     description: "Template de convite de casamento botânico com elegância natural e tons de verde oliva",
     variant: "garden" as const,
     plan: "Básico",
-    price: "R$ 16,50",
-    link: "/exemplo/garden",
-    features: [
-      "Design botânico elegante para convite digital",
-      "1 foto de capa personalizada",
-      "Localização interativa no mapa",
-      "Compartilhamento ilimitado do convite",
-    ],
+    price: "R$ 26,90",
+    image: "/images/thumbs/garden/01.png",
   },
   {
     id: "romantic",
@@ -29,18 +21,8 @@ const templates = [
     description: "Modelo de convite romântico com flores, galeria de fotos e música de fundo",
     variant: "romantico" as const,
     plan: "Pro",
-    price: "R$ 26,90",
-    link: "/exemplo/romantic",
-    features: [
-      "Design romântico com flores para convite digital",
-      "Fotos individuais do casal",
-      "Galeria com até 6 fotos do casal",
-      "História do casal personalizada",
-      "Música de fundo (YouTube)",
-      "Contagem regressiva até o casamento",
-      "Localização interativa no mapa",
-      "Confirmação de presença via WhatsApp",
-    ],
+    price: "R$ 37,90",
+    image: "/images/thumbs/romantico/01.png",
   },
   // Template moderno temporariamente oculto para MVP
   // {
@@ -67,15 +49,15 @@ const templates = [
 
 export function Templates() {
   return (
-    <section id="templates" className="py-16 sm:py-24 bg-[#FAF3E0]" aria-labelledby="templates-title">
+    <section id="templates" className="pt-8 pb-16 sm:pt-12 sm:pb-24 bg-white" aria-labelledby="templates-title">
       <div className="container mx-auto px-4">
         <h2 id="templates-title" className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-center text-[#3E3E3E] mb-3 sm:mb-4">
-          Templates de Convite de Casamento Digital
+          Modelos de Convite de Casamento Digital
         </h2>
         <p className="text-center text-[#6B6B6B] text-base sm:text-lg mb-12 sm:mb-16 max-w-2xl mx-auto leading-relaxed px-4">
-          Escolha o modelo de convite digital perfeito para seu casamento. Templates personalizáveis com recursos exclusivos para seu grande dia.
+          Escolha o modelo de convite digital perfeito para seu casamento. Modelos personalizáveis com recursos exclusivos para seu grande dia.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto" role="list" aria-label="Modelos de convite disponíveis">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 max-w-5xl mx-auto" role="list" aria-label="Modelos de convite disponíveis">
           {templates.map((template, index) => (
             <article key={index} role="listitem">
               <Card
@@ -83,31 +65,31 @@ export function Templates() {
                   }`}
                 style={{ animationDelay: `${index * 150}ms` }}
               >
-                <div className="p-4 sm:p-6 bg-gradient-to-b from-[#FAF3E0] to-white">
-                  <figure className="aspect-[3/4] relative">
+                <div className="p-2 sm:p-3 bg-gradient-to-b from-[#FAF3E0] to-white">
+                  <figure className="aspect-[9/16] relative">
                     <Image
-                      src={`${template.link}.png`}
+                      src={template.image}
                       alt={`Preview do modelo ${template.name}`}
                       fill
-                      className="object-cover"
+                      className="object-cover rounded"
                       loading="lazy"
-                      quality={80}
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      quality={75}
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   </figure>
                 </div>
 
-                <div className="p-4 sm:p-6">
-                  <header className="flex items-center justify-between mb-2">
-                    <h3 className="font-serif text-lg sm:text-xl font-semibold text-[#3E3E3E]">{template.name}</h3>
-                    <div className="flex items-center gap-2">
+                <div className="p-3 sm:p-4">
+                  <header className="flex items-center justify-between mb-1.5">
+                    <h3 className="font-serif text-base sm:text-lg font-semibold text-[#3E3E3E]">{template.name}</h3>
+                    <div className="flex items-center gap-1.5">
                       {template.plan === "Pro" && (
-                        <span className="text-xs px-2 py-1 rounded-full bg-gradient-to-r from-[#D4A373] to-[#C49363] text-white font-semibold">
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-gradient-to-r from-[#D4A373] to-[#C49363] text-white font-semibold">
                           Mais Escolhido
                         </span>
                       )}
                       <span
-                        className={`text-xs px-2 py-1 rounded-full ${template.plan === "Pro" ? "bg-[#D4A373] text-white" : "bg-[#8B9D7F] text-white"
+                        className={`text-[10px] px-1.5 py-0.5 rounded-full ${template.plan === "Pro" ? "bg-[#D4A373] text-white" : "bg-[#8B9D7F] text-white"
                           }`}
                       >
                         {template.plan}
@@ -115,46 +97,24 @@ export function Templates() {
                     </div>
                   </header>
 
-                  <div className="mb-3">
-                    <span className="text-2xl sm:text-3xl font-bold text-[#D4A373]">{template.price}</span>
+                  <div className="mb-2">
+                    <span className="text-xl sm:text-2xl font-bold text-[#D4A373]">{template.price}</span>
                   </div>
 
-                  <p className="text-[#6B6B6B] text-sm sm:text-base mb-4 leading-relaxed">{template.description}</p>
+                  <p className="text-[#6B6B6B] text-xs sm:text-sm mb-4 leading-relaxed line-clamp-2">{template.description}</p>
 
-                  <ul className="space-y-2 mb-6" role="list" aria-label={`Recursos do modelo ${template.name}`}>
-                    {template.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-[#6B6B6B]">
-                        <Check className="w-4 h-4 text-[#D4A373] flex-shrink-0 mt-0.5" aria-hidden="true" />
-                        <span className="leading-relaxed">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex flex-col gap-2">
-                    <Link href={template.link} aria-label={`Ver exemplo do modelo ${template.name}`} className="touch-target">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="w-full border-[#D4A373] text-[#D4A373] hover:bg-[#D4A373] hover:text-white transition-colors bg-transparent focus-visible:focus-visible"
-                        type="button"
-                      >
-                        Ver exemplo interativo
-                      </Button>
-                    </Link>
-
-                    <Link href={`/criar?template=${template.id}`} aria-label={`Escolher modelo ${template.name}`} className="touch-target">
-                      <Button
-                        size="sm"
-                        className={`w-full transition-colors focus-visible:focus-visible ${template.plan === "Pro"
-                          ? "bg-[#D4A373] text-white hover:bg-[#C49363]"
-                          : "bg-[#8B9D7F] text-white hover:bg-[#7A8C70]"
-                          }`}
-                        type="button"
-                      >
-                        Escolher este modelo
-                      </Button>
-                    </Link>
-                  </div>
+                  <Link href={`/modelo/${template.id}`} aria-label={`Escolher modelo ${template.name}`} className="touch-target">
+                    <Button
+                      size="sm"
+                      className={`w-full text-xs sm:text-sm py-2 transition-colors focus-visible:focus-visible ${template.plan === "Pro"
+                        ? "bg-[#D4A373] text-white hover:bg-[#C49363]"
+                        : "bg-[#8B9D7F] text-white hover:bg-[#7A8C70]"
+                        }`}
+                      type="button"
+                    >
+                      Escolher este modelo
+                    </Button>
+                  </Link>
                 </div>
               </Card>
             </article>

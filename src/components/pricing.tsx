@@ -7,7 +7,7 @@ import { Check } from "lucide-react"
 const plans = [
   {
     name: "Plano Simples",
-    price: "R$ 16,50",
+    price: "R$ 26,90",
     features: [
       "1 template elegante",
       "Personalização básica",
@@ -20,7 +20,7 @@ const plans = [
   },
   {
     name: "Plano Pro",
-    price: "R$ 26,90",
+    price: "R$ 37,90",
     features: [
       "Todos os templates exclusivos",
       "Personalização completa",

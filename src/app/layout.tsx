@@ -36,7 +36,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Criar Convite de Casamento Digital - CasarMe | Templates Elegantes",
   description:
-    "Crie seu convite de casamento digital personalizado em 3 cliques! Templates elegantes, mapa interativo, confirmação WhatsApp. Por menos de R$ 20 - Sem mensalidade.",
+    "Crie seu convite de casamento digital personalizado em 3 cliques! Templates elegantes, mapa interativo, confirmação WhatsApp. Por menos de R$ 30 - Sem mensalidade.",
   keywords: [
     "criar convite de casamento",
     "convite de casamento digital",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     "convite casamento personalizado",
     "convite digital barato",
     "convite casamento 3 cliques",
-    "convite digital menos 20 reais",
+    "convite digital menos 30 reais",
     "criar convite digital",
     "convite online casamento",
     "convite personalizado casamento"

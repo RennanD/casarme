@@ -4,11 +4,11 @@ const features = [
   {
     icon: Sparkles,
     title: "Criação em 3 cliques - Sem complicação",
-    description: "Não precisa ser designer. Templates prontos, você só personaliza. Sem curso, sem frustração!",
+    description: "Não precisa ser designer. Modelos prontos, você só personaliza. Sem curso, sem frustração!",
   },
   {
     icon: DollarSign,
-    title: "Por menos de R$ 20 - Mais barato que impresso",
+    title: "Por menos de R$ 30 - Mais barato que impresso",
     description: "Sem mensalidade, pague uma vez só. Mais econômico que convites tradicionais e muito mais funcional",
   },
   {
