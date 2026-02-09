@@ -26,10 +26,10 @@ export function HeroWithImage() {
           {/* Text Content */}
           <article className="text-center lg:text-left animate-fade-in">
             <h1 id="hero-title" className="font-serif text-3xl md:text-5xl lg:text-5xl font-bold text-[#3E3E3E] mb-6 animate-slide-up text-balance">
-              Convite de casamento digital interativo, rápido e sem dor de cabeça
+              Seu Convite Digital Interativo Pronto em 5 Minutos
             </h1>
             <p className="text-lg md:text-xl text-[#6B6B6B] mb-12 max-w-3xl mx-auto lg:mx-0 animate-slide-up [animation-delay:200ms] text-pretty">
-              Crie seu convite em minutos e receba um link para enviar aos convidados. Simples, com confimação de presença elegante e sem depender de designer.
+              Sem Canva, sem designers caros e sem complicação. Escolha um dos nossos modelos de luxo, preencha os dados e receba seu link interativo instantaneamente logo após o pagamento.
             </p>
             <div className="animate-slide-up [animation-delay:400ms]">
               <Link href="/#templates" aria-label="Ver modelos de convite de casamento digital" className="touch-target">

@@ -3,18 +3,18 @@ import { FileText, Palette, Sparkles } from "lucide-react"
 const steps = [
   {
     icon: Palette,
-    title: "Escolha seu modelo favorito",
-    description: "Selecione entre 3 modelos elegantes - Verde Oliva, Romântico ou Modern",
+    title: "Escolha seu modelo de luxo",
+    description: "Selecione entre nossos designs interativos premium focados em experiência mobile.",
   },
   {
     icon: FileText,
-    title: "Preencha os dados do casamento",
-    description: "Adicione fotos e informações (2 minutos) - Te guiamos passo a passo",
+    title: "Preencha seus dados em 2 minutos",
+    description: "Nós guiamos você passo a passo. Sem necessidade de habilidades em design ou ferramentas.",
   },
   {
     icon: Sparkles,
-    title: "Receba seu link personalizado",
-    description: "Convite pronto instantaneamente com mapa interativo e confirmação WhatsApp",
+    title: "Receba seu link na hora",
+    description: "Logo após o pagamento, seu convite interativo está pronto para ser enviado instantaneamente.",
   },
 ]
 

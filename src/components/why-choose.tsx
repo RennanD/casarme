@@ -4,22 +4,22 @@ const features = [
   {
     icon: Sparkles,
     title: "Criação em 3 cliques - Sem complicação",
-    description: "Não precisa ser designer. Modelos prontos, você só personaliza. Sem curso, sem frustração!",
+    description: "Esqueça o Canva ou designers caros. Escolha um modelo de luxo, preencha os dados e pronto em 5 minutos.",
   },
   {
     icon: DollarSign,
-    title: "Por menos de R$ 30 - Mais barato que impresso",
-    description: "Sem mensalidade, pague uma vez só. Mais econômico que convites tradicionais e muito mais funcional",
+    title: "Preço Justo - Recebimento Imediato",
+    description: "Sem mensalidade, pague uma vez e receba seu link na hora. Mais barato que convites tradicionais e muito mais funcional.",
   },
   {
     icon: MapPin,
-    title: "MAPA INTERATIVO incluído - Seus convidados encontram fácil",
-    description: "Botão direto para abrir o local no Google Maps. Seus convidados chegam sem erro",
+    title: "MAPA INTERATIVO - Seus convidados não se perdem",
+    description: "Botão direto para abrir o local no Google Maps ou Waze. Experiência premium para seus convidados.",
   },
   {
     icon: Heart,
-    title: "Confirmação via WhatsApp - Organize sua lista automaticamente",
-    description: "Seus convidados confirmam presença diretamente no convite. Lista organizada automaticamente",
+    title: "Confirmação via WhatsApp - Lista Automática",
+    description: "Foco total na facilidade: seus convidados confirmam com um clique e você organiza sua lista sem esforço.",
   },
 ]
 

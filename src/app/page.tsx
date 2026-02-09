@@ -11,13 +11,13 @@ import { Footer } from "@/src/components/footer"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Convite de casamento digital interativo, rápido e sem dor de cabeça | CasarMe",
-  description: "Crie seu convite em minutos e receba um link para enviar aos convidados. Simples, com confimação de presença elegante e sem depender de designer.",
-  keywords: "convite de casamento digital, convite online casamento, criar convite digital, convite personalizado casamento, convite digital barato, modelos convite casamento, convite casamento 3 cliques, convite digital menos 30 reais",
+  title: "Convite de Casamento Digital Interativo | Pronto em 5 Minutos",
+  description: "Crie seu convite de casamento digital premium em menos de 5 minutos. Sem Canva, sem designers e sem mensalidade. Link interativo com RSVP via WhatsApp e Mapa.",
+  keywords: "convite de casamento digital, convite interativo casamento, criar convite online, convite digital whatsapp, rsvp whatsapp casamento, convite de casamento barato e rápido, convite digital sem canva, convite luxo digital",
   twitter: {
     card: "summary_large_image",
-    title: "Convite de casamento digital interativo, rápido e sem dor de cabeça | Por menos de R$ 30",
-    description: "Crie seu convite em minutos e receba um link para enviar aos convidados. Simples, com confimação de presença elegante e sem depender de designer. Por menos de R$ 30 - Sem mensalidade.",
+    title: "Convite de Casamento Digital Interativo | Pronto em 5 Minutos",
+    description: "Crie agora seu convite interativo. Rápido, fácil e profissional. Por menos de R$ 30 - Pagamento Único.",
     images: ["/opengraph-image"],
   },
 }
