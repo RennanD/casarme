@@ -5,6 +5,7 @@ import { Eye, Copy, Edit } from "lucide-react"
 import { prisma } from "@/src/lib/prisma"
 import InvitationView from "./invitation-view"
 import { GoldenTemplate } from "@/src/components/templates/golden-template/golden-template"
+import { PhoneMockup } from "@/src/components/ui/phone-mockup"
 
 interface Invitation {
   id: string
@@ -85,12 +86,10 @@ export default async function InvitationPage({ params, searchParams }: PageProps
   }
 
 
-  console.log(`type`, invitation)
-
   // Renderizar o modelo correto baseado no tipo
   if (invitation.template === 'golden') {
     return (
-      <div>
+      <div className="bg-black lg:border-2 overflow-hidden border-[#D4A373]/90 rounded-md lg:max-w-xl mx-auto">
         <GoldenTemplate
           brideName={invitation.brideName}
           groomName={invitation.groomName}
