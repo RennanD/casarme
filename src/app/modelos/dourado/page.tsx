@@ -6,6 +6,8 @@ import Image from "next/image"
 
 import goldenTemplateImage from "@/src/assets/dourado-thumb.png"
 import { Navbar } from "@/src/components/navbar"
+import { GoldenTemplateDialog } from "@/src/components/golden-template-dialog"
+
 
 export const metadata = {
   title: "Convite de Casamento Aquarela Casal - Modelo Dourado | Casarme",
@@ -16,7 +18,7 @@ export const metadata = {
 
 export default function GoldenTemplatePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="bg-[#FAF3E0]/20">
 
       <header>
         <Navbar />
@@ -83,12 +85,13 @@ export default function GoldenTemplatePage() {
 
       {/* CTA Button */}
       <div className="max-w-4xl mx-auto px-4 mb-12 text-center">
-        <Button
-
-          className="bg-[#D4A373] hover:bg-[#C49363] text-white text-lg px-10 py-7 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-semibold whitespace-nowrap"
-        >
-          Criar meu convite de casamento
-        </Button>
+        <GoldenTemplateDialog>
+          <Button
+            className="bg-[#D4A373] hover:bg-[#C49363] text-white text-lg px-10 py-7 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-semibold whitespace-nowrap"
+          >
+            Criar meu convite de casamento
+          </Button>
+        </GoldenTemplateDialog>
       </div>
 
       {/* Product Information */}
@@ -132,11 +135,13 @@ export default function GoldenTemplatePage() {
                 </div>
               </div>
 
-              <Button
-                className="bg-[#D4A373] hover:bg-[#C49363] text-white text-lg px-10 py-7 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-semibold whitespace-nowrap"
-              >
-                Criar Convite
-              </Button>
+              <GoldenTemplateDialog>
+                <Button
+                  className="bg-[#D4A373] hover:bg-[#C49363] text-white text-lg px-10 py-7 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-semibold whitespace-nowrap"
+                >
+                  Criar Convite
+                </Button>
+              </GoldenTemplateDialog>
             </div>
           </div>
 
