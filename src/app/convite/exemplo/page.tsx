@@ -76,7 +76,6 @@ export default function ExampleInvitationPage() {
       try {
         await navigator.share(shareData)
       } catch (err) {
-        console.log("Error sharing:", err)
       }
     } else {
       navigator.clipboard.writeText(window.location.href)

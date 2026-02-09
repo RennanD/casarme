@@ -1,6 +1,6 @@
 import { GoldenTemplate } from "@/src/components/templates/golden-template/golden-template"
 import { Button } from "@/components/ui/button"
-import { MapPin, MessageCircle, Music, Zap, CreditCard } from "lucide-react"
+import { MapPin, MessageCircle, Music, Zap, CreditCard, Heart } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -20,9 +20,20 @@ export default function GoldenTemplatePage() {
   return (
     <div className="bg-[#FAF3E0]/20">
 
-      <header>
-        <Navbar />
-      </header>
+      <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-50">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-4">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2">
+              <Heart className="w-6 h-6 text-[#D4A373] fill-current" />
+              <span className="font-serif text-2xl text-[#3E3E3E]" style={{ fontFamily: "Playfair Display" }}>
+                CasarMe
+              </span>
+            </Link>
+
+          </div>
+        </div>
+      </nav>
 
       {/* Header Section */}
       <div className="max-w-4xl mx-auto px-4 py-12 pt-32 text-center">

@@ -4,6 +4,7 @@ import { Card } from "@/src/components/ui/card"
 import { Eye, Copy, Edit } from "lucide-react"
 import { prisma } from "@/src/lib/prisma"
 import InvitationView from "./invitation-view"
+import { GoldenTemplate } from "@/src/components/templates/golden-template/golden-template"
 
 interface Invitation {
   id: string
@@ -21,6 +22,7 @@ interface Invitation {
   musicUrl?: string
   whatsapp?: string
   template: string
+  inviteType: string
   email: string
   isActive: boolean
   images: Array<{
@@ -82,54 +84,26 @@ export default async function InvitationPage({ params, searchParams }: PageProps
     whatsapp: invitation.whatsapp || undefined
   }
 
-  // Se não for modo owner, mostrar a visualização pública
-  if (mode !== 'owner') {
-    return <InvitationView invitation={formattedInvitation} />
+
+  console.log(`type`, invitation)
+
+  // Renderizar o modelo correto baseado no tipo
+  if (invitation.template === 'golden') {
+    return (
+      <div>
+        <GoldenTemplate
+          brideName={invitation.brideName}
+          groomName={invitation.groomName}
+          date={formattedInvitation.weddingDate}
+          address={invitation.venueAddress}
+          musicUrl={invitation.musicUrl || undefined}
+          whatsappNumber={invitation.whatsapp || ""}
+        />
+      </div>
+    )
   }
 
-  // Modo owner - mostrar controles de administração
-  return (
-    <div className="min-h-screen bg-[#FAF3E0]">
-      {/* Botões de ação flutuantes */}
-      <div className="fixed top-4 right-4 z-50 flex gap-2">
-        <Button
-          asChild
-          variant="outline"
-          size="sm"
-          className="bg-white/90 backdrop-blur-sm"
-        >
-          <a href={`/convite/${slug}`}>
-            <Eye className="w-4 h-4 mr-2" />
-            Visualizar
-          </a>
-        </Button>
-        <Button
-          asChild
-          variant="outline"
-          size="sm"
-          className="bg-white/90 backdrop-blur-sm"
-        >
-          <a href={`/convite/${slug}`}>
-            <Copy className="w-4 h-4 mr-2" />
-            Copiar Link
-          </a>
-        </Button>
-        <Button
-          asChild
-          size="sm"
-          className="bg-[#D4A373] text-white hover:bg-[#C49363]"
-        >
-          <a href={`/convite/${slug}?mode=owner`}>
-            <Edit className="w-4 h-4 mr-2" />
-            Editar
-          </a>
-        </Button>
-      </div>
-
-      {/* Visualização do convite */}
-      <InvitationView invitation={formattedInvitation} />
-    </div>
-  )
+  return <InvitationView invitation={formattedInvitation as any} />
 }
 
 // Adicionar metadados para SEO

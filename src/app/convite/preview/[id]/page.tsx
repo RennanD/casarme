@@ -4,11 +4,12 @@ import { GoldenTemplate } from "@/src/components/templates/golden-template/golde
 import { Button } from "@/components/ui/button"
 import { CreditCard, CheckCircle2, Mail } from "lucide-react"
 import { WatermarkedPreview } from "@/src/components/watermarked-preview"
+import { PaymentButton } from "@/src/components/payment-button"
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 async function getInvitation(id: string) {
@@ -23,7 +24,8 @@ async function getInvitation(id: string) {
   }
 }
 
-export default async function PreviewPage({ params }: PageProps) {
+export default async function PreviewPage(props: PageProps) {
+  const params = await props.params;
   const invitation = await getInvitation(params.id)
 
   if (!invitation) {
@@ -141,27 +143,16 @@ export default async function PreviewPage({ params }: PageProps) {
                 </div>
               </div>
 
-              {/* Botões de Pagamento */}
-              <div className="space-y-3">
 
-                <Button
-                  className="w-full bg-[#00A868] hover:bg-[#008F5A] text-white text-lg py-7 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-semibold"
-                  size="lg"
-                >
-                  Finalizar Pagamento
-                </Button>
 
-                <Button
-                  className="w-full border border-[#D4A373] bg-[#D4A373] hover:bg-[#C49363] text-white text-lg py-7 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 font-semibold"
-                  size="lg"
-                >
-                  <a href="#preview">Prévia do convite</a>
-                </Button>
-
+              {/* Botão de Pagamento */}
+              <div className="space-y-3 mt-6">
+                <PaymentButton invitationId={invitation.id} />
               </div>
 
+
               <p className="text-xs text-gray-500 text-center mt-4">
-                Pagamento seguro processado via Stripe
+                Pagamento seguro processado via AbacatePay
               </p>
             </div>
 

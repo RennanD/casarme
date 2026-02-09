@@ -102,14 +102,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validar dados antes de criar checkout
-    console.log('Criando checkout para recuperação de carrinho:', {
-      invitationId: invitation.id,
-      templateId: invitation.template,
-      customerEmail: invitation.email,
-      groomName: invitation.groomName,
-      brideName: invitation.brideName
-    });
+
 
     // Gerar novo link de checkout
     const { url: checkoutUrl } = await createInvitationCheckoutSession({
@@ -118,10 +111,7 @@ export async function POST(request: NextRequest) {
       invitationId: invitation.id,
     })
 
-    console.log('Checkout criado com sucesso:', {
-      checkoutUrl,
-      invitationId: invitation.id
-    });
+
 
     // Enviar email
     await resend.emails.send({
@@ -134,8 +124,6 @@ export async function POST(request: NextRequest) {
         checkoutUrl: checkoutUrl!,
       }),
     })
-
-    console.log('Email de recuperação enviado para:', invitation.email);
 
     return NextResponse.json({
       success: true,

@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
       template,
       email,
       images,
+      cpf, // Adicionado CPF
       isActive = false // Convite inativo por padrão
     } = body
 
@@ -46,7 +47,9 @@ export async function POST(request: NextRequest) {
         whatsapp,
         template,
         email,
-        isActive
+        cpf, // Salvar CPF no banco
+        isActive,
+        inviteType: template === 'golden' ? 'interactive' : 'site'
       }
     })
 
