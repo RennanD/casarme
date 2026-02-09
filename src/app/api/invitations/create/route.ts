@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
       template,
       email,
       images,
+      cpf, // Adicionado CPF
       isActive = false // Convite inativo por padrão
     } = body
 
@@ -46,7 +47,9 @@ export async function POST(request: NextRequest) {
         whatsapp,
         template,
         email,
-        isActive
+        cpf, // Salvar CPF no banco
+        isActive,
+        inviteType: template === 'golden' ? 'interactive' : 'site'
       }
     })
 
@@ -65,28 +68,30 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Create images individually
-    if (images.hero) {
-      await createImage(images.hero, 'hero')
-    }
-
-    if (images.groom) {
-      await createImage(images.groom, 'groom')
-    }
-
-    if (images.bride) {
-      await createImage(images.bride, 'bride')
-    }
-
-    if (images.heroSlideshow) {
-      for (const img of images.heroSlideshow) {
-        await createImage(img, 'hero_slideshow')
+    // Create images individually (only if images are provided)
+    if (images) {
+      if (images.hero) {
+        await createImage(images.hero, 'hero')
       }
-    }
 
-    if (images.gallery) {
-      for (const img of images.gallery) {
-        await createImage(img, 'gallery')
+      if (images.groom) {
+        await createImage(images.groom, 'groom')
+      }
+
+      if (images.bride) {
+        await createImage(images.bride, 'bride')
+      }
+
+      if (images.heroSlideshow) {
+        for (const img of images.heroSlideshow) {
+          await createImage(img, 'hero_slideshow')
+        }
+      }
+
+      if (images.gallery) {
+        for (const img of images.gallery) {
+          await createImage(img, 'gallery')
+        }
       }
     }
 

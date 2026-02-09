@@ -21,20 +21,12 @@ if (!process.env.RESEND_FROM_EMAIL) {
 
 // Log de configuração (apenas em desenvolvimento)
 if (process.env.NODE_ENV === "development") {
-  console.log("✅ Configuração do NextAuth:")
-  console.log("  - AUTH_SECRET:", process.env.AUTH_SECRET ? "✅ configurado" : "❌ não configurado")
-  console.log("  - AUTH_RESEND_KEY:", process.env.AUTH_RESEND_KEY ? "✅ configurado" : "❌ não configurado")
-  console.log("  - RESEND_FROM_EMAIL:", process.env.RESEND_FROM_EMAIL || "❌ não configurado")
-  console.log("  - ADMIN_EMAIL:", process.env.ADMIN_EMAIL || "❌ não configurado")
 }
 
 // Verificar se o adapter está funcionando
 let adapter
 try {
   adapter = PrismaAdapter(prisma)
-  if (process.env.NODE_ENV === "development") {
-    console.log("✅ PrismaAdapter inicializado com sucesso")
-  }
 } catch (error) {
   console.error("❌ Erro ao inicializar PrismaAdapter:", error)
   throw error
@@ -56,7 +48,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async signIn({ user }) {
       // Validação adicional quando o usuário clica no link
       const adminEmail = process.env.ADMIN_EMAIL
-      
+
       if (!adminEmail) {
         console.error("ADMIN_EMAIL não configurado")
         return false

@@ -6,23 +6,23 @@ import Link from "next/link"
 const objections = [
   {
     problem: "Não tenho dinheiro para designer",
-    problemDescription: "Designer custa R$ 500+ e demora semanas para entregar",
-    solution: "Por menos de R$ 30 e pronto em minutos. Sem espera, sem complicação!",
+    problemDescription: "Designer custa R$ 500+ e demora semanas para entregar seu arquivo",
+    solution: "Pague menos de R$ 30 e tenha seu convite pronto HOJE. Sem espera, sem taxas extras!",
   },
   {
-    problem: "Não sei usar Canva/Photoshop",
-    problemDescription: "Canva é confuso, Photoshop é caro e difícil de aprender",
-    solution: "3 cliques e pronto - Sem curso, sem complicação, sem frustração!",
+    problem: "Não sei usar Canva ou Photoshop",
+    problemDescription: "Aprender do zero leva tempo e o resultado nem sempre fica como você sonhou",
+    solution: "Esqueça o Canva. No CasarMe é só preencher os campos e seu convite de luxo está pronto!",
   },
   {
-    problem: "Não tenho tempo para criar",
-    problemDescription: "Criar do zero leva horas e horas de trabalho",
-                    solution: "Modelos prontos, você só personaliza. Pronto em menos de 5 minutos!",
+    problem: "Tenho pressa para enviar",
+    problemDescription: "Preciso enviar os convites agora e não posso esperar dias pela criação",
+    solution: "Recebimento imediato. Pagou, recebeu seu link e já pode enviar pelo WhatsApp!",
   },
   {
-    problem: "Não sei o que colocar no convite",
-    problemDescription: "Fico perdido com tantas opções e não sei por onde começar",
-    solution: "Te guia passo a passo, sem erro. Só preencher os campos!",
+    problem: "Quero algo que funcione no celular",
+    problemDescription: "JPGs estáticos são ruins de ler e não têm mapa ou confirmação",
+    solution: "Experiência interativa nativa. Seus convidados confirmam com um clique e abrem o mapa direto!",
   },
 ]
 

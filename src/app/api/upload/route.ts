@@ -46,7 +46,6 @@ export async function POST(request: NextRequest) {
       url: cloudinaryResult.secure_url
     }
 
-    console.log('📤 Returning success response')
     return NextResponse.json({
       success: true,
       image: imageMetadata

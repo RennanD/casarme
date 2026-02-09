@@ -2,17 +2,13 @@ import { v2 as cloudinary } from 'cloudinary'
 
 // Configure Cloudinary
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME || 'dummy',
+  api_key: process.env.CLOUDINARY_API_KEY || 'dummy',
+  api_secret: process.env.CLOUDINARY_API_SECRET || 'dummy',
   secure: true,
 })
 
-console.log('🔧 Cloudinary configuration:', {
-  cloudName: process.env.CLOUDINARY_CLOUD_NAME,
-  apiKey: process.env.CLOUDINARY_API_KEY ? 'Set' : 'Missing',
-  apiSecret: process.env.CLOUDINARY_API_SECRET ? 'Set' : 'Missing'
-})
+
 
 export { cloudinary }
 
@@ -29,13 +25,11 @@ export async function uploadToCloudinary(
   file: File,
   folder: string = 'casarme'
 ): Promise<CloudinaryUploadResult> {
-  console.log('📁 File size before processing:', file.size, 'bytes')
 
   // Check if file is too large (>10MB) and compress if needed
   let buffer = Buffer.from(await file.arrayBuffer())
 
   if (file.size > 10 * 1024 * 1024) { // 10MB
-    console.log('⚠️ File too large, compressing...')
     // For very large files, we'll use Cloudinary's upload with size limit
     // This will trigger Cloudinary's automatic compression
   }

@@ -10,10 +10,10 @@ export function FinalCTA() {
       <div className="container mx-auto px-4 text-center">
         <Heart className="w-16 h-16 mx-auto mb-6 animate-pulse" aria-hidden="true" />
         <h2 id="final-cta-title" className="font-serif text-3xl md:text-5xl font-bold mb-6 text-balance">
-          🎉 Crie seu Convite Digital por Menos de R$ 30 - Comece Agora!
+          🎉 Tenha seu Convite Digital Pronto em 5 Minutos!
         </h2>
         <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-pretty opacity-95">
-          ✅ Modelos profissionais ✅ Mapa interativo ✅ Confirmação WhatsApp ✅ Sem mensalidade. Mais de 500 casais já criaram seus convites conosco!
+          ✅ Sem Canva ou designers ✅ Recebimento imediato ✅ RSVP e Mapa incluídos ✅ Pagamento único. Junte-se a mais de 500 casais que escolheram a praticidade do CasarMe!
         </p>
         <Link href="/#templates" aria-label="Ver modelos de convite de casamento digital" className="touch-target">
           <Button

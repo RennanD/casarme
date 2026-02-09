@@ -32,6 +32,11 @@ model Invitation {
   stripePaymentIntentId String?
   stripeSessionId       String?
   isActive              Boolean   @default(false)
+  billingId             String?   @unique
+  billingUrl            String?
+  cpf                   String?
+  paidAt                DateTime?
+  inviteType            String    @default("site")
   images                Image[]
 
   @@map("invitations")

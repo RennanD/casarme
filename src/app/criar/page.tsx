@@ -29,9 +29,10 @@ export const metadata: Metadata = {
 }
 
 interface PageProps {
-  searchParams: { template?: string }
+  searchParams: Promise<{ template?: string }>
 }
 
-export default function CreatePage({ searchParams }: PageProps) {
-  return <CreateInvitationClient selectedTemplateId={searchParams.template} />
+export default async function CreatePage({ searchParams }: PageProps) {
+  const { template } = await searchParams
+  return <CreateInvitationClient selectedTemplateId={template} />
 }

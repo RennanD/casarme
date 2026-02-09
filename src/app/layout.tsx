@@ -1,7 +1,7 @@
 import React, { Suspense } from "react"
 import type { Metadata, Viewport } from "next"
 import "./globals.css"
-import { Bad_Script } from "next/font/google"
+import { Rouge_Script, Dancing_Script } from "next/font/google"
 import { Toaster } from "sonner"
 import GoogleTagManagerScripts from "@/src/lib/analytics"
 import { StructuredData } from "@/src/components/structured-data"
@@ -16,7 +16,7 @@ const inter = {
   variable: "--font-inter",
 }
 
-const script = Bad_Script({
+const script = Rouge_Script({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-script",
