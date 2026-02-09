@@ -43,8 +43,8 @@ interface PageProps {
 }
 
 export default async function InvitationPage({ params, searchParams }: PageProps) {
-  const { slug } = params
-  const mode = searchParams.mode
+  const { slug } = await params
+  const { mode } = await searchParams
 
   // Buscar convite diretamente do banco
   const invitation = await prisma.invitation.findUnique({
@@ -106,9 +106,10 @@ export default async function InvitationPage({ params, searchParams }: PageProps
 }
 
 // Adicionar metadados para SEO
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const invitation = await prisma.invitation.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
     select: {
       groomName: true,
       brideName: true,

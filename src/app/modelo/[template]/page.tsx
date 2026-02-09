@@ -10,11 +10,12 @@ import CreateInvitationFormWrapper from "./create-invitation-form-wrapper"
 import { MobileCTAButton } from "./mobile-cta-button"
 
 interface PageProps {
-  params: { template: string }
+  params: Promise<{ template: string }>
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const template = getTemplateSpec(params.template)
+  const { template: templateId } = await params
+  const template = getTemplateSpec(templateId)
 
   if (!template) {
     return {
@@ -57,8 +58,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-export default function ModeloPage({ params }: PageProps) {
-  const template = getTemplateSpec(params.template)
+export default async function ModeloPage({ params }: PageProps) {
+  const { template: templateId } = await params
+  const template = getTemplateSpec(templateId)
 
   if (!template) {
     notFound()
@@ -121,11 +123,10 @@ export default function ModeloPage({ params }: PageProps) {
             <div className="max-w-6xl mx-auto">
               <div className="flex items-center gap-2 mb-4">
                 <span
-                  className={`text-xs px-3 py-1 rounded-full ${
-                    template.plan === "Pro"
+                  className={`text-xs px-3 py-1 rounded-full ${template.plan === "Pro"
                       ? "bg-[#D4A373] text-white"
                       : "bg-[#8B9D7F] text-white"
-                  }`}
+                    }`}
                 >
                   {template.plan}
                 </span>

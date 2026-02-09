@@ -25,8 +25,8 @@ async function getInvitation(id: string) {
 }
 
 export default async function PreviewPage(props: PageProps) {
-  const params = await props.params;
-  const invitation = await getInvitation(params.id)
+  const { id } = await props.params;
+  const invitation = await getInvitation(id)
 
   if (!invitation) {
     notFound()

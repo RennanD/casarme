@@ -4,10 +4,10 @@ import path from 'path'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { filename: string } }
+  { params }: { params: Promise<{ filename: string }> }
 ) {
   try {
-    const filename = params.filename
+    const { filename } = await params
 
     // Use public directory for now
     const filePath = path.resolve(process.cwd(), 'public', 'uploads', filename)
@@ -62,7 +62,7 @@ export async function GET(
         contentType = 'image/jpeg'
     }
 
-    return new NextResponse(fileBuffer, {
+    return new NextResponse(new Uint8Array(fileBuffer), {
       headers: {
         'Content-Type': contentType,
         'Cache-Control': 'public, max-age=31536000, immutable',
