@@ -109,7 +109,7 @@ export default async function InvitationPage({ params, searchParams }: PageProps
     const heroPhotoUrl = heroImage ? getImageUrl(heroImage.filename) : "/placeholder.svg?height=800&width=600"
 
     return (
-      <div className="bg-black lg:border-2 overflow-hidden border-[#08265E]/90 rounded-md lg:max-w-xl mx-auto">
+      <div className=" overflow-hidden lg:max-w-lg mx-auto">
         <BlueTemplate
           brideName={invitation.brideName}
           groomName={invitation.groomName}
