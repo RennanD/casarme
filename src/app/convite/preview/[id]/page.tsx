@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation"
 import { prisma } from "@/src/lib/prisma"
 import { GoldenTemplate } from "@/src/components/templates/golden-template/golden-template"
+import { BlueTemplate } from "@/src/components/templates/blue-template"
+import { getImageUrl } from "@/src/lib/image-url"
 import { Button } from "@/components/ui/button"
 import { CreditCard, CheckCircle2, Mail } from "lucide-react"
 import { WatermarkedPreview } from "@/src/components/watermarked-preview"
@@ -16,6 +18,9 @@ async function getInvitation(id: string) {
   try {
     const invitation = await prisma.invitation.findUnique({
       where: { id },
+      include: {
+        images: true
+      }
     })
     return invitation
   } catch (error) {
@@ -35,25 +40,44 @@ export default async function PreviewPage(props: PageProps) {
   // Combinar data e hora para o formato ISO
   const weddingDateTime = new Date(invitation.weddingDate).toISOString()
 
+  // Obter imagem de capa (se existir)
+  const heroImage = invitation.images?.find((img: any) => img.type === 'hero')
+  const heroPhotoUrl = heroImage ? getImageUrl(heroImage.filename) : "/placeholder.svg?height=800&width=600"
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-12">
           {/* Preview do Convite */}
-          <div id="preview" className="lg:sticky  lg:top-8 lg:self-start">
+          <div id="preview" className="lg:sticky lg:top-8 lg:self-start">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
               Prévia do seu Convite
             </h2>
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+            {/* Adicionando scale, opacity e blur para deixar menos visível antes de pagar */}
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden scale-[0.65] origin-top opacity-75 blur-[1px] pointer-events-none transition-all duration-500">
               <WatermarkedPreview>
-                <GoldenTemplate
-                  brideName={invitation.brideName}
-                  groomName={invitation.groomName}
-                  date={weddingDateTime}
-                  address={invitation.venueAddress}
-                  musicUrl={invitation.musicUrl || undefined}
-                  whatsappNumber={invitation.whatsapp || ""}
-                />
+                {invitation.template === "golden" ? (
+                  <GoldenTemplate
+                    brideName={invitation.brideName}
+                    groomName={invitation.groomName}
+                    date={weddingDateTime}
+                    address={invitation.venueAddress}
+                    musicUrl={invitation.musicUrl || undefined}
+                    whatsappNumber={invitation.whatsapp || ""}
+                  />
+                ) : invitation.template === "blue" ? (
+                  <BlueTemplate
+                    brideName={invitation.brideName}
+                    groomName={invitation.groomName}
+                    date={weddingDateTime}
+                    address={invitation.venueAddress}
+                    musicUrl={invitation.musicUrl || undefined}
+                    whatsappNumber={invitation.whatsapp || ""}
+                    thumbnail={heroPhotoUrl}
+                  />
+                ) : (
+                  <div className="p-10 text-center">Modelo não suportado na prévia</div>
+                )}
               </WatermarkedPreview>
             </div>
           </div>
@@ -99,7 +123,7 @@ export default async function PreviewPage(props: PageProps) {
                 <div className="flex justify-between items-center pb-4 border-b border-gray-200">
                   <div>
                     <p className="font-semibold text-gray-900">
-                      Convite de Casamento - Modelo Dourado
+                      Convite de Casamento - {invitation.template === 'golden' ? 'Modelo Dourado' : invitation.template === 'blue' ? 'Modelo Azul' : 'Digital'}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
                       {invitation.brideName} & {invitation.groomName}

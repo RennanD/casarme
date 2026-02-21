@@ -12,9 +12,19 @@ const interactiveTemplates = [
     description: "Modelo de convite interativo com design minimalista e foco na usabilidade mobile.",
     variant: "golden" as const,
     plan: "Premium",
-    price: "R$ 47,90",
+    price: "R$ 25,90",
     image: "/images/thumbs/golden/01.png", // Assuming this exists or using placeholder
     link: "/modelos/dourado"
+  },
+  {
+    id: "blue",
+    name: "Modelo Azul",
+    description: "Modelo de convite interativo e elegante com base no tom azul e ilustrações florais.",
+    variant: "blue" as const,
+    plan: "Premium",
+    price: "R$ 30,90",
+    image: "/images/thumbs/blue/01.png", // Temporarily using placeholder, update if needed
+    link: "/modelos/azul"
   }
 ]
 

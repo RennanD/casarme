@@ -5,7 +5,9 @@ import { Eye, Copy, Edit } from "lucide-react"
 import { prisma } from "@/src/lib/prisma"
 import InvitationView from "./invitation-view"
 import { GoldenTemplate } from "@/src/components/templates/golden-template/golden-template"
+import { BlueTemplate } from "@/src/components/templates/blue-template"
 import { PhoneMockup } from "@/src/components/ui/phone-mockup"
+import { getImageUrl } from "@/src/lib/image-url"
 
 interface Invitation {
   id: string
@@ -97,6 +99,25 @@ export default async function InvitationPage({ params, searchParams }: PageProps
           address={invitation.venueAddress}
           musicUrl={invitation.musicUrl || undefined}
           whatsappNumber={invitation.whatsapp || ""}
+        />
+      </div>
+    )
+  }
+
+  if (invitation.template === 'blue') {
+    const heroImage = invitation.images?.find((img: any) => img.type === 'hero')
+    const heroPhotoUrl = heroImage ? getImageUrl(heroImage.filename) : "/placeholder.svg?height=800&width=600"
+
+    return (
+      <div className="bg-black lg:border-2 overflow-hidden border-[#08265E]/90 rounded-md lg:max-w-xl mx-auto">
+        <BlueTemplate
+          brideName={invitation.brideName}
+          groomName={invitation.groomName}
+          date={formattedInvitation.weddingDate}
+          address={invitation.venueAddress}
+          musicUrl={invitation.musicUrl || undefined}
+          whatsappNumber={invitation.whatsapp || ""}
+          thumbnail={heroPhotoUrl}
         />
       </div>
     )
