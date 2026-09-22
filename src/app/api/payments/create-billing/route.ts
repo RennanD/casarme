@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     const billingData: CreateBillingData = {
       frequency: 'ONE_TIME',
-      methods: ['PIX', 'CARD'],
+      methods: ['PIX'],
       products: [
         {
           externalId: process.env.ABACATEPAY_API_GOLDEN_INVITE_PRODUCT || 'golden-template',
