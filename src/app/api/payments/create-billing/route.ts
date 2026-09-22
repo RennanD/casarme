@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/src/lib/prisma';
 import { AbacatePay, CreateBillingData } from '@/src/lib/abacatepay';
+import { getInviteProduct, getAbacateProductId, type InteractiveInviteTemplate } from '@/src/lib/invite-products';
 
 const abacatePay = new AbacatePay({
   apiKey: process.env.ABACATEPAY_API_KEY!,
@@ -33,16 +34,27 @@ export async function POST(request: NextRequest) {
     // For now, let's always create a new one or return existing if valid?
     // AbacatePay billings might expire. simpler to create a new one for now.
 
+    const product = getInviteProduct(invitation.template)
+
+    if (!product) {
+      return NextResponse.json(
+        { error: 'Unsupported invitation template for billing' },
+        { status: 400 }
+      )
+    }
+
+    const abacateProductId = getAbacateProductId(invitation.template as InteractiveInviteTemplate)
+
     const billingData: CreateBillingData = {
       frequency: 'ONE_TIME',
       methods: ['PIX'],
       products: [
         {
-          externalId: process.env.ABACATEPAY_API_GOLDEN_INVITE_PRODUCT || 'golden-template',
-          name: 'Convite de Casamento - Modelo Dourado',
+          externalId: abacateProductId,
+          name: product.productName,
           description: 'Convite digital personalizado para casamento',
           quantity: 1,
-          price: 2590, // R$ 25,90
+          price: product.priceCents,
         },
       ],
       returnUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/convite/preview/${invitationId}`,
@@ -56,7 +68,7 @@ export async function POST(request: NextRequest) {
       externalId: invitationId,
       metadata: {
         invitationId: invitationId,
-        template: 'golden',
+        template: invitation.template,
       },
     };
 
@@ -85,6 +97,10 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
+    if (error instanceof Error && error.message.startsWith('Missing environment variable:')) {
+      console.error('Billing configuration error:', error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
     console.error('Error creating billing:', error);
     return NextResponse.json({ error: 'Failed to create billing' }, { status: 500 });
   }

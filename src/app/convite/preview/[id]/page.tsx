@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { CreditCard, CheckCircle2, Mail } from "lucide-react"
 import { WatermarkedPreview } from "@/src/components/watermarked-preview"
 import { PaymentButton } from "@/src/components/payment-button"
+import { getInviteProduct, INTERACTIVE_INVITE_PRODUCTS } from "@/src/lib/invite-products"
 
 interface PageProps {
   params: Promise<{
@@ -36,6 +37,9 @@ export default async function PreviewPage(props: PageProps) {
   if (!invitation) {
     notFound()
   }
+
+  const product =
+    getInviteProduct(invitation.template) ?? INTERACTIVE_INVITE_PRODUCTS.golden
 
   // Combinar data e hora para o formato ISO
   const weddingDateTime = new Date(invitation.weddingDate).toISOString()
@@ -123,13 +127,13 @@ export default async function PreviewPage(props: PageProps) {
                 <div className="flex justify-between items-center pb-4 border-b border-gray-200">
                   <div>
                     <p className="font-semibold text-gray-900">
-                      Convite de Casamento - {invitation.template === 'golden' ? 'Modelo Dourado' : invitation.template === 'blue' ? 'Modelo Azul' : 'Digital'}
+                      {product.productName}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
                       {invitation.brideName} & {invitation.groomName}
                     </p>
                   </div>
-                  <p className="text-2xl font-bold text-gray-900">R$ 25,90</p>
+                  <p className="text-2xl font-bold text-gray-900">{product.displayPrice}</p>
                 </div>
 
                 <div className="space-y-2 text-sm text-gray-600">
@@ -159,11 +163,11 @@ export default async function PreviewPage(props: PageProps) {
               <div className="border-t border-gray-200 pt-6 mb-6">
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-gray-600">Subtotal</span>
-                  <span className="font-semibold">R$ 25,90</span>
+                  <span className="font-semibold">{product.displayPrice}</span>
                 </div>
                 <div className="flex justify-between items-center text-lg font-bold">
                   <span>Total</span>
-                  <span className="text-2xl text-[#D4A373]">R$ 25,90</span>
+                  <span className="text-2xl" style={{ color: product.accentColor }}>{product.displayPrice}</span>
                 </div>
               </div>
 

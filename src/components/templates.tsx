@@ -4,25 +4,26 @@ import { Card } from "@/src/components/ui/card"
 import { Button } from "@/src/components/ui/button"
 import Link from "next/link"
 import Image from "next/image"
+import { INTERACTIVE_INVITE_PRODUCTS } from "@/src/lib/invite-products"
 
 const interactiveTemplates = [
   {
     id: "golden",
-    name: "Modelo Dourado",
+    name: INTERACTIVE_INVITE_PRODUCTS.golden.label,
     description: "Modelo de convite interativo com design minimalista e foco na usabilidade mobile.",
     variant: "golden" as const,
     plan: "Premium",
-    price: "R$ 25,90",
+    price: INTERACTIVE_INVITE_PRODUCTS.golden.displayPrice,
     image: "/images/thumbs/golden/01.png", // Assuming this exists or using placeholder
     link: "/modelos/dourado"
   },
   {
     id: "blue",
-    name: "Modelo Azul",
+    name: INTERACTIVE_INVITE_PRODUCTS.blue.label,
     description: "Modelo de convite interativo e elegante com base no tom azul e ilustrações florais.",
     variant: "blue" as const,
     plan: "Premium",
-    price: "R$ 30,90",
+    price: INTERACTIVE_INVITE_PRODUCTS.blue.displayPrice,
     image: "/images/thumbs/blue/01.png", // Temporarily using placeholder, update if needed
     link: "/modelos/azul"
   }

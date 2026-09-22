@@ -7,6 +7,7 @@ import Image from "next/image"
 import goldenTemplateImage from "@/src/assets/dourado-thumb.png"
 import { Navbar } from "@/src/components/navbar"
 import { GoldenTemplateDialog } from "@/src/components/golden-template-dialog"
+import { INTERACTIVE_INVITE_PRODUCTS } from "@/src/lib/invite-products"
 
 
 export const metadata = {
@@ -136,7 +137,7 @@ export default function GoldenTemplatePage() {
               <div>
                 <p className="text-sm text-gray-600 mb-2">Pagamento Único • Sem assinaturas</p>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-gray-900">R$25,90</span>
+                  <span className="text-4xl font-bold text-gray-900">{INTERACTIVE_INVITE_PRODUCTS.golden.displayPrice}</span>
                 </div>
 
                 {/* Payment Methods */}

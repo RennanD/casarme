@@ -5,6 +5,7 @@ import Image from "next/image"
 
 import blueTemplateImage from "@/src/assets/images/thumbs/blue/2.png" // Placeholder or use correct thumbnail if exists
 import { BlueTemplateDialog } from "@/src/components/blue-template-dialog"
+import { INTERACTIVE_INVITE_PRODUCTS } from "@/src/lib/invite-products"
 
 export const metadata = {
   title: "Convite de Casamento Floral - Modelo Azul | Casarme",
@@ -129,7 +130,7 @@ export default function BlueTemplatePage() {
               <div>
                 <p className="text-sm text-gray-600 mb-2">Pagamento Único • Sem assinaturas</p>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-[#08265E]">R$30,90</span>
+                  <span className="text-4xl font-bold text-[#08265E]">{INTERACTIVE_INVITE_PRODUCTS.blue.displayPrice}</span>
                 </div>
 
                 {/* Payment Methods */}
