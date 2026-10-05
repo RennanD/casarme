@@ -1,6 +1,21 @@
 import type { Metadata } from 'next'
+import { Plus } from 'lucide-react'
 
-import { Input, Label, Separator } from '@/src/shared/ui'
+import {
+  Badge,
+  Button,
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Input,
+  Label,
+  Link,
+  Separator,
+} from '@/src/shared/ui'
 
 export const metadata: Metadata = {
   title: 'Design System — CasarMe v2',
@@ -51,6 +66,19 @@ const typographySamples = [
   },
 ] as const
 
+const buttonVariants = [
+  'default',
+  'secondary',
+  'outline',
+  'ghost',
+  'destructive',
+  'link',
+] as const
+
+const badgeVariants = ['default', 'secondary', 'outline', 'destructive'] as const
+
+const linkVariants = ['default', 'muted', 'nav'] as const
+
 export default function DesignSystemPage() {
   return (
     <main className="mx-auto max-w-4xl space-y-16 px-6 py-12">
@@ -85,6 +113,157 @@ export default function DesignSystemPage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section aria-labelledby="buttons-heading" className="space-y-8">
+        <div className="space-y-2">
+          <h2 id="buttons-heading" className="h2">
+            Buttons
+          </h2>
+          <p className="body text-muted-foreground">
+            Variantes e tamanhos para ações e CTAs. Ícones via{' '}
+            <code className="font-mono text-sm">lucide-react</code>.
+          </p>
+        </div>
+
+        <div className="space-y-10">
+          <div className="space-y-4">
+            <p className="body-sm font-mono text-muted-foreground">variants</p>
+            <div className="flex flex-wrap gap-3">
+              {buttonVariants.map((variant) => (
+                <Button key={variant} variant={variant}>
+                  {variant}
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <p className="body-sm font-mono text-muted-foreground">sizes</p>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button size="default">default</Button>
+              <Button size="sm">sm</Button>
+              <Button size="lg">lg</Button>
+              <Button size="icon" aria-label="Adicionar">
+                <Plus />
+              </Button>
+              <Button size="icon-sm" aria-label="Adicionar">
+                <Plus />
+              </Button>
+              <Button size="icon-lg" aria-label="Adicionar">
+                <Plus />
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <p className="body-sm font-mono text-muted-foreground">
+              disabled
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Button disabled>default</Button>
+              <Button variant="secondary" disabled>
+                secondary
+              </Button>
+              <Button variant="outline" disabled>
+                outline
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="badges-heading" className="space-y-8">
+        <div className="space-y-2">
+          <h2 id="badges-heading" className="h2">
+            Badges
+          </h2>
+          <p className="body text-muted-foreground">
+            Etiquetas de status e tags compactas.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          {badgeVariants.map((variant) => (
+            <Badge key={variant} variant={variant}>
+              {variant}
+            </Badge>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="links-heading" className="space-y-8">
+        <div className="space-y-2">
+          <h2 id="links-heading" className="h2">
+            Links
+          </h2>
+          <p className="body text-muted-foreground">
+            Navegação interna com <code className="font-mono text-sm">next/link</code>{' '}
+            e variantes CVA.
+          </p>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-6">
+          {linkVariants.map((variant) => (
+            <Link key={variant} href="/v2/design-system" variant={variant}>
+              {variant}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="cards-heading" className="space-y-8">
+        <div className="space-y-2">
+          <h2 id="cards-heading" className="h2">
+            Cards
+          </h2>
+          <p className="body text-muted-foreground">
+            Blocos de conteúdo compostos — header, title, description, content,
+            footer e action.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <Card>
+            <CardHeader>
+              <CardTitle>Convite básico</CardTitle>
+              <CardDescription>
+                Plano ideal para casamentos íntimos com até 50 convidados.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="body-sm text-muted-foreground">
+                RSVP, mapa do local e contagem regressiva inclusos.
+              </p>
+            </CardContent>
+            <CardFooter>
+              <Button size="sm">Ver detalhes</Button>
+            </CardFooter>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Convite premium</CardTitle>
+              <CardDescription>
+                Recursos avançados para eventos maiores.
+              </CardDescription>
+              <CardAction>
+                <Badge variant="secondary">Popular</Badge>
+              </CardAction>
+            </CardHeader>
+            <CardContent>
+              <p className="body-sm text-muted-foreground">
+                Galeria de fotos, playlist colaborativa e domínio personalizado.
+              </p>
+            </CardContent>
+            <CardFooter className="gap-2">
+              <Button variant="outline" size="sm">
+                Comparar
+              </Button>
+              <Button size="sm">Escolher plano</Button>
+            </CardFooter>
+          </Card>
+        </div>
       </section>
 
       <section aria-labelledby="forms-heading" className="space-y-8">
