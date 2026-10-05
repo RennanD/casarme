@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import { Input, Label, Separator } from '@/src/shared/ui'
+
 export const metadata: Metadata = {
   title: 'Design System — CasarMe v2',
 }
@@ -83,6 +85,73 @@ export default function DesignSystemPage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section aria-labelledby="forms-heading" className="space-y-8">
+        <div className="space-y-2">
+          <h2 id="forms-heading" className="h2">
+            Forms
+          </h2>
+          <p className="body text-muted-foreground">
+            Campos de formulário com <code className="font-mono text-sm">Input</code> e{' '}
+            <code className="font-mono text-sm">Label</code> alinhados aos tokens semânticos.
+          </p>
+        </div>
+
+        <div className="grid max-w-md gap-6">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="guest-name">Nome do convidado</Label>
+            <Input id="guest-name" placeholder="Maria Silva" />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="guest-email">E-mail</Label>
+            <Input id="guest-email" type="email" placeholder="maria@email.com" />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="guest-count">Número de acompanhantes</Label>
+            <Input id="guest-count" type="number" min={0} defaultValue={0} />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="guest-disabled">Campo desabilitado</Label>
+            <Input id="guest-disabled" disabled placeholder="Indisponível" />
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="separator-heading" className="space-y-8">
+        <div className="space-y-2">
+          <h2 id="separator-heading" className="h2">
+            Separator
+          </h2>
+          <p className="body text-muted-foreground">
+            Divisor padrão para quebras de seção — horizontal ou vertical.
+          </p>
+        </div>
+
+        <div className="space-y-8">
+          <div className="space-y-4">
+            <p className="body-sm font-mono text-muted-foreground">horizontal</p>
+            <div className="space-y-4">
+              <p className="body">Conteúdo acima do divisor</p>
+              <Separator />
+              <p className="body">Conteúdo abaixo do divisor</p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <p className="body-sm font-mono text-muted-foreground">vertical</p>
+            <div className="flex h-10 items-center gap-4">
+              <span className="body">Esquerda</span>
+              <Separator orientation="vertical" />
+              <span className="body">Centro</span>
+              <Separator orientation="vertical" />
+              <span className="body">Direita</span>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   )
