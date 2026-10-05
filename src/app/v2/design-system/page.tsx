@@ -43,6 +43,11 @@ const typographySamples = [
     sample: 'Heading level 3',
   },
   {
+    className: 'script',
+    label: 'script',
+    sample: 'Com amor, Maria & João',
+  },
+  {
     className: 'lead',
     label: 'lead',
     sample:

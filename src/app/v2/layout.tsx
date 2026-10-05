@@ -1,17 +1,26 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import '@/src/styles/globals.css'
+import { Inter, Playfair_Display, Rouge_Script } from 'next/font/google'
+
 import { cn } from '@/src/shared/lib/cn'
 
-const geistSans = Geist({
+import './globals.css'
+
+const playfair = Playfair_Display({
   subsets: ['latin'],
-  variable: '--font-geist-sans',
+  variable: '--font-playfair',
   display: 'swap',
 })
 
-const geistMono = Geist_Mono({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-geist-mono',
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const rougeScript = Rouge_Script({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-rouge-script',
   display: 'swap',
 })
 
@@ -31,8 +40,9 @@ export default function V2Layout({
   return (
     <div
       className={cn(
-        geistSans.variable,
-        geistMono.variable,
+        playfair.variable,
+        inter.variable,
+        rougeScript.variable,
         'min-h-screen bg-background font-sans text-foreground antialiased',
       )}
     >
