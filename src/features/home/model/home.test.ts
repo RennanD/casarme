@@ -6,7 +6,9 @@ import {
   HOME_BENEFITS,
   HOME_HERO,
   HOME_HERO_COLLAGE,
+  HOME_HOW_IT_WORKS_SECTION,
   HOME_HOW_IT_WORKS_STEPS,
+  HOME_OBJECTION_SECTION,
   HOME_OBJECTIONS,
   HOME_TESTIMONIALS,
 } from './copy'
@@ -93,6 +95,33 @@ describe('home copy arrays', () => {
     expect(HOME_HOW_IT_WORKS_STEPS).toHaveLength(3)
     expect(HOME_BENEFITS).toHaveLength(4)
     expect(HOME_TESTIMONIALS).toHaveLength(3)
+  })
+
+  it('requires non-empty problem and solution fields on each objection', () => {
+    for (const objection of HOME_OBJECTIONS) {
+      expect(objection.problem.length).toBeGreaterThan(0)
+      expect(objection.problemDescription.length).toBeGreaterThan(0)
+      expect(objection.solution.length).toBeGreaterThan(0)
+    }
+  })
+
+  it('requires non-empty title and description on each how-it-works step', () => {
+    for (const step of HOME_HOW_IT_WORKS_STEPS) {
+      expect(step.title.length).toBeGreaterThan(0)
+      expect(step.description.length).toBeGreaterThan(0)
+    }
+  })
+})
+
+describe('home funnel section copy', () => {
+  it('defines objection section title and CTA linking to templates', () => {
+    expect(HOME_OBJECTION_SECTION.title.length).toBeGreaterThan(0)
+    expect(HOME_OBJECTION_SECTION.ctaHeading.length).toBeGreaterThan(0)
+    expect(HOME_OBJECTION_SECTION.ctaLabel).toBe(HOME_HERO.ctaLabel)
+  })
+
+  it('defines how-it-works section title', () => {
+    expect(HOME_HOW_IT_WORKS_SECTION.title.length).toBeGreaterThan(0)
   })
 })
 

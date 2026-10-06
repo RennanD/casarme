@@ -35,6 +35,27 @@ export type HomeHeroCopy = {
   ctaLabel: string
 }
 
+export type HomeObjectionSectionCopy = {
+  title: string
+  ctaHeading: string
+  ctaLabel: string
+}
+
+export type HomeHowItWorksSectionCopy = {
+  title: string
+}
+
+export const HOME_OBJECTION_SECTION: HomeObjectionSectionCopy = {
+  title: 'Você Não Precisa Ser Designer para Ter um Convite Lindo!',
+  ctaHeading:
+    'Pare de se preocupar com design. Deixe o CasarMe fazer isso por você!',
+  ctaLabel: 'Criar Meu Convite',
+}
+
+export const HOME_HOW_IT_WORKS_SECTION: HomeHowItWorksSectionCopy = {
+  title: 'Como Criar seu Convite Digital em 3 Passos Simples',
+}
+
 export const HOME_HERO: HomeHeroCopy = {
   headlineLead: 'Seu Convite Digital',
   scriptAccent: 'Interativo',
