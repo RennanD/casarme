@@ -35,6 +35,34 @@ export type HomeHeroCopy = {
   ctaLabel: string
 }
 
+export type HomeObjectionSectionCopy = {
+  title: string
+  solutionLabel: string
+  ctaHeading: string
+  ctaLabel: string
+}
+
+export type HomeHowItWorksSectionCopy = {
+  title: string
+  imagePath: string
+  imageAlt: string
+}
+
+export const HOME_OBJECTION_SECTION: HomeObjectionSectionCopy = {
+  title: 'Você Não Precisa Ser Designer para Ter um Convite Lindo!',
+  solutionLabel: 'Solução CasarMe:',
+  ctaHeading:
+    'Pare de se preocupar com design. Deixe o CasarMe fazer isso por você!',
+  ctaLabel: 'Criar Meu Convite',
+}
+
+export const HOME_HOW_IT_WORKS_SECTION: HomeHowItWorksSectionCopy = {
+  title: 'Como Criar seu Convite Digital em 3 Passos Simples',
+  imagePath: '/mockups.webp',
+  imageAlt:
+    'Preview de convites digitais de casamento em diferentes modelos',
+}
+
 export const HOME_HERO: HomeHeroCopy = {
   headlineLead: 'Seu Convite Digital',
   scriptAccent: 'Interativo',
