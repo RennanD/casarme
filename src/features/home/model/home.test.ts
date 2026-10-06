@@ -4,10 +4,13 @@ import { HOME_ANCHORS, NAVBAR_ANCHOR_TARGETS } from './anchors'
 import { HOME_CATALOG, PRODUCT_LINE_LABELS } from './catalog'
 import {
   HOME_BENEFITS,
+  HOME_HERO,
+  HOME_HERO_COLLAGE,
   HOME_HOW_IT_WORKS_STEPS,
   HOME_OBJECTIONS,
   HOME_TESTIMONIALS,
 } from './copy'
+import { NAV_SECTION_LINKS } from './navigation'
 import { HOME_SECTION_ORDER } from './sections'
 
 describe('home catalog', () => {
@@ -90,5 +93,36 @@ describe('home copy arrays', () => {
     expect(HOME_HOW_IT_WORKS_STEPS).toHaveLength(3)
     expect(HOME_BENEFITS).toHaveLength(4)
     expect(HOME_TESTIMONIALS).toHaveLength(3)
+  })
+})
+
+describe('home hero copy', () => {
+  it('includes display/script headline parts and value-prop subcopy from v1', () => {
+    expect(HOME_HERO.headlineLead).toBe('Seu Convite Digital')
+    expect(HOME_HERO.scriptAccent).toBe('Interativo')
+    expect(HOME_HERO.headlineTail).toMatch(/5 Minutos/)
+    expect(HOME_HERO.subcopy).toMatch(/Canva/)
+    expect(HOME_HERO.ctaLabel).toBe('Criar Meu Convite')
+  })
+
+  it('defines 3 collage images with meaningful alt text', () => {
+    expect(HOME_HERO_COLLAGE).toHaveLength(3)
+
+    for (const image of HOME_HERO_COLLAGE) {
+      expect(image.src.length).toBeGreaterThan(0)
+      expect(image.alt.length).toBeGreaterThan(0)
+    }
+  })
+})
+
+describe('home navbar links', () => {
+  it('maps four section links to anchor registry ids', () => {
+    expect(NAV_SECTION_LINKS).toHaveLength(4)
+    expect(NAV_SECTION_LINKS.map((link) => link.anchorId)).toEqual([
+      HOME_ANCHORS.home,
+      HOME_ANCHORS.howItWorks,
+      HOME_ANCHORS.templates,
+      HOME_ANCHORS.whyChoose,
+    ])
   })
 })

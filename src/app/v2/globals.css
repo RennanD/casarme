@@ -124,4 +124,12 @@
   .script {
     @apply font-script text-4xl leading-none lg:text-5xl;
   }
+
+  .skip-link {
+    @apply bg-primary text-primary-foreground absolute top-[-2.5rem] left-0 z-[100] px-3 py-2 no-underline;
+  }
+
+  .skip-link:focus {
+    @apply top-0;
+  }
 }

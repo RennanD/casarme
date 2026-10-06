@@ -22,6 +22,43 @@ export type HomeTestimonial = {
   imagePath: string
 }
 
+export type HomeHeroCollageImage = {
+  src: string
+  alt: string
+}
+
+export type HomeHeroCopy = {
+  headlineLead: string
+  scriptAccent: string
+  headlineTail: string
+  subcopy: string
+  ctaLabel: string
+}
+
+export const HOME_HERO: HomeHeroCopy = {
+  headlineLead: 'Seu Convite Digital',
+  scriptAccent: 'Interativo',
+  headlineTail: 'Pronto em 5 Minutos',
+  subcopy:
+    'Sem Canva, sem designers caros e sem complicação. Escolha um dos nossos modelos de luxo, preencha os dados e receba seu link interativo instantaneamente logo após o pagamento.',
+  ctaLabel: 'Criar Meu Convite',
+}
+
+export const HOME_HERO_COLLAGE: HomeHeroCollageImage[] = [
+  {
+    src: '/romantic-couple-wedding-photo-in-garden.jpg',
+    alt: 'Casal romântico em jardim com flores',
+  },
+  {
+    src: '/romantic-couple-wedding-natural-light-soft-focus.jpg',
+    alt: 'Casal celebrando o casamento com luz natural',
+  },
+  {
+    src: '/mockups.webp',
+    alt: 'Preview de convites digitais de casamento em diferentes modelos',
+  },
+]
+
 export const HOME_OBJECTIONS: HomeObjection[] = [
   {
     problem: 'Não tenho dinheiro para designer',
