@@ -45,8 +45,11 @@ export default async function CheckoutPage({ params }: CheckoutPageProps) {
     <CheckoutClient
       invitationId={invitationId}
       chargeId={charge.chargeId}
+      chargeStatus={charge.status}
+      expiresAt={charge.expiresAt}
       brCode={charge.brCode}
       brCodeBase64={charge.brCodeBase64}
+      devMode={charge.devMode}
       orderSummary={charge.orderSummary}
       brideName={invitation.brideName}
       groomName={invitation.groomName}
@@ -55,9 +58,6 @@ export default async function CheckoutPage({ params }: CheckoutPageProps) {
         <CheckoutInvitePreview
           data={previewData}
           previewLabel={CHECKOUT_COPY.previewLabel}
-          expandLabel={CHECKOUT_COPY.previewExpand}
-          modalTitle={CHECKOUT_COPY.previewModalTitle}
-          modalDescription={CHECKOUT_COPY.previewModalDescription}
         />
       }
     />

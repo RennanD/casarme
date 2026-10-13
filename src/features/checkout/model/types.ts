@@ -19,6 +19,8 @@ export type ChargeOrchestrationInput = {
   existingChargeId: string | null
   chargeStatus: TransparentChargeStatus | null
   expiresAt: string | null
+  brCode?: string | null
+  brCodeBase64?: string | null
   now?: Date
 }
 

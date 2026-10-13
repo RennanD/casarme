@@ -9,13 +9,29 @@ export type TransparentChargeData = {
   brCode: string
   brCodeBase64: string
   expiresAt: string | null
+  devMode?: boolean
   metadata?: Record<string, unknown>
 }
 
 type AbacatePayEnvelope<T> = {
   data: T | null
-  error: { message?: string } | null
+  error: string | { message?: string } | null
   success?: boolean | { message?: string }
+}
+
+function extractErrorMessage(
+  body: AbacatePayEnvelope<unknown>,
+  statusText: string,
+): string {
+  if (!body.error) {
+    return statusText
+  }
+
+  if (typeof body.error === 'string') {
+    return body.error
+  }
+
+  return body.error.message ?? statusText
 }
 
 function getApiKey(): string {
@@ -42,7 +58,7 @@ async function abacatePayRequest<T>(
   const body = (await response.json().catch(() => ({}))) as AbacatePayEnvelope<T>
 
   if (!response.ok) {
-    const message = body.error?.message ?? response.statusText
+    const message = extractErrorMessage(body, response.statusText)
     throw new Error(`AbacatePay v2 request failed: ${message}`)
   }
 
@@ -85,6 +101,22 @@ export async function getTransparentCharge(chargeId: string): Promise<Transparen
 
   if (!body.data) {
     throw new Error('AbacatePay v2 get returned empty data')
+  }
+
+  return body.data
+}
+
+export async function simulateTransparentPayment(chargeId: string): Promise<TransparentChargeData> {
+  const body = await abacatePayRequest<TransparentChargeData>(
+    `/transparents/simulate-payment?id=${encodeURIComponent(chargeId)}`,
+    {
+      method: 'POST',
+      body: JSON.stringify({ metadata: {} }),
+    },
+  )
+
+  if (!body.data) {
+    throw new Error('AbacatePay v2 simulate-payment returned empty data')
   }
 
   return body.data

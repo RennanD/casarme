@@ -5,7 +5,7 @@ import { WatermarkedPreviewShell } from './watermarked-preview-shell'
 
 type InvitePreviewProps = {
   data: InvitePreviewData
-  variant?: 'compact' | 'enlarged'
+  variant?: 'compact' | 'enlarged' | 'checkout'
   className?: string
 }
 

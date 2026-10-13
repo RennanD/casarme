@@ -8,7 +8,7 @@ import { cn } from '@/src/shared/lib/cn'
 type WatermarkedPreviewShellProps = {
   children: ReactNode
   className?: string
-  variant?: 'compact' | 'enlarged'
+  variant?: 'compact' | 'enlarged' | 'checkout'
 }
 
 const VARIANT_STYLES = {
@@ -16,6 +16,8 @@ const VARIANT_STYLES = {
     'scale-[0.65] origin-top opacity-75 blur-[1px] motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:blur-none',
   enlarged:
     'scale-[0.85] origin-top opacity-90 blur-[0.5px] motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:blur-none',
+  checkout:
+    'opacity-90 blur-[0.5px] motion-reduce:opacity-100 motion-reduce:blur-none lg:scale-[0.75] lg:origin-top motion-reduce:lg:scale-100',
 } as const
 
 export function WatermarkedPreviewShell({

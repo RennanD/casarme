@@ -22,6 +22,7 @@ export type InitializedCheckoutCharge = {
   brCode: string
   brCodeBase64: string
   expiresAt: string | null
+  devMode: boolean
   orderSummary: OrderSummary
 }
 
@@ -64,6 +65,8 @@ export async function initializeTransparentCharge(input: {
     existingChargeId: invitation.transparentChargeId,
     chargeStatus: existingCharge?.status ?? null,
     expiresAt: existingCharge?.expiresAt ?? null,
+    brCode: existingCharge?.brCode ?? null,
+    brCodeBase64: existingCharge?.brCodeBase64 ?? null,
   })
 
   if (action === 'reuse' && existingCharge) {
@@ -73,6 +76,7 @@ export async function initializeTransparentCharge(input: {
       brCode: existingCharge.brCode,
       brCodeBase64: existingCharge.brCodeBase64,
       expiresAt: existingCharge.expiresAt,
+      devMode: existingCharge.devMode ?? false,
       orderSummary,
     }
   }
@@ -96,6 +100,7 @@ export async function initializeTransparentCharge(input: {
     brCode: created.brCode,
     brCodeBase64: created.brCodeBase64,
     expiresAt: created.expiresAt,
+    devMode: created.devMode ?? false,
     orderSummary,
   }
 }

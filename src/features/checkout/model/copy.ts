@@ -7,12 +7,18 @@ export const CHECKOUT_COPY = {
     'Abra o app do seu banco, escolha pagar via PIX e cole o código abaixo ou escaneie o QR Code.',
   copyCode: 'Copiar código PIX',
   copied: 'Código copiado!',
+  pixExpiresPrefix: 'Este código expira em',
+  pixExpiredRefreshing: 'Código PIX expirado. Gerando um novo código…',
   awaitingPayment: 'Aguardando pagamento',
   previewLabel: 'Prévia do convite',
-  previewExpand: 'Ampliar prévia',
-  previewModalTitle: 'Prévia do convite',
-  previewModalDescription:
-    'Visualização protegida do convite. Complete o pagamento para liberar a versão final.',
+  previewScrollLink: 'Ver prévia do convite',
+  devModeBanner: 'Ambiente de testes — pagamento simulado via AbacatePay',
+  simulatePayment: 'Simular pagamento',
+  simulatePaymentLoading: 'Simulando pagamento…',
+  simulatePaymentError: 'Não foi possível simular o pagamento. Tente novamente.',
+  simulatePaymentExpired:
+    'Este PIX expirou. Recarregue a página para gerar um novo código e simular novamente.',
+  simulatePaymentNotPending: 'Só é possível simular pagamentos com PIX pendente.',
   backToHome: 'Voltar para modelos',
   totalLabel: 'Total',
 } as const

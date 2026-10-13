@@ -6,13 +6,31 @@ import { Button, Card } from '@/src/shared/ui'
 
 import { CHECKOUT_COPY } from '../model/copy'
 
+import { PixExpiryCountdown } from './pix-expiry-countdown'
+
 type PixPanelProps = {
   brCode: string
   brCodeBase64: string
+  expiresAt: string | null
+  invitationId: string
+  chargeId: string
+  chargeStatus: string
+  showSimulatePayment?: boolean
 }
 
-export function PixPanel({ brCode, brCodeBase64 }: PixPanelProps) {
+export function PixPanel({
+  brCode,
+  brCodeBase64,
+  expiresAt,
+  invitationId,
+  chargeId,
+  chargeStatus,
+  showSimulatePayment = false,
+}: PixPanelProps) {
   const [copied, setCopied] = useState(false)
+  const [simulating, setSimulating] = useState(false)
+  const [simulateError, setSimulateError] = useState<string | null>(null)
+  const canSimulate = showSimulatePayment && chargeStatus === 'PENDING'
 
   const handleCopy = useCallback(async () => {
     try {
@@ -24,9 +42,33 @@ export function PixPanel({ brCode, brCodeBase64 }: PixPanelProps) {
     }
   }, [brCode])
 
+  const handleSimulate = useCallback(async () => {
+    setSimulating(true)
+    setSimulateError(null)
+
+    try {
+      const response = await fetch('/api/payments/v2/simulate-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ invitationId, chargeId }),
+      })
+
+      if (!response.ok) {
+        const data = (await response.json().catch(() => ({}))) as { error?: string }
+        setSimulateError(data.error ?? CHECKOUT_COPY.simulatePaymentError)
+      }
+    } catch {
+      setSimulateError(CHECKOUT_COPY.simulatePaymentError)
+    } finally {
+      setSimulating(false)
+    }
+  }, [chargeId, invitationId])
+
   return (
     <Card className="gap-5 rounded-[18px] border border-border bg-card p-6 shadow-none">
       <p className="body-sm text-muted-foreground">{CHECKOUT_COPY.pixInstructions}</p>
+
+      <PixExpiryCountdown expiresAt={expiresAt} />
 
       <div className="flex justify-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -53,6 +95,39 @@ export function PixPanel({ brCode, brCodeBase64 }: PixPanelProps) {
       <Button type="button" onClick={handleCopy} className="w-full">
         {copied ? CHECKOUT_COPY.copied : CHECKOUT_COPY.copyCode}
       </Button>
+
+      <Button asChild variant="ghost" className="w-full lg:hidden">
+        <a
+          href="#invite-preview"
+          onClick={(event) => {
+            event.preventDefault()
+            document.getElementById('invite-preview')?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+            })
+          }}
+        >
+          {CHECKOUT_COPY.previewScrollLink}
+        </a>
+      </Button>
+
+      {showSimulatePayment ? (
+        <div className="space-y-2 border-t border-border pt-4">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleSimulate}
+            disabled={simulating || !canSimulate}
+            className="w-full"
+          >
+            {simulating ? CHECKOUT_COPY.simulatePaymentLoading : CHECKOUT_COPY.simulatePayment}
+          </Button>
+          {!canSimulate && chargeStatus !== 'PENDING' ? (
+            <p className="text-xs text-muted-foreground">{CHECKOUT_COPY.simulatePaymentExpired}</p>
+          ) : null}
+          {simulateError ? <p className="text-xs text-destructive">{simulateError}</p> : null}
+        </div>
+      ) : null}
     </Card>
   )
 }

@@ -49,8 +49,15 @@ export function buildOrderSummary(input: {
   }
 }
 
+export function hasCompletePixPayload(input: {
+  brCode?: string | null
+  brCodeBase64?: string | null
+}): boolean {
+  return Boolean(input.brCode?.trim() && input.brCodeBase64?.trim())
+}
+
 export function resolveChargeAction(input: ChargeOrchestrationInput): ChargeOrchestrationAction {
-  const { existingChargeId, chargeStatus, expiresAt, now = new Date() } = input
+  const { existingChargeId, chargeStatus, expiresAt, brCode, brCodeBase64, now = new Date() } = input
 
   if (!existingChargeId || !chargeStatus) {
     return 'create'
@@ -66,6 +73,9 @@ export function resolveChargeAction(input: ChargeOrchestrationInput): ChargeOrch
 
   if (chargeStatus === 'PENDING') {
     if (expiresAt && new Date(expiresAt) <= now) {
+      return 'create'
+    }
+    if (!hasCompletePixPayload({ brCode, brCodeBase64 })) {
       return 'create'
     }
     return 'reuse'

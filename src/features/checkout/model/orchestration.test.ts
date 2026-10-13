@@ -49,14 +49,40 @@ describe('checkout orchestration', () => {
     expect(summary.summaryLabel).toBe('Convite Azul + planner')
   })
 
-  it('reuses a pending charge that has not expired', () => {
+  it('reuses a pending charge that has not expired with complete PIX payload', () => {
     expect(
       resolveChargeAction({
         existingChargeId: 'pix_char_abc',
         chargeStatus: 'PENDING',
         expiresAt: new Date(Date.now() + 60_000).toISOString(),
+        brCode: '00020101021226950014br.gov.bcb.pix',
+        brCodeBase64: 'data:image/png;base64,iVBORw0KGgoAAA',
       }),
     ).toBe('reuse')
+  })
+
+  it('creates a new charge when pending charge has empty brCode', () => {
+    expect(
+      resolveChargeAction({
+        existingChargeId: 'pix_char_abc',
+        chargeStatus: 'PENDING',
+        expiresAt: new Date(Date.now() + 60_000).toISOString(),
+        brCode: '',
+        brCodeBase64: 'data:image/png;base64,iVBORw0KGgoAAA',
+      }),
+    ).toBe('create')
+  })
+
+  it('creates a new charge when pending charge has empty brCodeBase64', () => {
+    expect(
+      resolveChargeAction({
+        existingChargeId: 'pix_char_abc',
+        chargeStatus: 'PENDING',
+        expiresAt: new Date(Date.now() + 60_000).toISOString(),
+        brCode: '00020101021226950014br.gov.bcb.pix',
+        brCodeBase64: '',
+      }),
+    ).toBe('create')
   })
 
   it('creates a new charge when pending charge is expired', () => {
