@@ -1,11 +1,39 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 import { CreateInviteWizard, type CreateInviteTemplate } from '@/src/features/create-invite'
 import { HOME_CATALOG } from '@/src/features/home'
+import { resolveCreateInviteMetadataBySlug } from '@/src/shared/og-v2'
 
 type CreateInvitePageProps = {
   params: Promise<{ slug: string }>
+}
+
+export async function generateMetadata({ params }: CreateInvitePageProps): Promise<Metadata> {
+  const { slug } = await params
+  const metadataCopy = resolveCreateInviteMetadataBySlug(slug)
+
+  if (!metadataCopy) {
+    return {}
+  }
+
+  return {
+    title: metadataCopy.title,
+    description: metadataCopy.description,
+    openGraph: {
+      title: metadataCopy.title,
+      description: metadataCopy.description,
+      type: 'website',
+      locale: 'pt_BR',
+      siteName: 'CasarMe',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: metadataCopy.title,
+      description: metadataCopy.description,
+    },
+  }
 }
 
 export default async function CreateInvitePage({ params }: CreateInvitePageProps) {
