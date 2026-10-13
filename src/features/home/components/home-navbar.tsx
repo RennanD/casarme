@@ -20,14 +20,14 @@ export function HomeNavbar() {
 
         <div className="hidden items-center gap-[30px] md:flex">
           {NAV_SECTION_LINKS.map((link) => (
-            <Link key={link.anchorId} href={`#${link.anchorId}`} variant="nav" className="text-xs font-normal">
+            <Link key={link.anchorId} href={`#${link.anchorId}`} variant="nav" className="text-xs font-normal no-underline hover:no-underline">
               {link.label}
             </Link>
           ))}
         </div>
 
         <Button asChild className="hidden h-auto rounded-full px-[18px] py-3 text-xs md:inline-flex">
-          <Link href={templatesHref}>{NAVBAR_CTA_LABEL}</Link>
+          <Link href={templatesHref} className="no-underline hover:no-underline">{NAVBAR_CTA_LABEL}</Link>
         </Button>
 
         <button

@@ -88,7 +88,17 @@
   }
 
   a,
-  button {
+  a:hover,
+  a:focus,
+  a:active,
+  button,
+  button:hover,
+  button:focus,
+  button:active,
+  [data-slot='button'],
+  [data-slot='button']:hover,
+  [data-slot='link'],
+  [data-slot='link']:hover {
     text-decoration: none;
   }
 }

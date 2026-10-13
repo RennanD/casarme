@@ -68,3 +68,11 @@ export const HOME_CATALOG: CatalogTemplate[] = [
 export function getCatalogByProductLine(productLine: ProductLine): CatalogTemplate[] {
   return HOME_CATALOG.filter((entry) => entry.productLine === productLine)
 }
+
+export function getTemplateDemoHref(slug: string): string {
+  return `/exemplo/${slug}`
+}
+
+export function getTemplateCreateHref(slug: string): string {
+  return `/v2/criar/${slug}?step=1`
+}

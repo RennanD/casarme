@@ -1,7 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
 import { HOME_ANCHORS, NAVBAR_ANCHOR_TARGETS } from './anchors'
-import { HOME_CATALOG, PRODUCT_LINE_LABELS } from './catalog'
+import {
+  getTemplateCreateHref,
+  getTemplateDemoHref,
+  HOME_CATALOG,
+  PRODUCT_LINE_LABELS,
+} from './catalog'
 import {
   HOME_BENEFITS,
   HOME_BENEFIT_STRIP,
@@ -64,6 +69,13 @@ describe('home catalog', () => {
   it('labels both product lines for grouped display', () => {
     expect(PRODUCT_LINE_LABELS.interactive).toBe('Convites Digitais Interativos')
     expect(PRODUCT_LINE_LABELS.site).toBe('Convites no Modelo de Site')
+  })
+
+  it('builds demo and create hrefs from template slug', () => {
+    expect(getTemplateDemoHref('azul')).toBe('/exemplo/azul')
+    expect(getTemplateCreateHref('dourado')).toBe('/v2/criar/dourado?step=1')
+    expect(getTemplateCreateHref('garden')).toBe('/v2/criar/garden?step=1')
+    expect(getTemplateDemoHref('romantic')).toBe('/exemplo/romantic')
   })
 })
 

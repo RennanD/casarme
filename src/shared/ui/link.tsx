@@ -5,11 +5,11 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/src/shared/lib/cn'
 
 const linkVariants = cva(
-  'inline-flex items-center gap-1 rounded-sm transition-colors outline-none focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+  'inline-flex items-center gap-1 rounded-sm no-underline transition-colors outline-none hover:no-underline focus:no-underline focus-visible:ring-ring/50 focus-visible:ring-[3px]',
   {
     variants: {
       variant: {
-        default: 'text-primary underline-offset-4 hover:underline',
+        default: 'text-primary',
         muted: 'text-muted-foreground hover:text-foreground',
         nav: 'text-foreground font-medium hover:text-primary',
       },

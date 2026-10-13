@@ -1,6 +1,10 @@
 import Image from 'next/image'
 
-import type { CatalogTemplate } from '@/src/features/home/model/catalog'
+import {
+  getTemplateCreateHref,
+  getTemplateDemoHref,
+  type CatalogTemplate,
+} from '@/src/features/home/model/catalog'
 import { Button, Card, CardFooter, CardHeader, CardTitle, Link } from '@/src/shared/ui'
 
 type TemplateCardProps = {
@@ -29,12 +33,20 @@ export function TemplateCard({ template }: TemplateCardProps) {
         </CardHeader>
         <CardFooter className="mt-auto grid grid-cols-2 gap-2 px-1 pb-1 pt-1">
           <Button variant="outline" asChild className="h-9 rounded-full px-2 text-[10px]">
-            <Link href={`/exemplo/${template.slug}`} aria-label={`Ver demonstração do convite ${template.name}`}>
+            <Link
+              href={getTemplateDemoHref(template.slug)}
+              className="no-underline hover:no-underline"
+              aria-label={`Ver demonstração do convite ${template.name}`}
+            >
               Ver demonstração
             </Link>
           </Button>
           <Button asChild className="h-9 rounded-full px-2 text-[10px]">
-            <Link href={`/modelo/${template.slug}`} aria-label={`Criar convite ${template.name}`}>
+            <Link
+              href={getTemplateCreateHref(template.slug)}
+              className="no-underline hover:no-underline"
+              aria-label={`Criar convite ${template.name}`}
+            >
               Criar convite <span aria-hidden>→</span>
             </Link>
           </Button>
