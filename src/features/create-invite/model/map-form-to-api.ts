@@ -29,6 +29,7 @@ export type CreateInvitationPayload = {
   template: string
   email: string
   cpf: string
+  includePlanner: boolean
   isActive: false
   images?: {
     hero?: CreateInviteFormValues['images']['hero']
@@ -86,6 +87,7 @@ export function mapFormToApiPayload(
     template: resolveTemplateId(template),
     email: values.email,
     cpf: values.cpf,
+    includePlanner: values.includePlanner,
     isActive: false,
     images: buildImagesPayload(values.images),
   }

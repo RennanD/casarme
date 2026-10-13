@@ -34,6 +34,8 @@ model Invitation {
   isActive              Boolean   @default(false)
   billingId             String?   @unique
   billingUrl            String?
+  transparentChargeId   String?   @unique
+  includePlanner        Boolean   @default(false)
   cpf                   String?
   paidAt                DateTime?
   inviteType            String    @default("site")

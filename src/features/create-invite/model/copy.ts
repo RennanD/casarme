@@ -203,13 +203,6 @@ export const ORDER_SUMMARY_COPY = {
   totalLabel: 'TOTAL DO PEDIDO',
 } as const
 
-export const CHECKOUT_COPY = {
-  title: 'Quase lá!',
-  description: 'Seu convite foi criado. Em breve você poderá concluir o pagamento por PIX.',
-  pixComingSoon: 'Pagamento via PIX em breve — estamos finalizando esta etapa.',
-  orderSummary: 'Resumo do pedido',
-  backToHome: 'Voltar para modelos',
-} as const
-
-/** Matches home anchor id for the templates section — composed at app layer, not imported cross-feature. */
+/** Matches home anchor id for the templates section. */
 export const CHANGE_TEMPLATE_HREF = '/v2#templates'
+

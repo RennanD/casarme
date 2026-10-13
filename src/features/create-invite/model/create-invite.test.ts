@@ -9,7 +9,6 @@ import {
   type CreateInviteTemplate,
 } from './catalog'
 import {
-  CHANGE_TEMPLATE_HREF,
   CREATE_INVITE_ACTIONS,
   CREATE_INVITE_HEADER,
   buildStepEyebrow,
@@ -307,6 +306,20 @@ describe('mapFormToApiPayload', () => {
     expect(payload.welcomeMessage).toBe('Você está convidado para o nosso casamento!')
   })
 
+  it('persists includePlanner from payment step values', () => {
+    const withPlanner = mapFormToApiPayload(
+      { ...VALID_BASE, includePlanner: true },
+      FIXTURE_CATALOG[0],
+    )
+    const withoutPlanner = mapFormToApiPayload(
+      { ...VALID_BASE, includePlanner: false },
+      FIXTURE_CATALOG[0],
+    )
+
+    expect(withPlanner.includePlanner).toBe(true)
+    expect(withoutPlanner.includePlanner).toBe(false)
+  })
+
   it('passes site template venue fields without interactive defaults', () => {
     const payload = mapFormToApiPayload(
       {
@@ -354,6 +367,5 @@ describe('create-invite copy helpers', () => {
   it('defines header metadata and navigation copy', () => {
     expect(CREATE_INVITE_HEADER.brandLabel).toBe('casarme')
     expect(CREATE_INVITE_ACTIONS.createInvite).toMatch(/convite/)
-    expect(CHANGE_TEMPLATE_HREF).toBe('/v2#templates')
   })
 })

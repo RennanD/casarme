@@ -16,3 +16,15 @@ export { Input } from './input'
 export { Label } from './label'
 export { Link, linkVariants } from './link'
 export { Separator } from './separator'
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+} from './dialog'
