@@ -4,6 +4,9 @@ export const HOME_ANCHORS = {
   home: 'home',
   templates: 'templates',
   howItWorks: 'como-funciona',
+  demo: 'demonstracao',
+  guestExperience: 'experiencia-convidados',
+  faq: 'duvidas',
   whyChoose: 'por-que-escolher',
 } as const
 
@@ -13,7 +16,8 @@ export const NAVBAR_ANCHOR_TARGETS = {
   home: HOME_ANCHORS.home,
   howItWorks: HOME_ANCHORS.howItWorks,
   templates: HOME_ANCHORS.templates,
-  whyChoose: HOME_ANCHORS.whyChoose,
+  demo: HOME_ANCHORS.demo,
+  faq: HOME_ANCHORS.faq,
   navigation: HOME_ANCHORS.navigation,
   mainContent: HOME_ANCHORS.mainContent,
 } as const

@@ -3,7 +3,7 @@ import {
   HOME_OBJECTION_SECTION,
   HOME_OBJECTIONS,
 } from '@/src/features/home/model/copy'
-import { Button, Link } from '@/src/shared/ui'
+import { Button, Card, CardContent, Link } from '@/src/shared/ui'
 
 export function ObjectionBreakerSection() {
   const templatesHref = `#${HOME_ANCHORS.templates}`
@@ -13,13 +13,13 @@ export function ObjectionBreakerSection() {
       className="bg-secondary px-4 py-16 sm:py-24"
       aria-labelledby="objection-title"
     >
-      <div className="mx-auto max-w-6xl">
-        <h2 id="objection-title" className="h2 mb-12 text-center md:mb-16">
+      <div className="mx-auto max-w-6xl space-y-10">
+        <h2 id="objection-title" className="h2 text-center">
           {HOME_OBJECTION_SECTION.title}
         </h2>
 
         <div
-          className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12"
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0"
           role="list"
           aria-label="Objeções comuns e soluções"
         >
@@ -27,46 +27,30 @@ export function ObjectionBreakerSection() {
             <article
               key={objection.problem}
               role="listitem"
-              className="bg-card rounded-2xl p-6 shadow-lg sm:p-8"
+              className="w-[85vw] shrink-0 snap-start sm:w-[320px] lg:w-auto"
             >
-              <div className="mb-6 flex items-start gap-4">
-                <div
-                  className="flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100"
-                  aria-hidden
-                >
-                  <span className="text-2xl leading-none">❌</span>
-                </div>
-                <div>
-                  <h3 className="mb-2 font-serif text-xl font-bold">
-                    &ldquo;{objection.problem}&rdquo;
-                  </h3>
-                  <p className="body-sm text-muted-foreground">
-                    {objection.problemDescription}
-                  </p>
-                </div>
-              </div>
+              <Card className="h-full border-none bg-card py-0 shadow-md transition-shadow hover:shadow-lg motion-reduce:transition-none">
+                <CardContent className="space-y-4 p-5">
+                  <div className="space-y-2">
+                    <p className="body-sm text-destructive font-medium">
+                      &ldquo;{objection.problem}&rdquo;
+                    </p>
+                    <p className="muted">{objection.problemDescription}</p>
+                  </div>
 
-              <div className="flex items-start gap-4">
-                <div
-                  className="flex size-12 shrink-0 items-center justify-center rounded-full bg-green-100"
-                  aria-hidden
-                >
-                  <span className="text-2xl leading-none">✅</span>
-                </div>
-                <div>
-                  <p className="mb-2 font-serif text-lg font-bold">
-                    {HOME_OBJECTION_SECTION.solutionLabel}
-                  </p>
-                  <p className="body-sm text-muted-foreground">
-                    {objection.solution}
-                  </p>
-                </div>
-              </div>
+                  <div className="border-border space-y-2 border-t pt-4">
+                    <p className="body-sm text-primary font-semibold">
+                      {HOME_OBJECTION_SECTION.solutionLabel}
+                    </p>
+                    <p className="body-sm">{objection.solution}</p>
+                  </div>
+                </CardContent>
+              </Card>
             </article>
           ))}
         </div>
 
-        <div className="mt-12 space-y-6 text-center md:mt-16">
+        <div className="space-y-6 text-center">
           <p className="font-serif text-2xl font-bold">
             {HOME_OBJECTION_SECTION.ctaHeading}
           </p>

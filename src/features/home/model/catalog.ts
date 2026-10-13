@@ -20,17 +20,6 @@ export const PRODUCT_LINE_LABELS: Record<ProductLine, string> = {
 
 export const HOME_CATALOG: CatalogTemplate[] = [
   {
-    id: 'golden',
-    name: 'Dourado',
-    description:
-      'Modelo de convite interativo com design minimalista e foco na usabilidade mobile.',
-    plan: 'Premium',
-    displayPrice: 'R$ 25,90',
-    imagePath: '/images/thumbs/golden/01.png',
-    productLine: 'interactive',
-    slug: 'dourado',
-  },
-  {
     id: 'blue',
     name: 'Azul',
     description:
@@ -40,6 +29,17 @@ export const HOME_CATALOG: CatalogTemplate[] = [
     imagePath: '/images/thumbs/blue/01.png',
     productLine: 'interactive',
     slug: 'azul',
+  },
+  {
+    id: 'golden',
+    name: 'Dourado',
+    description:
+      'Modelo de convite interativo com design minimalista e foco na usabilidade mobile.',
+    plan: 'Premium',
+    displayPrice: 'R$ 25,90',
+    imagePath: '/images/thumbs/golden/01.png',
+    productLine: 'interactive',
+    slug: 'dourado',
   },
   {
     id: 'garden',

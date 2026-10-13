@@ -4,13 +4,22 @@ import { HOME_ANCHORS, NAVBAR_ANCHOR_TARGETS } from './anchors'
 import { HOME_CATALOG, PRODUCT_LINE_LABELS } from './catalog'
 import {
   HOME_BENEFITS,
+  HOME_BENEFIT_STRIP,
+  HOME_BENTO_FEATURES,
+  HOME_FAQ,
+  HOME_FINAL_CTA,
+  HOME_FOOTER,
   HOME_HERO,
   HOME_HERO_COLLAGE,
   HOME_HOW_IT_WORKS_SECTION,
   HOME_HOW_IT_WORKS_STEPS,
   HOME_OBJECTION_SECTION,
   HOME_OBJECTIONS,
+  HOME_TEMPLATE_SECTION,
   HOME_TESTIMONIALS,
+  HOME_TESTIMONIALS_SECTION,
+  HOME_WHATSAPP_SECTION,
+  HOME_WHY_CHOOSE_SECTION,
 } from './copy'
 import { NAV_SECTION_LINKS } from './navigation'
 import { HOME_SECTION_ORDER } from './sections'
@@ -63,13 +72,14 @@ describe('home section order', () => {
     expect([...HOME_SECTION_ORDER]).toEqual([
       'navbar',
       'hero',
-      'category-nav',
-      'templates',
-      'objection-breaker',
       'how-it-works',
-      'whatsapp-spotlight',
-      'why-choose',
-      'testimonials',
+      'templates',
+      'before-celebration',
+      'product-demo',
+      'feature-bento',
+      'guest-experience',
+      'permanent-purchase',
+      'faq',
       'final-cta',
       'footer',
     ])
@@ -82,7 +92,8 @@ describe('home anchor registry', () => {
       home: HOME_ANCHORS.home,
       howItWorks: HOME_ANCHORS.howItWorks,
       templates: HOME_ANCHORS.templates,
-      whyChoose: HOME_ANCHORS.whyChoose,
+      demo: HOME_ANCHORS.demo,
+      faq: HOME_ANCHORS.faq,
       navigation: HOME_ANCHORS.navigation,
       mainContent: HOME_ANCHORS.mainContent,
     })
@@ -129,16 +140,15 @@ describe('home funnel section copy', () => {
 })
 
 describe('home hero copy', () => {
-  it('includes display/script headline parts and value-prop subcopy from v1', () => {
-    expect(HOME_HERO.headlineLead).toBe('Seu Convite Digital')
-    expect(HOME_HERO.scriptAccent).toBe('Interativo')
-    expect(HOME_HERO.headlineTail).toMatch(/5 Minutos/)
-    expect(HOME_HERO.subcopy).toMatch(/Canva/)
-    expect(HOME_HERO.ctaLabel).toBe('Criar Meu Convite')
+  it('includes the editorial headline, eyebrow, and CTA from the desktop design', () => {
+    expect(HOME_HERO.eyebrow).toBe('CONVITES DIGITAIS DE CASAMENTO')
+    expect(HOME_HERO.headline).toMatch(/história merece um convite à altura/)
+    expect(HOME_HERO.body).toMatch(/Escolham um modelo/)
+    expect(HOME_HERO.ctaLabel).toBe('Criar meu convite  →')
   })
 
-  it('defines 3 collage images with meaningful alt text', () => {
-    expect(HOME_HERO_COLLAGE).toHaveLength(3)
+  it('defines 2 desktop collage images with meaningful alt text', () => {
+    expect(HOME_HERO_COLLAGE).toHaveLength(2)
 
     for (const image of HOME_HERO_COLLAGE) {
       expect(image.src.length).toBeGreaterThan(0)
@@ -148,13 +158,50 @@ describe('home hero copy', () => {
 })
 
 describe('home navbar links', () => {
-  it('maps four section links to anchor registry ids', () => {
-    expect(NAV_SECTION_LINKS).toHaveLength(4)
+  it('maps desktop navigation links to anchor registry ids', () => {
+    expect(NAV_SECTION_LINKS).toHaveLength(3)
     expect(NAV_SECTION_LINKS.map((link) => link.anchorId)).toEqual([
-      HOME_ANCHORS.home,
-      HOME_ANCHORS.howItWorks,
       HOME_ANCHORS.templates,
-      HOME_ANCHORS.whyChoose,
+      HOME_ANCHORS.howItWorks,
+      HOME_ANCHORS.faq,
     ])
+  })
+})
+
+describe('home section titles and funnel copy', () => {
+  it('defines template section title and subtitle', () => {
+    expect(HOME_TEMPLATE_SECTION.title.length).toBeGreaterThan(0)
+    expect(HOME_TEMPLATE_SECTION.subtitle.length).toBeGreaterThan(0)
+  })
+
+  it('defines whatsapp section with 3 benefits and aligned CTAs', () => {
+    expect(HOME_WHATSAPP_SECTION.title.length).toBeGreaterThan(0)
+    expect(HOME_WHATSAPP_SECTION.painBody.length).toBeGreaterThan(0)
+    expect(HOME_WHATSAPP_SECTION.benefits).toHaveLength(3)
+    expect(HOME_WHATSAPP_SECTION.secondaryCtaLabel).toBe(HOME_HERO.ctaLabel)
+    expect(HOME_WHATSAPP_SECTION.imagePath.length).toBeGreaterThan(0)
+  })
+
+  it('defines why-choose and testimonials section titles', () => {
+    expect(HOME_WHY_CHOOSE_SECTION.title.length).toBeGreaterThan(0)
+    expect(HOME_TESTIMONIALS_SECTION.title.length).toBeGreaterThan(0)
+  })
+
+  it('defines final CTA aligned with hero CTA label', () => {
+    expect(HOME_FINAL_CTA.title.length).toBeGreaterThan(0)
+    expect(HOME_FINAL_CTA.ctaLabel.length).toBeGreaterThan(0)
+  })
+
+  it('defines footer brand and copyright', () => {
+    expect(HOME_FOOTER.brandName).toBe('CasarMe')
+    expect(HOME_FOOTER.copyright.length).toBeGreaterThan(0)
+  })
+})
+
+describe('desktop Home Redesigned feature content', () => {
+  it('defines four Bento features, two shared benefits, and four FAQ entries', () => {
+    expect(HOME_BENTO_FEATURES).toHaveLength(4)
+    expect(HOME_BENEFIT_STRIP).toHaveLength(2)
+    expect(HOME_FAQ).toHaveLength(5)
   })
 })

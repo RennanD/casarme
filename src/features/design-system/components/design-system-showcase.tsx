@@ -1,342 +1,129 @@
-import { Plus } from 'lucide-react'
-
-import {
-  Badge,
-  Button,
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Input,
-  Label,
-  Link,
-  Separator,
-} from '@/src/shared/ui'
+import { Button, Input, Label } from '@/src/shared/ui'
 
 import { BrandTokensSection } from './brand-tokens-section'
 
-const typographySamples = [
-  {
-    className: 'display',
-    label: 'display',
-    sample: 'Convite digital elegante',
-  },
-  {
-    className: 'h1',
-    label: 'h1',
-    sample: 'Heading level 1',
-  },
-  {
-    className: 'h2',
-    label: 'h2',
-    sample: 'Heading level 2',
-  },
-  {
-    className: 'h3',
-    label: 'h3',
-    sample: 'Heading level 3',
-  },
-  {
-    className: 'script',
-    label: 'script',
-    sample: 'Com amor, Maria & João',
-  },
-  {
-    className: 'lead',
-    label: 'lead',
-    sample:
-      'Texto introdutório para seções — maior que body, cor muted para hierarquia suave.',
-  },
-  {
-    className: 'body',
-    label: 'body',
-    sample:
-      'Corpo padrão para parágrafos e conteúdo. Use em blocos de texto, descrições e labels longos.',
-  },
-  {
-    className: 'body-sm',
-    label: 'body-sm',
-    sample: 'Texto auxiliar compacto — metadados, captions e detalhes secundários.',
-  },
-  {
-    className: 'muted',
-    label: 'muted',
-    sample: 'Texto desativado ou de apoio com cor muted-foreground.',
-  },
-] as const
-
-const buttonVariants = [
-  'default',
-  'secondary',
-  'outline',
-  'ghost',
-  'destructive',
-  'link',
-] as const
-
-const badgeVariants = ['default', 'secondary', 'outline', 'destructive'] as const
-
-const linkVariants = ['default', 'muted', 'nav'] as const
-
 export function DesignSystemShowcase() {
   return (
-    <main className="mx-auto max-w-4xl space-y-16 px-6 py-12">
-      <header className="space-y-3 border-b border-border pb-10">
-        <p className="body-sm text-muted-foreground">CasarMe v2 · Internal</p>
-        <h1 className="display">Design System</h1>
-        <p className="lead">
-          Referência visual para tokens, tipografia e primitivos da v2.
+    <main className="mx-auto max-w-[1280px] pb-12">
+      <header className="space-y-4 px-6 py-12 md:px-10 md:py-[54px] xl:px-16">
+        <p className="text-[11px] font-semibold tracking-[0.13em] text-muted-foreground">
+          CASARME / DESIGN SYSTEM / VERSÃO 02
+        </p>
+        <h1 className="font-serif text-4xl font-normal tracking-tight text-foreground md:text-5xl">
+          Dourado suave
+        </h1>
+        <p className="max-w-3xl text-base leading-7 text-muted-foreground">
+          Uma base mais leve para deixar o convite no centro. O dourado do Casarme
+          assume o papel de ação e detalhe.
         </p>
       </header>
 
       <BrandTokensSection />
 
-      <section aria-labelledby="typography-heading" className="space-y-8">
-        <div className="space-y-2">
-          <h2 id="typography-heading" className="h2">
-            Typography
+      <section
+        aria-labelledby="typography-heading"
+        className="grid gap-10 bg-card px-6 py-10 md:min-h-[440px] md:grid-cols-2 md:items-center md:gap-10 md:px-10 md:py-8 lg:grid-cols-[minmax(0,470px)_minmax(0,1fr)] lg:gap-[54px] xl:px-16"
+      >
+        <div className="space-y-4">
+          <p className="text-[11px] font-semibold tracking-[0.12em] text-muted-foreground">
+            02 / TIPOGRAFIA
+          </p>
+          <h2 id="typography-heading" className="sr-only">
+            Tipografia
           </h2>
-          <p className="body text-muted-foreground">
-            Utilitários CSS em{' '}
-            <code className="font-mono text-sm">@layer components</code>.
-            Aplique as classes diretamente — sem componentes React de tipografia.
+          <p className="max-w-md text-sm leading-6 text-muted-foreground">
+            Serif para emoção e títulos. Inter para clareza, formulários e
+            informações práticas.
           </p>
         </div>
 
-        <ul className="divide-y divide-border">
-          {typographySamples.map(({ className, label, sample }) => (
-            <li key={label} className="grid gap-4 py-8 md:grid-cols-[8rem_1fr]">
-              <div className="space-y-1">
-                <p className="font-mono text-xs uppercase tracking-wide text-muted-foreground">
-                  .{label}
-                </p>
-              </div>
-              <p className={className}>{sample}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="space-y-3">
+          <p className="font-serif text-3xl leading-[1.08] text-foreground md:text-4xl">
+            O dia de vocês,
+            <br />
+            do jeito de vocês.
+          </p>
+          <p className="text-[15px] text-foreground">
+            Convites digitais feitos para celebrar cada detalhe.
+          </p>
+          <p className="text-[11px] font-semibold tracking-[0.09em] text-muted-foreground">
+            LEGENDA · 11PX · INTER SEMIBOLD
+          </p>
+        </div>
       </section>
 
-      <section aria-labelledby="buttons-heading" className="space-y-8">
-        <div className="space-y-2">
-          <h2 id="buttons-heading" className="h2">
-            Buttons
+      <section
+        aria-labelledby="buttons-heading"
+        className="space-y-6 px-6 py-[38px] md:min-h-[460px] md:px-10 xl:px-16"
+      >
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-5">
+          <p className="text-[11px] font-semibold tracking-[0.12em] text-muted-foreground">
+            03 / BOTÕES
+          </p>
+          <h2 id="buttons-heading" className="sr-only">
+            Botões
           </h2>
-          <p className="body text-muted-foreground">
-            Variantes e tamanhos para ações e CTAs. Ícones via{' '}
-            <code className="font-mono text-sm">lucide-react</code>.
+          <p className="text-[13px] text-muted-foreground">
+          Ação principal em dourado · texto branco.
           </p>
         </div>
 
-        <div className="space-y-10">
-          <div className="space-y-4">
-            <p className="body-sm font-mono text-muted-foreground">variants</p>
-            <div className="flex flex-wrap gap-3">
-              {buttonVariants.map((variant) => (
-                <Button key={variant} variant={variant}>
-                  {variant}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <p className="body-sm font-mono text-muted-foreground">sizes</p>
-            <div className="flex flex-wrap items-center gap-3">
-              <Button size="default">default</Button>
-              <Button size="sm">sm</Button>
-              <Button size="lg">lg</Button>
-              <Button size="icon" aria-label="Adicionar">
-                <Plus />
-              </Button>
-              <Button size="icon-sm" aria-label="Adicionar">
-                <Plus />
-              </Button>
-              <Button size="icon-lg" aria-label="Adicionar">
-                <Plus />
-              </Button>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <p className="body-sm font-mono text-muted-foreground">disabled</p>
-            <div className="flex flex-wrap gap-3">
-              <Button disabled>default</Button>
-              <Button variant="secondary" disabled>
-                secondary
-              </Button>
-              <Button variant="outline" disabled>
-                outline
-              </Button>
-            </div>
-          </div>
+        <div className="flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+          <Button size="lg" className="w-[270px]">
+            Criar meu convite&nbsp; →
+          </Button>
+          <Button variant="outline" size="lg" className="w-[220px]">
+            Ver demonstração
+          </Button>
+          <Button
+            variant="ghost"
+            size="lg"
+            className="px-0 text-[13px] font-semibold text-foreground"
+          >
+            Voltar e editar&nbsp; ←
+          </Button>
         </div>
+
+        <p className="text-[13px] leading-6 text-muted-foreground">
+          Primário: iniciar, continuar e pagar. · Secundário: explorar e voltar. ·
+          Altura mínima: 48px.
+        </p>
       </section>
 
-      <section aria-labelledby="badges-heading" className="space-y-8">
-        <div className="space-y-2">
-          <h2 id="badges-heading" className="h2">
-            Badges
+      <section
+        aria-labelledby="forms-heading"
+        className="grid gap-8 bg-secondary px-6 py-8 md:min-h-[430px] md:grid-cols-[minmax(0,430px)_minmax(0,520px)] md:items-center md:gap-12 md:px-10 md:py-9 xl:px-16"
+      >
+        <div className="space-y-4">
+          <p className="text-[11px] font-semibold tracking-[0.12em] text-muted-foreground">
+            04 / FORMULÁRIOS
+          </p>
+          <h2 id="forms-heading" className="sr-only">
+            Formulários
           </h2>
-          <p className="body text-muted-foreground">
-            Etiquetas de status e tags compactas.
+          <p className="max-w-md text-sm leading-6 text-muted-foreground">
+            Campos claros, rótulos sempre visíveis e fundos quase brancos para
+            manter a leitura leve.
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-3">
-          {badgeVariants.map((variant) => (
-            <Badge key={variant} variant={variant}>
-              {variant}
-            </Badge>
-          ))}
+        <div className="min-h-[104px] space-y-2 rounded-xl border border-border bg-card p-4">
+          <Label htmlFor="design-system-email" className="text-xs font-semibold">
+            E-mail <span aria-hidden="true">*</span>
+          </Label>
+          <Input
+            id="design-system-email"
+            type="email"
+            placeholder="seuemail@exemplo.com"
+            aria-required="true"
+            className="border-transparent bg-transparent px-0 shadow-none focus-visible:border-transparent"
+          />
         </div>
       </section>
 
-      <section aria-labelledby="cards-heading" className="space-y-8">
-        <div className="space-y-2">
-          <h2 id="cards-heading" className="h2">
-            Cards
-          </h2>
-          <p className="body text-muted-foreground">
-            Blocos de conteúdo compostos — header, title, description, content,
-            footer e action.
-          </p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2">
-          <Card>
-            <CardHeader>
-              <CardTitle>Convite básico</CardTitle>
-              <CardDescription>
-                Plano ideal para casamentos íntimos com até 50 convidados.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="body-sm text-muted-foreground">
-                RSVP, mapa do local e contagem regressiva inclusos.
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Button size="sm">Ver detalhes</Button>
-            </CardFooter>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Convite premium</CardTitle>
-              <CardDescription>
-                Recursos avançados para eventos maiores.
-              </CardDescription>
-              <CardAction>
-                <Badge variant="secondary">Popular</Badge>
-              </CardAction>
-            </CardHeader>
-            <CardContent>
-              <p className="body-sm text-muted-foreground">
-                Galeria de fotos, playlist colaborativa e domínio personalizado.
-              </p>
-            </CardContent>
-            <CardFooter className="gap-2">
-              <Button variant="outline" size="sm">
-                Comparar
-              </Button>
-              <Button size="sm">Escolher plano</Button>
-            </CardFooter>
-          </Card>
-        </div>
-      </section>
-
-      <section aria-labelledby="links-heading" className="space-y-8">
-        <div className="space-y-2">
-          <h2 id="links-heading" className="h2">
-            Links
-          </h2>
-          <p className="body text-muted-foreground">
-            Navegação interna com{' '}
-            <code className="font-mono text-sm">next/link</code> e variantes CVA.
-          </p>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-6">
-          {linkVariants.map((variant) => (
-            <Link key={variant} href="/v2/design-system" variant={variant}>
-              {variant}
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section aria-labelledby="forms-heading" className="space-y-8">
-        <div className="space-y-2">
-          <h2 id="forms-heading" className="h2">
-            Forms
-          </h2>
-          <p className="body text-muted-foreground">
-            Campos de formulário com{' '}
-            <code className="font-mono text-sm">Input</code> e{' '}
-            <code className="font-mono text-sm">Label</code> alinhados aos tokens
-            semânticos.
-          </p>
-        </div>
-
-        <div className="grid max-w-md gap-6">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="guest-name">Nome do convidado</Label>
-            <Input id="guest-name" placeholder="Maria Silva" />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="guest-email">E-mail</Label>
-            <Input id="guest-email" type="email" placeholder="maria@email.com" />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="guest-count">Número de acompanhantes</Label>
-            <Input id="guest-count" type="number" min={0} defaultValue={0} />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="guest-disabled">Campo desabilitado</Label>
-            <Input id="guest-disabled" disabled placeholder="Indisponível" />
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="separator-heading" className="space-y-8">
-        <div className="space-y-2">
-          <h2 id="separator-heading" className="h2">
-            Separator
-          </h2>
-          <p className="body text-muted-foreground">
-            Divisor padrão para quebras de seção — horizontal ou vertical.
-          </p>
-        </div>
-
-        <div className="space-y-8">
-          <div className="space-y-4">
-            <p className="body-sm font-mono text-muted-foreground">horizontal</p>
-            <div className="space-y-4">
-              <p className="body">Conteúdo acima do divisor</p>
-              <Separator />
-              <p className="body">Conteúdo abaixo do divisor</p>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <p className="body-sm font-mono text-muted-foreground">vertical</p>
-            <div className="flex h-10 items-center gap-4">
-              <span className="body">Esquerda</span>
-              <Separator orientation="vertical" />
-              <span className="body">Centro</span>
-              <Separator orientation="vertical" />
-              <span className="body">Direita</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <footer className="px-6 pt-8 text-[10px] font-semibold tracking-[0.1em] text-muted-foreground md:px-10 xl:px-16">
+        CASARME · PLAYFAIR DISPLAY + INTER · PALETA BASEADA NO DOURADO PRIMARY
+      </footer>
     </main>
   )
 }

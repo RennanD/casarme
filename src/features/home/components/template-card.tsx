@@ -1,8 +1,7 @@
 import Image from 'next/image'
 
-import { HOME_ANCHORS } from '@/src/features/home/model/anchors'
 import type { CatalogTemplate } from '@/src/features/home/model/catalog'
-import { Badge, Button, Card, CardContent, CardFooter, CardHeader, CardTitle, Link } from '@/src/shared/ui'
+import { Button, Card, CardFooter, CardHeader, CardTitle, Link } from '@/src/shared/ui'
 
 type TemplateCardProps = {
   template: CatalogTemplate
@@ -10,45 +9,35 @@ type TemplateCardProps = {
 
 export function TemplateCard({ template }: TemplateCardProps) {
   return (
-    <article role="listitem">
-      <Card className="overflow-hidden py-0 transition-shadow hover:shadow-md">
-        <div className="bg-secondary/40 p-3">
-          <figure className="relative aspect-square overflow-hidden rounded-lg">
-            <Image
-              src={template.imagePath}
-              alt={`Preview do modelo ${template.name}`}
-              fill
-              className="object-cover"
-              loading="lazy"
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            />
-          </figure>
-        </div>
-
-        <CardHeader className="gap-3 px-4 pt-4 pb-0">
-          <div className="flex items-start justify-between gap-3">
-            <CardTitle className="h3">{template.name}</CardTitle>
-            <Badge variant={template.plan === 'Básico' ? 'secondary' : 'default'}>
-              {template.plan}
-            </Badge>
-          </div>
-          <p className="text-primary text-2xl font-bold">{template.displayPrice}</p>
+    <article role="listitem" className="h-full">
+      <Card className="h-[420px] gap-2 overflow-hidden rounded-[21px] border-0 bg-card p-3 py-3 shadow-[0_4px_16px_#3e3e3e12]">
+        <figure className="relative h-[250px] shrink-0 overflow-hidden rounded-[9px] bg-card">
+          <Image
+            src={template.imagePath}
+            alt={`Prévia do convite ${template.name}`}
+            fill
+            className="object-contain"
+            loading="lazy"
+            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+          />
+        </figure>
+        <CardHeader className="gap-1 px-1 pt-1 pb-0">
+          <CardTitle className="font-serif text-xl font-normal">{template.name}</CardTitle>
+          <p className="text-[11px] font-normal text-muted-foreground">
+            {template.displayPrice} <span>· pagamento único</span>
+          </p>
         </CardHeader>
-
-        <CardContent className="px-4">
-          <p className="body-sm text-muted-foreground line-clamp-2">{template.description}</p>
-        </CardContent>
-
-        <CardFooter className="px-4 pb-6">
-          <Link
-            href={`#${HOME_ANCHORS.templates}`}
-            aria-label={`Escolher modelo ${template.name}`}
-            className="w-full"
-          >
-            <Button className="w-full rounded-full" type="button">
-              Escolher este modelo
-            </Button>
-          </Link>
+        <CardFooter className="mt-auto grid grid-cols-2 gap-2 px-1 pb-1 pt-1">
+          <Button variant="outline" asChild className="h-9 rounded-full px-2 text-[10px]">
+            <Link href={`/exemplo/${template.slug}`} aria-label={`Ver demonstração do convite ${template.name}`}>
+              Ver demonstração
+            </Link>
+          </Button>
+          <Button asChild className="h-9 rounded-full px-2 text-[10px]">
+            <Link href={`/modelo/${template.slug}`} aria-label={`Criar convite ${template.name}`}>
+              Criar convite <span aria-hidden>→</span>
+            </Link>
+          </Button>
         </CardFooter>
       </Card>
     </article>

@@ -6,12 +6,11 @@ export type NavSectionLink = {
 }
 
 export const NAV_SECTION_LINKS: NavSectionLink[] = [
-  { label: 'Home', anchorId: HOME_ANCHORS.home },
-  { label: 'Como Funciona', anchorId: HOME_ANCHORS.howItWorks },
   { label: 'Modelos', anchorId: HOME_ANCHORS.templates },
-  { label: 'Por que escolher', anchorId: HOME_ANCHORS.whyChoose },
+  { label: 'Como funciona', anchorId: HOME_ANCHORS.howItWorks },
+  { label: 'Dúvidas', anchorId: HOME_ANCHORS.faq },
 ]
 
 export const GODPARENT_INVITE_PATH = '/convite-padrinhos'
 
-export const NAVBAR_CTA_LABEL = 'Criar Meu Convite'
+export const NAVBAR_CTA_LABEL = 'Criar meu convite  →'
