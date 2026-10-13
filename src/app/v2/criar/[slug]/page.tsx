@@ -19,9 +19,12 @@ export default async function CreateInvitePage({ params }: CreateInvitePageProps
 
   const template: CreateInviteTemplate = {
     slug: catalogEntry.slug,
+    id: catalogEntry.id,
     name: catalogEntry.name,
     displayPrice: catalogEntry.displayPrice,
     imagePath: catalogEntry.imagePath,
+    productLine: catalogEntry.productLine,
+    plan: catalogEntry.plan,
   }
 
   return (

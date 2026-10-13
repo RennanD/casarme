@@ -1,17 +1,23 @@
 import {
   CREATE_INVITE_EYEBROW,
-  CREATE_INVITE_INTRO,
+  getIntroCopy,
 } from '@/src/features/create-invite/model/copy'
-import type { WizardStep } from '@/src/features/create-invite/model/steps'
+import type { StepKind, WizardConfig, WizardStep } from '@/src/features/create-invite/model/wizard-config'
 
 import { CreateInviteStepper } from './create-invite-stepper'
 
 type CreateInviteIntroProps = {
+  config: WizardConfig
   currentStep: WizardStep
+  currentKind: StepKind
 }
 
-export function CreateInviteIntro({ currentStep }: CreateInviteIntroProps) {
-  const intro = CREATE_INVITE_INTRO[currentStep]
+export function CreateInviteIntro({
+  config,
+  currentStep,
+  currentKind,
+}: CreateInviteIntroProps) {
+  const intro = getIntroCopy(currentKind)
 
   return (
     <section className="mx-auto flex w-full max-w-[1440px] flex-col gap-2.5 px-5 pt-8 pb-5 lg:px-[120px] lg:pt-[34px]">
@@ -22,7 +28,7 @@ export function CreateInviteIntro({ currentStep }: CreateInviteIntroProps) {
         {intro.title}
       </h1>
       <p className="body-sm text-muted-foreground">{intro.description}</p>
-      <CreateInviteStepper currentStep={currentStep} />
+      <CreateInviteStepper config={config} currentStep={currentStep} />
     </section>
   )
 }

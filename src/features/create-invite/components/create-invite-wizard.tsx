@@ -2,27 +2,31 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
+import {
+  clearCreateInviteDraft,
+  useCreateInviteDraft,
+} from '@/src/features/create-invite/hooks/use-create-invite-draft'
 import type { CreateInviteTemplate } from '@/src/features/create-invite/model/catalog'
-import { CREATE_INVITE_DEFAULT_VALUES } from '@/src/features/create-invite/model/defaults'
+import { getDefaultValuesForTemplate } from '@/src/features/create-invite/model/defaults'
+import { mapFormToApiPayload } from '@/src/features/create-invite/model/map-form-to-api'
+import { CREATE_INVITE_ACTIONS } from '@/src/features/create-invite/model/copy'
+import type { CreateInviteFormValues } from '@/src/features/create-invite/model/schemas'
+import { buildStepHref, parseStep } from '@/src/features/create-invite/model/steps'
 import {
-  createInviteFormSchema,
-  type CreateInviteFormValues,
-} from '@/src/features/create-invite/model/schemas'
-import {
-  buildStepHref,
-  parseStep,
-  STEP_FIELDS,
+  getStepKind,
+  getWizardConfig,
   type WizardStep,
-} from '@/src/features/create-invite/model/steps'
+} from '@/src/features/create-invite/model/wizard-config'
 import { Card } from '@/src/shared/ui'
 
 import { CeremonyStepForm } from './ceremony-step-form'
 import { CoupleStepForm } from './couple-step-form'
 import { CreateInviteHeader } from './create-invite-header'
 import { CreateInviteIntro } from './create-invite-intro'
+import { MediaStepForm } from './media-step-form'
 import { PaymentStepForm } from './payment-step-form'
 import { TemplateSidebar } from './template-sidebar'
 
@@ -33,14 +37,21 @@ type CreateInviteWizardProps = {
 export function CreateInviteWizard({ template }: CreateInviteWizardProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const currentStep = parseStep(searchParams.get('step') ?? undefined)
+  const config = useMemo(() => getWizardConfig(template), [template])
+  const currentStep = parseStep(searchParams.get('step') ?? undefined, config.stepCount)
+  const currentKind = getStepKind(config, currentStep)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+
+  const defaultValues = useMemo(() => getDefaultValuesForTemplate(template), [template])
 
   const methods = useForm<CreateInviteFormValues>({
-    defaultValues: CREATE_INVITE_DEFAULT_VALUES,
+    defaultValues,
     mode: 'onSubmit',
-    resolver: zodResolver(createInviteFormSchema),
+    resolver: zodResolver(config.createSchema()),
   })
+
+  useCreateInviteDraft(template, methods)
 
   const navigateToStep = useCallback(
     (step: WizardStep) => {
@@ -51,16 +62,16 @@ export function CreateInviteWizard({ template }: CreateInviteWizardProps) {
 
   const handleContinue = useCallback(async () => {
     setIsSubmitting(true)
-    const fields = STEP_FIELDS[currentStep]
+    const fields = config.stepFields[currentStep] ?? []
     const isValid = await methods.trigger([...fields])
     setIsSubmitting(false)
 
     if (!isValid) return
 
-    if (currentStep < 3) {
+    if (currentStep < config.stepCount) {
       navigateToStep((currentStep + 1) as WizardStep)
     }
-  }, [currentStep, methods, navigateToStep])
+  }, [config.stepFields, config.stepCount, currentStep, methods, navigateToStep])
 
   const handleBack = useCallback(() => {
     if (currentStep > 1) {
@@ -68,26 +79,91 @@ export function CreateInviteWizard({ template }: CreateInviteWizardProps) {
     }
   }, [currentStep, navigateToStep])
 
+  const handleSubmit = useCallback(async () => {
+    setSubmitError(null)
+    setIsSubmitting(true)
+
+    const paymentFields = config.stepFields[config.stepCount as WizardStep] ?? []
+    const paymentValid = await methods.trigger([...paymentFields])
+
+    if (!paymentValid) {
+      setIsSubmitting(false)
+      return
+    }
+
+    const fullValid = await methods.trigger()
+    if (!fullValid) {
+      setIsSubmitting(false)
+      return
+    }
+
+    try {
+      const values = methods.getValues()
+      const payload = mapFormToApiPayload(values, template)
+
+      const response = await fetch('/api/invitations/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!response.ok) {
+        throw new Error('create_failed')
+      }
+
+      const data = (await response.json()) as { invitationId: string }
+      clearCreateInviteDraft(template.slug)
+      router.push(`/v2/checkout/${data.invitationId}`)
+    } catch {
+      setSubmitError(CREATE_INVITE_ACTIONS.submitError)
+      setIsSubmitting(false)
+    }
+  }, [config.stepCount, config.stepFields, methods, router, template])
+
   return (
     <FormProvider {...methods}>
       <div className="min-h-screen bg-background">
         <CreateInviteHeader />
-        <CreateInviteIntro currentStep={currentStep} />
+        <CreateInviteIntro config={config} currentStep={currentStep} currentKind={currentKind} />
 
         <div className="mx-auto grid w-full max-w-[1440px] gap-8 px-5 pb-12 lg:grid-cols-[minmax(0,740px)_380px] lg:px-[120px]">
           <Card className="gap-0 rounded-[18px] border border-border bg-card p-6 shadow-none sm:p-[30px] lg:order-1">
-            {currentStep === 1 ? (
-              <CoupleStepForm onContinue={handleContinue} isSubmitting={isSubmitting} />
+            {currentKind === 'couple' ? (
+              <CoupleStepForm
+                config={config}
+                onContinue={handleContinue}
+                isSubmitting={isSubmitting}
+              />
             ) : null}
-            {currentStep === 2 ? (
+            {currentKind === 'ceremony' ? (
               <CeremonyStepForm
+                config={config}
+                stepNumber={currentStep}
                 onContinue={handleContinue}
                 onBack={handleBack}
                 isSubmitting={isSubmitting}
               />
             ) : null}
-            {currentStep === 3 ? (
-              <PaymentStepForm template={template} onBack={handleBack} />
+            {currentKind === 'media' ? (
+              <MediaStepForm
+                template={template}
+                config={config}
+                stepNumber={currentStep}
+                onContinue={handleContinue}
+                onBack={handleBack}
+                isSubmitting={isSubmitting}
+              />
+            ) : null}
+            {currentKind === 'payment' ? (
+              <PaymentStepForm
+                template={template}
+                config={config}
+                stepNumber={currentStep}
+                onBack={handleBack}
+                onSubmit={handleSubmit}
+                isSubmitting={isSubmitting}
+                submitError={submitError}
+              />
             ) : null}
           </Card>
 

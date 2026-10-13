@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
         email,
         cpf, // Salvar CPF no banco
         isActive,
-        inviteType: template === 'golden' ? 'interactive' : 'site'
+        inviteType: ['blue', 'golden'].includes(template) ? 'interactive' : 'site'
       }
     })
 

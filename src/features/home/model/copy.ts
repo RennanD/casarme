@@ -157,7 +157,7 @@ export const HOME_TESTIMONIALS_SECTION: HomeTestimonialsSectionCopy = {
 export const HOME_FINAL_CTA: HomeFinalCtaCopy = {
   title: 'O próximo passo é escolher o modelo.',
   body: 'Personalize primeiro. Pague uma única vez depois.',
-  ctaLabel: 'Escolher meu convite  →',
+  ctaLabel: 'Escolher meu convite',
 }
 
 export const HOME_FOOTER: HomeFooterCopy = {
@@ -169,7 +169,7 @@ export const HOME_HERO: HomeHeroCopy = {
   eyebrow: 'CONVITES DIGITAIS DE CASAMENTO',
   headline: 'O começo de uma história merece um convite à altura.',
   body: 'Escolham um modelo, contem os detalhes do grande dia e compartilhem tudo com quem vocês amam. Em poucos passos, o convite fica pronto.',
-  ctaLabel: 'Criar meu convite  →',
+  ctaLabel: 'Criar meu convite',
   note: 'Escolha seu modelo e veja a demonstração completa.',
 }
 
@@ -189,7 +189,7 @@ export const HOME_PRODUCT_DEMO = {
   title: 'Mais do que um convite. Um espaço para celebrar.',
   body: 'Veja como seus convidados vão receber os detalhes, confirmar presença e encontrar o caminho até a cerimônia.',
   points: ['Localização com mapa', 'Confirmação por WhatsApp', 'Informações do grande dia'],
-  ctaLabel: 'Explorar a demonstração  →',
+  ctaLabel: 'Explorar a demonstração',
   imagePath: '/romantic-couple-wedding-photo-in-garden.jpg',
   imageAlt: 'Casal celebrando ao ar livre em um jardim',
 }

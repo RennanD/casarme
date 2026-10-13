@@ -29,3 +29,10 @@ export function maskWhatsApp(value: string): string {
   if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`
   return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`
 }
+
+export function maskWeddingTime(value: string): string {
+  const digits = digitsOnly(value).slice(0, 4)
+
+  if (digits.length <= 2) return digits
+  return `${digits.slice(0, 2)}:${digits.slice(2)}`
+}

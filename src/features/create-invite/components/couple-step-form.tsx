@@ -4,11 +4,12 @@ import { useFormContext } from 'react-hook-form'
 
 import {
   COUPLE_STEP_FIELDS,
-  CREATE_INVITE_ACTIONS,
-  CREATE_INVITE_FORM_COPY,
+  getContinueActionLabel,
+  getFormCopy,
 } from '@/src/features/create-invite/model/copy'
-import { maskWeddingDate } from '@/src/features/create-invite/model/masks'
+import { maskWeddingDate, maskWeddingTime } from '@/src/features/create-invite/model/masks'
 import type { CreateInviteFormValues } from '@/src/features/create-invite/model/schemas'
+import type { WizardConfig } from '@/src/features/create-invite/model/wizard-config'
 import { Button, Input } from '@/src/shared/ui'
 
 import { FormFieldGroup } from './form-field-group'
@@ -17,11 +18,12 @@ const borderlessInputClass =
   'h-auto border-0 bg-transparent px-0 py-0 shadow-none focus-visible:border-transparent focus-visible:ring-0'
 
 type CoupleStepFormProps = {
+  config: WizardConfig
   onContinue: () => void
   isSubmitting: boolean
 }
 
-export function CoupleStepForm({ onContinue, isSubmitting }: CoupleStepFormProps) {
+export function CoupleStepForm({ config, onContinue, isSubmitting }: CoupleStepFormProps) {
   const {
     register,
     setValue,
@@ -29,8 +31,9 @@ export function CoupleStepForm({ onContinue, isSubmitting }: CoupleStepFormProps
     formState: { errors },
   } = useFormContext<CreateInviteFormValues>()
 
-  const copy = CREATE_INVITE_FORM_COPY[1]
+  const copy = getFormCopy('couple', 1, config.stepCount)
   const weddingDate = watch('weddingDate')
+  const weddingTime = watch('weddingTime')
 
   return (
     <div className="flex flex-col gap-5">
@@ -72,35 +75,58 @@ export function CoupleStepForm({ onContinue, isSubmitting }: CoupleStepFormProps
         </FormFieldGroup>
       </div>
 
-      <FormFieldGroup
-        id="weddingDate"
-        label={COUPLE_STEP_FIELDS.weddingDate.label}
-        error={errors.weddingDate?.message}
-      >
-        <Input
+      <div className="grid gap-4 sm:grid-cols-2">
+        <FormFieldGroup
           id="weddingDate"
-          inputMode="numeric"
-          placeholder={COUPLE_STEP_FIELDS.weddingDate.placeholder}
-          className={borderlessInputClass}
-          aria-invalid={Boolean(errors.weddingDate)}
-          value={weddingDate}
-          {...register('weddingDate')}
-          onChange={(event) => {
-            setValue('weddingDate', maskWeddingDate(event.target.value), {
-              shouldDirty: true,
-            })
-          }}
-        />
-      </FormFieldGroup>
+          label={COUPLE_STEP_FIELDS.weddingDate.label}
+          error={errors.weddingDate?.message}
+        >
+          <Input
+            id="weddingDate"
+            inputMode="numeric"
+            placeholder={COUPLE_STEP_FIELDS.weddingDate.placeholder}
+            className={borderlessInputClass}
+            aria-invalid={Boolean(errors.weddingDate)}
+            value={weddingDate}
+            {...register('weddingDate')}
+            onChange={(event) => {
+              setValue('weddingDate', maskWeddingDate(event.target.value), {
+                shouldDirty: true,
+              })
+            }}
+          />
+        </FormFieldGroup>
+
+        <FormFieldGroup
+          id="weddingTime"
+          label={COUPLE_STEP_FIELDS.weddingTime.label}
+          error={errors.weddingTime?.message}
+        >
+          <Input
+            id="weddingTime"
+            inputMode="numeric"
+            placeholder={COUPLE_STEP_FIELDS.weddingTime.placeholder}
+            className={borderlessInputClass}
+            aria-invalid={Boolean(errors.weddingTime)}
+            value={weddingTime}
+            {...register('weddingTime')}
+            onChange={(event) => {
+              setValue('weddingTime', maskWeddingTime(event.target.value), {
+                shouldDirty: true,
+              })
+            }}
+          />
+        </FormFieldGroup>
+      </div>
 
       <Button
         type="button"
         size="lg"
-        className="w-full rounded-[26px]"
+        className="w-full rounded-[26px] enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100"
         disabled={isSubmitting}
         onClick={onContinue}
       >
-        {CREATE_INVITE_ACTIONS.continueToCeremony} <span aria-hidden>→</span>
+        {getContinueActionLabel('couple')} <span aria-hidden>→</span>
       </Button>
     </div>
   )

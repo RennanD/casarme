@@ -11,7 +11,7 @@ import {
 } from '@/src/features/create-invite/model/catalog'
 import {
   CREATE_INVITE_ACTIONS,
-  CREATE_INVITE_FORM_COPY,
+  getFormCopy,
   ORDER_SUMMARY_COPY,
   PAYMENT_PRIVACY_NOTE,
   PAYMENT_STEP_FIELDS,
@@ -19,6 +19,7 @@ import {
 } from '@/src/features/create-invite/model/copy'
 import { maskCpf } from '@/src/features/create-invite/model/masks'
 import type { CreateInviteFormValues } from '@/src/features/create-invite/model/schemas'
+import type { WizardConfig } from '@/src/features/create-invite/model/wizard-config'
 import { cn } from '@/src/shared/lib/cn'
 import { Button, Input } from '@/src/shared/ui'
 
@@ -29,10 +30,23 @@ const borderlessInputClass =
 
 type PaymentStepFormProps = {
   template: CreateInviteTemplate
+  config: WizardConfig
+  stepNumber: number
   onBack: () => void
+  onSubmit: () => void
+  isSubmitting: boolean
+  submitError: string | null
 }
 
-export function PaymentStepForm({ template, onBack }: PaymentStepFormProps) {
+export function PaymentStepForm({
+  template,
+  config,
+  stepNumber,
+  onBack,
+  onSubmit,
+  isSubmitting,
+  submitError,
+}: PaymentStepFormProps) {
   const {
     register,
     setValue,
@@ -40,7 +54,7 @@ export function PaymentStepForm({ template, onBack }: PaymentStepFormProps) {
     formState: { errors },
   } = useFormContext<CreateInviteFormValues>()
 
-  const copy = CREATE_INVITE_FORM_COPY[3]
+  const copy = getFormCopy('payment', stepNumber, config.stepCount)
   const cpf = watch('cpf')
   const includePlanner = watch('includePlanner')
   const orderTotal = calculateOrderTotal(template.displayPrice, includePlanner)
@@ -132,6 +146,12 @@ export function PaymentStepForm({ template, onBack }: PaymentStepFormProps) {
         <p className="font-serif text-[22px] text-foreground">{orderTotal.formattedTotal}</p>
       </div>
 
+      {submitError ? (
+        <p className="text-[11px] text-destructive" role="alert">
+          {submitError}
+        </p>
+      ) : null}
+
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <Button type="button" variant="ghost" className="justify-start" onClick={onBack}>
           ← {CREATE_INVITE_ACTIONS.back}
@@ -140,13 +160,14 @@ export function PaymentStepForm({ template, onBack }: PaymentStepFormProps) {
           <Button
             type="button"
             size="lg"
-            className="w-full rounded-[25px] sm:min-w-[300px]"
-            disabled
-            aria-describedby="pix-unavailable-note"
+            className="w-full rounded-[25px] enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100 sm:min-w-[300px]"
+            disabled={isSubmitting}
+            onClick={onSubmit}
           >
-            {CREATE_INVITE_ACTIONS.generatePix} <span aria-hidden>→</span>
+            {isSubmitting ? CREATE_INVITE_ACTIONS.submitting : CREATE_INVITE_ACTIONS.createInvite}{' '}
+            <span aria-hidden>→</span>
           </Button>
-          <p id="pix-unavailable-note" className="text-center text-[11px] text-muted-foreground sm:text-left">
+          <p className="text-center text-[11px] text-muted-foreground sm:text-left">
             {CREATE_INVITE_ACTIONS.pixUnavailable}
           </p>
         </div>

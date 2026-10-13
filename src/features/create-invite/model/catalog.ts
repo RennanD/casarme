@@ -1,11 +1,18 @@
 export const PLANNER_ADDON_PRICE = 9.9
 export const PLANNER_ADDON_DISPLAY = 'R$ 9,90'
 
+export type CreateInviteProductLine = 'interactive' | 'site'
+
+export type CreateInvitePlanTier = 'Premium' | 'Pro' | 'Básico'
+
 export type CreateInviteTemplate = {
   slug: string
+  id: string
   name: string
   displayPrice: string
   imagePath: string
+  productLine: CreateInviteProductLine
+  plan: CreateInvitePlanTier
 }
 
 export function resolveTemplateBySlug(

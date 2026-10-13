@@ -13,4 +13,4 @@ export const NAV_SECTION_LINKS: NavSectionLink[] = [
 
 export const GODPARENT_INVITE_PATH = '/convite-padrinhos'
 
-export const NAVBAR_CTA_LABEL = 'Criar meu convite  →'
+export const NAVBAR_CTA_LABEL = 'Criar meu convite'
