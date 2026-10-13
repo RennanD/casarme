@@ -25,7 +25,7 @@ export function TemplateSidebar({ template }: TemplateSidebarProps) {
             src={template.imagePath}
             alt={`Prévia do convite ${template.name}`}
             fill
-            className="object-contain outline outline-1 -outline-offset-1 outline-black/10"
+            className="object-contain outline-1 -outline-offset-1 outline-black/10"
             sizes="(max-width: 1024px) 100vw, 380px"
             priority
           />
