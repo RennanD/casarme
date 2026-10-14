@@ -113,7 +113,7 @@ export function CreateInviteWizard({ template }: CreateInviteWizardProps) {
 
       const data = (await response.json()) as { invitationId: string }
       clearCreateInviteDraft(template.slug)
-      router.push(`/v2/checkout/${data.invitationId}`)
+      router.push(`/checkout/${data.invitationId}`)
     } catch {
       setSubmitError(CREATE_INVITE_ACTIONS.submitError)
       setIsSubmitting(false)

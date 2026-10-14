@@ -25,7 +25,7 @@ export const PAYMENT_CONFIRMATION_EMAIL_COPY = {
 
   footerTagline: 'casarme · Convites digitais para celebrar',
 
-  contactEmail: 'casarme.site@gmail.com',
+  contactEmail: 'casarm.site@gmail.com',
 
   siteUrl: 'https://casarme.site',
 

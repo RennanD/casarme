@@ -1,4 +1,4 @@
-import { HOME_CATALOG } from '@/src/features/home/model/catalog'
+import { HOME_CATALOG } from '@/src/shared/catalog'
 import { HOME_HERO, HOME_HERO_COLLAGE } from '@/src/features/home/model/copy'
 
 import { OG_HOME_GARDEN_PHOTO, OG_SITE_URL } from './tokens'

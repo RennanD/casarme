@@ -1,6 +1,5 @@
-import { resolveFromEmail } from '@/src/shared/email'
-import { prisma } from '@/src/lib/prisma'
-import { resend } from '@/src/lib/resend'
+import { resolveFromEmail, resend } from '@/src/shared/email'
+import { prisma } from '@/src/shared/db'
 
 import { PaymentConfirmationEmail } from '../components/payment-confirmation-email'
 import { PAYMENT_CONFIRMATION_EMAIL_COPY } from '../model/payment-confirmation-email-copy'

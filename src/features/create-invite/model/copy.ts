@@ -204,5 +204,5 @@ export const ORDER_SUMMARY_COPY = {
 } as const
 
 /** Matches home anchor id for the templates section. */
-export const CHANGE_TEMPLATE_HREF = '/v2#templates'
+export const CHANGE_TEMPLATE_HREF = '/#templates'
 

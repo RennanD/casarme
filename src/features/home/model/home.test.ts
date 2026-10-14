@@ -72,10 +72,10 @@ describe('home catalog', () => {
   })
 
   it('builds demo and create hrefs from template slug', () => {
-    expect(getTemplateDemoHref('azul')).toBe('/exemplo/azul')
-    expect(getTemplateCreateHref('dourado')).toBe('/v2/criar/dourado?step=1')
-    expect(getTemplateCreateHref('garden')).toBe('/v2/criar/garden?step=1')
-    expect(getTemplateDemoHref('romantic')).toBe('/exemplo/romantic')
+    expect(getTemplateDemoHref('azul')).toBe('/demo/azul')
+    expect(getTemplateCreateHref('dourado')).toBe('/criar/dourado?step=1')
+    expect(getTemplateCreateHref('garden')).toBe('/criar/garden?step=1')
+    expect(getTemplateDemoHref('romantic')).toBe('/demo/romantic')
   })
 })
 

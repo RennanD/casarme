@@ -22,7 +22,7 @@ export function usePaymentPolling(invitationId: string, chargeId: string) {
         const data = (await response.json()) as { status?: string }
 
         if (data.status === 'PAID') {
-          router.replace(`/v2/obrigado/${invitationId}`)
+          router.replace(`/obrigado/${invitationId}`)
         }
       } catch {
         // Polling is UX-only; webhook remains authoritative

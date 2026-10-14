@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import { HOME_ANCHORS } from '@/src/features/home/model/anchors'
+import { getTemplateDemoHref } from '@/src/shared/catalog'
 import { Link } from '@/src/shared/ui'
 
 export function ProductDemoSection() {
@@ -28,7 +29,7 @@ export function ProductDemoSection() {
             <li>✓&nbsp; Confirmação de presença pelo WhatsApp</li>
             <li>✓&nbsp; Prévia do convite antes de comprar</li>
           </ul>
-          <Link href="/exemplo/garden" variant="nav" className="inline-block pt-1 text-xs font-semibold">
+          <Link href={getTemplateDemoHref('garden')} variant="nav" className="inline-block pt-1 text-xs font-semibold">
             Veja a demonstração completa&nbsp; →
           </Link>
         </div>

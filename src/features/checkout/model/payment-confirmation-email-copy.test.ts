@@ -41,6 +41,6 @@ describe('payment confirmation email copy', () => {
   })
 
   it('uses the v2 support contact email', () => {
-    expect(PAYMENT_CONFIRMATION_EMAIL_COPY.contactEmail).toBe('casarme.site@gmail.com')
+    expect(PAYMENT_CONFIRMATION_EMAIL_COPY.contactEmail).toBe('casarm.site@gmail.com')
   })
 })

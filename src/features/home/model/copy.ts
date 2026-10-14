@@ -169,7 +169,7 @@ export const HOME_HERO: HomeHeroCopy = {
   eyebrow: 'CONVITES DIGITAIS DE CASAMENTO',
   headline: 'O começo de uma história merece um convite à altura.',
   body: 'Escolham um modelo, contem os detalhes do grande dia e compartilhem tudo com quem vocês amam. Em poucos passos, o convite fica pronto.',
-  ctaLabel: 'Criar meu convite',
+  ctaLabel: 'Criar meu convite  →',
   note: 'Escolha seu modelo e veja a demonstração completa.',
 }
 

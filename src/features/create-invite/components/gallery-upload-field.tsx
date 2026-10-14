@@ -5,8 +5,8 @@ import { useRef, useState } from 'react'
 
 import { ROMANTIC_GALLERY_MAX_PHOTOS } from '@/src/features/create-invite/model/defaults'
 import type { ImageMetadataValues } from '@/src/features/create-invite/model/schemas'
-import { useImageUpload } from '@/src/hooks/use-image-upload'
-import { getImageUrl } from '@/src/lib/image-url'
+import { useImageUpload } from '@/src/features/create-invite/hooks/use-image-upload'
+import { getImageUrl } from '@/src/shared/lib/image-url'
 import { cn } from '@/src/shared/lib/cn'
 import { Button } from '@/src/shared/ui'
 

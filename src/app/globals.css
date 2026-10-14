@@ -1,94 +1,52 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Amore color palette - romantic and elegant */
-  --amore-gold: #d4a373;
-  --amore-beige: #faf3e0;
-  --amore-text: #3e3e3e;
-  --amore-text-secondary: #6b6b6b;
-  --amore-accent: #ede0d4;
-  --amore-bg: #fff8f0;
-
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --background: #fffdfa;
+  --foreground: #3e3e3e;
+  --card: #ffffff;
+  --card-foreground: #3e3e3e;
+  --popover: #ffffff;
+  --popover-foreground: #3e3e3e;
+  --primary: #d4a373;
+  --primary-foreground: #ffffff;
+  --secondary: #f8f6f2;
+  --secondary-foreground: #3e3e3e;
+  --muted: #f8f6f2;
+  --muted-foreground: #6b6b6b;
+  --accent: #eeeae4;
+  --accent-foreground: #3e3e3e;
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-
-
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  --destructive-foreground: oklch(1 0 0);
+  --border: #eeeae4;
+  --input: #eeeae4;
+  --ring: #d4a373;
+  --chart-1: #d4a373;
+  --chart-2: #f8f6f2;
+  --chart-3: #eeeae4;
+  --chart-4: #6b6b6b;
+  --chart-5: #3e3e3e;
+  --radius: 0.5rem;
+  --sidebar: #f8f6f2;
+  --sidebar-foreground: #3e3e3e;
+  --sidebar-primary: #d4a373;
+  --sidebar-primary-foreground: #3e3e3e;
+  --sidebar-accent: #eeeae4;
+  --sidebar-accent-foreground: #3e3e3e;
+  --sidebar-border: #eeeae4;
+  --sidebar-ring: #d4a373;
+  --surface-sage: #eef2ea;
+  --surface-peach: #f3e8df;
+  --surface-lilac: #efeaf2;
 }
 
 @theme inline {
-  /* Adding Playfair Display for serif (headings) and Inter for sans (body) */
   --font-serif: var(--font-playfair);
   --font-sans: var(--font-inter);
-  --font-mono: var(--font-geist-mono);
+  --font-script: var(--font-rouge-script);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -125,8 +83,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-
-  --font-script: "Rouge Script", serif;
+  --color-surface-sage: var(--surface-sage);
+  --color-surface-peach: var(--surface-peach);
+  --color-surface-lilac: var(--surface-lilac);
 }
 
 @layer base {
@@ -134,92 +93,75 @@
     @apply border-border outline-ring/50;
   }
 
-  body {
-    @apply bg-background text-foreground;
-  }
-
-  /* Otimizações de performance */
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Prevenir layout shift */
-  img[loading="lazy"] {
-    content-visibility: auto;
-  }
-
-  /* Skip links para acessibilidade */
-  .skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: #D4A373;
-    color: white;
-    padding: 8px;
+  a,
+  a:hover,
+  a:focus,
+  a:active,
+  button,
+  button:hover,
+  button:focus,
+  button:active,
+  [data-slot='button'],
+  [data-slot='button']:hover,
+  [data-slot='link'],
+  [data-slot='link']:hover {
     text-decoration: none;
-    z-index: 100;
+  }
+}
+
+@layer components {
+  .display {
+    @apply scroll-m-20 font-serif text-4xl font-bold tracking-tight lg:text-5xl;
+  }
+
+  .h1 {
+    @apply scroll-m-20 font-serif text-4xl font-bold tracking-tight lg:text-5xl;
+  }
+
+  .h2 {
+    @apply scroll-m-20 font-serif text-3xl font-semibold tracking-tight;
+  }
+
+  .h3 {
+    @apply scroll-m-20 font-serif text-2xl font-semibold tracking-tight;
+  }
+
+  .body {
+    @apply font-sans text-base leading-7;
+  }
+
+  .body-sm {
+    @apply font-sans text-sm leading-6;
+  }
+
+  .muted {
+    @apply font-sans text-sm leading-6 text-muted-foreground;
+  }
+
+  .lead {
+    @apply font-sans text-xl leading-7 text-muted-foreground;
+  }
+
+  .script {
+    @apply font-script text-4xl leading-none lg:text-5xl;
+  }
+
+  .skip-link {
+    @apply bg-primary text-primary-foreground absolute top-[-2.5rem] left-0 z-[100] px-3 py-2 no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground;
   }
 
   .skip-link:focus {
-    top: 0;
-  }
-
-  /* Touch targets maiores para mobile */
-  .touch-target {
-    min-height: 44px;
-    min-width: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Otimizações de performance */
-  * {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* Melhorar scroll em mobile */
-  html {
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-  }
-
-  /* Prevenir layout shift */
-  [data-next-image] {
-    content-visibility: auto;
+    @apply top-0;
   }
 }
 
-/* Custom animations for Amore landing page */
-@keyframes fade-in {
-  from {
-    opacity: 0;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.8s ease-out forwards;
-  opacity: 0;
-}
-
-.animate-slide-up {
-  animation: slide-up 1s ease-out forwards;
-  opacity: 0;
 }

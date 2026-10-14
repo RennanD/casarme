@@ -3,7 +3,7 @@ import { Link } from '@/src/shared/ui'
 const FOOTER_LINKS = [
   { href: '/politica-de-privacidade', label: 'Privacidade' },
   { href: '/termos-de-uso', label: 'Termos' },
-  { href: 'mailto:casarme.site@gmail.com', label: 'Ajuda' },
+  { href: 'mailto:casarm.site@gmail.com', label: 'Ajuda' },
 ] as const
 
 export function HomeFooter() {

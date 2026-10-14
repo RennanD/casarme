@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Check } from 'lucide-react'
 
 import { HOME_ANCHORS } from '@/src/features/home/model/anchors'
+import { getTemplateDemoHref } from '@/src/shared/catalog'
 import { Link } from '@/src/shared/ui'
 
 const EXPERIENCE_POINTS = [
@@ -29,7 +30,7 @@ export function GuestExperienceSection() {
           <ul className="space-y-3 pt-1 text-xs text-foreground">
             {EXPERIENCE_POINTS.map((point) => <li key={point} className="flex items-center gap-2"><Check className="size-3.5 shrink-0 text-primary" aria-hidden />{point}</li>)}
           </ul>
-          <Link href="/exemplo/garden" variant="nav" className="inline-block pt-1 text-xs font-semibold">Conheça uma demonstração&nbsp; →</Link>
+          <Link href={getTemplateDemoHref('garden')} variant="nav" className="inline-block pt-1 text-xs font-semibold">Conheça uma demonstração&nbsp; →</Link>
         </div>
       </div>
     </section>

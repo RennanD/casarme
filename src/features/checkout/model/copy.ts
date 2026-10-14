@@ -35,7 +35,7 @@ export const THANK_YOU_COPY = {
   openInvite: 'Ver convite',
 } as const
 
-export const CHANGE_TEMPLATE_HREF = '/v2#templates'
+export const CHANGE_TEMPLATE_HREF = '/#templates'
 
 export const TEMPLATE_DISPLAY_NAMES: Record<string, string> = {
   blue: 'Azul',

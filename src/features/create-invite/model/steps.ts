@@ -12,5 +12,5 @@ export function parseStep(stepParam: string | undefined, stepCount: number): Wiz
 }
 
 export function buildStepHref(slug: string, step: WizardStep): string {
-  return `/v2/criar/${slug}?step=${step}`
+  return `/criar/${slug}?step=${step}`
 }

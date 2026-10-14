@@ -151,8 +151,8 @@ describe('create-invite steps', () => {
   })
 
   it('builds step hrefs with slug and step query param', () => {
-    expect(buildStepHref('azul', 1)).toBe('/v2/criar/azul?step=1')
-    expect(buildStepHref('dourado', 3)).toBe('/v2/criar/dourado?step=3')
+    expect(buildStepHref('azul', 1)).toBe('/criar/azul?step=1')
+    expect(buildStepHref('dourado', 3)).toBe('/criar/dourado?step=3')
   })
 })
 
