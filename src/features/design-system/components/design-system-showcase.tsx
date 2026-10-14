@@ -70,7 +70,7 @@ export function DesignSystemShowcase() {
 
         <div className="flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center">
           <Button size="lg" className="w-64">
-            Criar meu convite&nbsp; →
+            Criar meu convite
           </Button>
           <Button variant="outline" size="lg" className="w-56">
             Ver demonstração

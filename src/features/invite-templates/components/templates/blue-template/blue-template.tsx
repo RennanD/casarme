@@ -24,11 +24,6 @@ export function BlueTemplate({
   musicUrl,
   whatsappNumber,
 }: BlueTemplateProps) {
-
-  const brideFirstLetter = brideName.charAt(0)
-  const groomFirstLetter = groomName.charAt(0)
-
-  const weekDay = new Date(date).toLocaleDateString("pt-BR", { weekday: "long" })
   const day = new Date(date).toLocaleDateString("pt-BR", { day: "2-digit" })
   const month = new Date(date).toLocaleDateString("pt-BR", { month: "long" })
   const year = new Date(date).toLocaleDateString("pt-BR", { year: "numeric" })
