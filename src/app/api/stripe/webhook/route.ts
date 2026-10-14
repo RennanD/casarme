@@ -4,6 +4,7 @@ import { prisma } from "@/src/lib/prisma";
 import { generateUniqueSlug } from "@/src/lib/slug";
 import { resend } from "@/src/lib/resend";
 import { EmailTemplate } from "@/src/lib/email-template";
+import { resolveFromEmail } from "@/src/shared/email";
 
 // Configuração para garantir que o corpo seja mantido como string bruta
 export const runtime = 'nodejs';
@@ -94,7 +95,7 @@ async function handleSuccessfulPayment(session: any) {
 
   // Enviar email de confirmação
   await resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL!,
+    from: resolveFromEmail(),
     to: [customerEmail],
     subject: `🎉 Seu convite interativo está pronto! - ${invitation.groomName} & ${invitation.brideName}`,
     react: EmailTemplate({

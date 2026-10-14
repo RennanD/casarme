@@ -7,6 +7,7 @@ import {
 import { prisma } from '@/src/lib/prisma'
 import { resend } from '@/src/lib/resend'
 import { EmailTemplate } from '@/src/lib/email-template'
+import { resolveFromEmail } from '@/src/shared/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -54,7 +55,7 @@ export async function POST(request: NextRequest) {
         if (invitation.email) {
           try {
             await resend.emails.send({
-              from: process.env.RESEND_FROM_EMAIL!,
+              from: resolveFromEmail(),
               to: [invitation.email],
               subject: `🎉 Seu convite interativo está pronto! - ${invitation.groomName} & ${invitation.brideName}`,
               react: EmailTemplate({

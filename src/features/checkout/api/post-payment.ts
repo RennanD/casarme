@@ -1,6 +1,9 @@
+import { resolveFromEmail } from '@/src/shared/email'
 import { prisma } from '@/src/lib/prisma'
 import { resend } from '@/src/lib/resend'
-import { EmailTemplate } from '@/src/lib/email-template'
+
+import { PaymentConfirmationEmail } from '../components/payment-confirmation-email'
+import { PAYMENT_CONFIRMATION_EMAIL_COPY } from '../model/payment-confirmation-email-copy'
 
 export async function activateInvitationAndSendEmail(invitationId: string): Promise<boolean> {
   const invitation = await prisma.invitation.findUnique({
@@ -24,7 +27,7 @@ export async function activateInvitationAndSendEmail(invitationId: string): Prom
     },
   })
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? ''
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? PAYMENT_CONFIRMATION_EMAIL_COPY.siteUrl
   const invitationUrl = `${baseUrl}/convite/${invitation.slug}`
   const plannerDownloadUrl = invitation.includePlanner
     ? `${baseUrl}/api/planner/download?invitationId=${invitation.id}`
@@ -33,14 +36,18 @@ export async function activateInvitationAndSendEmail(invitationId: string): Prom
   if (invitation.email) {
     try {
       await resend.emails.send({
-        from: process.env.RESEND_FROM_EMAIL!,
+        from: resolveFromEmail(),
         to: [invitation.email],
-        subject: `🎉 Seu convite interativo está pronto! - ${invitation.groomName} & ${invitation.brideName}`,
-        react: EmailTemplate({
+        subject: PAYMENT_CONFIRMATION_EMAIL_COPY.subject(
+          invitation.groomName,
+          invitation.brideName,
+        ),
+        react: PaymentConfirmationEmail({
           groomName: invitation.groomName,
           brideName: invitation.brideName,
           invitationUrl,
           plannerDownloadUrl,
+          baseUrl,
         }),
       })
     } catch (error) {

@@ -2,6 +2,7 @@ import NextAuth from "next-auth"
 import Resend from "next-auth/providers/resend"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "@/src/lib/prisma"
+import { resolveFromEmail } from "@/src/shared/email"
 
 // Validar variáveis de ambiente necessárias
 if (!process.env.AUTH_SECRET) {
@@ -41,7 +42,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Resend({
       apiKey: process.env.AUTH_RESEND_KEY || process.env.RESEND_API_KEY,
-      from: process.env.RESEND_FROM_EMAIL,
+      from: resolveFromEmail(),
     }),
   ],
   callbacks: {
