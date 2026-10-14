@@ -38,11 +38,11 @@ export function CoupleStepForm({ config, onContinue, isSubmitting }: CoupleStepF
   return (
     <div className="flex flex-col gap-5">
       <div className="space-y-1">
-        <p className="text-[10px] font-semibold tracking-[0.1em] text-muted-foreground uppercase">
+        <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
           {copy.eyebrow}
         </p>
-        <h2 className="font-serif text-[28px] font-normal text-foreground">{copy.title}</h2>
-        <p className="body-sm text-muted-foreground">{copy.description}</p>
+        <h2 className="font-serif text-3xl font-normal text-foreground">{copy.title}</h2>
+        <p className="text-sm leading-6 text-muted-foreground">{copy.description}</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -122,7 +122,7 @@ export function CoupleStepForm({ config, onContinue, isSubmitting }: CoupleStepF
       <Button
         type="button"
         size="lg"
-        className="w-full rounded-[26px] enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100"
+        className="w-full rounded-3xl motion-safe:enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100"
         disabled={isSubmitting}
         onClick={onContinue}
       >

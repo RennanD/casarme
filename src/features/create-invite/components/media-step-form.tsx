@@ -55,11 +55,11 @@ export function MediaStepForm({
   return (
     <div className="flex flex-col gap-4">
       <div className="space-y-1">
-        <p className="text-[10px] font-semibold tracking-[0.1em] text-muted-foreground uppercase">
+        <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
           {copy.eyebrow}
         </p>
-        <h2 className="font-serif text-[28px] font-normal text-foreground">{copy.title}</h2>
-        <p className="body-sm text-muted-foreground">{copy.description}</p>
+        <h2 className="font-serif text-3xl font-normal text-foreground">{copy.title}</h2>
+        <p className="text-sm leading-6 text-muted-foreground">{copy.description}</p>
       </div>
 
       <ImageUploadField
@@ -122,7 +122,7 @@ export function MediaStepForm({
               id="coupleStory"
               rows={3}
               placeholder={MEDIA_STEP_FIELDS.coupleStory.placeholder}
-              className={`${borderlessInputClass} min-h-[72px] w-full resize-y body-sm text-foreground outline-none`}
+              className={`${borderlessInputClass} min-h-18 w-full resize-y text-sm leading-6 text-foreground outline-none`}
               value={watch('coupleStory') ?? ''}
               onChange={(event) =>
                 setValue('coupleStory', event.target.value, { shouldDirty: true })
@@ -140,7 +140,7 @@ export function MediaStepForm({
                 id="groomStory"
                 rows={3}
                 placeholder={MEDIA_STEP_FIELDS.groomStory.placeholder}
-                className={`${borderlessInputClass} min-h-[72px] w-full resize-y body-sm text-foreground outline-none`}
+                className={`${borderlessInputClass} min-h-18 w-full resize-y text-sm leading-6 text-foreground outline-none`}
                 value={watch('groomStory') ?? ''}
                 onChange={(event) =>
                   setValue('groomStory', event.target.value, { shouldDirty: true })
@@ -157,7 +157,7 @@ export function MediaStepForm({
                 id="brideStory"
                 rows={3}
                 placeholder={MEDIA_STEP_FIELDS.brideStory.placeholder}
-                className={`${borderlessInputClass} min-h-[72px] w-full resize-y body-sm text-foreground outline-none`}
+                className={`${borderlessInputClass} min-h-18 w-full resize-y text-sm leading-6 text-foreground outline-none`}
                 value={watch('brideStory') ?? ''}
                 onChange={(event) =>
                   setValue('brideStory', event.target.value, { shouldDirty: true })
@@ -174,7 +174,7 @@ export function MediaStepForm({
         </Button>
         <Button
           type="button"
-          className="w-full rounded-3xl sm:w-auto sm:min-w-[270px]"
+          className="w-full rounded-3xl sm:w-auto sm:min-w-64"
           disabled={isSubmitting}
           onClick={onContinue}
         >

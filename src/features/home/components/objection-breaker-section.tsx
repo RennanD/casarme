@@ -27,7 +27,7 @@ export function ObjectionBreakerSection() {
             <article
               key={objection.problem}
               role="listitem"
-              className="w-[85vw] shrink-0 snap-start sm:w-[320px] lg:w-auto"
+              className="w-[85vw] shrink-0 snap-start sm:w-80 lg:w-auto"
             >
               <Card className="h-full border-none bg-card py-0 shadow-md transition-shadow hover:shadow-lg motion-reduce:transition-none">
                 <CardContent className="space-y-4 p-5">

@@ -50,14 +50,14 @@ export function ImageUploadField({
     <div className="flex flex-col gap-1.5">
       <div
         className={cn(
-          'flex flex-col gap-3 rounded-[10px] border border-border bg-background px-3.5 py-3',
+          'flex flex-col gap-3 rounded-lg border border-border bg-background px-3.5 py-3',
           displayError && 'border-destructive',
         )}
       >
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-xs font-semibold text-foreground">{label}</p>
-            {helper ? <p className="text-[11px] text-muted-foreground">{helper}</p> : null}
+            {helper ? <p className="text-xs text-muted-foreground">{helper}</p> : null}
           </div>
           {value ? (
             <Button
@@ -81,7 +81,7 @@ export function ImageUploadField({
               alt={value.originalName}
               className="aspect-[4/3] w-full object-cover outline -outline-offset-1 outline-black/10 dark:outline-white/10"
             />
-            <p className="mt-1.5 truncate text-[11px] text-muted-foreground">{value.originalName}</p>
+            <p className="mt-1.5 truncate text-xs text-muted-foreground">{value.originalName}</p>
           </div>
         ) : (
           <button
@@ -90,8 +90,8 @@ export function ImageUploadField({
             disabled={isUploading}
             onClick={() => inputRef.current?.click()}
             className={cn(
-              'flex min-h-[120px] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-card px-4 py-6 text-center transition-colors duration-150 ease-out',
-              'enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100',
+              'flex min-h-28 flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-card px-4 py-6 text-center transition-[transform,background-color,border-color] duration-150 ease-out',
+              'motion-safe:enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100',
               'hover:border-primary/40 hover:bg-background',
             )}
           >
@@ -117,7 +117,7 @@ export function ImageUploadField({
       </div>
 
       {displayError ? (
-        <p className="text-[11px] text-destructive" role="alert">
+        <p className="text-xs text-destructive" role="alert">
           {displayError}
         </p>
       ) : null}

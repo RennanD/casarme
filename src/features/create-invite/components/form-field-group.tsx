@@ -25,7 +25,7 @@ export function FormFieldGroup({
     <div className={cn('flex flex-col gap-1.5', className)}>
       <div
         className={cn(
-          'flex flex-col gap-1.5 rounded-[10px] border border-border bg-background px-3.5 py-3',
+          'flex flex-col gap-1.5 rounded-lg border border-border bg-background px-3.5 py-3',
           error && 'border-destructive',
         )}
       >
@@ -34,9 +34,9 @@ export function FormFieldGroup({
         </Label>
         {children}
       </div>
-      {helper ? <p className="text-[11px] text-muted-foreground">{helper}</p> : null}
+      {helper ? <p className="text-xs text-muted-foreground">{helper}</p> : null}
       {error ? (
-        <p className="text-[11px] text-destructive" role="alert">
+        <p className="text-xs text-destructive" role="alert">
           {error}
         </p>
       ) : null}

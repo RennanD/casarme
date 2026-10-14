@@ -6,10 +6,10 @@ export function BrandTokensSection() {
   return (
     <section
       aria-labelledby="brand-tokens-heading"
-      className="space-y-6 px-6 py-9 md:min-h-[620px] md:px-10 xl:px-16"
+      className="space-y-6 px-6 py-9 md:px-10 xl:px-16"
     >
       <div className="space-y-3">
-        <p className="text-[11px] font-semibold tracking-[0.12em] text-muted-foreground">
+        <p className="text-xs font-semibold tracking-widest text-muted-foreground">
           01 / CORES
         </p>
         <h2 id="brand-tokens-heading" className="sr-only">
@@ -17,7 +17,7 @@ export function BrandTokensSection() {
         </h2>
         <p className="max-w-3xl text-sm leading-6 text-foreground">
           Neutros quase brancos, contraste legível e dourado reservado para ações
-          primárias.
+          primárias. Superfícies sage, pêssego e lilás para bandas de marketing.
         </p>
       </div>
 
@@ -26,17 +26,17 @@ export function BrandTokensSection() {
           ({ name, label, value, className, outlined }) => (
             <li
               key={name}
-              className="h-[210px] space-y-3 rounded-xl border border-border bg-card p-3"
+              className="h-52 space-y-3 rounded-xl border border-border bg-card p-3"
             >
               <div
                 className={cn(
-                  'h-[105px] rounded-lg',
+                  'h-28 rounded-lg',
                   outlined && 'border border-border',
                   className,
                 )}
                 aria-hidden="true"
               />
-              <p className="text-[13px] leading-5 text-foreground">
+              <p className="text-sm leading-5 text-foreground">
                 {label} · {name}
                 <br />
                 <span className="font-mono text-muted-foreground">

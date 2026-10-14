@@ -9,7 +9,7 @@ const COMPARISON_CARDS = [
     description: 'Nomes, data, local e uma mensagem especial — tudo organizado em uma página bonita para compartilhar.',
     image: '/images/thumbs/golden/01.png',
     alt: 'Prévia do modelo Dourado',
-    tone: 'bg-[#eef2ea]',
+    tone: 'bg-surface-sage',
   },
   {
     eyebrow: 'NA HORA DE CELEBRAR',
@@ -17,29 +17,29 @@ const COMPARISON_CARDS = [
     description: 'Os convidados abrem o convite pelo celular e confirmam presença direto pelo WhatsApp.',
     image: '/images/home-redesigned/celebration-guests.png',
     alt: 'Noivos e convidados durante a celebração',
-    tone: 'bg-[#f3e8df]',
+    tone: 'bg-surface-peach',
   },
 ]
 
 export function BeforeCelebrationSection() {
   return (
-    <section className="bg-background px-6 py-12 lg:h-[570px] lg:px-0 lg:py-[42px]" aria-labelledby="before-celebration-title">
-      <div className="mx-auto max-w-[1080px] space-y-[22px]">
+    <section className="bg-background px-6 py-12 lg:px-8 lg:py-10" aria-labelledby="before-celebration-title">
+      <div className="mx-auto max-w-7xl space-y-6">
         <header className="space-y-2">
-          <p className="text-[10px] font-semibold tracking-[1.4px] text-muted-foreground">DO PRIMEIRO OLHAR À CONFIRMAÇÃO</p>
-          <h2 id="before-celebration-title" className="font-serif text-[32px] leading-tight font-normal text-foreground">Um convite que já explica como viver esse dia.</h2>
-          <p className="text-[13px] text-muted-foreground">Seu modelo reúne as informações do casamento e deixa o próximo passo claro para cada convidado.</p>
+          <p className="text-xs font-semibold tracking-widest text-muted-foreground">DO PRIMEIRO OLHAR À CONFIRMAÇÃO</p>
+          <h2 id="before-celebration-title" className="font-serif text-3xl leading-tight font-normal text-foreground">Um convite que já explica como viver esse dia.</h2>
+          <p className="text-sm text-muted-foreground">Seu modelo reúne as informações do casamento e deixa o próximo passo claro para cada convidado.</p>
         </header>
-        <div className="grid gap-[18px] md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2">
           {COMPARISON_CARDS.map((card) => (
-            <article key={card.eyebrow} className={`flex min-h-[390px] flex-col justify-between gap-3 rounded-[22px] p-[22px] ${card.tone}`}>
+            <article key={card.eyebrow} className={`flex min-h-96 flex-col justify-between gap-3 rounded-2xl p-6 ${card.tone}`}>
               <div className="space-y-2">
-                <p className="text-[9px] font-semibold tracking-[1.1px] text-muted-foreground">{card.eyebrow}</p>
-                <h3 className="font-serif text-[23px] leading-tight font-normal text-foreground">{card.title}</h3>
-                <p className="text-xs leading-[1.5] text-muted-foreground">{card.description}</p>
+                <p className="text-xs font-semibold tracking-wide text-muted-foreground">{card.eyebrow}</p>
+                <h3 className="font-serif text-xl leading-tight font-normal text-foreground">{card.title}</h3>
+                <p className="text-xs leading-relaxed text-muted-foreground">{card.description}</p>
               </div>
-              <figure className={`relative overflow-hidden rounded-xl ${card.eyebrow.startsWith('ANTES') ? 'h-[190px] w-[210px] self-end' : 'h-[190px] w-full'}`}>
-                <Image src={card.image} alt={card.alt} fill className={card.eyebrow.startsWith('ANTES') ? 'object-contain' : 'object-cover'} sizes="(max-width: 768px) 90vw, 500px" />
+              <figure className={`relative overflow-hidden rounded-xl ${card.eyebrow.startsWith('ANTES') ? 'h-48 w-52 self-end' : 'h-48 w-full'}`}>
+                <Image src={card.image} alt={card.alt} fill className={`${card.eyebrow.startsWith('ANTES') ? 'object-contain' : 'object-cover'} outline -outline-offset-1 outline-black/10 dark:outline-white/10`} sizes="(max-width: 768px) 90vw, 500px" />
               </figure>
             </article>
           ))}

@@ -48,7 +48,7 @@ export function CheckoutClient({
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="mx-auto flex w-full max-w-[1120px] flex-col gap-8 px-5 py-12 lg:px-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-12 lg:px-8">
         {showDevControls ? (
           <div
             role="status"
@@ -60,18 +60,18 @@ export function CheckoutClient({
 
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="space-y-2">
-            <p className="text-[10px] font-semibold tracking-[0.12em] text-muted-foreground uppercase">
+            <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
               {CHECKOUT_COPY.eyebrow}
             </p>
-            <h1 className="font-serif text-[clamp(1.75rem,4vw,2.25rem)] font-normal tracking-tight text-foreground">
+            <h1 className="font-serif text-3xl font-normal tracking-tight text-foreground lg:text-4xl">
               {CHECKOUT_COPY.title}
             </h1>
-            <p className="body-sm text-muted-foreground">{CHECKOUT_COPY.description}</p>
+            <p className="text-sm leading-6 text-muted-foreground">{CHECKOUT_COPY.description}</p>
           </div>
           <PaymentStatusBadge />
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:items-start">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
           <div className="space-y-6">
             <PixPanel
               brCode={brCode}

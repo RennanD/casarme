@@ -13,12 +13,12 @@ export function HomeNavbar() {
 
   return (
     <nav id={HOME_ANCHORS.navigation} className="relative z-50 scroll-mt-20 bg-background" aria-label="Principal">
-      <div className="mx-auto flex h-[72px] max-w-[1080px] items-center justify-between px-6">
+      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6 lg:px-8">
         <Link href={`#${HOME_ANCHORS.home}`} variant="nav" className="font-serif text-2xl font-normal lowercase no-underline hover:no-underline">
           casarme
         </Link>
 
-        <div className="hidden items-center gap-[30px] md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {NAV_SECTION_LINKS.map((link) => (
             <Link key={link.anchorId} href={`#${link.anchorId}`} variant="nav" className="text-xs font-normal no-underline hover:no-underline">
               {link.label}
@@ -26,7 +26,7 @@ export function HomeNavbar() {
           ))}
         </div>
 
-        <Button asChild className="hidden h-auto rounded-full px-[18px] py-3 text-xs md:inline-flex">
+        <Button asChild className="hidden h-auto rounded-full px-5 py-3 text-xs md:inline-flex">
           <Link href={templatesHref} className="no-underline hover:no-underline">{NAVBAR_CTA_LABEL}</Link>
         </Button>
 

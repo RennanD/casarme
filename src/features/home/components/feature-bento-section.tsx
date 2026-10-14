@@ -5,52 +5,52 @@ import { HOME_BENTO_SECTION } from '@/src/features/home/model/copy'
 
 export function FeatureBentoSection() {
   return (
-    <section className="bg-background px-6 py-12 lg:h-[680px] lg:px-0 lg:py-[50px]" aria-labelledby="bento-title">
-      <div className="mx-auto max-w-[1080px] space-y-5">
+    <section className="bg-background px-6 py-12 lg:px-8 lg:py-12" aria-labelledby="bento-title">
+      <div className="mx-auto max-w-7xl space-y-5">
         <header className="space-y-2">
-          <p className="text-[10px] font-semibold tracking-[1.4px] text-muted-foreground">{HOME_BENTO_SECTION.eyebrow}</p>
-          <h2 id="bento-title" className="font-serif text-[34px] leading-tight font-normal">{HOME_BENTO_SECTION.title}</h2>
-          <p className="text-[13px] text-muted-foreground">{HOME_BENTO_SECTION.subtitle}</p>
+          <p className="text-xs font-semibold tracking-widest text-muted-foreground">{HOME_BENTO_SECTION.eyebrow}</p>
+          <h2 id="bento-title" className="font-serif text-3xl leading-tight font-normal">{HOME_BENTO_SECTION.title}</h2>
+          <p className="text-sm text-muted-foreground">{HOME_BENTO_SECTION.subtitle}</p>
         </header>
 
-        <div className="grid gap-[14px] lg:grid-cols-[620fr_446fr]">
-          <article className="flex min-h-[210px] flex-col items-stretch justify-between gap-4 rounded-[20px] bg-[#eef2ea] p-[18px] lg:flex-row lg:items-center">
-            <div className="max-w-[340px] space-y-2">
-              <p className="text-[9px] font-semibold tracking-[0.9px] text-muted-foreground">LOCALIZAÇÃO</p>
-              <h3 className="font-serif text-[21px] leading-tight">Todo mundo sabe como chegar.</h3>
-              <p className="text-xs leading-[1.45] text-muted-foreground">Endereço e acesso ao mapa no próprio convite.</p>
+        <div className="grid gap-3.5 lg:grid-cols-2">
+          <article className="flex min-h-52 flex-col items-stretch justify-between gap-4 rounded-2xl bg-surface-sage p-4 lg:flex-row lg:items-center">
+            <div className="max-w-sm space-y-2">
+              <p className="text-xs font-semibold tracking-wide text-muted-foreground">LOCALIZAÇÃO</p>
+              <h3 className="font-serif text-xl leading-tight">Todo mundo sabe como chegar.</h3>
+              <p className="text-xs leading-snug text-muted-foreground">Endereço e acesso ao mapa no próprio convite.</p>
             </div>
-            <div className="flex h-[136px] w-full shrink-0 flex-col items-center justify-center gap-2 rounded-[14px] bg-white p-3 text-center shadow-[0_4px_12px_#3e3e3e12] lg:h-[164px] lg:w-[190px]">
-              <div className="grid size-9 place-items-center rounded-full bg-[#f8f6f2] text-primary"><MapPin className="size-5" aria-hidden /></div>
+            <div className="flex h-36 w-full shrink-0 flex-col items-center justify-center gap-2 rounded-xl bg-white p-3 text-center shadow-md lg:h-40 lg:w-48">
+              <div className="grid size-9 place-items-center rounded-full bg-secondary text-primary"><MapPin className="size-5" aria-hidden /></div>
               <p className="font-serif text-xs">Casa das Oliveiras</p>
-              <span className="text-[10px] text-muted-foreground">Abrir rota&nbsp; →</span>
+              <span className="text-xs text-muted-foreground">Abrir rota&nbsp; →</span>
             </div>
           </article>
 
-          <article className="flex min-h-[210px] flex-col justify-between gap-2 rounded-[20px] bg-[#f3e8df] p-[18px]">
+          <article className="flex min-h-52 flex-col justify-between gap-2 rounded-2xl bg-surface-peach p-4">
             <MessageCircle className="size-6 text-foreground" aria-hidden />
-            <h3 className="font-serif text-[21px] leading-tight">Confirme sem complicação.</h3>
-            <p className="text-xs leading-[1.4] text-muted-foreground">Quem recebe pode responder direto pelo WhatsApp, sem criar conta.</p>
-            <span className="w-fit rounded-full bg-white px-3 py-[9px] text-[10px]">Confirmar presença&nbsp; →</span>
+            <h3 className="font-serif text-xl leading-tight">Confirme sem complicação.</h3>
+            <p className="text-xs leading-snug text-muted-foreground">Quem recebe pode responder direto pelo WhatsApp, sem criar conta.</p>
+            <span className="w-fit rounded-full bg-white px-3 py-2 text-xs">Confirmar presença&nbsp; →</span>
           </article>
         </div>
 
-        <div className="grid gap-[14px] lg:grid-cols-[520fr_546fr]">
-          <article className="flex min-h-[210px] items-center gap-[14px] rounded-[20px] bg-[#efeaf2] p-[14px]">
-            <figure className="relative h-[180px] w-[120px] shrink-0 overflow-hidden rounded-[9px] lg:w-[140px]">
-              <Image src="/images/thumbs/romantico/01.png" alt="Prévia do modelo Romântico" fill className="object-contain" sizes="140px" />
+        <div className="grid gap-3.5 lg:grid-cols-2">
+          <article className="flex min-h-52 items-center gap-3.5 rounded-2xl bg-surface-lilac p-3.5">
+            <figure className="relative h-44 w-28 shrink-0 overflow-hidden rounded-lg lg:w-36">
+              <Image src="/images/thumbs/romantico/01.png" alt="Prévia do modelo Romântico" fill className="object-contain outline -outline-offset-1 outline-black/10 dark:outline-white/10" sizes="140px" />
             </figure>
-            <div className="space-y-[7px]">
-              <p className="text-[9px] font-semibold tracking-[0.9px] text-muted-foreground">NO MODELO ROMÂNTICO</p>
-              <h3 className="font-serif text-[21px] leading-tight">Um pouco mais de vocês.</h3>
-              <p className="text-xs leading-[1.45] text-muted-foreground">Até 6 fotos, música do YouTube e contagem regressiva.</p>
+            <div className="space-y-2">
+              <p className="text-xs font-semibold tracking-wide text-muted-foreground">NO MODELO ROMÂNTICO</p>
+              <h3 className="font-serif text-xl leading-tight">Um pouco mais de vocês.</h3>
+              <p className="text-xs leading-snug text-muted-foreground">Até 6 fotos, música do YouTube e contagem regressiva.</p>
             </div>
           </article>
 
-          <article className="flex min-h-[210px] flex-col justify-center gap-[10px] rounded-[20px] bg-white p-[18px] shadow-[0_3px_14px_#3e3e3e10]">
-            <p className="text-[9px] font-semibold tracking-[0.9px] text-muted-foreground">UM CONVITE CLARO E COMPLETO</p>
-            <h3 className="font-serif text-[21px] leading-tight">Todo mundo sabe o que esperar.</h3>
-            <p className="text-xs leading-[1.45] text-muted-foreground">Data, horário, endereço, mapa e confirmação ficam juntos no mesmo link.</p>
+          <article className="flex min-h-52 flex-col justify-center gap-2.5 rounded-2xl bg-white p-4 shadow-md">
+            <p className="text-xs font-semibold tracking-wide text-muted-foreground">UM CONVITE CLARO E COMPLETO</p>
+            <h3 className="font-serif text-xl leading-tight">Todo mundo sabe o que esperar.</h3>
+            <p className="text-xs leading-snug text-muted-foreground">Data, horário, endereço, mapa e confirmação ficam juntos no mesmo link.</p>
           </article>
         </div>
       </div>

@@ -28,7 +28,7 @@ export function WatermarkedPreviewShell({
   return (
     <div
       className={cn(
-        'pointer-events-none overflow-hidden rounded-[14px] border border-border bg-card shadow-none transition-[opacity,transform,filter] duration-300 ease-out motion-reduce:transition-none',
+        'pointer-events-none overflow-hidden rounded-xl border border-border bg-card shadow-md transition-[opacity,transform,filter] duration-300 ease-out motion-reduce:transition-none',
         VARIANT_STYLES[variant],
         className,
       )}

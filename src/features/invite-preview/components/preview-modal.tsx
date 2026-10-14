@@ -29,7 +29,7 @@ export function PreviewModal({
 }: PreviewModalProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90dvh] max-w-[min(100%,440px)] gap-0 overflow-hidden p-0 sm:max-w-[440px]">
+      <DialogContent className="max-h-dvh max-w-md gap-0 overflow-hidden p-0 sm:max-w-md">
         <DialogHeader className="gap-1 border-b border-border px-6 py-5 text-left">
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>

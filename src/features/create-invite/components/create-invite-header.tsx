@@ -4,7 +4,7 @@ import { Link } from '@/src/shared/ui'
 export function CreateInviteHeader() {
   return (
     <header className="border-b border-border">
-      <div className="mx-auto flex h-[68px] max-w-[1440px] items-center justify-between px-5 lg:px-28">
+      <div className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 lg:px-8">
         <Link
           href="/v2"
           variant="nav"
@@ -12,7 +12,7 @@ export function CreateInviteHeader() {
         >
           {CREATE_INVITE_HEADER.brandLabel}
         </Link>
-        <p className="body-sm hidden text-muted-foreground sm:block">
+        <p className="hidden text-sm leading-6 text-muted-foreground sm:block">
           {CREATE_INVITE_HEADER.draftStatus}
         </p>
       </div>

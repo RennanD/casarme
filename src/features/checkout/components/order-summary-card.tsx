@@ -17,7 +17,7 @@ export function OrderSummaryCard({
   email,
 }: OrderSummaryCardProps) {
   return (
-    <Card className="gap-4 rounded-[18px] border border-border bg-card p-6 shadow-none">
+    <Card className="gap-4 rounded-2xl border border-border bg-card p-6 shadow-none">
       <h2 className="text-sm font-semibold text-foreground">{CHECKOUT_COPY.orderSummary}</h2>
 
       <div className="space-y-3">
@@ -26,25 +26,25 @@ export function OrderSummaryCard({
             key={item.label}
             className="flex items-start justify-between gap-4 rounded-xl border border-border bg-background px-4 py-3.5"
           >
-            <p className="text-[13px] font-medium text-foreground">{item.label}</p>
-            <p className="text-[13px] text-foreground">{item.displayAmount}</p>
+            <p className="text-sm font-medium text-foreground">{item.label}</p>
+            <p className="text-sm text-foreground">{item.displayAmount}</p>
           </div>
         ))}
       </div>
 
       <div className="flex items-start justify-between gap-4 border-t border-border pt-4">
         <div>
-          <p className="text-[13px] font-semibold text-foreground">{summary.summaryLabel}</p>
-          <p className="text-[13px] text-muted-foreground">
+          <p className="text-sm font-semibold text-foreground">{summary.summaryLabel}</p>
+          <p className="text-sm text-muted-foreground">
             {brideName} & {groomName}
           </p>
-          <p className="text-[11px] text-muted-foreground">{email}</p>
+          <p className="text-xs text-muted-foreground">{email}</p>
         </div>
         <div className="text-right">
-          <p className="text-[10px] font-semibold tracking-[0.12em] text-muted-foreground uppercase">
+          <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
             {CHECKOUT_COPY.totalLabel}
           </p>
-          <p className="font-serif text-[22px] text-foreground">{summary.totalDisplay}</p>
+          <p className="font-serif text-xl text-foreground">{summary.totalDisplay}</p>
         </div>
       </div>
     </Card>

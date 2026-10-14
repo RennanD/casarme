@@ -12,7 +12,7 @@ describe('design-system brand tokens', () => {
     ])
   })
 
-  it('includes the six colors shown in the design frame', () => {
+  it('includes the brand and surface colors shown in the design frame', () => {
     expect(BRAND_TOKEN_SWATCHES.map((token) => token.name)).toEqual([
       'background',
       'secondary',
@@ -20,6 +20,9 @@ describe('design-system brand tokens', () => {
       'primary',
       'foreground',
       'border',
+      'surface-sage',
+      'surface-peach',
+      'surface-lilac',
     ])
   })
 })

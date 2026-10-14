@@ -61,13 +61,13 @@ export function PaymentStepForm({
   const summaryLabel = buildOrderSummaryLabel(template.name, includePlanner)
 
   return (
-    <div className="flex flex-col gap-[18px]">
+    <div className="flex flex-col gap-4">
       <div className="space-y-1">
-        <p className="text-[10px] font-semibold tracking-[0.1em] text-muted-foreground uppercase">
+        <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
           {copy.eyebrow}
         </p>
-        <h2 className="font-serif text-[28px] font-normal text-foreground">{copy.title}</h2>
-        <p className="body-sm text-muted-foreground">{copy.description}</p>
+        <h2 className="font-serif text-3xl font-normal text-foreground">{copy.title}</h2>
+        <p className="text-sm leading-6 text-muted-foreground">{copy.description}</p>
       </div>
 
       <FormFieldGroup
@@ -113,7 +113,7 @@ export function PaymentStepForm({
       >
         <span
           className={cn(
-            'relative mt-0.5 flex size-[22px] shrink-0 items-center justify-center rounded-[5px] border',
+            'relative mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-sm border',
             includePlanner ? 'border-primary bg-primary' : 'border-border bg-background',
           )}
         >
@@ -127,11 +127,11 @@ export function PaymentStepForm({
           />
         </span>
         <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-          <span className="text-[9px] font-semibold tracking-[0.07em] text-muted-foreground uppercase">
+          <span className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
             {PLANNER_ORDER_BUMP.label}
           </span>
           <span className="text-sm font-semibold text-foreground">{PLANNER_ORDER_BUMP.title}</span>
-          <span className="text-[11px] text-muted-foreground">{PLANNER_ORDER_BUMP.description}</span>
+          <span className="text-xs text-muted-foreground">{PLANNER_ORDER_BUMP.description}</span>
         </span>
         <span className="font-serif text-lg text-foreground">{PLANNER_ADDON_DISPLAY}</span>
       </label>
@@ -140,14 +140,14 @@ export function PaymentStepForm({
 
       <div className="flex items-center justify-between gap-3 rounded-xl border border-border bg-background px-4 py-3.5">
         <div>
-          <p className="text-[13px] font-semibold text-foreground">{ORDER_SUMMARY_COPY.totalLabel}</p>
-          <p className="text-[13px] leading-snug text-foreground">{summaryLabel}</p>
+          <p className="text-sm font-semibold text-foreground">{ORDER_SUMMARY_COPY.totalLabel}</p>
+          <p className="text-sm leading-snug text-foreground">{summaryLabel}</p>
         </div>
-        <p className="font-serif text-[22px] text-foreground">{orderTotal.formattedTotal}</p>
+        <p className="font-serif text-xl text-foreground">{orderTotal.formattedTotal}</p>
       </div>
 
       {submitError ? (
-        <p className="text-[11px] text-destructive" role="alert">
+        <p className="text-xs text-destructive" role="alert">
           {submitError}
         </p>
       ) : null}
@@ -160,14 +160,14 @@ export function PaymentStepForm({
           <Button
             type="button"
             size="lg"
-            className="w-full rounded-[25px] enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100 sm:min-w-[300px]"
+            className="w-full rounded-3xl motion-safe:enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100 sm:min-w-72"
             disabled={isSubmitting}
             onClick={onSubmit}
           >
             {isSubmitting ? CREATE_INVITE_ACTIONS.submitting : CREATE_INVITE_ACTIONS.createInvite}{' '}
             <span aria-hidden>→</span>
           </Button>
-          <p className="text-center text-[11px] text-muted-foreground sm:text-left">
+          <p className="text-center text-xs text-muted-foreground sm:text-left">
             {CREATE_INVITE_ACTIONS.pixUnavailable}
           </p>
         </div>

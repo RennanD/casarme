@@ -23,7 +23,7 @@ export function CreateInviteStepper({ config, currentStep }: CreateInviteStepper
               key={step.number}
               aria-current={isCurrent ? 'step' : undefined}
               className={cn(
-                'body-sm whitespace-nowrap',
+                'text-sm leading-6 whitespace-nowrap',
                 isCurrent ? 'font-semibold text-primary' : 'text-muted-foreground',
               )}
             >

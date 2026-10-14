@@ -37,11 +37,11 @@ export function BlueTemplate({
   const message = `Olá! Será uma honra estar presente nessa data tão especial! 💕`
 
   return (
-    <section className="bg-[#FFFDFA] overflow-hidden">
+    <section className="overflow-hidden bg-background">
       <div className="relative text-center min-h-screen max-w-lg mx-auto flex flex-col items-center py-16 px-5">
         <div className="absolute  inset-0 bg-linear-to-b  via-45% from-white">
           <div className="w-full h-full relative">
-            <div className="w-full h-[300px] relative">
+            <div className="relative h-72 w-full">
 
               <Image src={thumbnail} alt="Thumbnail" fill className="object-cover object-top" />
               <div className="absolute bottom-0 h-32 w-full bg-linear-to-b via-10% from-white/0 to-white" />
@@ -60,7 +60,7 @@ export function BlueTemplate({
           </h1>
 
 
-          <p className="max-w-[250px]">Carinhosamente convidam para a cerimônia de seu casamento</p>
+          <p className="max-w-xs">Carinhosamente convidam para a cerimônia de seu casamento</p>
 
 
           <div className="flex flex-col gap-2 mt-12">
@@ -70,7 +70,7 @@ export function BlueTemplate({
 
             <div className="w-full h-px bg-[#08265E]"></div>
 
-            <p className="uppercase max-w-[250px] font-semibold text-sm text-[#08265E]">{time} Horas no <span className="uppercase">{address}</span></p>
+            <p className="max-w-xs font-semibold text-sm uppercase text-[#08265E]">{time} Horas no <span className="uppercase">{address}</span></p>
 
           </div>
 

@@ -82,13 +82,13 @@ export function GalleryUploadField({
     <div className="flex flex-col gap-1.5">
       <div
         className={cn(
-          'flex flex-col gap-3 rounded-[10px] border border-border bg-background px-3.5 py-3',
+          'flex flex-col gap-3 rounded-lg border border-border bg-background px-3.5 py-3',
           displayError && 'border-destructive',
         )}
       >
         <div>
           <p className="text-xs font-semibold text-foreground">{label}</p>
-          {helper ? <p className="text-[11px] text-muted-foreground">{helper}</p> : null}
+          {helper ? <p className="text-xs text-muted-foreground">{helper}</p> : null}
         </div>
 
         {canAddMore ? (
@@ -98,8 +98,8 @@ export function GalleryUploadField({
             disabled={isUploading}
             onClick={() => inputRef.current?.click()}
             className={cn(
-              'flex min-h-[96px] flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-card px-4 py-5 text-center transition-colors duration-150 ease-out',
-              'enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100',
+              'flex min-h-24 flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-card px-4 py-5 text-center transition-[transform,background-color,border-color] duration-150 ease-out',
+              'motion-safe:enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100',
               'hover:border-primary/40 hover:bg-background',
             )}
           >
@@ -115,7 +115,7 @@ export function GalleryUploadField({
             </span>
           </button>
         ) : (
-          <p className="text-[11px] text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             Galeria completa — {maxPhotos} fotos adicionadas.
           </p>
         )}
@@ -159,7 +159,7 @@ export function GalleryUploadField({
       </div>
 
       {displayError ? (
-        <p className="text-[11px] text-destructive" role="alert">
+        <p className="text-xs text-destructive" role="alert">
           {displayError}
         </p>
       ) : null}

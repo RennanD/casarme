@@ -52,7 +52,7 @@ function DialogContent({
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
-          'fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-[18px] border border-border bg-background p-6 shadow-lg',
+          'fixed top-1/2 left-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl border border-border bg-background p-6 shadow-lg overscroll-contain',
           'data-[state=closed]:opacity-0 data-[state=open]:opacity-100',
           'motion-safe:data-[state=closed]:scale-[0.97] motion-safe:data-[state=open]:scale-100',
           'transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none motion-reduce:data-[state=closed]:scale-100',
@@ -65,7 +65,7 @@ function DialogContent({
         {showCloseButton ? (
           <DialogPrimitive.Close
             data-slot="dialog-close"
-            className="absolute top-4 right-4 rounded-full opacity-70 transition-opacity duration-150 ease-out hover:opacity-100 focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none disabled:pointer-events-none"
+            className="absolute top-4 right-4 rounded-full opacity-70 transition-opacity duration-150 ease-out hover:opacity-100 focus-visible:ring-ring/50 focus-visible:ring-2 focus-visible:outline-none disabled:pointer-events-none"
           >
             <XIcon className="size-4" />
             <span className="sr-only">Fechar</span>

@@ -9,10 +9,10 @@ export function HowItWorksSection() {
   return (
     <section
       id={HOME_ANCHORS.howItWorks}
-      className="scroll-mt-20 bg-background px-6 py-8 lg:h-[190px] lg:px-0 lg:py-[28px]"
+      className="scroll-mt-20 bg-background px-6 py-8 lg:px-8 lg:py-7"
       aria-labelledby="how-it-works-title"
     >
-      <div className="mx-auto grid max-w-[1080px] gap-8 md:grid-cols-3 md:gap-9">
+      <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-3 md:gap-9">
         <h2 id="how-it-works-title" className="sr-only">Como criar seu convite</h2>
         {HOME_HOW_IT_WORKS_STEPS.map((step, index) => {
           const Icon = STEP_ICONS[index]
@@ -20,10 +20,10 @@ export function HowItWorksSection() {
             <article key={step.title} className="space-y-2">
               <div className="flex items-center gap-3">
                 <Icon className="size-5 text-foreground" aria-hidden />
-                <span className="text-[10px] font-semibold tracking-[1px] text-muted-foreground">0{index + 1}</span>
+                <span className="text-xs font-semibold tracking-wide text-muted-foreground">0{index + 1}</span>
               </div>
-              <h3 className="font-serif text-[19px] font-normal text-foreground">{step.title}</h3>
-              <p className="text-xs leading-[1.45] text-muted-foreground">{step.description}</p>
+              <h3 className="font-serif text-lg font-normal text-foreground">{step.title}</h3>
+              <p className="text-xs leading-snug text-muted-foreground">{step.description}</p>
             </article>
           )
         })}

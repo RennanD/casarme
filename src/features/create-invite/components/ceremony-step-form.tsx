@@ -56,11 +56,11 @@ export function CeremonyStepForm({
   return (
     <div className="flex flex-col gap-4">
       <div className="space-y-1">
-        <p className="text-[10px] font-semibold tracking-[0.1em] text-muted-foreground uppercase">
+        <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
           {copy.eyebrow}
         </p>
-        <h2 className="font-serif text-[28px] font-normal text-foreground">{copy.title}</h2>
-        <p className="body-sm text-muted-foreground">{copy.description}</p>
+        <h2 className="font-serif text-3xl font-normal text-foreground">{copy.title}</h2>
+        <p className="text-sm leading-6 text-muted-foreground">{copy.description}</p>
       </div>
 
       {showVenueName ? (
@@ -121,7 +121,7 @@ export function CeremonyStepForm({
             id="welcomeMessage"
             rows={4}
             placeholder={CEREMONY_STEP_FIELDS.welcomeMessage.placeholder}
-            className={`${borderlessInputClass} min-h-[96px] w-full resize-y body-sm text-foreground outline-none`}
+            className={`${borderlessInputClass} min-h-24 w-full resize-y text-sm leading-6 text-foreground outline-none`}
             aria-invalid={Boolean(errors.welcomeMessage)}
             {...register('welcomeMessage')}
           />
@@ -172,7 +172,7 @@ export function CeremonyStepForm({
         </Button>
         <Button
           type="button"
-          className="w-full rounded-3xl enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100 sm:w-auto sm:min-w-[270px]"
+          className="w-full rounded-3xl motion-safe:enabled:active:scale-[0.96] motion-reduce:enabled:active:scale-100 sm:w-auto sm:min-w-64"
           disabled={isSubmitting}
           onClick={onContinue}
         >

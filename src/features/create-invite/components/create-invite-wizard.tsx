@@ -126,8 +126,8 @@ export function CreateInviteWizard({ template }: CreateInviteWizardProps) {
         <CreateInviteHeader />
         <CreateInviteIntro config={config} currentStep={currentStep} currentKind={currentKind} />
 
-        <div className="mx-auto grid w-full max-w-[1440px] gap-8 px-5 pb-12 lg:grid-cols-[minmax(0,740px)_380px] lg:px-[120px]">
-          <Card className="gap-0 rounded-[18px] border border-border bg-card p-6 shadow-none sm:p-[30px] lg:order-1">
+        <div className="mx-auto grid w-full max-w-7xl gap-8 px-5 pb-12 lg:grid-cols-2 lg:px-8">
+          <Card className="gap-0 rounded-2xl border border-border bg-card p-6 shadow-none sm:p-8 lg:order-1">
             {currentKind === 'couple' ? (
               <CoupleStepForm
                 config={config}

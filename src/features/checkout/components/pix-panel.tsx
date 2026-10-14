@@ -65,8 +65,8 @@ export function PixPanel({
   }, [chargeId, invitationId])
 
   return (
-    <Card className="gap-5 rounded-[18px] border border-border bg-card p-6 shadow-none">
-      <p className="body-sm text-muted-foreground">{CHECKOUT_COPY.pixInstructions}</p>
+    <Card className="gap-5 rounded-2xl border border-border bg-card p-6 shadow-none">
+      <p className="text-sm leading-6 text-muted-foreground">{CHECKOUT_COPY.pixInstructions}</p>
 
       <PixExpiryCountdown expiresAt={expiresAt} />
 

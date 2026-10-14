@@ -53,7 +53,7 @@ export function RealInviteTemplate({ data }: RealInviteTemplateProps) {
   switch (data.template) {
     case 'golden':
       return (
-        <div className="mx-auto overflow-hidden rounded-md border border-[#D4A373]/90 bg-black lg:max-w-xl">
+        <div className="mx-auto overflow-hidden rounded-md border border-primary/90 bg-black lg:max-w-xl">
           <GoldenTemplate
             brideName={data.brideName}
             groomName={data.groomName}

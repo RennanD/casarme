@@ -41,6 +41,27 @@ export const BRAND_TOKEN_SWATCHES = [
     className: 'bg-border',
     outlined: false,
   },
+  {
+    name: 'surface-sage',
+    label: 'Superfície sage',
+    value: '#EEF2EA',
+    className: 'bg-surface-sage',
+    outlined: false,
+  },
+  {
+    name: 'surface-peach',
+    label: 'Superfície pêssego',
+    value: '#F3E8DF',
+    className: 'bg-surface-peach',
+    outlined: false,
+  },
+  {
+    name: 'surface-lilac',
+    label: 'Superfície lilás',
+    value: '#EFEAF2',
+    className: 'bg-surface-lilac',
+    outlined: false,
+  },
 ] as const
 
 export const SHOWCASE_SECTION_ORDER = [
