@@ -14,7 +14,7 @@ export function Footer() {
               Política de Privacidade
             </Link>
             <a
-              href="mailto:casarme.site@gmail.com"
+              href="mailto:casarm.site@gmail.com"
               className="text-[#6B6B6B] hover:text-[#D4A373] transition-colors touch-target focus-visible:focus-visible"
               aria-label="Enviar email para CasarMe"
             >

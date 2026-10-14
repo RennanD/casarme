@@ -22,8 +22,9 @@ export async function POST(request: NextRequest) {
       template,
       email,
       images,
-      cpf, // Adicionado CPF
-      isActive = false // Convite inativo por padrão
+      cpf,
+      includePlanner = false,
+      isActive = false
     } = body
 
     // Generate unique slug
@@ -47,9 +48,10 @@ export async function POST(request: NextRequest) {
         whatsapp,
         template,
         email,
-        cpf, // Salvar CPF no banco
+        cpf,
+        includePlanner: Boolean(includePlanner),
         isActive,
-        inviteType: template === 'golden' ? 'interactive' : 'site'
+        inviteType: ['blue', 'golden'].includes(template) ? 'interactive' : 'site'
       }
     })
 

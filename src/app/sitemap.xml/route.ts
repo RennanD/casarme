@@ -1,19 +1,14 @@
 import { NextResponse } from 'next/server'
 
+import { HOME_CATALOG } from '@/src/shared/catalog'
+
 export async function GET() {
+  const demoPaths = HOME_CATALOG.map((entry) => `/demo/${entry.slug}`)
+
   const urls = [
     '',
-    '/criar',
     '/convite-padrinhos',
-    '/exemplo/garden',
-    '/exemplo/romantic',
-    '/exemplo/modern',
-    '/exemplo/dourado',
-    '/modelo/garden',
-    '/modelos/dourado',
-    '/modelo/moderno',
-    '/modelo/romantico',
-    '/convite/exemplo',
+    ...demoPaths,
     '/termos-de-uso',
     '/politica-de-privacidade',
   ]
@@ -24,13 +19,13 @@ export async function GET() {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
-      .map(
-        (path) => `<url>
+  .map(
+    (path) => `<url>
   <loc>${baseUrl}${path}</loc>
   <lastmod>${currentDate}</lastmod>
-</url>`
-      )
-      .join('\n')}
+</url>`,
+  )
+  .join('\n')}
 </urlset>`
 
   return new NextResponse(xml, {

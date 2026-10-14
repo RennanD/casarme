@@ -4,6 +4,7 @@ import { prisma } from "@/src/lib/prisma"
 import { createInvitationCheckoutSession } from "@/src/lib/stripe/checkout"
 import { resend } from "@/src/lib/resend"
 import { AbandonedCartEmailTemplate } from "@/src/lib/abandoned-cart-email-template"
+import { resolveFromEmail } from "@/src/shared/email"
 
 // GET: Listar convites não pagos
 export async function GET(request: NextRequest) {
@@ -115,7 +116,7 @@ export async function POST(request: NextRequest) {
 
     // Enviar email
     await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL!,
+      from: resolveFromEmail(),
       to: [invitation.email],
       subject: `💍 Complete seu convite de casamento - ${invitation.groomName} & ${invitation.brideName}`,
       react: AbandonedCartEmailTemplate({

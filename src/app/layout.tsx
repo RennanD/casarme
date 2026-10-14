@@ -1,28 +1,33 @@
-import React, { Suspense } from "react"
-import type { Metadata, Viewport } from "next"
-import "./globals.css"
-import { Rouge_Script, Dancing_Script } from "next/font/google"
-import { Toaster } from "sonner"
-import GoogleTagManagerScripts from "@/src/lib/analytics"
-import { StructuredData } from "@/src/components/structured-data"
-import { ErrorBoundary } from "@/src/components/error-boundary"
-import { InitScript } from "@/src/app/init-script"
+import React, { Suspense } from 'react'
+import type { Metadata, Viewport } from 'next'
+import { Inter, Playfair_Display, Rouge_Script } from 'next/font/google'
+import { Toaster } from 'sonner'
 
-const playfair = {
-  variable: "--font-playfair",
-}
+import { InitScript } from '@/src/app/init-script'
+import GoogleTagManagerScripts from '@/src/lib/analytics'
+import { StructuredData } from '@/src/components/structured-data'
+import { ErrorBoundary } from '@/src/components/error-boundary'
+import { cn } from '@/src/shared/lib/cn'
 
-const inter = {
-  variable: "--font-inter",
-}
+import './globals.css'
 
-const script = Rouge_Script({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-script",
-  display: "swap",
-  preload: false, // Não bloquear renderização
-  fallback: ["serif"], // Fallback imediato
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const rougeScript = Rouge_Script({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-rouge-script',
+  display: 'swap',
 })
 
 export const viewport: Viewport = {
@@ -31,76 +36,18 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   themeColor: '#D4A373',
-};
+}
 
 export const metadata: Metadata = {
-  title: "Criar Convite de Casamento Digital - CasarMe | Templates Elegantes",
-  description:
-    "Crie seu convite de casamento digital personalizado em 3 cliques! Templates elegantes, mapa interativo, confirmação WhatsApp. Por menos de R$ 30 - Sem mensalidade.",
-  keywords: [
-    "criar convite de casamento",
-    "convite de casamento digital",
-    "convite de casamento online",
-    "convite digital casamento",
-    "templates convite casamento",
-    "convite casamento personalizado",
-    "convite digital barato",
-    "convite casamento 3 cliques",
-    "convite digital menos 30 reais",
-    "criar convite digital",
-    "convite online casamento",
-    "convite personalizado casamento"
-  ],
-  authors: [{ name: "CasarMe" }],
-  creator: "CasarMe",
-  publisher: "CasarMe",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   metadataBase: new URL('https://casarme.site'),
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    type: 'website',
-    locale: 'pt_BR',
-    url: 'https://casarme.site',
-    siteName: 'CasarMe',
-    title: 'Criar Convite de Casamento Digital - CasarMe',
-    description: 'Crie seu convite de casamento digital personalizado em 3 cliques! Templates elegantes, mapa interativo, confirmação WhatsApp.',
-    images: [
-      {
-        url: '/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'Criar Convite de Casamento Digital - CasarMe',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Criar Convite de Casamento Digital - CasarMe',
-    description: 'Crie seu convite de casamento digital personalizado em 3 cliques! Templates elegantes, mapa interativo, confirmação WhatsApp.',
-    images: ['/opengraph-image'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+  title: 'CasarMe — Convites digitais de casamento',
+  description:
+    'Crie convites de casamento digitais personalizados. Templates elegantes, mapa integrado e confirmação pelo WhatsApp.',
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
       { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.png', type: 'image/png' }
+      { url: '/favicon.png', type: 'image/png' },
     ],
     apple: '/favicon.png',
   },
@@ -117,12 +64,18 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-        {/* Meta tags críticas para mobile */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="format-detection" content="telephone=no" />
       </head>
-      <body className={`font-sans ${playfair.variable} ${inter.variable} ${script.variable} antialiased`}>
+      <body
+        className={cn(
+          playfair.variable,
+          inter.variable,
+          rougeScript.variable,
+          'min-h-screen bg-background font-sans text-foreground antialiased',
+        )}
+      >
         <InitScript />
         <LayoutClient>{children}</LayoutClient>
       </body>
@@ -139,23 +92,6 @@ function LayoutClient({ children }: { children: React.ReactNode }) {
       <Suspense fallback={null}>
         <GoogleTagManagerScripts />
       </Suspense>
-      {/* Script de compatibilidade */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            // Verificação básica de compatibilidade
-            (function() {
-              try {
-                if (typeof Promise === 'undefined' || typeof fetch === 'undefined') {
-                  console.warn('Browser compatibility issue detected');
-                }
-              } catch(e) {
-                console.error('Compatibility check failed:', e);
-              }
-            })();
-          `,
-        }}
-      />
     </ErrorBoundary>
   )
 }

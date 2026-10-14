@@ -4,9 +4,15 @@ interface EmailTemplateProps {
   groomName: string
   brideName: string
   invitationUrl: string
+  plannerDownloadUrl?: string
 }
 
-export function EmailTemplate({ groomName, brideName, invitationUrl }: EmailTemplateProps) {
+export function EmailTemplate({
+  groomName,
+  brideName,
+  invitationUrl,
+  plannerDownloadUrl,
+}: EmailTemplateProps) {
   return (
     <Html>
       <Head>
@@ -106,6 +112,49 @@ export function EmailTemplate({ groomName, brideName, invitationUrl }: EmailTemp
                 {invitationUrl}
               </Link>
             </Section>
+
+            {plannerDownloadUrl ? (
+              <Section style={{
+                backgroundColor: '#FAF3E0',
+                padding: '25px',
+                borderRadius: '8px',
+                margin: '30px 0',
+                border: '2px solid #EDE0D4'
+              }}>
+                <Text style={{
+                  color: '#3E3E3E',
+                  fontSize: '18px',
+                  margin: '0 0 15px 0',
+                  fontFamily: 'Georgia, serif',
+                  fontWeight: 'bold'
+                }}>
+                  📒 Planner de casamento
+                </Text>
+                <Text style={{
+                  color: '#6B6B6B',
+                  fontSize: '16px',
+                  margin: '0 0 20px 0'
+                }}>
+                  Seu planner digital está pronto para download.
+                </Text>
+                <Button
+                  href={plannerDownloadUrl}
+                  style={{
+                    backgroundColor: '#3E3E3E',
+                    color: '#ffffff',
+                    padding: '12px 24px',
+                    borderRadius: '8px',
+                    textDecoration: 'none',
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    display: 'inline-block',
+                    border: 'none'
+                  }}
+                >
+                  Baixar planner
+                </Button>
+              </Section>
+            ) : null}
 
             <Section style={{ margin: '30px 0' }}>
               <Text style={{
