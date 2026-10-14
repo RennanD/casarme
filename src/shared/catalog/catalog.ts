@@ -11,6 +11,7 @@ export type CatalogTemplate = {
   imagePath: string
   productLine: ProductLine
   slug: string
+  features: readonly string[]
 }
 
 export const PRODUCT_LINE_LABELS: Record<ProductLine, string> = {
@@ -19,6 +20,47 @@ export const PRODUCT_LINE_LABELS: Record<ProductLine, string> = {
 }
 
 export const HOME_CATALOG: CatalogTemplate[] = [
+  {
+    id: 'romantic',
+    name: 'Romântico',
+    description:
+      'Modelo de convite romântico com flores, galeria de fotos e música de fundo',
+    plan: 'Pro',
+    displayPrice: 'R$ 76,50',
+    imagePath: '/images/thumbs/romantico/01.png',
+    productLine: 'site',
+    slug: 'romantic',
+    features: [
+      'Design romântico com flores',
+      'Contagem regressiva',
+      'Fotos individuais do casal',
+      'Galeria com até 6 fotos',
+      'Histórias personalizadas',
+      'Música de fundo (YouTube)',
+      'Mapa integrado',
+      'Confirmação via WhatsApp',
+    ],
+  },
+  {
+    id: 'garden',
+    name: 'Verde Oliva',
+    description:
+      'Template de convite de casamento botânico com elegância natural e tons de verde oliva',
+    plan: 'Básico',
+    displayPrice: 'R$ 58,90',
+    imagePath: '/images/thumbs/garden/01.png',
+    productLine: 'site',
+    slug: 'garden',
+    features: [
+      'Design botânico elegante',
+      'Contagem regressiva',
+      'Foto de capa personalizada',
+      'Mensagem de boas-vindas',
+      'História do casal',
+      'Mapa integrado',
+      'Confirmação via WhatsApp',
+    ],
+  },
   {
     id: 'blue',
     name: 'Azul',
@@ -29,6 +71,14 @@ export const HOME_CATALOG: CatalogTemplate[] = [
     imagePath: '/images/thumbs/blue/01.png',
     productLine: 'interactive',
     slug: 'azul',
+    features: [
+      'Design elegante com flores',
+      'Foto de capa personalizada',
+      'Data, horário e endereço',
+      'Mapa integrado',
+      'Confirmação via WhatsApp',
+      'Música de fundo (YouTube)',
+    ],
   },
   {
     id: 'golden',
@@ -40,28 +90,13 @@ export const HOME_CATALOG: CatalogTemplate[] = [
     imagePath: '/images/thumbs/golden/01.png',
     productLine: 'interactive',
     slug: 'dourado',
-  },
-  {
-    id: 'garden',
-    name: 'Verde Oliva',
-    description:
-      'Template de convite de casamento botânico com elegância natural e tons de verde oliva',
-    plan: 'Básico',
-    displayPrice: 'R$ 26,90',
-    imagePath: '/images/thumbs/garden/01.png',
-    productLine: 'site',
-    slug: 'garden',
-  },
-  {
-    id: 'romantic',
-    name: 'Romântico',
-    description:
-      'Modelo de convite romântico com flores, galeria de fotos e música de fundo',
-    plan: 'Pro',
-    displayPrice: 'R$ 37,90',
-    imagePath: '/images/thumbs/romantico/01.png',
-    productLine: 'site',
-    slug: 'romantic',
+    features: [
+      'Design minimalista com monograma',
+      'Data, horário e endereço',
+      'Mapa integrado',
+      'Confirmação via WhatsApp',
+      'Música de fundo (YouTube)',
+    ],
   },
 ]
 

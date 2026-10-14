@@ -35,8 +35,8 @@ describe('v2 og copy', () => {
   it.each([
     ['azul', 'Azul', 'R$ 30,90', '/images/thumbs/blue/01.png'],
     ['dourado', 'Dourado', 'R$ 25,90', '/images/thumbs/golden/01.png'],
-    ['garden', 'Verde Oliva', 'R$ 26,90', '/images/thumbs/garden/01.png'],
-    ['romantic', 'Romântico', 'R$ 37,90', '/images/thumbs/romantico/01.png'],
+    ['garden', 'Verde Oliva', 'R$ 58,90', '/images/thumbs/garden/01.png'],
+    ['romantic', 'Romântico', 'R$ 76,50', '/images/thumbs/romantico/01.png'],
   ] as const)(
     'resolves create-invite og copy for slug %s',
     (slug, name, price, imagePath) => {

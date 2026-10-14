@@ -26,22 +26,32 @@ describe('shared catalog', () => {
     })
     expect(byName['Verde Oliva']).toMatchObject({
       plan: 'Básico',
-      displayPrice: 'R$ 26,90',
+      displayPrice: 'R$ 58,90',
       productLine: 'site',
     })
     expect(byName.Romântico).toMatchObject({
       plan: 'Pro',
-      displayPrice: 'R$ 37,90',
+      displayPrice: 'R$ 76,50',
       productLine: 'site',
     })
   })
 
-  it('requires non-empty id, slug, imagePath, and description on each entry', () => {
+  it('orders templates romantic, garden, blue, golden', () => {
+    expect(HOME_CATALOG.map((entry) => entry.id)).toEqual([
+      'romantic',
+      'garden',
+      'blue',
+      'golden',
+    ])
+  })
+
+  it('requires non-empty id, slug, imagePath, description, and features on each entry', () => {
     for (const entry of HOME_CATALOG) {
       expect(entry.id.length).toBeGreaterThan(0)
       expect(entry.slug.length).toBeGreaterThan(0)
       expect(entry.imagePath.length).toBeGreaterThan(0)
       expect(entry.description.length).toBeGreaterThan(0)
+      expect(entry.features.length).toBeGreaterThanOrEqual(4)
     }
   })
 
