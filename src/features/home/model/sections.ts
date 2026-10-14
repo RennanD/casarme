@@ -4,7 +4,6 @@ export const HOME_SECTION_ORDER = [
   'how-it-works',
   'templates',
   'before-celebration',
-  'product-demo',
   'feature-bento',
   'guest-experience',
   'permanent-purchase',

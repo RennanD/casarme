@@ -40,6 +40,13 @@
   --surface-sage: #eef2ea;
   --surface-peach: #f3e8df;
   --surface-lilac: #efeaf2;
+  --image-outline: oklch(0 0 0 / 0.1);
+  --shadow-elevated: 0 1px 2px oklch(0 0 0 / 0.04), 0 4px 12px oklch(0 0 0 / 0.06);
+  --shadow-polaroid: 0 2px 8px oklch(0 0 0 / 0.08), 0 8px 24px oklch(0 0 0 / 0.06);
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --home-max-width: 1200px;
+  --home-padding-x: 20px;
+  --home-padding-x-lg: 32px;
 }
 
 @theme inline {
@@ -89,6 +96,10 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
@@ -153,6 +164,77 @@
   .skip-link:focus {
     @apply top-0;
   }
+
+  .image-outline {
+    outline: 1px solid var(--image-outline);
+    outline-offset: -1px;
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-polaroid {
+    box-shadow: var(--shadow-polaroid);
+  }
+
+  .icon-badge {
+    @apply flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/8 text-primary;
+  }
+
+  .icon-badge-lg {
+    @apply flex size-9 shrink-0 items-center justify-center rounded-full bg-secondary text-primary;
+  }
+
+  .home-enter {
+    animation: home-enter 300ms var(--ease-out-strong) both;
+  }
+
+  .home-enter-delay-0 {
+    animation-delay: 0ms;
+  }
+
+  .home-enter-delay-1 {
+    animation-delay: 100ms;
+  }
+
+  .home-enter-delay-2 {
+    animation-delay: 200ms;
+  }
+
+  .home-enter-delay-3 {
+    animation-delay: 300ms;
+  }
+
+  .home-enter-delay-4 {
+    animation-delay: 400ms;
+  }
+
+  .home-shell {
+    width: min(var(--home-max-width), 100%);
+    margin-inline: auto;
+    padding-inline: var(--home-padding-x);
+  }
+
+  @media (min-width: 768px) {
+    .home-shell {
+      padding-inline: var(--home-padding-x-lg);
+    }
+  }
+}
+
+@keyframes home-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -163,5 +245,21 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .home-enter {
+    animation: home-enter-fade 200ms ease both;
+    filter: none;
+    transform: none;
+  }
+}
+
+@keyframes home-enter-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }

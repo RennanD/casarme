@@ -29,10 +29,44 @@ export type HomeHeroCollageImage = {
 
 export type HomeHeroCopy = {
   eyebrow: string
-  headline: string
+  headlineLine1: string
+  headlineLine2: string
   body: string
   ctaLabel: string
+  ctaSecondaryLabel: string
   note: string
+}
+
+export type HomePhaseBlock = {
+  eyebrow: string
+  title: string
+  description: string
+  image: string
+  alt: string
+  caption?: string
+  imageContain?: boolean
+}
+
+export type HomeBeforeCelebrationCopy = {
+  eyebrow: string
+  title: string
+  subtitle: string
+  phases: HomePhaseBlock[]
+}
+
+export type HomeDemoSectionCopy = {
+  eyebrow: string
+  title: string
+  subtitle: string
+  disclaimer: string
+}
+
+export type HomeFeatureHighlight = {
+  title: string
+  description: string
+  eyebrow?: string
+  image?: string
+  alt?: string
 }
 
 export type HomeObjectionSectionCopy = {
@@ -100,15 +134,15 @@ export const HOME_OBJECTION_SECTION: HomeObjectionSectionCopy = {
 }
 
 export const HOME_HOW_IT_WORKS_SECTION: HomeHowItWorksSectionCopy = {
-  title: 'Simples assim',
+  title: 'Como funciona',
   imagePath: '/mockups.webp',
   imageAlt: 'Prévia de convites digitais de casamento',
 }
 
 export const HOME_TEMPLATE_SECTION: HomeTemplateSectionCopy = {
-  title: 'Nossos Modelos de Convite',
+  title: 'Escolha o modelo de vocês.',
   subtitle:
-    'Modelos exclusivos criados para emocionar seus convidados desde o primeiro clique.',
+    'Um pagamento por convite, sem assinatura. Compare os recursos de cada modelo antes de escolher.',
 }
 
 export const HOME_WHATSAPP_SECTION: HomeWhatsappSectionCopy = {
@@ -155,9 +189,9 @@ export const HOME_TESTIMONIALS_SECTION: HomeTestimonialsSectionCopy = {
 }
 
 export const HOME_FINAL_CTA: HomeFinalCtaCopy = {
-  title: 'O próximo passo é escolher o modelo.',
-  body: 'Personalize primeiro. Pague uma única vez depois.',
-  ctaLabel: 'Escolher meu convite',
+  title: 'Comece pelo convite.',
+  body: 'Escolha a data, personalize o convite e veja a prévia. Depois, compartilhe o link com os convidados.',
+  ctaLabel: 'Criar meu convite',
 }
 
 export const HOME_FOOTER: HomeFooterCopy = {
@@ -166,16 +200,84 @@ export const HOME_FOOTER: HomeFooterCopy = {
 }
 
 export const HOME_HERO: HomeHeroCopy = {
-  eyebrow: 'CONVITES DIGITAIS DE CASAMENTO',
-  headline: 'O começo de uma história merece um convite à altura.',
-  body: 'Escolham um modelo, contem os detalhes do grande dia e compartilhem tudo com quem vocês amam. Em poucos passos, o convite fica pronto.',
-  ctaLabel: 'Criar meu convite  →',
-  note: 'Escolha seu modelo e veja a demonstração completa.',
+  eyebrow: 'Para o seu casamento',
+  headlineLine1: 'O convite de todo mundo.',
+  headlineLine2: 'Num só link.',
+  body: 'A data, o local, a confirmação. Com um link, seus convidados abrem o convite pelo navegador — sem baixar aplicativo nem criar conta.',
+  ctaLabel: 'Criar meu convite',
+  ctaSecondaryLabel: 'Ver demonstração',
+  note: 'A partir de R$ 25,90. Personalize antes de pagar.',
 }
+
+export const HOME_BEFORE_CELEBRATION: HomeBeforeCelebrationCopy = {
+  eyebrow: 'Como funciona',
+  title: 'Do convite à confirmação, sem complicar.',
+  subtitle:
+    'Personalizem o convite, compartilhem o link com os convidados e acompanhem as confirmações. Depois, o convite continua disponível.',
+  phases: [
+    {
+      eyebrow: 'Antes da comemoração',
+      title: 'Crie um convite com a cara de vocês.',
+      description:
+        'Escolham nome, data, local e mensagem. Vejam a prévia antes de pagar. Depois, compartilhem o link para imprimir ou enviar.',
+      image: '/images/home-redesigned/invite-flatlay.webp',
+      alt: 'Convite de casamento sobre mesa de madeira',
+      caption: 'Casamento de Ana e Pedro',
+      imageContain: true,
+    },
+    {
+      eyebrow: 'Na hora de celebrar',
+      title: 'Deixem o link à mão.',
+      description:
+        'Ao abrir o link, o convite carrega no navegador do celular. O convidado vê as informações e confirma presença, sem baixar aplicativo nem criar conta.',
+      image: '/images/home-redesigned/invitation-phone.webp',
+      alt: 'Convite digital aberto no celular',
+      caption: 'Na mesa, um link. No celular, todos os detalhes.',
+    },
+    {
+      eyebrow: 'Depois do grande dia',
+      title: 'Um lugar para todas as informações.',
+      description:
+        'O link do convite continua disponível. Vocês revisam os detalhes, compartilham novamente e mantêm tudo organizado para quem ainda precisa confirmar.',
+      image: '/images/home-redesigned/celebration-guests.webp',
+      alt: 'Noivos e convidados durante a celebração',
+      caption: 'o nosso sim, por todos os olhares.',
+    },
+  ],
+}
+
+export const HOME_DEMO_SECTION: HomeDemoSectionCopy = {
+  eyebrow: 'Um exemplo para você explorar',
+  title: 'Do convite ao compartilhar.',
+  subtitle: 'Veja como o convite fica para quem recebe. Depois, explore a demonstração completa.',
+  disclaimer: 'É só uma demonstração. Nenhum dado é enviado.',
+}
+
+export const HOME_INCLUDED_FEATURES = [
+  'Mapa do local e endereço completo',
+  'Convidados sem conta e sem instalar aplicativo',
+  'Confirmação de presença pelo WhatsApp',
+] as const
+
+export const HOME_FEATURE_HIGHLIGHTS: HomeFeatureHighlight[] = [
+  {
+    eyebrow: 'No modelo Romântico',
+    title: 'Tem detalhe que merece destaque.',
+    description:
+      'Música do YouTube, galeria com até 6 fotos e contagem regressiva. No modelo Romântico, o convite ganha ainda mais a cara de vocês.',
+    image: '/images/thumbs/romantico/01.png',
+    alt: 'Prévia do modelo Romântico',
+  },
+  {
+    title: 'Um convite para as suas pessoas.',
+    description:
+      'O convite fica disponível pelo link que vocês compartilham. Vocês decidem com quem compartilhar — família, amigos e quem faz parte desse dia.',
+  },
+]
 
 export const HOME_HERO_COLLAGE: HomeHeroCollageImage[] = [
   {
-    src: '/images/home-redesigned/hero-wedding-garden.png',
+    src: '/images/home-redesigned/hero-wedding-garden.webp',
     alt: 'Foto de uma celebração de casamento em um jardim',
   },
   {
@@ -195,9 +297,9 @@ export const HOME_PRODUCT_DEMO = {
 }
 
 export const HOME_BENTO_SECTION = {
-  eyebrow: 'FEITO PARA DEIXAR TUDO MAIS SIMPLES',
-  title: 'Cada detalhe, no lugar certo.',
-  subtitle: 'O convite reúne as informações que os convidados precisam para participar do grande dia.',
+  eyebrow: 'Cada detalhe, no lugar certo',
+  title: 'O convite reúne o que os convidados precisam.',
+  subtitle: 'Data, horário, endereço, mapa e confirmação ficam juntos no mesmo link.',
 }
 
 export const HOME_BENTO_FEATURES = [
@@ -284,18 +386,18 @@ export const HOME_OBJECTIONS: HomeObjection[] = [
 export const HOME_HOW_IT_WORKS_STEPS: HomeHowItWorksStep[] = [
   {
     iconKey: 'palette',
-    title: 'Escolha um modelo',
-    description: 'Encontre um estilo que combine com o casamento de vocês.',
+    title: 'Deixe o convite com a cara de vocês.',
+    description: 'Nome, data e modelo. Veja a prévia antes de pagar.',
   },
   {
     iconKey: 'file-text',
-    title: 'Contem a história',
-    description: 'Preencham nomes, data, local e as informações importantes.',
+    title: 'Compartilhe o link na hora certa.',
+    description: 'No grupo dos convidados, na cerimônia ou antes do grande dia.',
   },
   {
     iconKey: 'sparkles',
-    title: 'Compartilhem com todos',
-    description: 'Envie o link pelo WhatsApp e acompanhe as confirmações.',
+    title: 'Receba as confirmações e compartilhe.',
+    description: 'Os convidados confirmam pelo WhatsApp. O link continua disponível.',
   },
 ]
 

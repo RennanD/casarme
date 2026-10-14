@@ -97,7 +97,6 @@ describe('home section order', () => {
       'how-it-works',
       'templates',
       'before-celebration',
-      'product-demo',
       'feature-bento',
       'guest-experience',
       'permanent-purchase',
@@ -163,10 +162,11 @@ describe('home funnel section copy', () => {
 
 describe('home hero copy', () => {
   it('includes the editorial headline, eyebrow, and CTA from the desktop design', () => {
-    expect(HOME_HERO.eyebrow).toBe('CONVITES DIGITAIS DE CASAMENTO')
-    expect(HOME_HERO.headline).toMatch(/história merece um convite à altura/)
-    expect(HOME_HERO.body).toMatch(/Escolham um modelo/)
-    expect(HOME_HERO.ctaLabel).toBe('Criar meu convite  →')
+    expect(HOME_HERO.eyebrow).toBe('Para o seu casamento')
+    expect(HOME_HERO.headlineLine1).toMatch(/convite de todo mundo/)
+    expect(HOME_HERO.headlineLine2).toMatch(/Num só link/)
+    expect(HOME_HERO.body).toMatch(/navegador/)
+    expect(HOME_HERO.ctaLabel).toBe('Criar meu convite')
   })
 
   it('defines 2 desktop collage images with meaningful alt text', () => {

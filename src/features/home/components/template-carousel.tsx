@@ -106,7 +106,7 @@ export function TemplateCarousel({ templates }: TemplateCarouselProps) {
   return (
     <div
       className={cn(
-        'embla mx-auto w-full max-w-7xl py-6 lg:py-10',
+        'embla home-shell w-full py-6 lg:py-10',
         '[--slide-size:70%] [--slide-spacing:1rem]',
         'lg:[--slide-size:40%] lg:[--slide-spacing:1.5rem]',
       )}
@@ -171,7 +171,7 @@ export function TemplateCarousel({ templates }: TemplateCarouselProps) {
                 className={cn(
                   'size-2 rounded-full transition-[transform,opacity] duration-150 ease-out',
                   index === selectedIndex
-                    ? 'scale-110 bg-foreground'
+                    ? 'motion-safe:scale-110 bg-foreground motion-reduce:opacity-100'
                     : 'bg-foreground/25',
                 )}
               />

@@ -10,7 +10,6 @@ import { HowItWorksSection } from './how-it-works-section'
 import { BeforeCelebrationSection } from './before-celebration-section'
 import { GuestExperienceSection } from './guest-experience-section'
 import { PermanentPurchaseSection } from './permanent-purchase-section'
-import { ProductDemoSection } from './product-demo-section'
 import { SkipLinks } from './skip-links'
 import { TemplateGridSection } from './template-grid-section'
 
@@ -28,7 +27,6 @@ export function HomePage() {
         <HowItWorksSection />
         <TemplateGridSection />
         <BeforeCelebrationSection />
-        <ProductDemoSection />
         <FeatureBentoSection />
         <GuestExperienceSection />
         <PermanentPurchaseSection />

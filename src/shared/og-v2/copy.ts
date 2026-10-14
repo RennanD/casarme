@@ -44,7 +44,7 @@ export function resolveHomeOgCopy(baseUrl = OG_SITE_URL): OgImageCopy {
 
   return {
     eyebrow: HOME_HERO.eyebrow,
-    headline: HOME_HERO.headline,
+    headline: `${HOME_HERO.headlineLine1} ${HOME_HERO.headlineLine2}`,
     description: HOME_HERO.body,
     visual: {
       type: 'collage',
@@ -57,7 +57,7 @@ export function resolveHomeOgCopy(baseUrl = OG_SITE_URL): OgImageCopy {
 
 export function resolveHomeMetadata(): OgMetadataCopy {
   return {
-    title: `${HOME_HERO.headline} — CasarMe`,
+    title: `${HOME_HERO.headlineLine1} ${HOME_HERO.headlineLine2} — CasarMe`,
     description: HOME_HERO.body,
   }
 }

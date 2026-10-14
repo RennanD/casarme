@@ -1,48 +1,62 @@
-import Image from 'next/image'
-
-import { HOME_ANCHORS } from '@/src/features/home/model/anchors'
-
-const COMPARISON_CARDS = [
-  {
-    eyebrow: 'ANTES DA COMEMORAÇÃO',
-    title: 'Um convite com a cara de vocês.',
-    description: 'Nomes, data, local e uma mensagem especial — tudo organizado em uma página bonita para compartilhar.',
-    image: '/images/thumbs/golden/01.png',
-    alt: 'Prévia do modelo Dourado',
-    tone: 'bg-surface-sage',
-  },
-  {
-    eyebrow: 'NA HORA DE CELEBRAR',
-    title: 'Escaneou. Confirmou. Já faz parte.',
-    description: 'Os convidados abrem o convite pelo celular e confirmam presença direto pelo WhatsApp.',
-    image: '/images/home-redesigned/celebration-guests.png',
-    alt: 'Noivos e convidados durante a celebração',
-    tone: 'bg-surface-peach',
-  },
-]
+import { HomeImage } from '@/src/features/home/components/home-image'
+import { HOME_BEFORE_CELEBRATION } from '@/src/features/home/model/copy'
+import { cn } from '@/src/shared/lib/cn'
+import { Link } from '@/src/shared/ui'
 
 export function BeforeCelebrationSection() {
   return (
-    <section className="bg-background px-6 py-12 lg:px-8 lg:py-10" aria-labelledby="before-celebration-title">
-      <div className="mx-auto max-w-7xl space-y-6">
-        <header className="space-y-2">
-          <p className="text-xs font-semibold tracking-widest text-muted-foreground">DO PRIMEIRO OLHAR À CONFIRMAÇÃO</p>
-          <h2 id="before-celebration-title" className="font-serif text-3xl leading-tight font-normal text-foreground">Um convite que já explica como viver esse dia.</h2>
-          <p className="text-sm text-muted-foreground">Seu modelo reúne as informações do casamento e deixa o próximo passo claro para cada convidado.</p>
+    <section className="bg-background py-12 lg:py-16" aria-labelledby="before-celebration-title">
+      <div className="home-shell space-y-12">
+        <header className="mx-auto max-w-2xl space-y-3 text-center">
+          <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">{HOME_BEFORE_CELEBRATION.eyebrow}</p>
+          <h2 id="before-celebration-title" className="font-serif text-3xl leading-tight font-normal text-foreground lg:text-4xl">
+            {HOME_BEFORE_CELEBRATION.title}
+          </h2>
+          <p className="text-sm leading-relaxed text-muted-foreground">{HOME_BEFORE_CELEBRATION.subtitle}</p>
         </header>
-        <div className="grid gap-4 md:grid-cols-2">
-          {COMPARISON_CARDS.map((card) => (
-            <article key={card.eyebrow} className={`flex min-h-96 flex-col justify-between gap-3 rounded-2xl p-6 ${card.tone}`}>
-              <div className="space-y-2">
-                <p className="text-xs font-semibold tracking-wide text-muted-foreground">{card.eyebrow}</p>
-                <h3 className="font-serif text-xl leading-tight font-normal text-foreground">{card.title}</h3>
-                <p className="text-xs leading-relaxed text-muted-foreground">{card.description}</p>
-              </div>
-              <figure className={`relative overflow-hidden rounded-xl ${card.eyebrow.startsWith('ANTES') ? 'h-48 w-52 self-end' : 'h-48 w-full'}`}>
-                <Image src={card.image} alt={card.alt} fill className={`${card.eyebrow.startsWith('ANTES') ? 'object-contain' : 'object-cover'} outline -outline-offset-1 outline-black/10 dark:outline-white/10`} sizes="(max-width: 768px) 90vw, 500px" />
-              </figure>
-            </article>
-          ))}
+
+        <div className="space-y-16 lg:space-y-20">
+          {HOME_BEFORE_CELEBRATION.phases.map((phase, index) => {
+            const imageFirst = index % 2 === 0
+
+            return (
+              <article
+                key={phase.eyebrow}
+                className={cn(
+                  'flex flex-col items-center gap-8 lg:gap-12',
+                  imageFirst ? 'lg:flex-row' : 'lg:flex-row-reverse',
+                )}
+              >
+                <div className="w-full min-w-0 shrink-0 space-y-4 lg:w-1/2">
+                  <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{phase.eyebrow}</p>
+                  <h3 className="font-serif text-2xl leading-tight font-normal text-foreground lg:text-3xl">{phase.title}</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{phase.description}</p>
+                  {phase.eyebrow.startsWith('Antes') && (
+                    <div className="shadow-elevated max-w-xs rounded-2xl border border-transparent bg-card p-4">
+                      <p className="text-xs font-semibold tracking-wide text-muted-foreground">CASAMENTO DE ANA E PEDRO</p>
+                      <p className="mt-1 font-serif text-sm text-foreground">Todos os detalhes, num convite só.</p>
+                      <Link href="#templates" className="mt-3 text-xs text-primary">Experimente um modelo</Link>
+                    </div>
+                  )}
+                </div>
+
+                <figure className="relative aspect-[4/3] w-full min-w-0 shrink-0 overflow-hidden rounded-2xl lg:w-1/2">
+                  <HomeImage
+                    src={phase.image}
+                    alt={phase.alt}
+                    fill
+                    className={cn('image-outline', phase.imageContain ? 'object-contain bg-secondary/40 p-4' : 'object-cover')}
+                    sizes="(max-width: 1024px) 100vw, 560px"
+                  />
+                  {phase.caption && (
+                    <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent px-4 pb-4 pt-10">
+                      <span className="font-serif text-sm italic text-white">{phase.caption}</span>
+                    </figcaption>
+                  )}
+                </figure>
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>
