@@ -37,27 +37,44 @@ const BASE_SAMPLE = {
   images: [] as DemoInviteData['images'],
 }
 
+const EXTENDED_SAMPLE_IMAGES: DemoInviteData['images'] = [
+  { filename: '/placeholder.svg?height=800&width=600', type: 'hero' },
+  { filename: '/placeholder.svg?height=400&width=400', type: 'groom' },
+  { filename: '/placeholder.svg?height=400&width=400', type: 'bride' },
+  { filename: '/placeholder.svg?height=400&width=400', type: 'gallery' },
+]
+
 const SAMPLE_BY_SLUG: Record<string, DemoInviteData> = {
+  'verde-oliva': {
+    ...BASE_SAMPLE,
+    template: 'verde-oliva',
+    images: EXTENDED_SAMPLE_IMAGES,
+  },
+  rosa: {
+    ...BASE_SAMPLE,
+    template: 'rosa',
+    images: EXTENDED_SAMPLE_IMAGES,
+  },
   azul: {
     ...BASE_SAMPLE,
-    template: 'blue',
+    template: 'azul',
     groomName: 'Fernando',
     brideName: 'Marina',
     weddingDateIso: '2026-02-12T12:00:00-03:00',
-    images: [
-      {
-        filename:
-          'https://www.guiadecasamento.com.br/blog/wp-content/uploads/2014/01/noivos-roupa-festa-casamento.jpg',
-        type: 'hero',
-      },
-    ],
+    images: EXTENDED_SAMPLE_IMAGES,
   },
   dourado: {
     ...BASE_SAMPLE,
-    template: 'golden',
+    template: 'dourado',
     groomName: 'Rennan',
     brideName: 'Bárbara',
     weddingDateIso: '2026-02-12T12:00:00-03:00',
+    images: EXTENDED_SAMPLE_IMAGES,
+  },
+  terracota: {
+    ...BASE_SAMPLE,
+    template: 'terracota',
+    images: EXTENDED_SAMPLE_IMAGES,
   },
   garden: {
     ...BASE_SAMPLE,
@@ -66,17 +83,15 @@ const SAMPLE_BY_SLUG: Record<string, DemoInviteData> = {
   romantic: {
     ...BASE_SAMPLE,
     template: 'romantic',
-    images: [
-      { filename: '/placeholder.svg?height=800&width=600', type: 'hero' },
-      { filename: '/placeholder.svg?height=400&width=400', type: 'groom' },
-      { filename: '/placeholder.svg?height=400&width=400', type: 'bride' },
-      { filename: '/placeholder.svg?height=400&width=400', type: 'gallery' },
-    ],
+    images: EXTENDED_SAMPLE_IMAGES,
   },
 }
 
 export function getSampleDataBySlug(slug: string): DemoInviteData | null {
-  if (!HOME_CATALOG.some((entry) => entry.slug === slug)) {
+  const inHomeCatalog = HOME_CATALOG.some((entry) => entry.slug === slug)
+  const hasLegacySample = slug in SAMPLE_BY_SLUG
+
+  if (!inHomeCatalog && !hasLegacySample) {
     return null
   }
 

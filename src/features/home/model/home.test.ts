@@ -30,39 +30,26 @@ import { NAV_SECTION_LINKS } from './navigation'
 import { HOME_SECTION_ORDER } from './sections'
 
 describe('home catalog', () => {
-  it('contains exactly 4 templates with expected names, prices, plans, and product lines', () => {
-    expect(HOME_CATALOG).toHaveLength(4)
+  it('contains exactly 5 extended templates, all Pro / R$ 76,50 / site', () => {
+    expect(HOME_CATALOG).toHaveLength(5)
 
-    const byName = Object.fromEntries(HOME_CATALOG.map((entry) => [entry.name, entry]))
-
-    expect(byName.Dourado).toMatchObject({
-      plan: 'Premium',
-      displayPrice: 'R$ 25,90',
-      productLine: 'interactive',
-    })
-    expect(byName.Azul).toMatchObject({
-      plan: 'Premium',
-      displayPrice: 'R$ 30,90',
-      productLine: 'interactive',
-    })
-    expect(byName['Verde Oliva']).toMatchObject({
-      plan: 'Básico',
-      displayPrice: 'R$ 58,90',
-      productLine: 'site',
-    })
-    expect(byName.Romântico).toMatchObject({
-      plan: 'Pro',
-      displayPrice: 'R$ 76,50',
-      productLine: 'site',
-    })
+    for (const entry of HOME_CATALOG) {
+      expect(entry).toMatchObject({
+        plan: 'Pro',
+        displayPrice: 'R$ 76,50',
+        productLine: 'site',
+        category: 'extended',
+      })
+    }
   })
 
-  it('orders templates romantic, garden, blue, golden', () => {
+  it('orders templates verde-oliva, rosa, azul, dourado, terracota', () => {
     expect(HOME_CATALOG.map((entry) => entry.id)).toEqual([
-      'romantic',
-      'garden',
-      'blue',
-      'golden',
+      'verde-oliva',
+      'rosa',
+      'azul',
+      'dourado',
+      'terracota',
     ])
   })
 
@@ -84,8 +71,8 @@ describe('home catalog', () => {
   it('builds demo and create hrefs from template slug', () => {
     expect(getTemplateDemoHref('azul')).toBe('/demo/azul')
     expect(getTemplateCreateHref('dourado')).toBe('/criar/dourado?step=1')
-    expect(getTemplateCreateHref('garden')).toBe('/criar/garden?step=1')
-    expect(getTemplateDemoHref('romantic')).toBe('/demo/romantic')
+    expect(getTemplateCreateHref('verde-oliva')).toBe('/criar/verde-oliva?step=1')
+    expect(getTemplateDemoHref('rosa')).toBe('/demo/rosa')
   })
 })
 
