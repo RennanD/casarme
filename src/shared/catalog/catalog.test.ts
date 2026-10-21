@@ -4,6 +4,7 @@ import {
   CATEGORY_LABELS,
   EXTENDED_TEMPLATE_FEATURES,
   EXTENDED_TEMPLATE_SLUGS,
+  isExtendedTemplateSlug,
   getTemplateCreateHref,
   getTemplateDemoHref,
   HOME_CATALOG,
@@ -23,6 +24,15 @@ describe('shared catalog taxonomy', () => {
       'terracota',
     ])
     expect(HOME_CATALOG.map((entry) => entry.slug)).toEqual(EXTENDED_TEMPLATE_SLUGS)
+  })
+
+  it('identifies extended template slugs', () => {
+    for (const slug of EXTENDED_TEMPLATE_SLUGS) {
+      expect(isExtendedTemplateSlug(slug)).toBe(true)
+    }
+
+    expect(isExtendedTemplateSlug('blue')).toBe(false)
+    expect(isExtendedTemplateSlug('romantic')).toBe(false)
   })
 
   it('requires category, theme, and styleLabel on every home catalog entry', () => {

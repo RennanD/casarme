@@ -6,6 +6,7 @@ export {
   getTemplateCreateHref,
   getTemplateDemoHref,
   HOME_CATALOG,
+  isExtendedTemplateSlug,
   PRODUCT_LINE_LABELS,
   resolveCatalogById,
   resolveCatalogBySlug,

@@ -1,10 +1,16 @@
+import { isExtendedTemplateSlug } from '@/src/shared/catalog'
+
 import type { TemplateBranch } from './types'
 
-const CATALOG_TEMPLATE_IDS = new Set(['blue', 'golden', 'garden', 'romantic'])
+const LEGACY_TEMPLATE_IDS = new Set(['blue', 'golden', 'garden', 'romantic'])
 
 export function resolveTemplateBranch(templateId: string): TemplateBranch {
-  if (CATALOG_TEMPLATE_IDS.has(templateId)) {
+  if (LEGACY_TEMPLATE_IDS.has(templateId)) {
     return templateId as TemplateBranch
+  }
+
+  if (isExtendedTemplateSlug(templateId)) {
+    return 'romantic'
   }
 
   if (templateId === 'modern') {

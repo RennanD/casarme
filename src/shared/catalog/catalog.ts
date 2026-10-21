@@ -31,6 +31,10 @@ export const EXTENDED_TEMPLATE_SLUGS = [
 
 export type ExtendedTemplateSlug = (typeof EXTENDED_TEMPLATE_SLUGS)[number]
 
+export function isExtendedTemplateSlug(slug: string): slug is ExtendedTemplateSlug {
+  return (EXTENDED_TEMPLATE_SLUGS as readonly string[]).includes(slug)
+}
+
 export const EXTENDED_TEMPLATE_FEATURES = [
   'Design romântico com flores',
   'Contagem regressiva',

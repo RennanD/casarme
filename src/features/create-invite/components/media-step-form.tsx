@@ -2,6 +2,8 @@
 
 import { useFormContext } from 'react-hook-form'
 
+import { isExtendedTemplateSlug } from '@/src/shared/catalog'
+
 import type { CreateInviteTemplate } from '@/src/features/create-invite/model/catalog'
 import {
   CREATE_INVITE_ACTIONS,
@@ -45,7 +47,7 @@ export function MediaStepForm({
 
   const copy = getFormCopy('media', stepNumber, config.stepCount)
   const images = watch('images')
-  const isRomantic = template.slug === 'romantic'
+  const isRomantic = isExtendedTemplateSlug(template.slug) || template.slug === 'romantic'
 
   const heroError = errors.images?.hero?.message as string | undefined
   const groomError = errors.images?.groom?.message as string | undefined

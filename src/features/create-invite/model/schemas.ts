@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { isExtendedTemplateSlug } from '@/src/shared/catalog'
+
 import { ROMANTIC_GALLERY_MAX_PHOTOS } from './defaults'
 
 export const imageMetadataSchema = z.object({
@@ -138,14 +140,22 @@ export type CreateInviteFormValues = CoupleStepValues &
   z.infer<typeof optionalMediaStepSchema> &
   PaymentStepValues
 
+function romanticInviteSchema(base: ReturnType<typeof coupleStepSchema.merge>) {
+  return base.merge(romanticCeremonyStepSchema).merge(romanticImagesSchema()).merge(storiesSchema)
+}
+
 export function createInviteSchemaForTemplate(slug: string) {
   const base = coupleStepSchema.merge(paymentStepSchema)
 
-  if (slug === 'dourado') {
+  if (isExtendedTemplateSlug(slug) || slug === 'romantic') {
+    return romanticInviteSchema(base)
+  }
+
+  if (slug === 'golden') {
     return base.merge(interactiveCeremonyStepSchema).merge(optionalMediaStepSchema)
   }
 
-  if (slug === 'azul') {
+  if (slug === 'blue') {
     return base
       .merge(interactiveCeremonyStepSchema)
       .merge(heroRequiredImagesSchema())
@@ -159,14 +169,10 @@ export function createInviteSchemaForTemplate(slug: string) {
       .merge(storiesSchema)
   }
 
-  if (slug === 'romantic') {
-    return base.merge(romanticCeremonyStepSchema).merge(romanticImagesSchema()).merge(storiesSchema)
-  }
-
-  return base.merge(interactiveCeremonyStepSchema).merge(optionalMediaStepSchema)
+  return romanticInviteSchema(base)
 }
 
 /** @deprecated Use createInviteSchemaForTemplate(slug) for adaptive validation */
-export const createInviteFormSchema = createInviteSchemaForTemplate('dourado')
+export const createInviteFormSchema = createInviteSchemaForTemplate('terracota')
 
 export const ceremonyStepSchema = interactiveCeremonyStepSchema

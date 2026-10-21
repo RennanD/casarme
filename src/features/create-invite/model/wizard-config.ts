@@ -1,3 +1,5 @@
+import { EXTENDED_TEMPLATE_SLUGS } from '@/src/shared/catalog'
+
 import type { CreateInviteTemplate } from './catalog'
 import { createInviteSchemaForTemplate, type CreateInviteFormValues } from './schemas'
 
@@ -44,9 +46,7 @@ const ROMANTIC_CEREMONY_FIELDS = [
   'musicUrl',
 ] as const satisfies readonly (keyof CreateInviteFormValues)[]
 
-const AZUL_MEDIA_FIELDS = ['images'] as const satisfies readonly (keyof CreateInviteFormValues)[]
-
-const GARDEN_MEDIA_FIELDS = ['images'] as const satisfies readonly (keyof CreateInviteFormValues)[]
+const HERO_MEDIA_FIELDS = ['images'] as const satisfies readonly (keyof CreateInviteFormValues)[]
 
 const ROMANTIC_MEDIA_FIELDS = [
   'images',
@@ -85,8 +85,28 @@ function buildIsFieldVisible(visibility: FieldVisibilityMap) {
   }
 }
 
+const ROMANTIC_WIZARD_CONFIG: Omit<WizardConfig, 'createSchema'> = {
+  stepCount: 4,
+  steps: FOUR_STEP_LAYOUT,
+  stepFields: {
+    1: COUPLE_FIELDS,
+    2: ROMANTIC_CEREMONY_FIELDS,
+    3: ROMANTIC_MEDIA_FIELDS,
+    4: PAYMENT_FIELDS,
+  },
+  isFieldVisible: buildIsFieldVisible({
+    1: COUPLE_FIELDS,
+    2: ROMANTIC_CEREMONY_FIELDS,
+    3: ROMANTIC_MEDIA_FIELDS,
+    4: PAYMENT_FIELDS,
+  }),
+}
+
 const WIZARD_CONFIGS: Record<string, Omit<WizardConfig, 'createSchema'>> = {
-  dourado: {
+  ...Object.fromEntries(
+    EXTENDED_TEMPLATE_SLUGS.map((slug) => [slug, ROMANTIC_WIZARD_CONFIG]),
+  ),
+  golden: {
     stepCount: 3,
     steps: THREE_STEP_LAYOUT,
     stepFields: {
@@ -100,19 +120,19 @@ const WIZARD_CONFIGS: Record<string, Omit<WizardConfig, 'createSchema'>> = {
       3: PAYMENT_FIELDS,
     }),
   },
-  azul: {
+  blue: {
     stepCount: 4,
     steps: FOUR_STEP_LAYOUT,
     stepFields: {
       1: COUPLE_FIELDS,
       2: INTERACTIVE_CEREMONY_FIELDS,
-      3: AZUL_MEDIA_FIELDS,
+      3: HERO_MEDIA_FIELDS,
       4: PAYMENT_FIELDS,
     },
     isFieldVisible: buildIsFieldVisible({
       1: COUPLE_FIELDS,
       2: INTERACTIVE_CEREMONY_FIELDS,
-      3: AZUL_MEDIA_FIELDS,
+      3: HERO_MEDIA_FIELDS,
       4: PAYMENT_FIELDS,
     }),
   },
@@ -122,36 +142,21 @@ const WIZARD_CONFIGS: Record<string, Omit<WizardConfig, 'createSchema'>> = {
     stepFields: {
       1: COUPLE_FIELDS,
       2: SITE_CEREMONY_FIELDS,
-      3: GARDEN_MEDIA_FIELDS,
+      3: HERO_MEDIA_FIELDS,
       4: PAYMENT_FIELDS,
     },
     isFieldVisible: buildIsFieldVisible({
       1: COUPLE_FIELDS,
       2: SITE_CEREMONY_FIELDS,
-      3: GARDEN_MEDIA_FIELDS,
+      3: HERO_MEDIA_FIELDS,
       4: PAYMENT_FIELDS,
     }),
   },
-  romantic: {
-    stepCount: 4,
-    steps: FOUR_STEP_LAYOUT,
-    stepFields: {
-      1: COUPLE_FIELDS,
-      2: ROMANTIC_CEREMONY_FIELDS,
-      3: ROMANTIC_MEDIA_FIELDS,
-      4: PAYMENT_FIELDS,
-    },
-    isFieldVisible: buildIsFieldVisible({
-      1: COUPLE_FIELDS,
-      2: ROMANTIC_CEREMONY_FIELDS,
-      3: ROMANTIC_MEDIA_FIELDS,
-      4: PAYMENT_FIELDS,
-    }),
-  },
+  romantic: ROMANTIC_WIZARD_CONFIG,
 }
 
 export function getWizardConfig(template: CreateInviteTemplate): WizardConfig {
-  const config = WIZARD_CONFIGS[template.slug] ?? WIZARD_CONFIGS.dourado
+  const config = WIZARD_CONFIGS[template.slug] ?? ROMANTIC_WIZARD_CONFIG
 
   return {
     ...config,
