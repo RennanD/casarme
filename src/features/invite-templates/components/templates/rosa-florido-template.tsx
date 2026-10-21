@@ -8,6 +8,8 @@ import { CalendarCheck, MapPin } from 'lucide-react'
 import { cn } from '@/src/shared/lib/cn'
 
 import { InviteMusicPlayer } from '../shell/invite-music-player'
+import { ExtendedVenueSection } from '../shell/shared/extended-venue-section'
+import { GalleryColumnsSection } from '../shell/shared/gallery-columns-section'
 import type { InviteShellData, InviteShellPhotos } from '../../model/invite-shell-types'
 import { ROSA_FLORIDO_THEME } from '../../model/themes/rosa-florido-theme'
 import {
@@ -78,9 +80,6 @@ export function RosaFloridoTemplate({
   const groomInitial = data.groomName?.charAt(0)?.toUpperCase() ?? 'N'
   const brideInitial = data.brideName?.charAt(0)?.toUpperCase() ?? 'N'
   const storyPhoto = groomPhoto || bridePhoto || heroPhoto
-  const venuePhoto = galleryPhotos[0] || heroPhoto
-  const leftColumnPhotos = galleryPhotos.filter((_, index) => index % 2 === 0)
-  const rightColumnPhotos = galleryPhotos.filter((_, index) => index % 2 === 1)
 
   const handleConfirmPresence = () => {
     if (!data.whatsapp) {
@@ -337,51 +336,12 @@ export function RosaFloridoTemplate({
         </div>
       </section>
 
-      <section
-        className="flex flex-col gap-2.5 px-7 pb-5 pt-7"
-        style={{ backgroundColor: tokens.surface }}
-      >
-        <SectionMarker>07 · Onde será</SectionMarker>
-        <h2
-          className="text-2xl"
-          style={{ color: tokens.accent, fontFamily: tokens.fontSerif }}
-        >
-          Onde será?
-        </h2>
-        <p className="text-[17px]" style={{ fontFamily: tokens.fontSerif }}>
-          {data.venueName || 'Local da Cerimônia'}
-        </p>
-        <p
-          className="text-sm leading-[21px]"
-          style={{ color: tokens.textMuted, fontFamily: tokens.fontSerif }}
-        >
-          {data.venueAddress || 'Endereço completo'}
-        </p>
-        <button
-          type="button"
-          onClick={handleOpenMap}
-          className="flex items-center gap-2 px-5 py-3 transition-[transform,opacity] duration-150 ease-out enabled:active:scale-[0.96] motion-reduce:transition-none motion-reduce:enabled:active:scale-100"
-        >
-          <MapPin className="size-3.5" style={{ color: tokens.accent }} strokeWidth={1.75} />
-          <span
-            className="text-[11px]"
-            style={{ color: tokens.accent, fontFamily: tokens.fontSans }}
-          >
-            Ver localização
-          </span>
-        </button>
-      </section>
-
-      {venuePhoto && (
-        <div className="relative h-[220px] w-full">
-          <Image
-            src={venuePhoto}
-            alt={data.venueName || 'Local do evento'}
-            fill
-            className="object-cover outline outline-1 -outline-offset-1 outline-black/10"
-          />
-        </div>
-      )}
+      <ExtendedVenueSection
+        theme={tokens}
+        venueName={data.venueName}
+        venueAddress={data.venueAddress}
+        sectionLabel="07 · Onde será"
+      />
 
       <section className="flex flex-col items-center gap-3 px-6 py-7">
         <p
@@ -400,40 +360,11 @@ export function RosaFloridoTemplate({
         </button>
       </section>
 
-      {galleryPhotos.length > 0 && (
-        <section
-          className="flex flex-col items-center gap-4 px-4 pb-7 pt-8"
-          style={{ backgroundColor: tokens.surface }}
-        >
-          <SectionMarker>08 · Galeria</SectionMarker>
-          <div className="flex w-full justify-center gap-2.5">
-            <div className="flex w-[175px] flex-col gap-2.5">
-              {leftColumnPhotos.map((photo, index) => (
-                <div key={`left-${index}`} className="relative h-[311px] w-full overflow-hidden rounded-xl">
-                  <Image
-                    src={photo || '/placeholder.svg?height=622&width=350'}
-                    alt={`Galeria ${index * 2 + 1}`}
-                    fill
-                    className="object-cover outline outline-1 -outline-offset-1 outline-black/10"
-                  />
-                </div>
-              ))}
-            </div>
-            <div className="flex w-[175px] flex-col gap-2.5 pt-14">
-              {rightColumnPhotos.map((photo, index) => (
-                <div key={`right-${index}`} className="relative h-[311px] w-full overflow-hidden rounded-xl">
-                  <Image
-                    src={photo || '/placeholder.svg?height=622&width=350'}
-                    alt={`Galeria ${index * 2 + 2}`}
-                    fill
-                    className="object-cover outline outline-1 -outline-offset-1 outline-black/10"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <GalleryColumnsSection
+        galleryPhotos={galleryPhotos}
+        theme={tokens}
+        sectionLabel="08 · Galeria"
+      />
 
       <footer
         className="flex flex-col items-center gap-2 px-7 pb-14 pt-10"

@@ -5,6 +5,7 @@ import { Music2, Pause, Play } from 'lucide-react'
 import { Button } from '@/src/components/ui/button'
 
 import { useInviteMusic } from '../../hooks/use-invite-music'
+import type { ExtendedInviteTheme } from '../../model/themes/extended-invite-theme'
 import type { RomanticTheme } from '../../model/themes/romantic-theme'
 import { ROMANTIC_THEME } from '../../model/themes/romantic-theme'
 import type { RosaFloridoTheme } from '../../model/themes/rosa-florido-theme'
@@ -12,6 +13,7 @@ import type { RosaFloridoTheme } from '../../model/themes/rosa-florido-theme'
 type MusicPlayerTheme =
   | { variant: 'romantic'; tokens?: RomanticTheme }
   | { variant: 'rosa'; tokens: RosaFloridoTheme }
+  | { variant: 'extended'; tokens: ExtendedInviteTheme }
 
 type InviteMusicPlayerProps = {
   musicUrl?: string
@@ -26,7 +28,7 @@ export function InviteMusicPlayer({
 
   if (!enabled) return null
 
-  if (theme.variant === 'rosa') {
+  if (theme.variant === 'rosa' || theme.variant === 'extended') {
     const tokens = theme.tokens
     return (
       <>

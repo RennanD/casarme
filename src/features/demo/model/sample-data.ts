@@ -42,6 +42,8 @@ const EXTENDED_SAMPLE_IMAGES: DemoInviteData['images'] = [
   { filename: '/placeholder.svg?height=400&width=400', type: 'groom' },
   { filename: '/placeholder.svg?height=400&width=400', type: 'bride' },
   { filename: '/placeholder.svg?height=400&width=400', type: 'gallery' },
+  { filename: '/placeholder.svg?height=500&width=400', type: 'gallery' },
+  { filename: '/placeholder.svg?height=480&width=640', type: 'gallery' },
 ]
 
 const SAMPLE_BY_SLUG: Record<string, DemoInviteData> = {
