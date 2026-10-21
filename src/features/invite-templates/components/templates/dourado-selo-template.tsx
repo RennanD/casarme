@@ -167,11 +167,7 @@ export function DouradoSeloTemplate({
         weddingDate={data.weddingDate}
         weddingTime={data.weddingTime}
       />
-      <ExtendedCalendarSection
-        weddingDate={data.weddingDate}
-        theme={theme}
-        variant="week-event"
-      />
+      <ExtendedCalendarSection weddingDate={data.weddingDate} theme={theme} />
       <ExtendedVenueSection
         theme={theme}
         venueName={data.venueName}

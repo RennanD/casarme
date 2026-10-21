@@ -99,11 +99,7 @@ export function VerdeOlivaTemplate({
         weddingDate={data.weddingDate}
         weddingTime={data.weddingTime}
       />
-      <ExtendedCalendarSection
-        weddingDate={data.weddingDate}
-        theme={theme}
-        variant="week-agenda"
-      />
+      <ExtendedCalendarSection weddingDate={data.weddingDate} theme={theme} />
       <ExtendedVenueSection
         theme={theme}
         venueName={data.venueName}

@@ -1,0 +1,14 @@
+{
+  "source": "mockup.pen frames exported via .scratch/pencil-templates.html",
+  "frames": {
+    "verde-oliva": "wyhur",
+    "rosa": "TIq1g",
+    "azul": "M8JZEQ",
+    "dourado": "BmNOt",
+    "terracota": "adw9H"
+  },
+  "paths": {
+    "heroes": "public/images/demo/{slug}/hero.jpg",
+    "gallery": "public/images/demo/shared/gallery-0{1-6}.jpg"
+  }
+}

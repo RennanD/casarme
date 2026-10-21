@@ -1,5 +1,7 @@
 import { HOME_CATALOG } from '@/src/shared/catalog'
 
+import { buildDemoImagesFromPencil } from './pencil-demo-images'
+
 export type DemoInviteData = {
   template: string
   groomName: string
@@ -37,25 +39,16 @@ const BASE_SAMPLE = {
   images: [] as DemoInviteData['images'],
 }
 
-const EXTENDED_SAMPLE_IMAGES: DemoInviteData['images'] = [
-  { filename: '/placeholder.svg?height=800&width=600', type: 'hero' },
-  { filename: '/placeholder.svg?height=400&width=400', type: 'groom' },
-  { filename: '/placeholder.svg?height=400&width=400', type: 'bride' },
-  { filename: '/placeholder.svg?height=400&width=400', type: 'gallery' },
-  { filename: '/placeholder.svg?height=500&width=400', type: 'gallery' },
-  { filename: '/placeholder.svg?height=480&width=640', type: 'gallery' },
-]
-
 const SAMPLE_BY_SLUG: Record<string, DemoInviteData> = {
   'verde-oliva': {
     ...BASE_SAMPLE,
     template: 'verde-oliva',
-    images: EXTENDED_SAMPLE_IMAGES,
+    images: buildDemoImagesFromPencil('verde-oliva'),
   },
   rosa: {
     ...BASE_SAMPLE,
     template: 'rosa',
-    images: EXTENDED_SAMPLE_IMAGES,
+    images: buildDemoImagesFromPencil('rosa'),
   },
   azul: {
     ...BASE_SAMPLE,
@@ -63,7 +56,7 @@ const SAMPLE_BY_SLUG: Record<string, DemoInviteData> = {
     groomName: 'Fernando',
     brideName: 'Marina',
     weddingDateIso: '2026-02-12T12:00:00-03:00',
-    images: EXTENDED_SAMPLE_IMAGES,
+    images: buildDemoImagesFromPencil('azul'),
   },
   dourado: {
     ...BASE_SAMPLE,
@@ -71,12 +64,12 @@ const SAMPLE_BY_SLUG: Record<string, DemoInviteData> = {
     groomName: 'Rennan',
     brideName: 'Bárbara',
     weddingDateIso: '2026-02-12T12:00:00-03:00',
-    images: EXTENDED_SAMPLE_IMAGES,
+    images: buildDemoImagesFromPencil('dourado'),
   },
   terracota: {
     ...BASE_SAMPLE,
     template: 'terracota',
-    images: EXTENDED_SAMPLE_IMAGES,
+    images: buildDemoImagesFromPencil('terracota'),
   },
   garden: {
     ...BASE_SAMPLE,
@@ -85,7 +78,7 @@ const SAMPLE_BY_SLUG: Record<string, DemoInviteData> = {
   romantic: {
     ...BASE_SAMPLE,
     template: 'romantic',
-    images: EXTENDED_SAMPLE_IMAGES,
+    images: buildDemoImagesFromPencil('rosa'),
   },
 }
 

@@ -109,7 +109,7 @@ export function AzulPorcelainTemplate({
         weddingDate={data.weddingDate}
         weddingTime={data.weddingTime}
       />
-      <ExtendedCalendarSection weddingDate={data.weddingDate} theme={theme} variant="month" />
+      <ExtendedCalendarSection weddingDate={data.weddingDate} theme={theme} />
       <ExtendedVenueSection
         theme={theme}
         venueName={data.venueName}

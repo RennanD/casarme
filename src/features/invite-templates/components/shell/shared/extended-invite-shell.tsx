@@ -13,7 +13,7 @@ type ExtendedInviteShellProps = {
 export function ExtendedInviteShell({ theme, className, children }: ExtendedInviteShellProps) {
   return (
     <div
-      className={cn('mx-auto min-h-screen w-full max-w-6xl', className)}
+      className={cn('mx-auto min-h-screen w-full max-w-3xl', className)}
       style={{ backgroundColor: theme.bg, color: theme.text }}
     >
       {children}
