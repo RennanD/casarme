@@ -1,6 +1,8 @@
 export {
   resolveCreateInviteMetadataBySlug,
   resolveCreateInviteOgCopy,
+  resolveDemoMetadataBySlug,
+  resolveDemoOgCopy,
   resolveHomeMetadata,
   resolveHomeOgCopy,
   toAbsoluteAssetUrl,

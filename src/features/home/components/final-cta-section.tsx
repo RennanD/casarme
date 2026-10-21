@@ -32,7 +32,7 @@ export function FinalCtaSection() {
           </figure>
           <figure className="shadow-polaroid absolute right-0 top-0 h-48 w-[46%] rotate-2 overflow-hidden rounded-xl bg-secondary/50">
             <HomeImage
-              src="/images/thumbs/golden/01.png"
+              src="/images/thumbs/dourado/01.png"
               alt="Prévia do modelo Dourado"
               fill
               className="image-outline object-contain p-2"

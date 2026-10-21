@@ -29,7 +29,7 @@ export function HomeNavbar() {
 
         <div className="hidden items-center gap-2 md:flex">
           <Button variant="ghost" asChild className="h-auto rounded-full px-4 py-2.5 text-xs">
-            <Link href={getTemplateDemoHref('garden')} className="no-underline hover:no-underline">Ver demonstração</Link>
+            <Link href={getTemplateDemoHref('verde-oliva')} className="no-underline hover:no-underline">Ver demonstração</Link>
           </Button>
           <Button asChild className="h-auto rounded-full px-5 py-3 text-xs">
             <Link href={templatesHref} className="no-underline hover:no-underline">{NAVBAR_CTA_LABEL}</Link>
@@ -56,7 +56,7 @@ export function HomeNavbar() {
                 {link.label}
               </Link>
             ))}
-            <Link href={getTemplateDemoHref('garden')} variant="nav" className="py-2" onClick={() => setIsOpen(false)}>
+            <Link href={getTemplateDemoHref('verde-oliva')} variant="nav" className="py-2" onClick={() => setIsOpen(false)}>
               Ver demonstração
             </Link>
             <Button asChild className="w-full rounded-full">

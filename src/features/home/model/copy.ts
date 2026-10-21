@@ -281,7 +281,7 @@ export const HOME_HERO_COLLAGE: HomeHeroCollageImage[] = [
     alt: 'Foto de uma celebração de casamento em um jardim',
   },
   {
-    src: '/images/thumbs/blue/01.png',
+    src: '/images/thumbs/azul/01.png',
     alt: 'Prévia do convite Azul',
   },
 ]

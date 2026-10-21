@@ -40,7 +40,7 @@ export function toAbsoluteAssetUrl(path: string, baseUrl = OG_SITE_URL): string 
 }
 
 export function resolveHomeOgCopy(baseUrl = OG_SITE_URL): OgImageCopy {
-  const templateThumb = HOME_HERO_COLLAGE[1]?.src ?? HOME_CATALOG[0]?.imagePath ?? '/images/thumbs/blue/01.png'
+  const templateThumb = HOME_HERO_COLLAGE[1]?.src ?? HOME_CATALOG[0]?.imagePath ?? '/images/thumbs/azul/01.png'
 
   return {
     eyebrow: HOME_HERO.eyebrow,
@@ -101,4 +101,39 @@ export function resolveCreateInviteMetadataBySlug(slug: string): OgMetadataCopy 
   }
 
   return resolveCreateInviteMetadata(catalogEntry.name, catalogEntry.description)
+}
+
+export function resolveDemoMetadata(templateName: string, description: string): OgMetadataCopy {
+  return {
+    title: `Demonstração ${templateName} — CasarMe`,
+    description,
+  }
+}
+
+export function resolveDemoMetadataBySlug(slug: string): OgMetadataCopy | null {
+  const catalogEntry = resolveCatalogBySlug(slug)
+  if (!catalogEntry) {
+    return null
+  }
+
+  return resolveDemoMetadata(catalogEntry.name, catalogEntry.description)
+}
+
+export function resolveDemoOgCopy(slug: string, baseUrl = OG_SITE_URL): OgImageCopy | null {
+  const catalogEntry = resolveCatalogBySlug(slug)
+  if (!catalogEntry) {
+    return null
+  }
+
+  return {
+    eyebrow: 'DEMONSTRAÇÃO',
+    headline: `Demonstração ${catalogEntry.name}`,
+    description: catalogEntry.description,
+    visual: {
+      type: 'template',
+      thumbUrl: toAbsoluteAssetUrl(catalogEntry.imagePath, baseUrl),
+      badge: catalogEntry.displayPrice,
+    },
+    metadata: resolveDemoMetadata(catalogEntry.name, catalogEntry.description),
+  }
 }

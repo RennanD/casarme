@@ -31,7 +31,7 @@ export function HomeHeroCollage() {
       <figure className="shadow-polaroid absolute left-[44%] top-0 z-20 h-[65%] w-[48%] rotate-2 overflow-hidden rounded-2xl">
         <div className="relative h-[calc(100%-2rem)] w-full bg-secondary/60">
           <HomeImage
-            src="/images/thumbs/blue/01.png"
+            src="/images/thumbs/azul/01.png"
             alt="Prévia do convite Azul"
             fill
             className="image-outline object-contain p-2"
