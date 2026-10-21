@@ -28,16 +28,16 @@ export function ExtendedVenueSection({
       >
         <SectionMarker theme={theme}>{sectionLabel}</SectionMarker>
         <h2
-          className="text-2xl"
+          className="text-4xl"
           style={{ color: theme.accent, fontFamily: theme.fontSerif }}
         >
           Onde será?
         </h2>
-        <p className="text-[17px]" style={{ fontFamily: theme.fontSerif }}>
+        <p className="text-[26px]" style={{ fontFamily: theme.fontSerif }}>
           {venueName || 'Local da Cerimônia'}
         </p>
         <p
-          className="text-sm leading-[21px]"
+          className="text-[21px] leading-[32px]"
           style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}
         >
           {venueAddress || 'Endereço completo'}
@@ -49,7 +49,7 @@ export function ExtendedVenueSection({
         >
           <MapPin className="size-3.5" style={{ color: theme.accent }} strokeWidth={1.75} />
           <span
-            className="text-[11px]"
+            className="text-[17px]"
             style={{ color: theme.accent, fontFamily: theme.fontSans }}
           >
             Abrir no Google Maps

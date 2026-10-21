@@ -24,7 +24,7 @@ export function GalleryFilmstripSection({
   return (
     <section className="flex flex-col gap-2.5 bg-white pb-7 pt-6">
       <p
-        className="text-center text-[15px]"
+        className="text-center text-[23px]"
         style={{ color: theme.accent, fontFamily: theme.fontSerif }}
       >
         Galeria · filmstrip

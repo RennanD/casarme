@@ -46,7 +46,7 @@ export function GalleryCarouselSection({
   return (
     <section className="flex flex-col items-center gap-3 px-0 pb-7 pt-4">
       <p
-        className="text-[8px] tracking-[0.2px]"
+        className="text-[12px] tracking-[0.2px]"
         style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
       >
         {sectionLabel.toUpperCase()}
@@ -98,7 +98,7 @@ export function GalleryCarouselSection({
         ))}
       </div>
       <p
-        className="text-[8px] italic"
+        className="text-[12px] italic"
         style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
       >
         deslize para ver mais

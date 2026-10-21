@@ -5,11 +5,10 @@ import { Cormorant_Garamond, Dancing_Script, Lato } from 'next/font/google'
 import { cn } from '@/src/shared/lib/cn'
 
 import { ExtendedCalendarSection } from '../shell/shared/extended-calendar-section'
-import { ExtendedCoupleNamesSection } from '../shell/shared/extended-couple-names-section'
 import { ExtendedCoupleStorySection } from '../shell/shared/extended-couple-story-section'
 import { ExtendedEditorialDateSection } from '../shell/shared/extended-editorial-date-section'
 import { ExtendedFooter } from '../shell/shared/extended-footer'
-import { ExtendedHeroSection } from '../shell/shared/extended-hero-section'
+import { ExtendedHeroCap } from '../shell/shared/extended-hero-cap'
 import { ExtendedInviteMessageSection } from '../shell/shared/extended-invite-message-section'
 import { ExtendedInviteShell } from '../shell/shared/extended-invite-shell'
 import { ExtendedQuickActions } from '../shell/shared/extended-quick-actions'
@@ -60,19 +59,13 @@ export function TerracotaBohoTemplate({
       theme={theme}
       className={cn(dancingScript.variable, cormorant.variable, lato.variable)}
     >
-      <ExtendedHeroSection
+      <ExtendedHeroCap
         theme={theme}
         variant="terracota"
         heroPhoto={heroPhoto}
         groomName={data.groomName}
         brideName={data.brideName}
         musicUrl={data.musicUrl}
-      />
-      <ExtendedCoupleNamesSection
-        theme={theme}
-        variant="terracota"
-        groomName={data.groomName}
-        brideName={data.brideName}
       />
       <ExtendedInviteMessageSection theme={theme} variant="terracota" />
       <ExtendedQuoteSection

@@ -5,9 +5,8 @@ import { Cormorant_Garamond, Great_Vibes, Lato } from 'next/font/google'
 import { cn } from '@/src/shared/lib/cn'
 
 import { ExtendedCalendarSection } from '../shell/shared/extended-calendar-section'
-import { ExtendedCoupleNamesSection } from '../shell/shared/extended-couple-names-section'
 import { ExtendedFooter } from '../shell/shared/extended-footer'
-import { ExtendedHeroSection } from '../shell/shared/extended-hero-section'
+import { ExtendedHeroCap } from '../shell/shared/extended-hero-cap'
 import { ExtendedInviteMessageSection } from '../shell/shared/extended-invite-message-section'
 import { ExtendedInviteShell } from '../shell/shared/extended-invite-shell'
 import { ExtendedQuickActions } from '../shell/shared/extended-quick-actions'
@@ -64,32 +63,32 @@ function DouradoEditorialDate({
       style={{ backgroundColor: theme.surface }}
     >
       <span
-        className="text-[52px] leading-none"
+        className="text-[78px] leading-none"
         style={{ color: theme.accent, fontFamily: theme.fontSerif }}
       >
         {dateParts.day}
       </span>
-      <p className="text-[13px]" style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}>
+      <p className="text-[20px]" style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}>
         {dateParts.month} {dateParts.year} · {formatWeddingTime(weddingTime)}
       </p>
       <div className="flex items-end gap-2">
-        <span className="text-sm capitalize" style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}>
+        <span className="text-[21px] capitalize" style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}>
           {dateParts.month}
         </span>
         <span style={{ color: theme.line, fontFamily: theme.fontSerif }}>—</span>
         <span
-          className="text-[56px] leading-[50px]"
+          className="text-[84px] leading-[75px]"
           style={{ color: theme.accent, fontFamily: theme.fontSerif }}
         >
           {dateParts.day}
         </span>
         <span style={{ color: theme.line, fontFamily: theme.fontSerif }}>—</span>
-        <span className="text-sm" style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}>
+        <span className="text-[21px]" style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}>
           {dateParts.year}
         </span>
       </div>
       <p
-        className="text-[11px] italic capitalize"
+        className="text-[17px] italic capitalize"
         style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}
       >
         {dateParts.weekday} · {formatWeddingTime(weddingTime)}
@@ -110,7 +109,7 @@ function DouradoCoupleStory({ coupleStory }: { coupleStory: string }) {
     >
       {theme.line && <div className="h-px w-20" style={{ backgroundColor: theme.line }} />}
       <p
-        className="text-center text-base italic leading-[26px]"
+        className="text-center text-2xl italic leading-[39px]"
         style={{ fontFamily: theme.fontSerif }}
       >
         {coupleStory}
@@ -134,19 +133,13 @@ export function DouradoSeloTemplate({
       theme={theme}
       className={cn(greatVibes.variable, cormorant.variable, lato.variable)}
     >
-      <ExtendedHeroSection
+      <ExtendedHeroCap
         theme={theme}
         variant="dourado"
         heroPhoto={heroPhoto}
         groomName={data.groomName}
         brideName={data.brideName}
         musicUrl={data.musicUrl}
-      />
-      <ExtendedCoupleNamesSection
-        theme={theme}
-        variant="dourado"
-        groomName={data.groomName}
-        brideName={data.brideName}
       />
       <ExtendedQuoteSection
         theme={theme}

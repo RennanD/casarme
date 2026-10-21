@@ -19,14 +19,14 @@ export function ExtendedInviteMessageSection({
 
   const textSize =
     variant === 'rosa'
-      ? 'text-[21px] leading-8'
+      ? 'text-[32px] leading-[48px]'
       : variant === 'azul'
-        ? 'text-lg leading-[27px]'
+        ? 'text-[27px] leading-[41px]'
         : variant === 'dourado'
-          ? 'text-[17px] leading-[26px]'
+          ? 'text-[26px] leading-[39px]'
           : variant === 'terracota'
-            ? 'text-xl leading-[29px]'
-            : 'text-base leading-6'
+            ? 'text-3xl leading-[44px]'
+            : 'text-2xl leading-9'
 
   return (
     <section
@@ -45,7 +45,7 @@ export function ExtendedInviteMessageSection({
       </p>
       {variant === 'rosa' && (
         <p
-          className="text-[72px] leading-[43px]"
+          className="text-[108px] leading-[65px]"
           style={{ color: theme.accentLight, fontFamily: theme.fontSerif }}
           aria-hidden
         >

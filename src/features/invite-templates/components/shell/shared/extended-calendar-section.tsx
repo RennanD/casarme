@@ -1,3 +1,5 @@
+import { useId } from 'react'
+
 import {
   buildMonthCalendar,
   getWeekdayLabels,
@@ -14,6 +16,7 @@ export function ExtendedCalendarSection({
   weddingDate,
   theme,
 }: ExtendedCalendarSectionProps) {
+  const weekdayHeaderId = useId()
   const dateParts = parseWeddingDateParts(weddingDate)
   if (!dateParts) return null
 
@@ -28,17 +31,17 @@ export function ExtendedCalendarSection({
       style={{ backgroundColor: theme.surface }}
     >
       <p
-        className="text-[15px] capitalize"
+        className="text-[23px] capitalize"
         style={{ fontFamily: theme.fontSerif, color: theme.text }}
       >
         {dateParts.month} {dateParts.year}
       </p>
       <div className="w-full max-w-sm">
         <div className="mb-1 grid grid-cols-7 gap-1">
-          {getWeekdayLabels().map((label) => (
+          {getWeekdayLabels().map((label, index) => (
             <span
-              key={label}
-              className="text-center text-[9px] font-medium uppercase"
+              key={`${weekdayHeaderId}-${index}`}
+              className="text-center text-[14px] font-medium uppercase"
               style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
             >
               {label}
@@ -56,7 +59,7 @@ export function ExtendedCalendarSection({
                 return (
                   <div
                     key={cellIndex}
-                    className="flex aspect-square items-center justify-center rounded-full text-[11px] font-medium text-white"
+                    className="flex aspect-square items-center justify-center rounded-full text-[17px] font-medium text-white"
                     style={{ backgroundColor: theme.accent, fontFamily: theme.fontSans }}
                     aria-label={`Dia do casamento: ${cell.day}`}
                   >
@@ -68,7 +71,7 @@ export function ExtendedCalendarSection({
               return (
                 <span
                   key={cellIndex}
-                  className="flex aspect-square items-center justify-center text-[10px]"
+                  className="flex aspect-square items-center justify-center text-[15px]"
                   style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
                 >
                   {cell.day}

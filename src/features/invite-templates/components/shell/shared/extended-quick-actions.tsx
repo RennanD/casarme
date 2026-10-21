@@ -37,7 +37,7 @@ function ActionCard({
         <Icon className="size-[18px]" strokeWidth={1.75} />
       </span>
       <span
-        className="text-center text-[10px] leading-[13px]"
+        className="text-center text-[15px] leading-[20px]"
         style={{ fontFamily: theme.fontSans, color: theme.text }}
       >
         {label}

@@ -5,11 +5,10 @@ import { Inter, Playfair_Display, Tangerine } from 'next/font/google'
 import { cn } from '@/src/shared/lib/cn'
 
 import { ExtendedCalendarSection } from '../shell/shared/extended-calendar-section'
-import { ExtendedCoupleNamesSection } from '../shell/shared/extended-couple-names-section'
 import { ExtendedCoupleStorySection } from '../shell/shared/extended-couple-story-section'
 import { ExtendedEditorialDateSection } from '../shell/shared/extended-editorial-date-section'
 import { ExtendedFooter } from '../shell/shared/extended-footer'
-import { ExtendedHeroSection } from '../shell/shared/extended-hero-section'
+import { ExtendedHeroCap } from '../shell/shared/extended-hero-cap'
 import { ExtendedInviteMessageSection } from '../shell/shared/extended-invite-message-section'
 import { ExtendedInviteShell } from '../shell/shared/extended-invite-shell'
 import { ExtendedQuickActions } from '../shell/shared/extended-quick-actions'
@@ -61,7 +60,7 @@ export function AzulPorcelainTemplate({
       theme={theme}
       className={cn(tangerine.variable, playfair.variable, inter.variable)}
     >
-      <ExtendedHeroSection
+      <ExtendedHeroCap
         theme={theme}
         variant="azul"
         heroPhoto={heroPhoto}
@@ -69,16 +68,14 @@ export function AzulPorcelainTemplate({
         brideName={data.brideName}
         musicUrl={data.musicUrl}
       />
-      <ExtendedCoupleNamesSection
-        theme={theme}
-        variant="azul"
-        groomName={data.groomName}
-        brideName={data.brideName}
-      />
       {dateParts && (
         <p
-          className="border-x-4 px-7 pb-4 text-center text-xs uppercase tracking-[0.12em]"
-          style={{ borderColor: theme.accentLight, fontFamily: theme.fontSans }}
+          className="border-x-4 px-7 pb-4 text-center text-lg uppercase tracking-[0.12em]"
+          style={{
+            borderColor: theme.accentLight,
+            backgroundColor: theme.surface,
+            fontFamily: theme.fontSans,
+          }}
         >
           {dateParts.day} de {dateParts.month} de {dateParts.year} ·{' '}
           {formatWeddingTime(data.weddingTime)} horas

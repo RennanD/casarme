@@ -42,7 +42,7 @@ export function ExtendedCoupleStorySection({
       )}
       <div className="flex min-w-0 flex-1 flex-col gap-2">
         <SectionMarker theme={theme}>03 · Nossa história</SectionMarker>
-        <p className="text-sm leading-[22px]" style={{ fontFamily: theme.fontSerif }}>
+        <p className="text-[21px] leading-[33px]" style={{ fontFamily: theme.fontSerif }}>
           {coupleStory}
         </p>
       </div>

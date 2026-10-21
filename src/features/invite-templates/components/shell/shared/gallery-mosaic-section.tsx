@@ -36,7 +36,7 @@ export function GalleryMosaicSection({ galleryPhotos, theme }: GalleryMosaicSect
       style={{ backgroundColor: theme.surface }}
     >
       <p
-        className="w-full text-center text-[8px] tracking-[0.18px]"
+        className="w-full text-center text-[12px] tracking-[0.18px]"
         style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
       >
         GALERIA · BENTO

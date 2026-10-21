@@ -29,10 +29,10 @@ export function ExtendedQuoteSection({
     <p
       className={
         variant === 'azul'
-          ? 'text-center text-sm italic leading-[22px]'
+          ? 'text-center text-[21px] italic leading-[33px]'
           : variant === 'dourado'
-            ? 'text-center text-base italic leading-6'
-            : 'text-[15px] italic leading-[23px]'
+            ? 'text-center text-2xl italic leading-9'
+            : 'text-[23px] italic leading-[35px]'
       }
       style={{
         fontFamily: variant === 'azul' ? theme.fontSerif : theme.fontSerif,
@@ -48,11 +48,11 @@ export function ExtendedQuoteSection({
       className="flex items-center justify-center gap-1.5 pb-3"
       style={{ color: theme.accent, fontFamily: theme.fontSerif }}
     >
-      <span className="text-base">{brideInitial}</span>
-      <span className="text-xs" style={{ color: theme.textMuted, fontFamily: theme.fontSans }}>
+      <span className="text-2xl">{brideInitial}</span>
+      <span className="text-lg" style={{ color: theme.textMuted, fontFamily: theme.fontSans }}>
         |
       </span>
-      <span className="text-base">{groomInitial}</span>
+      <span className="text-2xl">{groomInitial}</span>
     </div>
   )
 
@@ -73,10 +73,10 @@ export function ExtendedQuoteSection({
       >
         <div className="w-[3px] shrink-0 self-stretch" style={{ backgroundColor: theme.accentLight }} />
         <div className="flex min-w-0 flex-1 flex-col gap-2">
-          <p className="text-[15px] italic leading-[23px]" style={{ fontFamily: theme.fontSerif }}>
+          <p className="text-[23px] italic leading-[35px]" style={{ fontFamily: theme.fontSerif }}>
             {quote.startsWith('"') ? quote : `"${quote}"`}
           </p>
-          <p className="text-xs" style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}>
+          <p className="text-lg" style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}>
             {brideInitial} · {groomInitial}
           </p>
         </div>
@@ -92,7 +92,7 @@ export function ExtendedQuoteSection({
       >
         {quoteText}
         <p
-          className="mt-2 text-[9px] tracking-[0.12px]"
+          className="mt-2 text-[14px] tracking-[0.12px]"
           style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
         >
           {brideInitial} · {groomInitial}
@@ -117,7 +117,7 @@ export function ExtendedQuoteSection({
         <div className="relative z-10 flex max-w-sm flex-col items-center gap-2">
           {quoteText}
           <p
-            className="text-[9px] tracking-[0.1px]"
+            className="text-[14px] tracking-[0.1px]"
             style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
           >
             {brideInitial} · {groomInitial}
@@ -144,11 +144,11 @@ export function ExtendedQuoteSection({
         aria-hidden
       />
       <div className="pl-5">
-        <p className="text-[15px] italic leading-[23px]" style={{ fontFamily: theme.fontSerif }}>
+        <p className="text-[23px] italic leading-[35px]" style={{ fontFamily: theme.fontSerif }}>
           {quote.startsWith('"') ? quote : `"${quote}"`}
         </p>
         <p
-          className="mt-2 text-[9px]"
+          className="mt-2 text-[14px]"
           style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
         >
           {brideInitial} · {groomInitial}

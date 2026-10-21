@@ -56,7 +56,7 @@ export function GalleryPolaroidSection({
       style={{ backgroundColor: theme.surface }}
     >
       <p
-        className="text-[8px] tracking-[0.18px]"
+        className="text-[12px] tracking-[0.18px]"
         style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
       >
         GALERIA · POLAROIDS
@@ -91,7 +91,7 @@ export function GalleryPolaroidSection({
                       </div>
                       {stackIndex === 2 && (
                         <p
-                          className="mt-2 text-center text-[9px]"
+                          className="mt-2 text-center text-[14px]"
                           style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}
                         >
                           {photoIndex + 1} / {galleryPhotos.length}
@@ -117,7 +117,7 @@ export function GalleryPolaroidSection({
           <ChevronLeft className="size-4" strokeWidth={1.75} />
         </button>
         <span
-          className="text-[10px]"
+          className="text-[15px]"
           style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
           aria-live="polite"
         >

@@ -18,13 +18,13 @@ export function ExtendedFooter({ groomName, brideName, theme }: ExtendedFooterPr
       style={{ backgroundColor: theme.surface }}
     >
       <p
-        className="text-center text-base italic leading-[26px]"
+        className="text-center text-2xl italic leading-[39px]"
         style={{ fontFamily: theme.fontSerif }}
       >
         {theme.footerMessage ?? 'Esperamos contar com sua presença neste dia tão especial.'}
       </p>
       <p
-        className="text-[10px]"
+        className="text-[15px]"
         style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
       >
         Feito com{' '}
@@ -33,7 +33,7 @@ export function ExtendedFooter({ groomName, brideName, theme }: ExtendedFooterPr
         </Link>
       </p>
       <p
-        className="text-[8px] tracking-[0.2px]"
+        className="text-[12px] tracking-[0.2px]"
         style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
       >
         {groomInitial} · {brideInitial}
