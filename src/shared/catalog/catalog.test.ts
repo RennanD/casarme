@@ -4,9 +4,6 @@ import {
   CATEGORY_LABELS,
   EXTENDED_TEMPLATE_FEATURES,
   EXTENDED_TEMPLATE_SLUGS,
-  filterCatalogByCategory,
-  filterCatalogByCategoryAndTheme,
-  filterCatalogByTheme,
   getTemplateCreateHref,
   getTemplateDemoHref,
   HOME_CATALOG,
@@ -162,33 +159,3 @@ describe('shared catalog resolution', () => {
   })
 })
 
-describe('shared catalog filters', () => {
-  it('returns all extended templates when category is extended and theme is all', () => {
-    const results = filterCatalogByCategoryAndTheme(HOME_CATALOG, 'extended', 'all')
-    expect(results).toHaveLength(5)
-    expect(results.map((entry) => entry.slug)).toEqual(EXTENDED_TEMPLATE_SLUGS)
-  })
-
-  it('returns only templates matching a specific theme', () => {
-    expect(filterCatalogByTheme(HOME_CATALOG, 'rosa')).toHaveLength(1)
-    expect(filterCatalogByTheme(HOME_CATALOG, 'rosa')[0]?.slug).toBe('rosa')
-    expect(filterCatalogByTheme(HOME_CATALOG, 'all')).toHaveLength(5)
-  })
-
-  it('returns empty sets for categories without catalog entries', () => {
-    expect(filterCatalogByCategory(HOME_CATALOG, 'cover-photo')).toEqual([])
-    expect(filterCatalogByCategory(HOME_CATALOG, 'simple')).toEqual([])
-    expect(
-      filterCatalogByCategoryAndTheme(HOME_CATALOG, 'cover-photo', 'all'),
-    ).toEqual([])
-  })
-
-  it('returns empty set when category and theme combination has no matches', () => {
-    expect(
-      filterCatalogByCategoryAndTheme(HOME_CATALOG, 'extended', 'rosa'),
-    ).toHaveLength(1)
-    expect(
-      filterCatalogByCategoryAndTheme(HOME_CATALOG, 'cover-photo', 'rosa'),
-    ).toEqual([])
-  })
-})

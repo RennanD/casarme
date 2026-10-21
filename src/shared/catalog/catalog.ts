@@ -229,32 +229,6 @@ export function getCatalogByProductLine(productLine: ProductLine): CatalogTempla
   return HOME_CATALOG.filter((entry) => entry.productLine === productLine)
 }
 
-export function filterCatalogByCategory(
-  catalog: readonly CatalogTemplate[],
-  category: CatalogCategory,
-): CatalogTemplate[] {
-  return catalog.filter((entry) => entry.category === category)
-}
-
-export function filterCatalogByTheme(
-  catalog: readonly CatalogTemplate[],
-  theme: CatalogTheme | 'all',
-): CatalogTemplate[] {
-  if (theme === 'all') {
-    return [...catalog]
-  }
-
-  return catalog.filter((entry) => entry.theme === theme)
-}
-
-export function filterCatalogByCategoryAndTheme(
-  catalog: readonly CatalogTemplate[],
-  category: CatalogCategory,
-  theme: CatalogTheme | 'all',
-): CatalogTemplate[] {
-  return filterCatalogByTheme(filterCatalogByCategory(catalog, category), theme)
-}
-
 export function resolveCatalogBySlug(slug: string): CatalogTemplate | null {
   return (
     HOME_CATALOG.find((entry) => entry.slug === slug) ??

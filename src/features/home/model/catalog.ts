@@ -2,9 +2,6 @@ export {
   CATEGORY_LABELS,
   EXTENDED_TEMPLATE_FEATURES,
   EXTENDED_TEMPLATE_SLUGS,
-  filterCatalogByCategory,
-  filterCatalogByCategoryAndTheme,
-  filterCatalogByTheme,
   getCatalogByProductLine,
   getTemplateCreateHref,
   getTemplateDemoHref,
@@ -13,6 +10,12 @@ export {
   resolveCatalogBySlug,
   THEME_LABELS,
 } from '@/src/shared/catalog'
+export {
+  filterHomeCatalog,
+  hasCatalogEntriesForCategory,
+  isCategoryComingSoon,
+} from './catalog-filters'
+export type { CatalogThemeFilter } from './catalog-filters'
 export type {
   CatalogCategory,
   CatalogTemplate,
