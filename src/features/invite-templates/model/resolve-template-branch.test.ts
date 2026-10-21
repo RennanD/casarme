@@ -12,7 +12,11 @@ describe('resolveTemplateBranch', () => {
     },
   )
 
-  it.each(EXTENDED_TEMPLATE_SLUGS)(
+  it('routes rosa extended template to its own branch', () => {
+    expect(resolveTemplateBranch('rosa')).toBe('rosa')
+  })
+
+  it.each(EXTENDED_TEMPLATE_SLUGS.filter((slug) => slug !== 'rosa'))(
     'routes extended template %s to romantic renderer branch',
     (templateId) => {
       expect(resolveTemplateBranch(templateId)).toBe('romantic')

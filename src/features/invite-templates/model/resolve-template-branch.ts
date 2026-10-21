@@ -9,6 +9,10 @@ export function resolveTemplateBranch(templateId: string): TemplateBranch {
     return templateId as TemplateBranch
   }
 
+  if (templateId === 'rosa') {
+    return 'rosa'
+  }
+
   if (isExtendedTemplateSlug(templateId)) {
     return 'romantic'
   }

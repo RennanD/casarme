@@ -26,5 +26,6 @@ export type TemplateBranch =
   | 'golden'
   | 'garden'
   | 'romantic'
+  | 'rosa'
   | 'modern'
   | 'fallback'

@@ -5,6 +5,7 @@ import { GardenTemplate } from './templates/garden-template'
 import { GoldenTemplate } from './templates/golden-template/golden-template'
 import { ModernTemplate } from './templates/modern-template'
 import { RomanticTemplate } from './templates/romantic-template'
+import { RosaFloridoTemplate } from './templates/rosa-florido-template'
 import { LegacyFallback } from './legacy-fallback'
 import {
   findGalleryImages,
@@ -70,6 +71,16 @@ export function InviteRenderer({ data, variant = 'default' }: InviteRendererProp
     case 'garden':
       return (
         <GardenTemplate data={templateData} heroPhoto={findHeroImage(data)} />
+      )
+    case 'rosa':
+      return (
+        <RosaFloridoTemplate
+          data={templateData}
+          heroPhoto={findHeroImage(data)}
+          groomPhoto={findImageByType(data.images, 'groom')}
+          bridePhoto={findImageByType(data.images, 'bride')}
+          galleryPhotos={findGalleryImages(data)}
+        />
       )
     case 'romantic':
       return (
