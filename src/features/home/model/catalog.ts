@@ -11,7 +11,11 @@ export {
   THEME_LABELS,
 } from '@/src/shared/catalog'
 export {
+  CATALOG_CATEGORY_ORDER,
   filterHomeCatalog,
+  formatCatalogResultsAnnouncement,
+  getCatalogEmptyStateMessage,
+  getThemesForCategory,
   hasCatalogEntriesForCategory,
   isCategoryComingSoon,
 } from './catalog-filters'

@@ -1,6 +1,10 @@
 export { HomePage } from './components/home-page'
 export {
+  CATALOG_CATEGORY_ORDER,
   filterHomeCatalog,
+  formatCatalogResultsAnnouncement,
+  getCatalogEmptyStateMessage,
+  getThemesForCategory,
   hasCatalogEntriesForCategory,
   isCategoryComingSoon,
 } from './model/catalog-filters'

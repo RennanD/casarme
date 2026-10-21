@@ -5,7 +5,7 @@ import { HomeImage } from '@/src/features/home/components/home-image'
 import { HOME_BENTO_SECTION, HOME_FEATURE_HIGHLIGHTS } from '@/src/features/home/model/copy'
 
 export function FeatureBentoSection() {
-  const [romanticHighlight, privacyHighlight] = HOME_FEATURE_HIGHLIGHTS
+  const [extendedHighlight, privacyHighlight] = HOME_FEATURE_HIGHLIGHTS
 
   return (
     <section className="bg-background py-12 lg:py-16" aria-labelledby="bento-title">
@@ -40,11 +40,11 @@ export function FeatureBentoSection() {
 
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <article className="flex flex-col gap-4 lg:flex-row lg:items-center">
-            {romanticHighlight.image && (
+            {extendedHighlight.image && (
               <figure className="shadow-elevated relative mx-auto h-52 w-36 shrink-0 overflow-hidden rounded-xl lg:mx-0">
                 <HomeImage
-                  src={romanticHighlight.image}
-                  alt={romanticHighlight.alt ?? ''}
+                  src={extendedHighlight.image}
+                  alt={extendedHighlight.alt ?? ''}
                   fill
                   className="image-outline object-contain bg-secondary/40 p-2"
                   sizes="(max-width: 768px) 144px, 180px"
@@ -52,11 +52,11 @@ export function FeatureBentoSection() {
               </figure>
             )}
             <div className="space-y-2 text-center lg:text-left">
-              {romanticHighlight.eyebrow && (
-                <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{romanticHighlight.eyebrow}</p>
+              {extendedHighlight.eyebrow && (
+                <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{extendedHighlight.eyebrow}</p>
               )}
-              <h3 className="font-serif text-2xl leading-tight">{romanticHighlight.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{romanticHighlight.description}</p>
+              <h3 className="font-serif text-2xl leading-tight">{extendedHighlight.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{extendedHighlight.description}</p>
             </div>
           </article>
 

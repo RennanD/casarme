@@ -261,12 +261,12 @@ export const HOME_INCLUDED_FEATURES = [
 
 export const HOME_FEATURE_HIGHLIGHTS: HomeFeatureHighlight[] = [
   {
-    eyebrow: 'No modelo Romântico',
+    eyebrow: 'Nos modelos estendidos',
     title: 'Tem detalhe que merece destaque.',
     description:
-      'Música do YouTube, galeria com até 6 fotos e contagem regressiva. No modelo Romântico, o convite ganha ainda mais a cara de vocês.',
-    image: '/images/thumbs/romantico/01.png',
-    alt: 'Prévia do modelo Romântico',
+      'Música do YouTube, galeria com até 6 fotos e contagem regressiva. Nos modelos estendidos, o convite ganha ainda mais a cara de vocês.',
+    image: '/images/thumbs/rosa/01.png',
+    alt: 'Prévia do modelo Rosa Florido',
   },
   {
     title: 'Um convite para as suas pessoas.',
@@ -321,7 +321,7 @@ export const HOME_BENTO_FEATURES = [
   },
   {
     iconKey: 'images',
-    eyebrow: 'NO MODELO ROMÂNTICO',
+    eyebrow: 'NOS MODELOS ESTENDIDOS',
     title: 'Galeria de fotos',
     description: 'Uma galeria com até 6 fotos para deixar o convite com a cara do casal.',
     imagePath: '/happy-couple-wedding-portrait.jpg',
@@ -330,7 +330,7 @@ export const HOME_BENTO_FEATURES = [
   },
   {
     iconKey: 'music-2',
-    eyebrow: 'NO MODELO ROMÂNTICO',
+    eyebrow: 'NOS MODELOS ESTENDIDOS',
     title: 'Música e contagem regressiva',
     description: 'Adicione música do YouTube e conte os dias até o grande momento.',
     imagePath: '/romantic-couple-wedding-natural-light-soft-focus.jpg',

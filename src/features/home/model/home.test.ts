@@ -11,6 +11,7 @@ import {
   HOME_BENEFITS,
   HOME_BENEFIT_STRIP,
   HOME_BENTO_FEATURES,
+  HOME_FEATURE_HIGHLIGHTS,
   HOME_FAQ,
   HOME_FINAL_CTA,
   HOME_FOOTER,
@@ -212,5 +213,19 @@ describe('desktop Home Redesigned feature content', () => {
     expect(HOME_BENTO_FEATURES).toHaveLength(4)
     expect(HOME_BENEFIT_STRIP).toHaveLength(2)
     expect(HOME_FAQ).toHaveLength(5)
+  })
+
+  it('uses generic extended-model copy instead of Romântico-only references', () => {
+    const [extendedHighlight] = HOME_FEATURE_HIGHLIGHTS
+
+    expect(extendedHighlight.eyebrow).toMatch(/modelos estendidos/i)
+    expect(extendedHighlight.description).not.toMatch(/modelo Romântico/i)
+    expect(extendedHighlight.image).toBe('/images/thumbs/rosa/01.png')
+
+    for (const feature of HOME_BENTO_FEATURES) {
+      if ('eyebrow' in feature && feature.eyebrow) {
+        expect(feature.eyebrow).not.toMatch(/ROMÂNTICO/)
+      }
+    }
   })
 })

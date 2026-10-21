@@ -1,9 +1,8 @@
 import { HomeCheckList } from '@/src/features/home/components/home-check-list'
 import { HOME_ANCHORS } from '@/src/features/home/model/anchors'
-import { HOME_CATALOG } from '@/src/features/home/model/catalog'
 import { HOME_INCLUDED_FEATURES, HOME_TEMPLATE_SECTION } from '@/src/features/home/model/copy'
 
-import { TemplateCarousel } from './template-carousel'
+import { TemplateCatalog } from './template-catalog'
 
 export function TemplateGridSection() {
   return (
@@ -21,7 +20,7 @@ export function TemplateGridSection() {
           <p className="text-sm text-muted-foreground">{HOME_TEMPLATE_SECTION.subtitle}</p>
         </header>
 
-        <TemplateCarousel templates={HOME_CATALOG} />
+        <TemplateCatalog />
 
         <div className="rounded-2xl bg-secondary/70 px-6 py-8 lg:px-8">
           <p className="mb-4 text-xs font-semibold tracking-wide text-muted-foreground uppercase">Incluído em todos os modelos</p>

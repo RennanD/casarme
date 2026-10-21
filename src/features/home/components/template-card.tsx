@@ -15,9 +15,10 @@ import { HomeIconBadge } from '@/src/features/home/components/home-icon-badge'
 import {
   getTemplateCreateHref,
   getTemplateDemoHref,
+  THEME_LABELS,
   type CatalogTemplate,
 } from '@/src/features/home/model/catalog'
-import { Button, Card, CardFooter, CardHeader, CardTitle, Link } from '@/src/shared/ui'
+import { Badge, Button, Card, CardFooter, CardHeader, CardTitle, Link } from '@/src/shared/ui'
 
 type TemplateCardProps = {
   template: CatalogTemplate
@@ -39,21 +40,25 @@ function getFeatureIcon(feature: string): LucideIcon {
 
 export function TemplateCard({ template }: TemplateCardProps) {
   return (
-    <article className="flex h-full min-h-[36rem] flex-1 flex-col lg:min-h-[28rem]">
-      <Card className="shadow-elevated flex h-full flex-1 flex-col gap-4 overflow-hidden rounded-2xl border border-transparent bg-card p-5 sm:p-6 lg:gap-3 lg:p-4">
-        <figure className="relative h-72 shrink-0 overflow-hidden rounded-xl bg-secondary/80 p-3 lg:h-48">
+    <article className="flex h-full flex-1 flex-col">
+      <Card className="shadow-elevated flex h-full flex-1 flex-col gap-4 overflow-hidden rounded-2xl border border-transparent bg-card p-5 sm:p-6">
+        <figure className="relative h-56 shrink-0 overflow-hidden rounded-xl bg-secondary/80 p-3 sm:h-64 lg:h-52">
           <HomeImage
             src={template.imagePath}
             alt={`Prévia do convite ${template.name}`}
             fill
             className="image-outline object-contain"
             loading="lazy"
-            sizes="(max-width: 1024px) 70vw, 480px"
+            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
           />
         </figure>
 
         <CardHeader className="gap-2 px-0 pt-0 pb-0">
-          <CardTitle className="font-serif text-xl font-normal lg:text-lg">{template.name}</CardTitle>
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge variant="secondary">{THEME_LABELS[template.theme]}</Badge>
+          </div>
+          <CardTitle className="font-serif text-xl font-normal">{template.name}</CardTitle>
+          <p className="text-sm text-muted-foreground">{template.styleLabel}</p>
           <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
             <p className="font-serif text-2xl font-normal tabular-nums tracking-tight text-foreground lg:text-xl">
               {template.displayPrice}
