@@ -59,7 +59,7 @@ export function CatalogCategoryFilters({
       role="radiogroup"
       aria-label="Filtrar por categoria"
       className={cn(
-        layout === 'sidebar' ? 'flex flex-col gap-2' : 'flex flex-wrap gap-2',
+        layout === 'sidebar' ? 'flex flex-wrap gap-2' : 'flex flex-wrap gap-2',
       )}
     >
       {CATALOG_CATEGORY_ORDER.map((category) => {
@@ -100,7 +100,7 @@ export function CatalogThemeFilters({
       role="radiogroup"
       aria-label="Filtrar por tema"
       className={cn(
-        layout === 'sidebar' ? 'flex flex-col gap-2' : 'flex flex-wrap gap-2',
+        layout === 'sidebar' ? 'flex flex-wrap gap-2' : 'flex flex-wrap gap-2',
         disabled && 'pointer-events-none opacity-50',
       )}
     >
