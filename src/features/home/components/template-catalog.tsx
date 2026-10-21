@@ -25,6 +25,7 @@ type TemplateCatalogProps = {
 }
 
 function CatalogFiltersPanel({
+  catalog,
   category,
   theme,
   themes,
@@ -32,6 +33,7 @@ function CatalogFiltersPanel({
   onThemeChange,
   layout,
 }: {
+  catalog: readonly CatalogTemplate[]
   category: CatalogCategory
   theme: CatalogThemeFilter
   themes: ReturnType<typeof getThemesForCategory>
@@ -39,7 +41,7 @@ function CatalogFiltersPanel({
   onThemeChange: (theme: CatalogThemeFilter) => void
   layout: 'sidebar' | 'row'
 }) {
-  const categoryComingSoon = isCategoryComingSoon(HOME_CATALOG, category)
+  const categoryComingSoon = isCategoryComingSoon(catalog, category)
 
   if (layout === 'sidebar') {
     return (
@@ -48,7 +50,7 @@ function CatalogFiltersPanel({
           <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Categoria</p>
           <CatalogCategoryFilters
             selectedCategory={category}
-            isComingSoon={(value) => isCategoryComingSoon(HOME_CATALOG, value)}
+            isComingSoon={(value) => isCategoryComingSoon(catalog, value)}
             onCategoryChange={onCategoryChange}
             layout="sidebar"
           />
@@ -71,7 +73,7 @@ function CatalogFiltersPanel({
     <div className="space-y-3">
       <CatalogCategoryFilters
         selectedCategory={category}
-        isComingSoon={(value) => isCategoryComingSoon(HOME_CATALOG, value)}
+        isComingSoon={(value) => isCategoryComingSoon(catalog, value)}
         onCategoryChange={onCategoryChange}
         layout="row"
       />
@@ -108,6 +110,7 @@ export function TemplateCatalog({ catalog = HOME_CATALOG }: TemplateCatalogProps
       <aside className="hidden lg:block lg:w-60 lg:shrink-0">
         <div className="sticky top-24">
           <CatalogFiltersPanel
+            catalog={catalog}
             category={category}
             theme={theme}
             themes={themes}
@@ -121,6 +124,7 @@ export function TemplateCatalog({ catalog = HOME_CATALOG }: TemplateCatalogProps
       <div className="min-w-0 flex-1 space-y-6">
         <div className="lg:hidden">
           <CatalogFiltersPanel
+            catalog={catalog}
             category={category}
             theme={theme}
             themes={themes}

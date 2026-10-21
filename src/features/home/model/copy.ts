@@ -130,7 +130,7 @@ export const HOME_OBJECTION_SECTION: HomeObjectionSectionCopy = {
   solutionLabel: 'Solução CasarMe:',
   ctaHeading:
     'Pare de se preocupar com design. Deixe o CasarMe fazer isso por você!',
-  ctaLabel: 'Criar meu convite  →',
+  ctaLabel: 'Criar meu convite',
 }
 
 export const HOME_HOW_IT_WORKS_SECTION: HomeHowItWorksSectionCopy = {
@@ -175,7 +175,7 @@ export const HOME_WHATSAPP_SECTION: HomeWhatsappSectionCopy = {
   footerNote:
     'Todos os nossos modelos incluem confirmação de presença via WhatsApp',
   primaryCtaLabel: 'Ver Modelos',
-  secondaryCtaLabel: 'Criar meu convite  →',
+  secondaryCtaLabel: 'Criar meu convite',
   imagePath: '/modern-wedding-couple-photo.jpg',
   imageAlt: 'Casal de noivos em foto de casamento',
 }
