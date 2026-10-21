@@ -36,3 +36,29 @@ export function buildMonthCalendar(
 
   return rows
 }
+
+export type WeekDayCell = {
+  day: number
+  isWeddingDay: boolean
+}
+
+/** Seven days of the calendar week containing the wedding date (Sun–Sat). */
+export function buildEventWeekDays(weddingDate: string): WeekDayCell[] {
+  const date = new Date(`${weddingDate}T00:00:00`)
+  if (Number.isNaN(date.getTime())) return []
+
+  const weddingDay = date.getDate()
+  const weddingMonth = date.getMonth()
+  const startOfWeek = new Date(date)
+  startOfWeek.setDate(date.getDate() - date.getDay())
+
+  return Array.from({ length: 7 }, (_, index) => {
+    const cellDate = new Date(startOfWeek)
+    cellDate.setDate(startOfWeek.getDate() + index)
+    return {
+      day: cellDate.getDate(),
+      isWeddingDay:
+        cellDate.getDate() === weddingDay && cellDate.getMonth() === weddingMonth,
+    }
+  })
+}

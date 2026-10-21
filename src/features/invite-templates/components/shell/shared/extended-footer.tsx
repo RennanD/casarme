@@ -21,7 +21,7 @@ export function ExtendedFooter({ groomName, brideName, theme }: ExtendedFooterPr
         className="text-center text-base italic leading-[26px]"
         style={{ fontFamily: theme.fontSerif }}
       >
-        Esperamos contar com sua presença neste dia tão especial.
+        {theme.footerMessage ?? 'Esperamos contar com sua presença neste dia tão especial.'}
       </p>
       <p
         className="text-[10px]"

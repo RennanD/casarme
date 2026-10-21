@@ -19,15 +19,22 @@ type GalleryColumnsSectionProps = {
   sectionLabel?: string
 }
 
+function chunkPairs(photos: (string | null)[]): (string | null)[][] {
+  const pairs: (string | null)[][] = []
+  for (let index = 0; index < photos.length; index += 4) {
+    pairs.push(photos.slice(index, index + 4))
+  }
+  return pairs.length > 0 ? pairs : [photos]
+}
+
 export function GalleryColumnsSection({
   galleryPhotos,
   theme,
-  sectionLabel = 'Galeria',
+  sectionLabel = '08 · Galeria',
 }: GalleryColumnsSectionProps) {
   if (galleryPhotos.length === 0) return null
 
-  const leftColumnPhotos = galleryPhotos.filter((_, index) => index % 2 === 0)
-  const rightColumnPhotos = galleryPhotos.filter((_, index) => index % 2 === 1)
+  const pages = chunkPairs(galleryPhotos)
 
   return (
     <section
@@ -35,58 +42,64 @@ export function GalleryColumnsSection({
       style={{ backgroundColor: theme.surface }}
     >
       <SectionMarker theme={theme}>{sectionLabel}</SectionMarker>
-      <Carousel className="w-full" opts={{ align: 'start', loop: false }}>
+      <Carousel
+        className="w-full"
+        opts={{ align: 'start', loop: false }}
+        aria-roledescription="carousel"
+        aria-label="Galeria de fotos do casal"
+      >
         <CarouselContent className="-ml-2">
-          <CarouselItem className="basis-full pl-2">
-            <div className="flex w-full justify-center gap-2.5">
-              <div className="flex w-[175px] flex-col gap-2.5">
-                {leftColumnPhotos.map((photo, index) => (
-                  <div
-                    key={`left-${index}`}
-                    className="relative h-[280px] w-full overflow-hidden rounded-xl border-2 bg-white p-1.5"
-                    style={{ borderColor: theme.accentLight }}
-                  >
-                    <div className="relative size-full overflow-hidden rounded-lg">
-                      <Image
-                        src={photo || '/placeholder.svg?height=560&width=350'}
-                        alt={`Galeria ${index * 2 + 1}`}
-                        fill
-                        className="object-cover outline outline-1 -outline-offset-1 outline-black/10"
-                      />
-                    </div>
+          {pages.map((pagePhotos, pageIndex) => {
+            const leftColumnPhotos = pagePhotos.filter((_, index) => index % 2 === 0)
+            const rightColumnPhotos = pagePhotos.filter((_, index) => index % 2 === 1)
+
+            return (
+              <CarouselItem key={pageIndex} className="basis-full pl-2">
+                <div className="flex w-full justify-center gap-2.5">
+                  <div className="flex w-[175px] flex-col gap-2.5">
+                    {leftColumnPhotos.map((photo, index) => (
+                      <div
+                        key={`left-${pageIndex}-${index}`}
+                        className="relative h-[280px] w-full overflow-hidden rounded-xl"
+                      >
+                        <Image
+                          src={photo || '/placeholder.svg?height=560&width=350'}
+                          alt={`Galeria ${pageIndex * 4 + index * 2 + 1}`}
+                          fill
+                          className="object-cover outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10"
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-              <div className="flex w-[175px] flex-col gap-2.5 pt-14">
-                {rightColumnPhotos.map((photo, index) => (
-                  <div
-                    key={`right-${index}`}
-                    className="relative h-[280px] w-full overflow-hidden rounded-xl border-2 bg-white p-1.5"
-                    style={{ borderColor: theme.accentLight }}
-                  >
-                    <div className="relative size-full overflow-hidden rounded-lg">
-                      <Image
-                        src={photo || '/placeholder.svg?height=560&width=350'}
-                        alt={`Galeria ${index * 2 + 2}`}
-                        fill
-                        className="object-cover outline outline-1 -outline-offset-1 outline-black/10"
-                      />
-                    </div>
+                  <div className="flex w-[175px] flex-col gap-2.5 pt-14">
+                    {rightColumnPhotos.map((photo, index) => (
+                      <div
+                        key={`right-${pageIndex}-${index}`}
+                        className="relative h-[280px] w-full overflow-hidden rounded-xl"
+                      >
+                        <Image
+                          src={photo || '/placeholder.svg?height=560&width=350'}
+                          alt={`Galeria ${pageIndex * 4 + index * 2 + 2}`}
+                          fill
+                          className="object-cover outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10"
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-          </CarouselItem>
+                </div>
+              </CarouselItem>
+            )
+          })}
         </CarouselContent>
-        {galleryPhotos.length > 2 && (
+        {pages.length > 1 && (
           <>
             <CarouselPrevious
-              className="left-1 border bg-white/90 hover:bg-white"
-              style={{ color: theme.accent, borderColor: theme.accentLight }}
+              className="left-1 border border-transparent bg-white/90 shadow-[0_0_0_1px_oklch(0_0_0_/_0.06)] hover:bg-white"
+              style={{ color: theme.accent }}
             />
             <CarouselNext
-              className="right-1 border bg-white/90 hover:bg-white"
-              style={{ color: theme.accent, borderColor: theme.accentLight }}
+              className="right-1 border border-transparent bg-white/90 shadow-[0_0_0_1px_oklch(0_0_0_/_0.06)] hover:bg-white"
+              style={{ color: theme.accent }}
             />
           </>
         )}

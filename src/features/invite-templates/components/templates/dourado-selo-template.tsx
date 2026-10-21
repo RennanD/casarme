@@ -1,19 +1,25 @@
 'use client'
 
 import { Cormorant_Garamond, Great_Vibes, Lato } from 'next/font/google'
-import Image from 'next/image'
 
 import { cn } from '@/src/shared/lib/cn'
 
-import { InviteMusicPlayer } from '../shell/invite-music-player'
+import { ExtendedCalendarSection } from '../shell/shared/extended-calendar-section'
+import { ExtendedCoupleNamesSection } from '../shell/shared/extended-couple-names-section'
 import { ExtendedFooter } from '../shell/shared/extended-footer'
+import { ExtendedHeroSection } from '../shell/shared/extended-hero-section'
+import { ExtendedInviteMessageSection } from '../shell/shared/extended-invite-message-section'
+import { ExtendedInviteShell } from '../shell/shared/extended-invite-shell'
 import { ExtendedQuickActions } from '../shell/shared/extended-quick-actions'
+import { ExtendedQuoteSection } from '../shell/shared/extended-quote-section'
 import { ExtendedRsvpCta } from '../shell/shared/extended-rsvp-cta'
 import { ExtendedVenueSection } from '../shell/shared/extended-venue-section'
-import { GalleryPolaroidSection } from '../shell/shared/gallery-polaroid-section'
-import { SectionMarker } from '../shell/shared/section-marker'
+import { GalleryMosaicSection } from '../shell/shared/gallery-mosaic-section'
 import type { InviteShellData, InviteShellPhotos } from '../../model/invite-shell-types'
-import { formatWeddingTime, parseWeddingDateParts } from '../../model/wedding-date'
+import {
+  formatWeddingTime,
+  parseWeddingDateParts,
+} from '../../model/wedding-date'
 import { DOURADO_SELO_THEME } from '../../model/themes/dourado-selo-theme'
 
 const greatVibes = Great_Vibes({
@@ -41,6 +47,79 @@ type DouradoSeloTemplateProps = InviteShellPhotos & {
   data: InviteShellData
 }
 
+function DouradoEditorialDate({
+  weddingDate,
+  weddingTime,
+}: {
+  weddingDate: string
+  weddingTime: string
+}) {
+  const theme = DOURADO_SELO_THEME
+  const dateParts = parseWeddingDateParts(weddingDate)
+  if (!dateParts) return null
+
+  return (
+    <section
+      className="flex flex-col items-center gap-2 px-6 py-8"
+      style={{ backgroundColor: theme.surface }}
+    >
+      <span
+        className="text-[52px] leading-none"
+        style={{ color: theme.accent, fontFamily: theme.fontSerif }}
+      >
+        {dateParts.day}
+      </span>
+      <p className="text-[13px]" style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}>
+        {dateParts.month} {dateParts.year} · {formatWeddingTime(weddingTime)}
+      </p>
+      <div className="flex items-end gap-2">
+        <span className="text-sm capitalize" style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}>
+          {dateParts.month}
+        </span>
+        <span style={{ color: theme.line, fontFamily: theme.fontSerif }}>—</span>
+        <span
+          className="text-[56px] leading-[50px]"
+          style={{ color: theme.accent, fontFamily: theme.fontSerif }}
+        >
+          {dateParts.day}
+        </span>
+        <span style={{ color: theme.line, fontFamily: theme.fontSerif }}>—</span>
+        <span className="text-sm" style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}>
+          {dateParts.year}
+        </span>
+      </div>
+      <p
+        className="text-[11px] italic capitalize"
+        style={{ color: theme.textMuted, fontFamily: theme.fontSerif }}
+      >
+        {dateParts.weekday} · {formatWeddingTime(weddingTime)}
+      </p>
+      {theme.line && <div className="mt-1 h-px w-[120px]" style={{ backgroundColor: theme.line }} />}
+    </section>
+  )
+}
+
+function DouradoCoupleStory({ coupleStory }: { coupleStory: string }) {
+  const theme = DOURADO_SELO_THEME
+  if (!coupleStory) return null
+
+  return (
+    <section
+      className="flex flex-col items-center gap-3 px-7 py-6"
+      style={{ backgroundColor: theme.accentLight }}
+    >
+      {theme.line && <div className="h-px w-20" style={{ backgroundColor: theme.line }} />}
+      <p
+        className="text-center text-base italic leading-[26px]"
+        style={{ fontFamily: theme.fontSerif }}
+      >
+        {coupleStory}
+      </p>
+      {theme.line && <div className="h-px w-20" style={{ backgroundColor: theme.line }} />}
+    </section>
+  )
+}
+
 export function DouradoSeloTemplate({
   data,
   heroPhoto,
@@ -49,145 +128,59 @@ export function DouradoSeloTemplate({
   galleryPhotos = [],
 }: DouradoSeloTemplateProps) {
   const theme = DOURADO_SELO_THEME
-  const dateParts = parseWeddingDateParts(data.weddingDate)
-  const storyPhoto = groomPhoto || bridePhoto || heroPhoto
-  const groomInitial = data.groomName?.charAt(0)?.toUpperCase() ?? 'N'
-  const brideInitial = data.brideName?.charAt(0)?.toUpperCase() ?? 'N'
 
   return (
-    <div
-      className={cn(greatVibes.variable, cormorant.variable, lato.variable, 'min-h-screen')}
-      style={{ backgroundColor: theme.bg, color: theme.text }}
+    <ExtendedInviteShell
+      theme={theme}
+      className={cn(greatVibes.variable, cormorant.variable, lato.variable)}
     >
-      <section className="relative flex flex-col items-center px-6 pb-8 pt-14 text-center">
-        <p
-          className="text-xs uppercase tracking-[0.18em]"
-          style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
-        >
-          Você está convidado para o nosso casamento
-        </p>
-
-        <div
-          className="mt-10 flex size-28 items-center justify-center rounded-full border-2"
-          style={{ borderColor: theme.accent }}
-        >
-          <span className="text-6xl leading-none" style={{ color: theme.accent, fontFamily: theme.fontDisplay }}>
-            {brideInitial}
-            {groomInitial}
-          </span>
-        </div>
-
-        <h1 className="mt-6 text-2xl" style={{ fontFamily: theme.fontSerif }}>
-          {data.brideName || 'Noiva'} & {data.groomName || 'Noivo'}
-        </h1>
-
-        {dateParts && (
-          <div className="mt-10 flex items-center gap-3">
-            <div
-              className="flex flex-col items-center border-y px-3 py-3"
-              style={{ borderColor: theme.accent }}
-            >
-              <p
-                className="text-[10px] uppercase"
-                style={{ color: theme.accent, fontFamily: theme.fontSans }}
-              >
-                {dateParts.weekday}
-              </p>
-            </div>
-            <div
-              className="flex flex-col items-center border-x px-4 py-2"
-              style={{ borderColor: theme.accent }}
-            >
-              <p
-                className="text-[10px] uppercase"
-                style={{ color: theme.accent, fontFamily: theme.fontSans }}
-              >
-                {dateParts.month}
-              </p>
-              <p
-                className="text-6xl leading-none"
-                style={{ color: theme.accent, fontFamily: theme.fontSerif }}
-              >
-                {dateParts.day}
-              </p>
-              <p
-                className="text-[10px] uppercase"
-                style={{ color: theme.accent, fontFamily: theme.fontSans }}
-              >
-                {dateParts.year}
-              </p>
-            </div>
-            <div
-              className="flex flex-col items-center border-y px-3 py-3"
-              style={{ borderColor: theme.accent }}
-            >
-              <p
-                className="text-[10px] uppercase"
-                style={{ color: theme.accent, fontFamily: theme.fontSans }}
-              >
-                {formatWeddingTime(data.weddingTime)} horas
-              </p>
-            </div>
-          </div>
-        )}
-
-        <InviteMusicPlayer musicUrl={data.musicUrl} theme={{ variant: 'extended', tokens: theme }} />
-      </section>
-
-      <section className="flex flex-col gap-2 px-8 pb-6 pt-2">
-        <SectionMarker theme={theme}>02 · O convite</SectionMarker>
-        <p className="text-[19px] leading-8" style={{ fontFamily: theme.fontSerif }}>
-          {data.welcomeMessage ||
-            'É com imensa alegria que convidamos você para celebrar conosco este momento único.'}
-        </p>
-      </section>
-
-      {data.coupleStory && (
-        <section
-          className="flex flex-row gap-3.5 px-5 py-6"
-          style={{ backgroundColor: theme.surface }}
-        >
-          {storyPhoto && (
-            <div className="relative h-40 w-[120px] shrink-0 overflow-hidden rounded-lg">
-              <Image
-                src={storyPhoto}
-                alt="História do casal"
-                fill
-                className="object-cover outline outline-1 -outline-offset-1 outline-black/10"
-              />
-            </div>
-          )}
-          <div className="flex min-w-0 flex-1 flex-col gap-2">
-            <SectionMarker theme={theme}>03 · Nossa história</SectionMarker>
-            <p className="text-sm leading-[22px]" style={{ fontFamily: theme.fontSerif }}>
-              {data.coupleStory}
-            </p>
-          </div>
-        </section>
-      )}
-
+      <ExtendedHeroSection
+        theme={theme}
+        variant="dourado"
+        heroPhoto={heroPhoto}
+        groomName={data.groomName}
+        brideName={data.brideName}
+        musicUrl={data.musicUrl}
+      />
+      <ExtendedCoupleNamesSection
+        theme={theme}
+        variant="dourado"
+        groomName={data.groomName}
+        brideName={data.brideName}
+      />
+      <ExtendedQuoteSection
+        theme={theme}
+        variant="dourado"
+        framed
+        welcomeMessage={data.welcomeMessage}
+        groomName={data.groomName}
+        brideName={data.brideName}
+      />
+      <ExtendedInviteMessageSection theme={theme} variant="dourado" />
       <ExtendedQuickActions
         theme={theme}
         venueAddress={data.venueAddress}
         whatsapp={data.whatsapp}
       />
-
+      <DouradoCoupleStory coupleStory={data.coupleStory} />
+      <DouradoEditorialDate
+        weddingDate={data.weddingDate}
+        weddingTime={data.weddingTime}
+      />
+      <ExtendedCalendarSection
+        weddingDate={data.weddingDate}
+        theme={theme}
+        variant="week-event"
+      />
       <ExtendedVenueSection
         theme={theme}
         venueName={data.venueName}
         venueAddress={data.venueAddress}
-        sectionLabel="07 · Onde será"
+        sectionLabel="Onde será"
       />
-
       <ExtendedRsvpCta theme={theme} whatsapp={data.whatsapp} />
-
-      <GalleryPolaroidSection
-        galleryPhotos={galleryPhotos}
-        theme={theme}
-        sectionLabel="08 · Galeria"
-      />
-
+      <GalleryMosaicSection galleryPhotos={galleryPhotos} theme={theme} />
       <ExtendedFooter groomName={data.groomName} brideName={data.brideName} theme={theme} />
-    </div>
+    </ExtendedInviteShell>
   )
 }

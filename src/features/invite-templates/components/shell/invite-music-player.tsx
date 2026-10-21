@@ -15,14 +15,18 @@ type MusicPlayerTheme =
   | { variant: 'rosa'; tokens: RosaFloridoTheme }
   | { variant: 'extended'; tokens: ExtendedInviteTheme }
 
+type MusicPlacement = 'bottom-center' | 'top-right' | 'top-left'
+
 type InviteMusicPlayerProps = {
   musicUrl?: string
   theme?: MusicPlayerTheme
+  placement?: MusicPlacement
 }
 
 export function InviteMusicPlayer({
   musicUrl,
   theme = { variant: 'romantic', tokens: ROMANTIC_THEME },
+  placement = 'top-right',
 }: InviteMusicPlayerProps) {
   const { enabled, isPlaying, hasUserInteracted, videoId, toggle } = useInviteMusic(musicUrl)
 
@@ -30,17 +34,37 @@ export function InviteMusicPlayer({
 
   if (theme.variant === 'rosa' || theme.variant === 'extended') {
     const tokens = theme.tokens
+    const placementClass =
+      placement === 'bottom-center'
+        ? 'bottom-6 left-1/2 z-20 -translate-x-1/2'
+        : placement === 'top-left'
+          ? 'left-4 top-4 z-20'
+          : 'right-4 top-4 z-20'
+
+    const buttonSize =
+      placement === 'bottom-center' ? 'size-14' : placement === 'top-left' ? 'size-11' : 'size-12'
+
     return (
       <>
-        <button
-          type="button"
-          onClick={toggle}
-          aria-label={isPlaying ? 'Pausar música' : 'Tocar música'}
-          className="absolute right-4 top-4 z-20 flex size-12 items-center justify-center rounded-full text-white shadow-lg transition-[transform,background-color] duration-150 ease-out enabled:active:scale-[0.96] motion-reduce:transition-none motion-reduce:enabled:active:scale-100"
-          style={{ backgroundColor: tokens.accent }}
-        >
-          {isPlaying ? <Pause className="size-[18px]" /> : <Music2 className="size-[18px]" />}
-        </button>
+        <div className={`absolute flex flex-col items-center gap-2 ${placementClass}`}>
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label={isPlaying ? 'Pausar música' : 'Tocar música'}
+            className={`flex ${buttonSize} items-center justify-center rounded-full text-white shadow-lg transition-[transform,background-color] duration-150 ease-out enabled:active:scale-[0.96] motion-reduce:transition-none motion-reduce:enabled:active:scale-100`}
+            style={{ backgroundColor: tokens.accent }}
+          >
+            {isPlaying ? <Pause className="size-[18px]" /> : <Music2 className="size-[18px]" />}
+          </button>
+          {placement === 'bottom-center' && (
+            <span
+              className="text-[9px] tracking-[0.35em]"
+              style={{ color: tokens.accent, fontFamily: tokens.fontSans }}
+            >
+              T o c a r m ú s i c a
+            </span>
+          )}
+        </div>
         {hasUserInteracted && videoId && (
           <div className="pointer-events-none absolute -left-1 -top-1 size-px opacity-0">
             <iframe

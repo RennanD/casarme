@@ -1,19 +1,17 @@
 'use client'
 
-import { useRef } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
-import Autoplay from 'embla-carousel-autoplay'
 
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  type CarouselApi,
 } from '@/src/components/ui/carousel'
 
 import type { ExtendedInviteTheme } from '../../../model/themes/extended-invite-theme'
-import { SectionMarker } from './section-marker'
+import { cn } from '@/src/shared/lib/cn'
 
 type GalleryCarouselSectionProps = {
   galleryPhotos: (string | null)[]
@@ -26,50 +24,85 @@ export function GalleryCarouselSection({
   theme,
   sectionLabel = 'Galeria',
 }: GalleryCarouselSectionProps) {
-  const autoplayPlugin = useRef(
-    Autoplay({ delay: 3500, stopOnInteraction: true } as Parameters<typeof Autoplay>[0]),
-  )
+  const [api, setApi] = useState<CarouselApi>()
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  const onSelect = useCallback(() => {
+    if (!api) return
+    setSelectedIndex(api.selectedSnap)
+  }, [api])
+
+  useEffect(() => {
+    if (!api) return
+    onSelect()
+    api.on('select', onSelect)
+    return () => {
+      api.off('select', onSelect)
+    }
+  }, [api, onSelect])
 
   if (galleryPhotos.length === 0) return null
 
   return (
-    <section
-      className="flex flex-col items-center gap-4 px-4 pb-7 pt-8"
-      style={{ backgroundColor: theme.surface }}
-    >
-      <SectionMarker theme={theme}>{sectionLabel}</SectionMarker>
-      <div className="relative h-[420px] w-full overflow-hidden rounded-2xl">
-        <Carousel
-          className="size-full"
-          plugins={[autoplayPlugin.current]}
-          opts={{ loop: true }}
-          onMouseEnter={autoplayPlugin.current.stop}
-          onMouseLeave={autoplayPlugin.current.reset}
-        >
-          <CarouselContent className="h-full">
-            {galleryPhotos.map((photo, index) => (
-              <CarouselItem key={index} className="h-full">
-                <div className="relative size-full">
-                  <Image
-                    src={photo || '/placeholder.svg?height=840&width=780'}
-                    alt={`Galeria ${index + 1}`}
-                    fill
-                    className="object-cover outline outline-1 -outline-offset-1 outline-black/10"
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious
-            className="left-3 border bg-white/90 hover:bg-white"
-            style={{ color: theme.accent, borderColor: theme.accentLight }}
+    <section className="flex flex-col items-center gap-3 px-0 pb-7 pt-4">
+      <p
+        className="text-[8px] tracking-[0.2px]"
+        style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
+      >
+        {sectionLabel.toUpperCase()}
+      </p>
+      <Carousel
+        className="w-full"
+        setApi={setApi}
+        opts={{ align: 'center', loop: galleryPhotos.length > 1, containScroll: 'trimSnaps' }}
+        aria-roledescription="carousel"
+        aria-label="Galeria de fotos do casal"
+      >
+        <CarouselContent className="-ml-2">
+          {galleryPhotos.map((photo, index) => (
+            <CarouselItem key={index} className="basis-[55%] pl-2 sm:basis-[50%]">
+              <div
+                className={cn(
+                  'relative mx-auto overflow-hidden rounded-xl transition-[transform,opacity] duration-300 ease-out motion-reduce:transition-none',
+                  selectedIndex === index ? 'h-[210px] w-full opacity-100' : 'mt-[22px] h-[170px] w-[85%] opacity-55',
+                )}
+              >
+                <Image
+                  src={photo || '/placeholder.svg?height=420&width=400'}
+                  alt={`Galeria ${index + 1}`}
+                  fill
+                  className="object-cover outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10"
+                />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+      <div className="flex items-center gap-1.5" role="tablist" aria-label="Indicadores da galeria">
+        {galleryPhotos.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            role="tab"
+            aria-selected={selectedIndex === index}
+            aria-label={`Foto ${index + 1}`}
+            onClick={() => api?.goTo(index)}
+            className={cn(
+              'rounded-full transition-[width,height,background-color] duration-150 ease-out motion-reduce:transition-none',
+              selectedIndex === index ? 'size-2' : 'size-1.5',
+            )}
+            style={{
+              backgroundColor: selectedIndex === index ? theme.accent : `${theme.accent}33`,
+            }}
           />
-          <CarouselNext
-            className="right-3 border bg-white/90 hover:bg-white"
-            style={{ color: theme.accent, borderColor: theme.accentLight }}
-          />
-        </Carousel>
+        ))}
       </div>
+      <p
+        className="text-[8px] italic"
+        style={{ color: theme.textMuted, fontFamily: theme.fontSans }}
+      >
+        deslize para ver mais
+      </p>
     </section>
   )
 }
