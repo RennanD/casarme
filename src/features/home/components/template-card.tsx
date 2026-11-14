@@ -94,7 +94,6 @@ export function TemplateCard({ template }: TemplateCardProps) {
 
         <CardFooter className="mt-auto shrink-0 grid grid-cols-1 gap-2 px-0 pb-0 pt-2 sm:grid-cols-2">
           <Button
-            id={`select-template-invite-${template.slug}`}
             variant="outline"
             asChild
             className="h-9 w-full rounded-full px-2 text-xs sm:w-auto"
@@ -109,6 +108,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
           </Button>
           <Button
             asChild
+            id={`select-template-invite-${template.slug}`}
             className="h-9 w-full rounded-full px-2 text-xs sm:w-auto"
           >
             <Link
