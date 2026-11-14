@@ -1,4 +1,4 @@
-import { HomeImage } from '@/src/features/home/components/home-image'
+import { HomeImage } from "@/src/features/home/components/home-image";
 import {
   BadgeCheck,
   BookOpen,
@@ -9,32 +9,39 @@ import {
   Music,
   Sparkles,
   type LucideIcon,
-} from 'lucide-react'
+} from "lucide-react";
 
-import { HomeIconBadge } from '@/src/features/home/components/home-icon-badge'
+import { HomeIconBadge } from "@/src/features/home/components/home-icon-badge";
 import {
   getTemplateCreateHref,
   getTemplateDemoHref,
   type CatalogTemplate,
-} from '@/src/features/home/model/catalog'
-import { Button, Card, CardFooter, CardHeader, CardTitle, Link } from '@/src/shared/ui'
+} from "@/src/features/home/model/catalog";
+import {
+  Button,
+  Card,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Link,
+} from "@/src/shared/ui";
 
 type TemplateCardProps = {
-  template: CatalogTemplate
-}
+  template: CatalogTemplate;
+};
 
 function getFeatureIcon(feature: string): LucideIcon {
-  const label = feature.toLowerCase()
+  const label = feature.toLowerCase();
 
-  if (label.includes('música') || label.includes('youtube')) return Music
-  if (label.includes('mapa')) return MapPin
-  if (label.includes('whatsapp')) return MessageCircle
-  if (label.includes('galeria') || label.includes('foto')) return ImageIcon
-  if (label.includes('contagem')) return Clock
-  if (label.includes('história') || label.includes('mensagem')) return BookOpen
-  if (label.includes('design')) return Sparkles
+  if (label.includes("música") || label.includes("youtube")) return Music;
+  if (label.includes("mapa")) return MapPin;
+  if (label.includes("whatsapp")) return MessageCircle;
+  if (label.includes("galeria") || label.includes("foto")) return ImageIcon;
+  if (label.includes("contagem")) return Clock;
+  if (label.includes("história") || label.includes("mensagem")) return BookOpen;
+  if (label.includes("design")) return Sparkles;
 
-  return BadgeCheck
+  return BadgeCheck;
 }
 
 export function TemplateCard({ template }: TemplateCardProps) {
@@ -53,12 +60,16 @@ export function TemplateCard({ template }: TemplateCardProps) {
         </figure>
 
         <CardHeader className="gap-2 px-0 pt-0 pb-0">
-          <CardTitle className="font-serif text-xl font-normal lg:text-lg">{template.name}</CardTitle>
+          <CardTitle className="font-serif text-xl font-normal lg:text-lg">
+            {template.name}
+          </CardTitle>
           <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
             <p className="font-serif text-2xl font-normal tabular-nums tracking-tight text-foreground lg:text-xl">
               {template.displayPrice}
             </p>
-            <span className="text-xs text-muted-foreground">pagamento único</span>
+            <span className="text-xs text-muted-foreground">
+              pagamento único
+            </span>
           </div>
         </CardHeader>
 
@@ -67,7 +78,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
           aria-label={`Recursos do convite ${template.name}`}
         >
           {template.features.map((feature) => {
-            const Icon = getFeatureIcon(feature)
+            const Icon = getFeatureIcon(feature);
 
             return (
               <li
@@ -77,12 +88,17 @@ export function TemplateCard({ template }: TemplateCardProps) {
                 <HomeIconBadge icon={Icon} className="mt-0.5" />
                 <span className="pt-0.5">{feature}</span>
               </li>
-            )
+            );
           })}
         </ul>
 
         <CardFooter className="mt-auto shrink-0 grid grid-cols-1 gap-2 px-0 pb-0 pt-2 sm:grid-cols-2">
-          <Button variant="outline" asChild className="h-9 w-full rounded-full px-2 text-xs sm:w-auto">
+          <Button
+            id={`select-template-invite-${template.slug}`}
+            variant="outline"
+            asChild
+            className="h-9 w-full rounded-full px-2 text-xs sm:w-auto"
+          >
             <Link
               href={getTemplateDemoHref(template.slug)}
               className="no-underline hover:no-underline"
@@ -91,7 +107,10 @@ export function TemplateCard({ template }: TemplateCardProps) {
               Ver demonstração
             </Link>
           </Button>
-          <Button asChild className="h-9 w-full rounded-full px-2 text-xs sm:w-auto">
+          <Button
+            asChild
+            className="h-9 w-full rounded-full px-2 text-xs sm:w-auto"
+          >
             <Link
               href={getTemplateCreateHref(template.slug)}
               className="no-underline hover:no-underline"
@@ -103,5 +122,5 @@ export function TemplateCard({ template }: TemplateCardProps) {
         </CardFooter>
       </Card>
     </article>
-  )
+  );
 }

@@ -1,20 +1,38 @@
-import { HomeImage } from '@/src/features/home/components/home-image'
-import { HOME_ANCHORS } from '@/src/features/home/model/anchors'
-import { HOME_FINAL_CTA } from '@/src/features/home/model/copy'
-import { Button, Link } from '@/src/shared/ui'
+import { HomeImage } from "@/src/features/home/components/home-image";
+import { HOME_ANCHORS } from "@/src/features/home/model/anchors";
+import { HOME_FINAL_CTA } from "@/src/features/home/model/copy";
+import { Button, Link } from "@/src/shared/ui";
 
 export function FinalCtaSection() {
   return (
-    <section className="bg-surface-sage py-12 lg:py-14" aria-labelledby="final-cta-title">
+    <section
+      className="bg-surface-sage py-12 lg:py-14"
+      aria-labelledby="final-cta-title"
+    >
       <div className="home-shell flex flex-col items-center justify-between gap-10 md:flex-row">
         <div className="w-full max-w-lg space-y-4 text-center md:text-left">
-          <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">Prepare o convite do seu casamento</p>
-          <h2 id="final-cta-title" className="font-serif text-3xl leading-tight font-normal lg:text-4xl">{HOME_FINAL_CTA.title}</h2>
+          <p className="text-xs font-semibold tracking-widest text-muted-foreground uppercase">
+            Prepare o convite do seu casamento
+          </p>
+          <h2
+            id="final-cta-title"
+            className="font-serif text-3xl leading-tight font-normal lg:text-4xl"
+          >
+            {HOME_FINAL_CTA.title}
+          </h2>
           <p className="text-sm text-muted-foreground">{HOME_FINAL_CTA.body}</p>
-          <Button asChild className="h-auto rounded-full px-6 py-3.5 text-sm">
-            <Link href={`#${HOME_ANCHORS.templates}`}>{HOME_FINAL_CTA.ctaLabel}</Link>
+          <Button
+            id="cta-final-section"
+            asChild
+            className="h-auto rounded-full px-6 py-3.5 text-sm"
+          >
+            <Link href={`#${HOME_ANCHORS.templates}`}>
+              {HOME_FINAL_CTA.ctaLabel}
+            </Link>
           </Button>
-          <p className="text-xs text-muted-foreground">Personalize antes de pagar. Sem assinatura.</p>
+          <p className="text-xs text-muted-foreground">
+            Personalize antes de pagar. Sem assinatura.
+          </p>
         </div>
 
         <div className="relative h-52 w-full max-w-sm shrink-0">
@@ -45,5 +63,5 @@ export function FinalCtaSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
