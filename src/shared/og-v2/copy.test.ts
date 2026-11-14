@@ -19,8 +19,8 @@ describe('v2 og copy', () => {
     expect(copy.description).toMatch(/navegador/)
     expect(copy.visual).toMatchObject({
       type: 'collage',
-      gardenPhotoUrl: 'https://casarme.site/images/home-redesigned/hero-wedding-garden.png',
-      templateThumbUrl: 'https://casarme.site/images/thumbs/azul/01.png',
+      gardenPhotoUrl: 'https://casarme.site/images/home-redesigned/hero-wedding-garden-with-invitation.png',
+      templateThumbUrl: 'https://casarme.site/images/home-redesigned/hero-invitation-rosa.webp',
     })
     expect(copy.metadata.title).toBe(`${copy.headline} — CasarMe`)
     expect(copy.metadata.description).toBe(copy.description)

@@ -83,21 +83,23 @@ export function CreateInviteWizard({ template }: CreateInviteWizardProps) {
     setSubmitError(null)
     setIsSubmitting(true)
 
-    const paymentFields = config.stepFields[config.stepCount as WizardStep] ?? []
-    const paymentValid = await methods.trigger([...paymentFields])
-
-    if (!paymentValid) {
-      setIsSubmitting(false)
-      return
-    }
-
-    const fullValid = await methods.trigger()
-    if (!fullValid) {
-      setIsSubmitting(false)
-      return
-    }
-
     try {
+      const paymentFields = config.stepFields[config.stepCount as WizardStep] ?? []
+      const paymentValid = await methods.trigger([...paymentFields])
+
+      if (!paymentValid) return
+
+      const fullValid = await methods.trigger()
+      if (!fullValid) {
+        const firstInvalidPath = Object.keys(methods.formState.errors)[0]?.split('.')[0]
+        const stepToReview = config.steps.find(({ number }) =>
+          config.stepFields[number]?.some((field) => String(field) === firstInvalidPath),
+        )
+
+        if (stepToReview) navigateToStep(stepToReview.number)
+        return
+      }
+
       const values = methods.getValues()
       const payload = mapFormToApiPayload(values, template)
 
@@ -116,9 +118,10 @@ export function CreateInviteWizard({ template }: CreateInviteWizardProps) {
       router.push(`/checkout/${data.invitationId}`)
     } catch {
       setSubmitError(CREATE_INVITE_ACTIONS.submitError)
+    } finally {
       setIsSubmitting(false)
     }
-  }, [config.stepCount, config.stepFields, methods, router, template])
+  }, [config.stepCount, config.stepFields, config.steps, methods, navigateToStep, router, template])
 
   return (
     <FormProvider {...methods}>

@@ -110,7 +110,10 @@ export function CatalogCategoryFilters({
   onCategoryChange,
   layout,
 }: CatalogCategoryFiltersProps) {
-  const chipLayoutClass = layout === 'sidebar' ? 'flex flex-wrap gap-2' : 'flex flex-wrap gap-2'
+  const chipLayoutClass =
+    layout === 'sidebar'
+      ? 'flex flex-wrap gap-2'
+      : 'flex w-full flex-nowrap gap-2 overflow-x-auto overscroll-x-contain pb-1'
 
   return (
     <div role="radiogroup" aria-label="Filtrar por categoria" className={chipLayoutClass}>
@@ -154,7 +157,10 @@ export function CatalogThemeFilters({
   layout,
 }: CatalogThemeFiltersProps) {
   const themeValues: CatalogThemeFilter[] = ['all', ...themes]
-  const chipLayoutClass = layout === 'sidebar' ? 'flex flex-wrap gap-2' : 'flex flex-wrap gap-2'
+  const chipLayoutClass =
+    layout === 'sidebar'
+      ? 'flex flex-wrap gap-2'
+      : 'flex w-full flex-nowrap gap-2 overflow-x-auto overscroll-x-contain pb-1'
 
   return (
     <div

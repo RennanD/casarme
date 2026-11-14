@@ -10,8 +10,11 @@ type WatermarkedPreviewShellProps = {
 
 export function WatermarkedPreviewShell({
   children,
+  variant = 'compact',
   className,
 }: WatermarkedPreviewShellProps) {
+  const isCheckoutPreview = variant === 'checkout'
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
@@ -49,8 +52,12 @@ export function WatermarkedPreviewShell({
   }, [])
 
   return (
-    <div className={`relative select-none ${className ?? ''}`}>
-      <div className="pointer-events-none">{children}</div>
+    <div
+      className={`relative select-none ${isCheckoutPreview ? 'max-h-[70vh] overflow-hidden' : ''} ${className ?? ''}`}
+    >
+      <div className={`pointer-events-none ${isCheckoutPreview ? 'blur-[2px]' : ''}`}>
+        {children}
+      </div>
 
       <div
         className="pointer-events-none absolute inset-0 overflow-hidden"

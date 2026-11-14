@@ -40,7 +40,7 @@ export function toAbsoluteAssetUrl(path: string, baseUrl = OG_SITE_URL): string 
 }
 
 export function resolveHomeOgCopy(baseUrl = OG_SITE_URL): OgImageCopy {
-  const templateThumb = HOME_HERO_COLLAGE[1]?.src ?? HOME_CATALOG[0]?.imagePath ?? '/images/thumbs/azul/01.png'
+  const templateThumb = HOME_HERO_COLLAGE[1]?.src ?? HOME_CATALOG[0]?.imagePath ?? '/images/thumbs/rosa/01.png'
 
   return {
     eyebrow: HOME_HERO.eyebrow,

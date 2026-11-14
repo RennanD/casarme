@@ -266,7 +266,7 @@ describe('create-invite schemas', () => {
     ).toBe(true)
   })
 
-  it('requires hero, groom, bride, and gallery for extended azul media step', () => {
+  it('requires hero and gallery for extended azul media step', () => {
     const azulSchema = createInviteSchemaForTemplate('azul')
 
     expect(
@@ -283,7 +283,7 @@ describe('create-invite schemas', () => {
         ...VALID_BASE,
         venueName: 'Espaço Jardim',
         welcomeMessage: 'Vocês estão convidados para o nosso casamento!',
-        images: VALID_ROMANTIC_MEDIA,
+        images: { hero: SAMPLE_IMAGE, gallery: [SAMPLE_IMAGE] },
       }).success,
     ).toBe(true)
   })

@@ -91,20 +91,6 @@ function romanticImagesSchema() {
           path: ['hero'],
         })
       }
-      if (!data.groom) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Envie a foto do noivo',
-          path: ['groom'],
-        })
-      }
-      if (!data.bride) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Envie a foto da noiva',
-          path: ['bride'],
-        })
-      }
       if (!data.gallery?.length) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,

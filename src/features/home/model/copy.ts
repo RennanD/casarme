@@ -221,8 +221,8 @@ export const HOME_BEFORE_CELEBRATION: HomeBeforeCelebrationCopy = {
       description:
         'Escolham nome, data, local e mensagem. Vejam a prévia antes de pagar. Depois, compartilhem o link para imprimir ou enviar.',
       image: '/images/home-redesigned/invite-flatlay.webp',
-      alt: 'Convite de casamento sobre mesa de madeira',
-      caption: 'Casamento de Ana e Pedro',
+      alt: 'Convite Terracota — Boho Botânico apresentado em composição de flatlay',
+      caption: 'Convite Terracota',
       imageContain: true,
     },
     {
@@ -231,7 +231,7 @@ export const HOME_BEFORE_CELEBRATION: HomeBeforeCelebrationCopy = {
       description:
         'Ao abrir o link, o convite carrega no navegador do celular. O convidado vê as informações e confirma presença, sem baixar aplicativo nem criar conta.',
       image: '/images/home-redesigned/invitation-phone.webp',
-      alt: 'Convite digital aberto no celular',
+      alt: 'Convite Verde Oliva — CDI Minimalista aberto em um celular',
       caption: 'Na mesa, um link. No celular, todos os detalhes.',
     },
     {
@@ -265,8 +265,8 @@ export const HOME_FEATURE_HIGHLIGHTS: HomeFeatureHighlight[] = [
     title: 'Tem detalhe que merece destaque.',
     description:
       'Música do YouTube, galeria com até 6 fotos e contagem regressiva. Nos modelos estendidos, o convite ganha ainda mais a cara de vocês.',
-    image: '/images/thumbs/rosa/01.png',
-    alt: 'Prévia do modelo Rosa Florido',
+    image: '/images/home-redesigned/invitation-azul.webp',
+    alt: 'Prévia do modelo Azul — Porcelain Framed',
   },
   {
     title: 'Um convite para as suas pessoas.',
@@ -277,12 +277,12 @@ export const HOME_FEATURE_HIGHLIGHTS: HomeFeatureHighlight[] = [
 
 export const HOME_HERO_COLLAGE: HomeHeroCollageImage[] = [
   {
-    src: '/images/home-redesigned/hero-wedding-garden.webp',
-    alt: 'Foto de uma celebração de casamento em um jardim',
+    src: '/images/home-redesigned/hero-wedding-garden-with-invitation.webp',
+    alt: 'Casal mostra em um tablet o convite Verde Oliva do CasarMe',
   },
   {
-    src: '/images/thumbs/azul/01.png',
-    alt: 'Prévia do convite Azul',
+    src: '/images/home-redesigned/hero-invitation-rosa.webp',
+    alt: 'Convite Rosa Florido — Editorial Romântico',
   },
 ]
 

@@ -51,8 +51,6 @@ const HERO_MEDIA_FIELDS = ['images'] as const satisfies readonly (keyof CreateIn
 const ROMANTIC_MEDIA_FIELDS = [
   'images',
   'coupleStory',
-  'groomStory',
-  'brideStory',
 ] as const satisfies readonly (keyof CreateInviteFormValues)[]
 
 const PAYMENT_FIELDS = [

@@ -107,22 +107,20 @@ export function TemplateCatalog({ catalog = HOME_CATALOG }: TemplateCatalogProps
 
   return (
     <div className="space-y-6 lg:flex lg:items-start lg:gap-8 lg:space-y-0">
-      <aside className="hidden lg:block lg:w-60 lg:shrink-0">
-        <div className="sticky top-24">
-          <CatalogFiltersPanel
-            catalog={catalog}
-            category={category}
-            theme={theme}
-            themes={themes}
-            onCategoryChange={handleCategoryChange}
-            onThemeChange={setTheme}
-            layout="sidebar"
-          />
-        </div>
+      <aside className="hidden self-start lg:sticky lg:top-24 lg:block lg:w-60 lg:shrink-0">
+        <CatalogFiltersPanel
+          catalog={catalog}
+          category={category}
+          theme={theme}
+          themes={themes}
+          onCategoryChange={handleCategoryChange}
+          onThemeChange={setTheme}
+          layout="sidebar"
+        />
       </aside>
 
       <div className="min-w-0 flex-1 space-y-6">
-        <div className="lg:hidden">
+        <div className="sticky top-18 z-40 -mx-5 bg-background/95 px-5 py-3 backdrop-blur-sm lg:hidden">
           <CatalogFiltersPanel
             catalog={catalog}
             category={category}
@@ -141,7 +139,7 @@ export function TemplateCatalog({ catalog = HOME_CATALOG }: TemplateCatalogProps
         {results.length > 0 ? (
           <ul
             className={cn(
-              'grid gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3',
+              'grid grid-cols-2 gap-3 max-[359px]:grid-cols-1 sm:gap-6',
             )}
             aria-label={`${results.length} modelos disponíveis`}
           >

@@ -37,7 +37,7 @@ export function GuestExperienceSection() {
               sizes="(max-width: 1024px) 100vw, 544px"
             />
             <figcaption className="absolute bottom-4 left-4 flex max-w-[14rem] flex-col gap-0.5 rounded-xl border border-transparent bg-card/95 px-3 py-2 shadow-sm backdrop-blur-sm">
-              <span className="text-xs font-semibold tracking-wide text-muted-foreground">POR ANA · EXEMPLO ILUSTRATIVO</span>
+              <span className="text-xs font-semibold tracking-wide text-muted-foreground">MODELO VERDE OLIVA</span>
               <span className="font-serif text-sm italic text-foreground">Que bom ter todo mundo por perto.</span>
             </figcaption>
           </figure>

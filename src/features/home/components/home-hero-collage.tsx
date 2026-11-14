@@ -15,8 +15,8 @@ export function HomeHeroCollage() {
       <figure className="shadow-polaroid absolute left-0 top-[8%] z-10 h-[58%] w-[52%] -rotate-2 overflow-hidden rounded-2xl">
         <div className="relative h-[calc(100%-2rem)] w-full">
           <HomeImage
-            src="/images/home-redesigned/hero-wedding-garden.webp"
-            alt="Casal de noivos com convite digital em um jardim"
+            src="/images/home-redesigned/hero-wedding-garden-with-invitation.webp"
+            alt="Casal mostra em um tablet o convite Verde Oliva do CasarMe"
             fill
             className="image-outline object-cover"
             sizes="(max-width: 768px) 45vw, 480px"
@@ -31,15 +31,15 @@ export function HomeHeroCollage() {
       <figure className="shadow-polaroid absolute left-[44%] top-0 z-20 h-[65%] w-[48%] rotate-2 overflow-hidden rounded-2xl">
         <div className="relative h-[calc(100%-2rem)] w-full bg-secondary/60">
           <HomeImage
-            src="/images/thumbs/azul/01.png"
-            alt="Prévia do convite Azul"
+            src="/images/home-redesigned/hero-invitation-rosa.webp"
+            alt="Convite Rosa Florido — Editorial Romântico"
             fill
-            className="image-outline object-contain p-2"
+            className="image-outline object-cover"
             sizes="(max-width: 768px) 40vw, 440px"
           />
         </div>
         <figcaption className="flex h-8 items-center justify-center bg-card/95 font-serif text-xs italic text-foreground backdrop-blur-sm">
-          convite Azul
+          convite Rosa Florido
         </figcaption>
       </figure>
     </div>

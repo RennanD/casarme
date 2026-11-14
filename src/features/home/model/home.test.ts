@@ -220,7 +220,7 @@ describe('desktop Home Redesigned feature content', () => {
 
     expect(extendedHighlight.eyebrow).toMatch(/modelos estendidos/i)
     expect(extendedHighlight.description).not.toMatch(/modelo Romântico/i)
-    expect(extendedHighlight.image).toBe('/images/thumbs/rosa/01.png')
+    expect(extendedHighlight.image).toBe('/images/home-redesigned/invitation-azul.webp')
 
     for (const feature of HOME_BENTO_FEATURES) {
       if ('eyebrow' in feature && feature.eyebrow) {

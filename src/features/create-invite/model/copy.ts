@@ -135,14 +135,6 @@ export const MEDIA_STEP_FIELDS = {
     label: 'Foto de capa',
     helper: 'Esta imagem aparece no topo do convite.',
   },
-  groom: {
-    label: 'Foto do noivo',
-    helper: 'Retrato individual do noivo.',
-  },
-  bride: {
-    label: 'Foto da noiva',
-    helper: 'Retrato individual da noiva.',
-  },
   gallery: {
     label: 'Galeria de fotos',
     helper: 'Selecione até 6 fotos de uma vez. Pelo menos uma é obrigatória.',
@@ -150,14 +142,6 @@ export const MEDIA_STEP_FIELDS = {
   coupleStory: {
     label: 'História do casal (opcional)',
     placeholder: 'Como vocês se conheceram...',
-  },
-  groomStory: {
-    label: 'História do noivo (opcional)',
-    placeholder: 'Um pouco sobre o noivo...',
-  },
-  brideStory: {
-    label: 'História da noiva (opcional)',
-    placeholder: 'Um pouco sobre a noiva...',
   },
 } as const
 
@@ -188,7 +172,6 @@ export const CREATE_INVITE_ACTIONS = {
   createInvite: 'Criar meu convite',
   back: 'Voltar',
   changeTemplate: 'Trocar modelo',
-  pixUnavailable: 'Pagamento via PIX em breve — estamos finalizando esta etapa.',
   submitError: 'Não foi possível criar o convite. Tente novamente.',
   submitting: 'Criando convite...',
 } as const
