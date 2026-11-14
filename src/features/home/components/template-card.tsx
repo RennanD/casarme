@@ -96,6 +96,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
           <Button
             variant="outline"
             asChild
+            id={`btn-view-demo-${template.slug}`}
             className="h-9 w-full rounded-full px-2 text-xs sm:w-auto"
           >
             <Link
