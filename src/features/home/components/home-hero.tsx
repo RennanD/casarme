@@ -1,8 +1,7 @@
-import { HOME_ANCHORS } from '@/src/features/home/model/anchors'
-import { HOME_HERO } from '@/src/features/home/model/copy'
-import { HomeHeroCollage } from '@/src/features/home/components/home-hero-collage'
-import { getTemplateDemoHref } from '@/src/shared/catalog'
-import { Button, Link } from '@/src/shared/ui'
+import { HOME_ANCHORS } from "@/src/features/home/model/anchors";
+import { HOME_HERO } from "@/src/features/home/model/copy";
+import { HomeHeroCollage } from "@/src/features/home/components/home-hero-collage";
+import { Button, Link } from "@/src/shared/ui";
 
 export function HomeHero() {
   return (
@@ -28,15 +27,23 @@ export function HomeHero() {
             {HOME_HERO.body}
           </p>
           <div className="home-enter home-enter-delay-3 flex flex-col items-center gap-3 sm:flex-row lg:items-start">
-            <Button asChild className="h-auto w-full rounded-full px-6 py-3.5 text-sm sm:w-auto">
-              <Link href={`#${HOME_ANCHORS.templates}`}>{HOME_HERO.ctaLabel}</Link>
+            <Button
+              id="btn-hero-cta"
+              asChild
+              className="h-auto w-full rounded-full px-6 py-3.5 text-sm sm:w-auto"
+            >
+              <Link href={`#${HOME_ANCHORS.templates}`}>
+                {HOME_HERO.ctaLabel}
+              </Link>
             </Button>
           </div>
-          <p className="home-enter home-enter-delay-3 text-xs text-muted-foreground">{HOME_HERO.note}</p>
+          <p className="home-enter home-enter-delay-3 text-xs text-muted-foreground">
+            {HOME_HERO.note}
+          </p>
         </div>
 
         <HomeHeroCollage />
       </div>
     </section>
-  )
+  );
 }

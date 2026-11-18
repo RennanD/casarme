@@ -1,14 +1,21 @@
-import { HomeImage } from '@/src/features/home/components/home-image'
+import { HomeImage } from "@/src/features/home/components/home-image";
 import {
   getTemplateCreateHref,
   getTemplateDemoHref,
   type CatalogTemplate,
-} from '@/src/features/home/model/catalog'
-import { Button, Card, CardFooter, CardHeader, CardTitle, Link } from '@/src/shared/ui'
+} from "@/src/features/home/model/catalog";
+import {
+  Button,
+  Card,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Link,
+} from "@/src/shared/ui";
 
 type TemplateCardProps = {
-  template: CatalogTemplate
-}
+  template: CatalogTemplate;
+};
 
 export function TemplateCard({ template }: TemplateCardProps) {
   return (
@@ -26,7 +33,9 @@ export function TemplateCard({ template }: TemplateCardProps) {
         </figure>
 
         <CardHeader className="items-center gap-1 px-1 py-0 text-center">
-          <CardTitle className="font-serif text-lg font-medium leading-tight">{template.name}</CardTitle>
+          <CardTitle className="font-serif text-lg font-medium leading-tight">
+            {template.name}
+          </CardTitle>
           <p className="text-sm text-muted-foreground">{template.styleLabel}</p>
           <p className="pt-1 font-serif text-xl font-semibold tabular-nums tracking-tight text-foreground">
             {template.displayPrice}
@@ -34,7 +43,12 @@ export function TemplateCard({ template }: TemplateCardProps) {
         </CardHeader>
 
         <CardFooter className="mt-auto grid shrink-0 grid-cols-1 gap-2 border-t border-border/60 px-0 pb-0 pt-3 sm:grid-cols-2">
-          <Button variant="outline" asChild className="h-10 w-full px-2 text-xs sm:text-sm">
+          <Button
+            variant="outline"
+            asChild
+            id={`btn-view-demo-${template.slug}`}
+            className="h-10 w-full px-2 text-xs sm:text-sm"
+          >
             <Link
               href={getTemplateDemoHref(template.slug)}
               className="no-underline hover:no-underline"
@@ -43,7 +57,11 @@ export function TemplateCard({ template }: TemplateCardProps) {
               Ver preview
             </Link>
           </Button>
-          <Button asChild className="h-10 w-full px-2 text-xs sm:text-sm">
+          <Button
+            asChild
+            id={`select-template-invite-${template.slug}`}
+            className="h-10 w-full px-2 text-xs sm:text-sm"
+          >
             <Link
               href={getTemplateCreateHref(template.slug)}
               className="no-underline hover:no-underline"
@@ -55,5 +73,5 @@ export function TemplateCard({ template }: TemplateCardProps) {
         </CardFooter>
       </Card>
     </article>
-  )
+  );
 }
