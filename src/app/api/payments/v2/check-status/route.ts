@@ -30,6 +30,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (invitation.paymentStatus === 'paid') {
+      await activateInvitationAndSendEmail(invitationId)
       return NextResponse.json({ status: 'PAID' })
     }
 

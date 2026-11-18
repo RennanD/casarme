@@ -1,14 +1,21 @@
 import { NextResponse } from 'next/server'
 
-import { HOME_CATALOG } from '@/src/shared/catalog'
+import {
+  getTemplateCreateHref,
+  getTemplateDemoHref,
+  HOME_CATALOG,
+} from '@/src/shared/catalog'
 
 export async function GET() {
-  const demoPaths = HOME_CATALOG.map((entry) => `/demo/${entry.slug}`)
+  const templatePaths = HOME_CATALOG.flatMap((entry) => [
+    getTemplateDemoHref(entry.slug),
+    getTemplateCreateHref(entry.slug),
+  ])
 
   const urls = [
     '',
     '/convite-padrinhos',
-    ...demoPaths,
+    ...templatePaths,
     '/termos-de-uso',
     '/politica-de-privacidade',
   ]

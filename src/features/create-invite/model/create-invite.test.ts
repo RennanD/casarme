@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
+import { EXTENDED_TEMPLATE_SLUGS } from '@/src/shared/catalog'
+
 import {
   calculateOrderTotal,
   formatDisplayPrice,
@@ -20,25 +22,29 @@ import { createInviteSchemaForTemplate, coupleStepSchema, paymentStepSchema } fr
 import { buildStepHref, parseStep } from './steps'
 import { getWizardConfig } from './wizard-config'
 
+const EXTENDED_TEMPLATE: CreateInviteTemplate = {
+  slug: 'azul',
+  id: 'azul',
+  name: 'Azul',
+  displayPrice: 'R$ 76,50',
+  imagePath: '/images/thumbs/azul/01.png',
+  productLine: 'site',
+  plan: 'Pro',
+}
+
+const DOURADO_EXTENDED: CreateInviteTemplate = {
+  slug: 'dourado',
+  id: 'dourado',
+  name: 'Dourado',
+  displayPrice: 'R$ 76,50',
+  imagePath: '/images/thumbs/dourado/01.png',
+  productLine: 'site',
+  plan: 'Pro',
+}
+
 const FIXTURE_CATALOG: CreateInviteTemplate[] = [
-  {
-    slug: 'azul',
-    id: 'blue',
-    name: 'Azul',
-    displayPrice: 'R$ 30,90',
-    imagePath: '/images/thumbs/blue/01.png',
-    productLine: 'interactive',
-    plan: 'Premium',
-  },
-  {
-    slug: 'dourado',
-    id: 'golden',
-    name: 'Dourado',
-    displayPrice: 'R$ 25,90',
-    imagePath: '/images/thumbs/golden/01.png',
-    productLine: 'interactive',
-    plan: 'Premium',
-  },
+  EXTENDED_TEMPLATE,
+  DOURADO_EXTENDED,
   {
     slug: 'garden',
     id: 'garden',
@@ -56,6 +62,15 @@ const FIXTURE_CATALOG: CreateInviteTemplate[] = [
     imagePath: '/images/thumbs/romantico/01.png',
     productLine: 'site',
     plan: 'Pro',
+  },
+  {
+    slug: 'golden',
+    id: 'golden',
+    name: 'Dourado',
+    displayPrice: 'R$ 25,90',
+    imagePath: '/images/thumbs/golden/01.png',
+    productLine: 'interactive',
+    plan: 'Premium',
   },
 ]
 
@@ -87,6 +102,13 @@ const VALID_BASE = {
   includePlanner: true,
 }
 
+const VALID_ROMANTIC_MEDIA = {
+  hero: SAMPLE_IMAGE,
+  groom: SAMPLE_IMAGE,
+  bride: SAMPLE_IMAGE,
+  gallery: [SAMPLE_IMAGE],
+}
+
 describe('create-invite catalog', () => {
   it('resolves known template slugs and returns null for unknown slugs', () => {
     expect(resolveTemplateBySlug('azul', FIXTURE_CATALOG)?.name).toBe('Azul')
@@ -95,47 +117,45 @@ describe('create-invite catalog', () => {
   })
 
   it('parses and formats Brazilian display prices', () => {
-    expect(parseDisplayPrice('R$ 30,90')).toBeCloseTo(30.9)
-    expect(formatDisplayPrice(40.8)).toBe('R$ 40,80')
+    expect(parseDisplayPrice('R$ 76,50')).toBeCloseTo(76.5)
+    expect(formatDisplayPrice(86.4)).toBe('R$ 86,40')
   })
 
-  it('calculates order total with and without planner add-on', () => {
-    const withPlanner = calculateOrderTotal('R$ 30,90', true)
-    expect(withPlanner.templatePrice).toBeCloseTo(30.9)
-    expect(withPlanner.total).toBeCloseTo(30.9 + PLANNER_ADDON_PRICE)
-    expect(withPlanner.formattedTotal).toBe('R$ 40,80')
+  it('calculates order total with and without planner add-on at extended price', () => {
+    const withPlanner = calculateOrderTotal('R$ 76,50', true)
+    expect(withPlanner.templatePrice).toBeCloseTo(76.5)
+    expect(withPlanner.total).toBeCloseTo(76.5 + PLANNER_ADDON_PRICE)
+    expect(withPlanner.formattedTotal).toBe('R$ 86,40')
 
-    const withoutPlanner = calculateOrderTotal('R$ 30,90', false)
-    expect(withoutPlanner.total).toBeCloseTo(30.9)
-    expect(withoutPlanner.formattedTotal).toBe('R$ 30,90')
+    const withoutPlanner = calculateOrderTotal('R$ 76,50', false)
+    expect(withoutPlanner.total).toBeCloseTo(76.5)
+    expect(withoutPlanner.formattedTotal).toBe('R$ 76,50')
   })
 })
 
 describe('wizard config', () => {
-  it('resolves 3 steps for Dourado and 4 steps for Azul, garden, and romantic', () => {
-    expect(getWizardConfig(FIXTURE_CATALOG[1]).stepCount).toBe(3)
-    expect(getWizardConfig(FIXTURE_CATALOG[0]).stepCount).toBe(4)
-    expect(getWizardConfig(FIXTURE_CATALOG[2]).stepCount).toBe(4)
-    expect(getWizardConfig(FIXTURE_CATALOG[3]).stepCount).toBe(4)
+  it.each(EXTENDED_TEMPLATE_SLUGS)('uses 4 romantic steps for extended slug %s', (slug) => {
+    const template = { ...EXTENDED_TEMPLATE, slug, id: slug }
+    const config = getWizardConfig(template)
+
+    expect(config.stepCount).toBe(4)
+    expect(config.steps.some((step) => step.kind === 'media')).toBe(true)
+    expect(config.isFieldVisible(2, 'venueName')).toBe(true)
+    expect(config.isFieldVisible(2, 'musicUrl')).toBe(true)
+    expect(config.isFieldVisible(3, 'coupleStory')).toBe(true)
   })
 
-  it('does not require venueName on golden ceremony step but requires it on garden', () => {
-    const golden = getWizardConfig(FIXTURE_CATALOG[1])
-    const garden = getWizardConfig(FIXTURE_CATALOG[2])
-
+  it('keeps 3 steps for legacy golden slug', () => {
+    const golden = getWizardConfig(FIXTURE_CATALOG[4])
+    expect(golden.stepCount).toBe(3)
+    expect(golden.steps.some((step) => step.kind === 'media')).toBe(false)
     expect(golden.isFieldVisible(2, 'venueName')).toBe(false)
     expect(golden.isFieldVisible(2, 'musicUrl')).toBe(true)
-    expect(garden.isFieldVisible(2, 'venueName')).toBe(true)
-    expect(garden.isFieldVisible(2, 'musicUrl')).toBe(false)
   })
 
-  it('includes a media step only for four-step templates', () => {
-    expect(getWizardConfig(FIXTURE_CATALOG[1]).steps.some((step) => step.kind === 'media')).toBe(
-      false,
-    )
-    expect(getWizardConfig(FIXTURE_CATALOG[0]).steps.some((step) => step.kind === 'media')).toBe(
-      true,
-    )
+  it('uses 4 steps for garden and romantic legacy slugs', () => {
+    expect(getWizardConfig(FIXTURE_CATALOG[2]).stepCount).toBe(4)
+    expect(getWizardConfig(FIXTURE_CATALOG[3]).stepCount).toBe(4)
   })
 })
 
@@ -152,7 +172,7 @@ describe('create-invite steps', () => {
 
   it('builds step hrefs with slug and step query param', () => {
     expect(buildStepHref('azul', 1)).toBe('/criar/azul?step=1')
-    expect(buildStepHref('dourado', 3)).toBe('/criar/dourado?step=3')
+    expect(buildStepHref('dourado', 4)).toBe('/criar/dourado?step=4')
   })
 })
 
@@ -195,12 +215,34 @@ describe('create-invite schemas', () => {
     ).toBe(false)
   })
 
-  it('requires venueName on garden ceremony schema but not on dourado', () => {
+  it('requires venueName on extended dourado ceremony schema', () => {
     const douradoSchema = createInviteSchemaForTemplate('dourado')
-    const gardenSchema = createInviteSchemaForTemplate('garden')
 
     expect(
       douradoSchema.safeParse({
+        ...VALID_BASE,
+        venueName: '',
+        welcomeMessage: 'Vocês estão convidados para o nosso casamento!',
+        images: VALID_ROMANTIC_MEDIA,
+      }).success,
+    ).toBe(false)
+
+    expect(
+      douradoSchema.safeParse({
+        ...VALID_BASE,
+        venueName: 'Espaço Jardim',
+        welcomeMessage: 'Vocês estão convidados para o nosso casamento!',
+        images: VALID_ROMANTIC_MEDIA,
+      }).success,
+    ).toBe(true)
+  })
+
+  it('requires venueName on garden ceremony schema but not on legacy golden', () => {
+    const goldenSchema = createInviteSchemaForTemplate('golden')
+    const gardenSchema = createInviteSchemaForTemplate('garden')
+
+    expect(
+      goldenSchema.safeParse({
         ...VALID_BASE,
       }).success,
     ).toBe(true)
@@ -224,11 +266,11 @@ describe('create-invite schemas', () => {
     ).toBe(true)
   })
 
-  it('requires hero, groom, bride, and gallery for romantic media step', () => {
-    const romanticSchema = createInviteSchemaForTemplate('romantic')
+  it('requires hero and gallery for extended azul media step', () => {
+    const azulSchema = createInviteSchemaForTemplate('azul')
 
     expect(
-      romanticSchema.safeParse({
+      azulSchema.safeParse({
         ...VALID_BASE,
         venueName: 'Espaço Jardim',
         welcomeMessage: 'Vocês estão convidados para o nosso casamento!',
@@ -237,28 +279,11 @@ describe('create-invite schemas', () => {
     ).toBe(false)
 
     expect(
-      romanticSchema.safeParse({
+      azulSchema.safeParse({
         ...VALID_BASE,
         venueName: 'Espaço Jardim',
         welcomeMessage: 'Vocês estão convidados para o nosso casamento!',
-        images: {
-          hero: SAMPLE_IMAGE,
-          groom: SAMPLE_IMAGE,
-          bride: SAMPLE_IMAGE,
-          gallery: [SAMPLE_IMAGE],
-        },
-      }).success,
-    ).toBe(true)
-  })
-
-  it('requires hero image for azul template', () => {
-    const azulSchema = createInviteSchemaForTemplate('azul')
-
-    expect(azulSchema.safeParse({ ...VALID_BASE }).success).toBe(false)
-    expect(
-      azulSchema.safeParse({
-        ...VALID_BASE,
-        images: { hero: SAMPLE_IMAGE, gallery: [] },
+        images: { hero: SAMPLE_IMAGE, gallery: [SAMPLE_IMAGE] },
       }).success,
     ).toBe(true)
   })
@@ -283,41 +308,60 @@ describe('create-invite schemas', () => {
 })
 
 describe('mapFormToApiPayload', () => {
-  it('maps azul slug to blue template id and converts DD/MM/AAAA + HH:MM to ISO weddingDate', () => {
+  it('persists azul slug as template id and converts DD/MM/AAAA + HH:MM to ISO weddingDate', () => {
     const payload = mapFormToApiPayload(
       {
         ...VALID_BASE,
-        images: { hero: SAMPLE_IMAGE, gallery: [] },
+        venueName: 'Espaço Jardim',
+        welcomeMessage: 'Vocês estão convidados!',
+        images: VALID_ROMANTIC_MEDIA,
       },
-      FIXTURE_CATALOG[0],
+      EXTENDED_TEMPLATE,
     )
 
-    expect(payload.template).toBe('blue')
+    expect(payload.template).toBe('azul')
     expect(payload.weddingDate).toBe('2026-10-13T18:30:00')
     expect(payload.weddingTime).toBe('18:30')
     expect(payload.isActive).toBe(false)
+    expect(payload.venueName).toBe('Espaço Jardim')
   })
 
-  it('applies interactive defaults for venueName and welcomeMessage on Dourado', () => {
-    const payload = mapFormToApiPayload(VALID_BASE, FIXTURE_CATALOG[1])
+  it('persists dourado extended slug without mapping to golden', () => {
+    const payload = mapFormToApiPayload(
+      {
+        ...VALID_BASE,
+        venueName: 'Salão Nobre',
+        welcomeMessage: 'Celebraremos juntos!',
+        images: VALID_ROMANTIC_MEDIA,
+      },
+      DOURADO_EXTENDED,
+    )
 
-    expect(payload.template).toBe('golden')
-    expect(payload.venueName).toBe('Local da Cerimônia')
-    expect(payload.welcomeMessage).toBe('Você está convidado para o nosso casamento!')
+    expect(payload.template).toBe('dourado')
+    expect(payload.venueName).toBe('Salão Nobre')
+    expect(payload.welcomeMessage).toBe('Celebraremos juntos!')
   })
 
   it('persists includePlanner from payment step values', () => {
     const withPlanner = mapFormToApiPayload(
       { ...VALID_BASE, includePlanner: true },
-      FIXTURE_CATALOG[0],
+      EXTENDED_TEMPLATE,
     )
     const withoutPlanner = mapFormToApiPayload(
       { ...VALID_BASE, includePlanner: false },
-      FIXTURE_CATALOG[0],
+      EXTENDED_TEMPLATE,
     )
 
     expect(withPlanner.includePlanner).toBe(true)
     expect(withoutPlanner.includePlanner).toBe(false)
+  })
+
+  it('applies interactive defaults for legacy golden slug', () => {
+    const payload = mapFormToApiPayload(VALID_BASE, FIXTURE_CATALOG[4])
+
+    expect(payload.template).toBe('golden')
+    expect(payload.venueName).toBe('Local da Cerimônia')
+    expect(payload.welcomeMessage).toBe('Você está convidado para o nosso casamento!')
   })
 
   it('passes site template venue fields without interactive defaults', () => {

@@ -167,9 +167,6 @@ export function PaymentStepForm({
             {isSubmitting ? CREATE_INVITE_ACTIONS.submitting : CREATE_INVITE_ACTIONS.createInvite}{' '}
             <span aria-hidden>→</span>
           </Button>
-          <p className="text-center text-xs text-muted-foreground sm:text-left">
-            {CREATE_INVITE_ACTIONS.pixUnavailable}
-          </p>
         </div>
       </div>
     </div>

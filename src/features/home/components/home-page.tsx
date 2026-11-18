@@ -18,7 +18,7 @@ export function HomePage() {
     <>
       <SkipLinks />
 
-      <header>
+      <header className="sticky top-0 z-50">
         <HomeNavbar />
       </header>
 

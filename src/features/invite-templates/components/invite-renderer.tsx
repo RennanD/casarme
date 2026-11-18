@@ -1,10 +1,15 @@
 'use client'
 
+import { AzulPorcelainTemplate } from './templates/azul-porcelain-template'
 import { BlueTemplate } from './templates/blue-template'
+import { DouradoSeloTemplate } from './templates/dourado-selo-template'
 import { GardenTemplate } from './templates/garden-template'
 import { GoldenTemplate } from './templates/golden-template/golden-template'
 import { ModernTemplate } from './templates/modern-template'
 import { RomanticTemplate } from './templates/romantic-template'
+import { RosaFloridoTemplate } from './templates/rosa-florido-template'
+import { TerracotaBohoTemplate } from './templates/terracota-boho-template'
+import { VerdeOlivaTemplate } from './templates/verde-oliva-template'
 import { LegacyFallback } from './legacy-fallback'
 import {
   findGalleryImages,
@@ -70,6 +75,56 @@ export function InviteRenderer({ data, variant = 'default' }: InviteRendererProp
     case 'garden':
       return (
         <GardenTemplate data={templateData} heroPhoto={findHeroImage(data)} />
+      )
+    case 'rosa':
+      return (
+        <RosaFloridoTemplate
+          data={templateData}
+          heroPhoto={findHeroImage(data)}
+          groomPhoto={findImageByType(data.images, 'groom')}
+          bridePhoto={findImageByType(data.images, 'bride')}
+          galleryPhotos={findGalleryImages(data)}
+        />
+      )
+    case 'verde-oliva':
+      return (
+        <VerdeOlivaTemplate
+          data={templateData}
+          heroPhoto={findHeroImage(data)}
+          groomPhoto={findImageByType(data.images, 'groom')}
+          bridePhoto={findImageByType(data.images, 'bride')}
+          galleryPhotos={findGalleryImages(data)}
+        />
+      )
+    case 'azul':
+      return (
+        <AzulPorcelainTemplate
+          data={templateData}
+          heroPhoto={findHeroImage(data)}
+          groomPhoto={findImageByType(data.images, 'groom')}
+          bridePhoto={findImageByType(data.images, 'bride')}
+          galleryPhotos={findGalleryImages(data)}
+        />
+      )
+    case 'dourado':
+      return (
+        <DouradoSeloTemplate
+          data={templateData}
+          heroPhoto={findHeroImage(data)}
+          groomPhoto={findImageByType(data.images, 'groom')}
+          bridePhoto={findImageByType(data.images, 'bride')}
+          galleryPhotos={findGalleryImages(data)}
+        />
+      )
+    case 'terracota':
+      return (
+        <TerracotaBohoTemplate
+          data={templateData}
+          heroPhoto={findHeroImage(data)}
+          groomPhoto={findImageByType(data.images, 'groom')}
+          bridePhoto={findImageByType(data.images, 'bride')}
+          galleryPhotos={findGalleryImages(data)}
+        />
       )
     case 'romantic':
       return (

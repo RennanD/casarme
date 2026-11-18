@@ -33,7 +33,7 @@ export function BeforeCelebrationSection() {
                   <p className="text-sm leading-relaxed text-muted-foreground">{phase.description}</p>
                   {phase.eyebrow.startsWith('Antes') && (
                     <div className="shadow-elevated max-w-xs rounded-2xl border border-transparent bg-card p-4">
-                      <p className="text-xs font-semibold tracking-wide text-muted-foreground">CASAMENTO DE ANA E PEDRO</p>
+                      <p className="text-xs font-semibold tracking-wide text-muted-foreground">CONVITE TERRACOTA</p>
                       <p className="mt-1 font-serif text-sm text-foreground">Todos os detalhes, num convite só.</p>
                       <Link href="#templates" className="mt-3 text-xs text-primary">Experimente um modelo</Link>
                     </div>

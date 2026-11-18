@@ -51,7 +51,7 @@ export function HomeNavbar() {
             className="h-auto rounded-full px-4 py-2.5 text-xs"
           >
             <Link
-              href={getTemplateDemoHref("garden")}
+              href={getTemplateDemoHref('verde-oliva')}
               className="no-underline hover:no-underline"
             >
               Ver demonstração
@@ -105,7 +105,7 @@ export function HomeNavbar() {
               </Link>
             ))}
             <Link
-              href={getTemplateDemoHref("garden")}
+              href={getTemplateDemoHref('verde-oliva')}
               variant="nav"
               className="py-2"
               onClick={() => setIsOpen(false)}

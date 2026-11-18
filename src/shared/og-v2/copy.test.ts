@@ -3,6 +3,8 @@ import { describe, expect, it } from 'vitest'
 import {
   resolveCreateInviteMetadataBySlug,
   resolveCreateInviteOgCopy,
+  resolveDemoMetadataBySlug,
+  resolveDemoOgCopy,
   resolveHomeMetadata,
   resolveHomeOgCopy,
   toAbsoluteAssetUrl,
@@ -12,13 +14,13 @@ describe('v2 og copy', () => {
   it('resolves home og copy from HOME_HERO and collage assets', () => {
     const copy = resolveHomeOgCopy()
 
-    expect(copy.eyebrow).toBe('CONVITES DIGITAIS DE CASAMENTO')
-    expect(copy.headline).toMatch(/história merece um convite à altura/)
-    expect(copy.description).toMatch(/Escolham um modelo/)
+    expect(copy.eyebrow).toBe('Para o seu casamento')
+    expect(copy.headline).toMatch(/convite de todo mundo/)
+    expect(copy.description).toMatch(/navegador/)
     expect(copy.visual).toMatchObject({
       type: 'collage',
-      gardenPhotoUrl: 'https://casarme.site/images/home-redesigned/hero-wedding-garden.png',
-      templateThumbUrl: 'https://casarme.site/images/thumbs/blue/01.png',
+      gardenPhotoUrl: 'https://casarme.site/images/home-redesigned/hero-wedding-garden-with-invitation.png',
+      templateThumbUrl: 'https://casarme.site/images/home-redesigned/hero-invitation-rosa.webp',
     })
     expect(copy.metadata.title).toBe(`${copy.headline} — CasarMe`)
     expect(copy.metadata.description).toBe(copy.description)
@@ -27,16 +29,17 @@ describe('v2 og copy', () => {
   it('resolves home metadata from HOME_HERO', () => {
     const metadata = resolveHomeMetadata()
 
-    expect(metadata.title).toMatch(/história merece um convite à altura/)
+    expect(metadata.title).toMatch(/convite de todo mundo/)
     expect(metadata.title).toContain('CasarMe')
-    expect(metadata.description).toMatch(/Escolham um modelo/)
+    expect(metadata.description).toMatch(/navegador/)
   })
 
   it.each([
-    ['azul', 'Azul', 'R$ 30,90', '/images/thumbs/blue/01.png'],
-    ['dourado', 'Dourado', 'R$ 25,90', '/images/thumbs/golden/01.png'],
-    ['garden', 'Verde Oliva', 'R$ 58,90', '/images/thumbs/garden/01.png'],
-    ['romantic', 'Romântico', 'R$ 76,50', '/images/thumbs/romantico/01.png'],
+    ['verde-oliva', 'Verde Oliva', 'R$ 76,50', '/images/thumbs/verde-oliva/01.png'],
+    ['rosa', 'Rosa Florido', 'R$ 76,50', '/images/thumbs/rosa/01.png'],
+    ['azul', 'Azul', 'R$ 76,50', '/images/thumbs/azul/01.png'],
+    ['dourado', 'Dourado', 'R$ 76,50', '/images/thumbs/dourado/01.png'],
+    ['terracota', 'Terracota', 'R$ 76,50', '/images/thumbs/terracota/01.png'],
   ] as const)(
     'resolves create-invite og copy for slug %s',
     (slug, name, price, imagePath) => {
@@ -55,22 +58,48 @@ describe('v2 og copy', () => {
     },
   )
 
+  it.each([
+    ['verde-oliva', 'Verde Oliva', 'R$ 76,50', '/images/thumbs/verde-oliva/01.png'],
+    ['rosa', 'Rosa Florido', 'R$ 76,50', '/images/thumbs/rosa/01.png'],
+    ['azul', 'Azul', 'R$ 76,50', '/images/thumbs/azul/01.png'],
+    ['dourado', 'Dourado', 'R$ 76,50', '/images/thumbs/dourado/01.png'],
+    ['terracota', 'Terracota', 'R$ 76,50', '/images/thumbs/terracota/01.png'],
+  ] as const)(
+    'resolves demo og copy for slug %s',
+    (slug, name, price, imagePath) => {
+      const copy = resolveDemoOgCopy(slug)
+
+      expect(copy).not.toBeNull()
+      expect(copy?.headline).toBe(`Demonstração ${name}`)
+      expect(copy?.eyebrow).toBe('DEMONSTRAÇÃO')
+      expect(copy?.visual).toMatchObject({
+        type: 'template',
+        badge: price,
+        thumbUrl: `https://casarme.site${imagePath}`,
+      })
+      expect(copy?.metadata.title).toBe(`Demonstração ${name} — CasarMe`)
+    },
+  )
+
   it('returns null for unknown create-invite slugs', () => {
     expect(resolveCreateInviteOgCopy('inexistente')).toBeNull()
     expect(resolveCreateInviteMetadataBySlug('inexistente')).toBeNull()
+    expect(resolveDemoOgCopy('inexistente')).toBeNull()
+    expect(resolveDemoMetadataBySlug('inexistente')).toBeNull()
   })
 
   it('returns distinct metadata titles per template slug', () => {
-    const titles = ['azul', 'dourado', 'garden', 'romantic'].map(
+    const titles = ['verde-oliva', 'rosa', 'azul', 'dourado', 'terracota'].map(
       (slug) => resolveCreateInviteMetadataBySlug(slug)?.title,
     )
 
-    expect(new Set(titles).size).toBe(4)
+    expect(new Set(titles).size).toBe(5)
     expect(titles).toEqual([
+      'Criar convite Verde Oliva — CasarMe',
+      'Criar convite Rosa Florido — CasarMe',
       'Criar convite Azul — CasarMe',
       'Criar convite Dourado — CasarMe',
-      'Criar convite Verde Oliva — CasarMe',
-      'Criar convite Romântico — CasarMe',
+      'Criar convite Terracota — CasarMe',
     ])
   })
 

@@ -28,6 +28,6 @@ export const OG_FONTS = {
   sans: 'Inter',
 } as const
 
-export const OG_HOME_GARDEN_PHOTO = '/images/home-redesigned/hero-wedding-garden.png'
+export const OG_HOME_GARDEN_PHOTO = '/images/home-redesigned/hero-wedding-garden-with-invitation.png'
 
 export const OG_WAX_SEAL_PATTERN = '/brand/pattern-wax-seal.png'

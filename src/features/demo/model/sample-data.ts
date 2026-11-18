@@ -1,5 +1,7 @@
 import { HOME_CATALOG } from '@/src/shared/catalog'
 
+import { buildDemoImagesFromPencil } from './pencil-demo-images'
+
 export type DemoInviteData = {
   template: string
   groomName: string
@@ -38,26 +40,36 @@ const BASE_SAMPLE = {
 }
 
 const SAMPLE_BY_SLUG: Record<string, DemoInviteData> = {
+  'verde-oliva': {
+    ...BASE_SAMPLE,
+    template: 'verde-oliva',
+    images: buildDemoImagesFromPencil('verde-oliva'),
+  },
+  rosa: {
+    ...BASE_SAMPLE,
+    template: 'rosa',
+    images: buildDemoImagesFromPencil('rosa'),
+  },
   azul: {
     ...BASE_SAMPLE,
-    template: 'blue',
+    template: 'azul',
     groomName: 'Fernando',
     brideName: 'Marina',
     weddingDateIso: '2026-02-12T12:00:00-03:00',
-    images: [
-      {
-        filename:
-          'https://www.guiadecasamento.com.br/blog/wp-content/uploads/2014/01/noivos-roupa-festa-casamento.jpg',
-        type: 'hero',
-      },
-    ],
+    images: buildDemoImagesFromPencil('azul'),
   },
   dourado: {
     ...BASE_SAMPLE,
-    template: 'golden',
+    template: 'dourado',
     groomName: 'Rennan',
     brideName: 'Bárbara',
     weddingDateIso: '2026-02-12T12:00:00-03:00',
+    images: buildDemoImagesFromPencil('dourado'),
+  },
+  terracota: {
+    ...BASE_SAMPLE,
+    template: 'terracota',
+    images: buildDemoImagesFromPencil('terracota'),
   },
   garden: {
     ...BASE_SAMPLE,
@@ -66,17 +78,15 @@ const SAMPLE_BY_SLUG: Record<string, DemoInviteData> = {
   romantic: {
     ...BASE_SAMPLE,
     template: 'romantic',
-    images: [
-      { filename: '/placeholder.svg?height=800&width=600', type: 'hero' },
-      { filename: '/placeholder.svg?height=400&width=400', type: 'groom' },
-      { filename: '/placeholder.svg?height=400&width=400', type: 'bride' },
-      { filename: '/placeholder.svg?height=400&width=400', type: 'gallery' },
-    ],
+    images: buildDemoImagesFromPencil('rosa'),
   },
 }
 
 export function getSampleDataBySlug(slug: string): DemoInviteData | null {
-  if (!HOME_CATALOG.some((entry) => entry.slug === slug)) {
+  const inHomeCatalog = HOME_CATALOG.some((entry) => entry.slug === slug)
+  const hasLegacySample = slug in SAMPLE_BY_SLUG
+
+  if (!inHomeCatalog && !hasLegacySample) {
     return null
   }
 

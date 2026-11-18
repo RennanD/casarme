@@ -1,0 +1,12 @@
+# Checklist de qualidade
+- [ ] Modelo corresponde exatamente à escolha.
+- [ ] Briefing opcional foi oferecido antes de gerar e respeitado se fornecido.
+- [ ] No modelo com foto de capa, a foto aparece somente no topo.
+- [ ] O restante do convite tem fundo próprio.
+- [ ] O modelo com foto de capa não virou site infinito.
+- [ ] Tema reconhecível sem template rígido.
+- [ ] No modelo infinito, somente seções escolhidas e galeria de até seis fotos.
+- [ ] Nenhum dado pessoal/evento foi inventado.
+- [ ] Texto essencial não está embutido nas imagens.
+- [ ] Botões funcionam ou estão identificados como demonstração.
+- [ ] Mobile-first, contraste, foco visível e prefers-reduced-motion.

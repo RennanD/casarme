@@ -130,7 +130,7 @@ export const HOME_OBJECTION_SECTION: HomeObjectionSectionCopy = {
   solutionLabel: 'Solução CasarMe:',
   ctaHeading:
     'Pare de se preocupar com design. Deixe o CasarMe fazer isso por você!',
-  ctaLabel: 'Criar meu convite  →',
+  ctaLabel: 'Criar meu convite',
 }
 
 export const HOME_HOW_IT_WORKS_SECTION: HomeHowItWorksSectionCopy = {
@@ -175,7 +175,7 @@ export const HOME_WHATSAPP_SECTION: HomeWhatsappSectionCopy = {
   footerNote:
     'Todos os nossos modelos incluem confirmação de presença via WhatsApp',
   primaryCtaLabel: 'Ver Modelos',
-  secondaryCtaLabel: 'Criar meu convite  →',
+  secondaryCtaLabel: 'Criar meu convite',
   imagePath: '/modern-wedding-couple-photo.jpg',
   imageAlt: 'Casal de noivos em foto de casamento',
 }
@@ -221,8 +221,8 @@ export const HOME_BEFORE_CELEBRATION: HomeBeforeCelebrationCopy = {
       description:
         'Escolham nome, data, local e mensagem. Vejam a prévia antes de pagar. Depois, compartilhem o link para imprimir ou enviar.',
       image: '/images/home-redesigned/invite-flatlay.webp',
-      alt: 'Convite de casamento sobre mesa de madeira',
-      caption: 'Casamento de Ana e Pedro',
+      alt: 'Convite Terracota — Boho Botânico apresentado em composição de flatlay',
+      caption: 'Convite Terracota',
       imageContain: true,
     },
     {
@@ -231,7 +231,7 @@ export const HOME_BEFORE_CELEBRATION: HomeBeforeCelebrationCopy = {
       description:
         'Ao abrir o link, o convite carrega no navegador do celular. O convidado vê as informações e confirma presença, sem baixar aplicativo nem criar conta.',
       image: '/images/home-redesigned/invitation-phone.webp',
-      alt: 'Convite digital aberto no celular',
+      alt: 'Convite Verde Oliva — CDI Minimalista aberto em um celular',
       caption: 'Na mesa, um link. No celular, todos os detalhes.',
     },
     {
@@ -261,12 +261,12 @@ export const HOME_INCLUDED_FEATURES = [
 
 export const HOME_FEATURE_HIGHLIGHTS: HomeFeatureHighlight[] = [
   {
-    eyebrow: 'No modelo Romântico',
+    eyebrow: 'Nos modelos estendidos',
     title: 'Tem detalhe que merece destaque.',
     description:
-      'Música do YouTube, galeria com até 6 fotos e contagem regressiva. No modelo Romântico, o convite ganha ainda mais a cara de vocês.',
-    image: '/images/thumbs/romantico/01.png',
-    alt: 'Prévia do modelo Romântico',
+      'Música do YouTube, galeria com até 6 fotos e contagem regressiva. Nos modelos estendidos, o convite ganha ainda mais a cara de vocês.',
+    image: '/images/home-redesigned/invitation-azul.webp',
+    alt: 'Prévia do modelo Azul — Porcelain Framed',
   },
   {
     title: 'Um convite para as suas pessoas.',
@@ -277,12 +277,12 @@ export const HOME_FEATURE_HIGHLIGHTS: HomeFeatureHighlight[] = [
 
 export const HOME_HERO_COLLAGE: HomeHeroCollageImage[] = [
   {
-    src: '/images/home-redesigned/hero-wedding-garden.webp',
-    alt: 'Foto de uma celebração de casamento em um jardim',
+    src: '/images/home-redesigned/hero-wedding-garden-with-invitation.webp',
+    alt: 'Casal mostra em um tablet o convite Verde Oliva do CasarMe',
   },
   {
-    src: '/images/thumbs/blue/01.png',
-    alt: 'Prévia do convite Azul',
+    src: '/images/home-redesigned/hero-invitation-rosa.webp',
+    alt: 'Convite Rosa Florido — Editorial Romântico',
   },
 ]
 
@@ -321,7 +321,7 @@ export const HOME_BENTO_FEATURES = [
   },
   {
     iconKey: 'images',
-    eyebrow: 'NO MODELO ROMÂNTICO',
+    eyebrow: 'NOS MODELOS ESTENDIDOS',
     title: 'Galeria de fotos',
     description: 'Uma galeria com até 6 fotos para deixar o convite com a cara do casal.',
     imagePath: '/happy-couple-wedding-portrait.jpg',
@@ -330,7 +330,7 @@ export const HOME_BENTO_FEATURES = [
   },
   {
     iconKey: 'music-2',
-    eyebrow: 'NO MODELO ROMÂNTICO',
+    eyebrow: 'NOS MODELOS ESTENDIDOS',
     title: 'Música e contagem regressiva',
     description: 'Adicione música do YouTube e conte os dias até o grande momento.',
     imagePath: '/romantic-couple-wedding-natural-light-soft-focus.jpg',

@@ -1,10 +1,19 @@
 import { describe, expect, it } from 'vitest'
 
+import { EXTENDED_TEMPLATE_SLUGS } from '@/src/shared/catalog'
+
 import { resolveTemplateBranch } from './resolve-template-branch'
 
 describe('resolveTemplateBranch', () => {
   it.each(['blue', 'golden', 'garden', 'romantic'] as const)(
-    'resolves catalog template %s',
+    'resolves legacy catalog template %s',
+    (templateId) => {
+      expect(resolveTemplateBranch(templateId)).toBe(templateId)
+    },
+  )
+
+  it.each(EXTENDED_TEMPLATE_SLUGS)(
+    'routes extended template %s to its own branch',
     (templateId) => {
       expect(resolveTemplateBranch(templateId)).toBe(templateId)
     },

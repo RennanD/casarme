@@ -5,9 +5,6 @@ import {
   findInvitationForTransparentWebhook,
 } from '@/src/features/checkout'
 import { prisma } from '@/src/lib/prisma'
-import { resend } from '@/src/lib/resend'
-import { EmailTemplate } from '@/src/lib/email-template'
-import { resolveFromEmail } from '@/src/shared/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -39,35 +36,8 @@ export async function POST(request: NextRequest) {
       })
 
       if (invitation) {
-        await prisma.invitation.update({
-          where: { id: invitation.id },
-          data: {
-            paymentStatus: 'paid',
-            isActive: true,
-            paidAt: new Date(),
-          },
-        })
-
+        await activateInvitationAndSendEmail(invitation.id)
         console.log(`Invitation ${invitation.id} activated via AbacatePay v1 billing.`)
-
-        const invitationUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/convite/${invitation.slug}`
-
-        if (invitation.email) {
-          try {
-            await resend.emails.send({
-              from: resolveFromEmail(),
-              to: [invitation.email],
-              subject: `🎉 Seu convite interativo está pronto! - ${invitation.groomName} & ${invitation.brideName}`,
-              react: EmailTemplate({
-                groomName: invitation.groomName,
-                brideName: invitation.brideName,
-                invitationUrl,
-              }),
-            })
-          } catch (emailError) {
-            console.error('Error sending email:', emailError)
-          }
-        }
       } else {
         console.error(
           `Invitation not found for billingId: ${billingId}. Full payload:`,

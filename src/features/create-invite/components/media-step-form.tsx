@@ -2,6 +2,8 @@
 
 import { useFormContext } from 'react-hook-form'
 
+import { isExtendedTemplateSlug } from '@/src/shared/catalog'
+
 import type { CreateInviteTemplate } from '@/src/features/create-invite/model/catalog'
 import {
   CREATE_INVITE_ACTIONS,
@@ -45,11 +47,9 @@ export function MediaStepForm({
 
   const copy = getFormCopy('media', stepNumber, config.stepCount)
   const images = watch('images')
-  const isRomantic = template.slug === 'romantic'
+  const isRomantic = isExtendedTemplateSlug(template.slug) || template.slug === 'romantic'
 
   const heroError = errors.images?.hero?.message as string | undefined
-  const groomError = errors.images?.groom?.message as string | undefined
-  const brideError = errors.images?.bride?.message as string | undefined
   const galleryError = errors.images?.gallery?.message as string | undefined
 
   return (
@@ -76,31 +76,6 @@ export function MediaStepForm({
 
       {isRomantic ? (
         <>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <ImageUploadField
-              id="groom-image"
-              label={MEDIA_STEP_FIELDS.groom.label}
-              helper={MEDIA_STEP_FIELDS.groom.helper}
-              uploadType="groom"
-              value={images?.groom}
-              error={groomError}
-              onChange={(metadata) =>
-                setValue('images.groom', metadata, { shouldDirty: true, shouldValidate: true })
-              }
-            />
-            <ImageUploadField
-              id="bride-image"
-              label={MEDIA_STEP_FIELDS.bride.label}
-              helper={MEDIA_STEP_FIELDS.bride.helper}
-              uploadType="bride"
-              value={images?.bride}
-              error={brideError}
-              onChange={(metadata) =>
-                setValue('images.bride', metadata, { shouldDirty: true, shouldValidate: true })
-              }
-            />
-          </div>
-
           <GalleryUploadField
             id="gallery-image"
             label={MEDIA_STEP_FIELDS.gallery.label}
@@ -130,41 +105,6 @@ export function MediaStepForm({
             />
           </FormFieldGroup>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <FormFieldGroup
-              id="groomStory"
-              label={MEDIA_STEP_FIELDS.groomStory.label}
-              error={errors.groomStory?.message}
-            >
-              <textarea
-                id="groomStory"
-                rows={3}
-                placeholder={MEDIA_STEP_FIELDS.groomStory.placeholder}
-                className={`${borderlessInputClass} min-h-18 w-full resize-y text-sm leading-6 text-foreground outline-none`}
-                value={watch('groomStory') ?? ''}
-                onChange={(event) =>
-                  setValue('groomStory', event.target.value, { shouldDirty: true })
-                }
-              />
-            </FormFieldGroup>
-
-            <FormFieldGroup
-              id="brideStory"
-              label={MEDIA_STEP_FIELDS.brideStory.label}
-              error={errors.brideStory?.message}
-            >
-              <textarea
-                id="brideStory"
-                rows={3}
-                placeholder={MEDIA_STEP_FIELDS.brideStory.placeholder}
-                className={`${borderlessInputClass} min-h-18 w-full resize-y text-sm leading-6 text-foreground outline-none`}
-                value={watch('brideStory') ?? ''}
-                onChange={(event) =>
-                  setValue('brideStory', event.target.value, { shouldDirty: true })
-                }
-              />
-            </FormFieldGroup>
-          </div>
         </>
       ) : null}
 

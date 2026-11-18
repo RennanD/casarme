@@ -1,13 +1,6 @@
 import type { CreateInviteTemplate } from './catalog'
 import type { CreateInviteFormValues } from './schemas'
 
-const SLUG_TO_TEMPLATE_ID: Record<string, string> = {
-  azul: 'blue',
-  dourado: 'golden',
-  garden: 'garden',
-  romantic: 'romantic',
-}
-
 const INTERACTIVE_DEFAULTS = {
   venueName: 'Local da Cerimônia',
   welcomeMessage: 'Você está convidado para o nosso casamento!',
@@ -44,10 +37,6 @@ function parseBrazilianDateToIso(date: string, time: string): string {
   return `${year}-${month}-${day}T${time}:00`
 }
 
-function resolveTemplateId(template: CreateInviteTemplate): string {
-  return SLUG_TO_TEMPLATE_ID[template.slug] ?? template.id
-}
-
 function buildImagesPayload(
   images: CreateInviteFormValues['images'],
 ): CreateInvitationPayload['images'] | undefined {
@@ -74,17 +63,17 @@ export function mapFormToApiPayload(
     weddingTime: values.weddingTime,
     venueName: isInteractive
       ? values.venueName?.trim() || INTERACTIVE_DEFAULTS.venueName
-      : values.venueName.trim(),
+      : (values.venueName ?? '').trim(),
     venueAddress: values.venueAddress,
     welcomeMessage: isInteractive
       ? values.welcomeMessage?.trim() || INTERACTIVE_DEFAULTS.welcomeMessage
-      : values.welcomeMessage.trim(),
+      : (values.welcomeMessage ?? '').trim(),
     coupleStory: values.coupleStory?.trim() || undefined,
     groomStory: values.groomStory?.trim() || undefined,
     brideStory: values.brideStory?.trim() || undefined,
     musicUrl: values.musicUrl?.trim() || undefined,
     whatsapp: values.whatsapp,
-    template: resolveTemplateId(template),
+    template: template.id,
     email: values.email,
     cpf: values.cpf,
     includePlanner: values.includePlanner,

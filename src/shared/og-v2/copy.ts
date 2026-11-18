@@ -1,4 +1,4 @@
-import { HOME_CATALOG } from '@/src/shared/catalog'
+import { HOME_CATALOG, resolveCatalogBySlug } from '@/src/shared/catalog'
 import { HOME_HERO, HOME_HERO_COLLAGE } from '@/src/features/home/model/copy'
 
 import { OG_HOME_GARDEN_PHOTO, OG_SITE_URL } from './tokens'
@@ -40,7 +40,7 @@ export function toAbsoluteAssetUrl(path: string, baseUrl = OG_SITE_URL): string 
 }
 
 export function resolveHomeOgCopy(baseUrl = OG_SITE_URL): OgImageCopy {
-  const templateThumb = HOME_HERO_COLLAGE[1]?.src ?? HOME_CATALOG[0]?.imagePath ?? '/images/thumbs/blue/01.png'
+  const templateThumb = HOME_HERO_COLLAGE[1]?.src ?? HOME_CATALOG[0]?.imagePath ?? '/images/thumbs/rosa/01.png'
 
   return {
     eyebrow: HOME_HERO.eyebrow,
@@ -66,7 +66,7 @@ export function resolveCreateInviteOgCopy(
   slug: string,
   baseUrl = OG_SITE_URL,
 ): OgImageCopy | null {
-  const catalogEntry = HOME_CATALOG.find((entry) => entry.slug === slug)
+  const catalogEntry = resolveCatalogBySlug(slug)
   if (!catalogEntry) {
     return null
   }
@@ -95,10 +95,45 @@ export function resolveCreateInviteMetadata(
 }
 
 export function resolveCreateInviteMetadataBySlug(slug: string): OgMetadataCopy | null {
-  const catalogEntry = HOME_CATALOG.find((entry) => entry.slug === slug)
+  const catalogEntry = resolveCatalogBySlug(slug)
   if (!catalogEntry) {
     return null
   }
 
   return resolveCreateInviteMetadata(catalogEntry.name, catalogEntry.description)
+}
+
+export function resolveDemoMetadata(templateName: string, description: string): OgMetadataCopy {
+  return {
+    title: `Demonstração ${templateName} — CasarMe`,
+    description,
+  }
+}
+
+export function resolveDemoMetadataBySlug(slug: string): OgMetadataCopy | null {
+  const catalogEntry = resolveCatalogBySlug(slug)
+  if (!catalogEntry) {
+    return null
+  }
+
+  return resolveDemoMetadata(catalogEntry.name, catalogEntry.description)
+}
+
+export function resolveDemoOgCopy(slug: string, baseUrl = OG_SITE_URL): OgImageCopy | null {
+  const catalogEntry = resolveCatalogBySlug(slug)
+  if (!catalogEntry) {
+    return null
+  }
+
+  return {
+    eyebrow: 'DEMONSTRAÇÃO',
+    headline: `Demonstração ${catalogEntry.name}`,
+    description: catalogEntry.description,
+    visual: {
+      type: 'template',
+      thumbUrl: toAbsoluteAssetUrl(catalogEntry.imagePath, baseUrl),
+      badge: catalogEntry.displayPrice,
+    },
+    metadata: resolveDemoMetadata(catalogEntry.name, catalogEntry.description),
+  }
 }

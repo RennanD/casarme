@@ -50,35 +50,38 @@ export function useCreateInviteDraft(
   methods: UseFormReturn<CreateInviteFormValues>,
 ): void {
   const hydratedRef = useRef(false)
+  const templateSlug = template.slug
 
   useEffect(() => {
-    const draft = readCreateInviteDraft(template)
+    const draft = readCreateInviteDraft({ slug: templateSlug })
     if (draft) {
       methods.reset(draft)
     } else {
-      methods.reset(getDefaultValuesForTemplate(template))
+      methods.reset(getDefaultValuesForTemplate({ slug: templateSlug }))
     }
     hydratedRef.current = true
-  }, [methods, template])
+  }, [methods, templateSlug])
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout> | undefined
+    const storageKey = getDraftStorageKey(templateSlug)
 
     const subscription = methods.watch((values) => {
       if (!hydratedRef.current) return
 
       if (timeoutId) clearTimeout(timeoutId)
       timeoutId = setTimeout(() => {
-        window.localStorage.setItem(
-          getDraftStorageKey(template.slug),
-          JSON.stringify(values),
-        )
+        window.localStorage.setItem(storageKey, JSON.stringify(values))
+        timeoutId = undefined
       }, SAVE_DEBOUNCE_MS)
     })
 
     return () => {
       subscription.unsubscribe()
-      if (timeoutId) clearTimeout(timeoutId)
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+        window.localStorage.setItem(storageKey, JSON.stringify(methods.getValues()))
+      }
     }
-  }, [methods, template])
+  }, [methods, templateSlug])
 }

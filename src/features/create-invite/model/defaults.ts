@@ -1,3 +1,5 @@
+import { isExtendedTemplateSlug } from '@/src/shared/catalog'
+
 import type { CreateInviteTemplate } from './catalog'
 import type { CreateInviteFormValues } from './schemas'
 
@@ -6,7 +8,9 @@ export const DEFAULT_WELCOME_MESSAGE =
 
 export const ROMANTIC_GALLERY_MAX_PHOTOS = 6
 
-const SITE_TEMPLATE_SLUGS = new Set(['garden', 'romantic'])
+function usesSiteWelcomeMessage(slug: string): boolean {
+  return isExtendedTemplateSlug(slug) || slug === 'garden' || slug === 'romantic'
+}
 
 export const CREATE_INVITE_DEFAULT_VALUES: CreateInviteFormValues = {
   brideName: '',
@@ -34,7 +38,7 @@ export function getDefaultValuesForTemplate(
 ): CreateInviteFormValues {
   const base = { ...CREATE_INVITE_DEFAULT_VALUES }
 
-  if (SITE_TEMPLATE_SLUGS.has(template.slug)) {
+  if (usesSiteWelcomeMessage(template.slug)) {
     return {
       ...base,
       welcomeMessage: DEFAULT_WELCOME_MESSAGE,

@@ -1,48 +1,115 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  CATEGORY_LABELS,
+  EXTENDED_TEMPLATE_FEATURES,
+  EXTENDED_TEMPLATE_SLUGS,
+  isExtendedTemplateSlug,
   getTemplateCreateHref,
   getTemplateDemoHref,
   HOME_CATALOG,
   PRODUCT_LINE_LABELS,
+  resolveCatalogById,
   resolveCatalogBySlug,
+  THEME_LABELS,
 } from './catalog'
 
-describe('shared catalog', () => {
-  it('contains exactly 4 templates with expected names, prices, plans, and product lines', () => {
-    expect(HOME_CATALOG).toHaveLength(4)
+describe('shared catalog taxonomy', () => {
+  it('defines five extended template slugs in catalog order', () => {
+    expect(EXTENDED_TEMPLATE_SLUGS).toEqual([
+      'verde-oliva',
+      'rosa',
+      'azul',
+      'dourado',
+      'terracota',
+    ])
+    expect(HOME_CATALOG.map((entry) => entry.slug)).toEqual(EXTENDED_TEMPLATE_SLUGS)
+  })
 
-    const byName = Object.fromEntries(HOME_CATALOG.map((entry) => [entry.name, entry]))
+  it('identifies extended template slugs', () => {
+    for (const slug of EXTENDED_TEMPLATE_SLUGS) {
+      expect(isExtendedTemplateSlug(slug)).toBe(true)
+    }
 
-    expect(byName.Dourado).toMatchObject({
-      plan: 'Premium',
-      displayPrice: 'R$ 25,90',
-      productLine: 'interactive',
+    expect(isExtendedTemplateSlug('blue')).toBe(false)
+    expect(isExtendedTemplateSlug('romantic')).toBe(false)
+  })
+
+  it('requires category, theme, and styleLabel on every home catalog entry', () => {
+    for (const entry of HOME_CATALOG) {
+      expect(entry.category).toBe('extended')
+      expect(entry.theme.length).toBeGreaterThan(0)
+      expect(entry.styleLabel.length).toBeGreaterThan(0)
+    }
+  })
+
+  it('exposes readable labels for categories and themes', () => {
+    expect(CATEGORY_LABELS.extended).toBe('Convite estendido')
+    expect(CATEGORY_LABELS['cover-photo']).toBe('Convite com foto de capa')
+    expect(CATEGORY_LABELS.simple).toBe('Convite simples')
+
+    expect(THEME_LABELS['verde-oliva']).toBe('Verde oliva')
+    expect(THEME_LABELS.rosa).toBe('Rosa')
+    expect(THEME_LABELS.azul).toBe('Azul')
+    expect(THEME_LABELS.dourado).toBe('Dourado')
+    expect(THEME_LABELS.terracota).toBe('Terracota')
+  })
+})
+
+describe('shared catalog entries', () => {
+  it('contains exactly 5 extended templates, all Pro / R$ 76,50 / site', () => {
+    expect(HOME_CATALOG).toHaveLength(5)
+
+    for (const entry of HOME_CATALOG) {
+      expect(entry).toMatchObject({
+        plan: 'Pro',
+        displayPrice: 'R$ 76,50',
+        productLine: 'site',
+        category: 'extended',
+      })
+    }
+  })
+
+  it('maps commercial names and style labels from the Pencil frames', () => {
+    const bySlug = Object.fromEntries(HOME_CATALOG.map((entry) => [entry.slug, entry]))
+
+    expect(bySlug['verde-oliva']).toMatchObject({
+      name: 'Verde Oliva',
+      styleLabel: 'CDI Minimalista',
+      theme: 'verde-oliva',
+      id: 'verde-oliva',
     })
-    expect(byName.Azul).toMatchObject({
-      plan: 'Premium',
-      displayPrice: 'R$ 30,90',
-      productLine: 'interactive',
+    expect(bySlug.rosa).toMatchObject({
+      name: 'Rosa Florido',
+      styleLabel: 'Editorial Romântico',
+      theme: 'rosa',
+      id: 'rosa',
     })
-    expect(byName['Verde Oliva']).toMatchObject({
-      plan: 'Básico',
-      displayPrice: 'R$ 58,90',
-      productLine: 'site',
+    expect(bySlug.azul).toMatchObject({
+      name: 'Azul',
+      styleLabel: 'Porcelain Framed',
+      theme: 'azul',
+      id: 'azul',
     })
-    expect(byName.Romântico).toMatchObject({
-      plan: 'Pro',
-      displayPrice: 'R$ 76,50',
-      productLine: 'site',
+    expect(bySlug.dourado).toMatchObject({
+      name: 'Dourado',
+      styleLabel: 'Selo Clássico',
+      theme: 'dourado',
+      id: 'dourado',
+    })
+    expect(bySlug.terracota).toMatchObject({
+      name: 'Terracota',
+      styleLabel: 'Boho Botânico',
+      theme: 'terracota',
+      id: 'terracota',
     })
   })
 
-  it('orders templates romantic, garden, blue, golden', () => {
-    expect(HOME_CATALOG.map((entry) => entry.id)).toEqual([
-      'romantic',
-      'garden',
-      'blue',
-      'golden',
-    ])
+  it('shares the romantic feature set across all extended templates', () => {
+    for (const entry of HOME_CATALOG) {
+      expect(entry.features).toEqual(EXTENDED_TEMPLATE_FEATURES)
+      expect(entry.features.length).toBeGreaterThanOrEqual(8)
+    }
   })
 
   it('requires non-empty id, slug, imagePath, description, and features on each entry', () => {
@@ -63,12 +130,42 @@ describe('shared catalog', () => {
   it('builds demo and create hrefs from template slug', () => {
     expect(getTemplateDemoHref('azul')).toBe('/demo/azul')
     expect(getTemplateCreateHref('dourado')).toBe('/criar/dourado?step=1')
-    expect(getTemplateCreateHref('garden')).toBe('/criar/garden?step=1')
-    expect(getTemplateDemoHref('romantic')).toBe('/demo/romantic')
-  })
-
-  it('resolves catalog entries by slug and returns null for unknown slugs', () => {
-    expect(resolveCatalogBySlug('azul')?.id).toBe('blue')
-    expect(resolveCatalogBySlug('invalid')).toBeNull()
+    expect(getTemplateCreateHref('verde-oliva')).toBe('/criar/verde-oliva?step=1')
+    expect(getTemplateDemoHref('rosa')).toBe('/demo/rosa')
   })
 })
+
+describe('shared catalog resolution', () => {
+  it('resolves new extended slugs to entries where id matches slug', () => {
+    expect(resolveCatalogBySlug('verde-oliva')?.id).toBe('verde-oliva')
+    expect(resolveCatalogBySlug('rosa')?.id).toBe('rosa')
+    expect(resolveCatalogBySlug('azul')?.id).toBe('azul')
+    expect(resolveCatalogBySlug('dourado')?.id).toBe('dourado')
+    expect(resolveCatalogBySlug('terracota')?.id).toBe('terracota')
+  })
+
+  it('resolves legacy template ids for existing invites', () => {
+    expect(resolveCatalogById('blue')?.name).toBe('Azul')
+    expect(resolveCatalogById('golden')?.name).toBe('Dourado')
+    expect(resolveCatalogById('garden')?.name).toBe('Verde Oliva')
+    expect(resolveCatalogById('romantic')?.name).toBe('Romântico')
+  })
+
+  it('resolves legacy slugs not present in the public home catalog', () => {
+    expect(resolveCatalogBySlug('romantic')?.id).toBe('romantic')
+    expect(resolveCatalogBySlug('garden')?.id).toBe('garden')
+  })
+
+  it('returns null for unknown slugs and ids', () => {
+    expect(resolveCatalogBySlug('invalid')).toBeNull()
+    expect(resolveCatalogById('invalid')).toBeNull()
+  })
+
+  it('prefers new extended entries over legacy when slug collides', () => {
+    expect(resolveCatalogBySlug('azul')?.id).toBe('azul')
+    expect(resolveCatalogBySlug('dourado')?.id).toBe('dourado')
+    expect(resolveCatalogById('azul')?.plan).toBe('Pro')
+    expect(resolveCatalogById('blue')?.plan).toBe('Premium')
+  })
+})
+
